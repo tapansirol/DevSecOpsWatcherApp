@@ -1,0 +1,14 @@
+.glowing-border-cpl2 { 
+    border: ridge;
+    outline: none;
+    border-color: #2b74b9;
+    /* box-shadow: 0 0 4px #145da1; */
+}
+.border-cpl2{
+    border: ridge;
+    outline: none;
+}
+.button-cpl2{
+    float: right;
+    vertical-align: bottom;
+}
