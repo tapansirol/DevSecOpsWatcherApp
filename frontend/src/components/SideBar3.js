@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import '../static/css/SideBar.css';
 
-import { withStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Page1 from './page1';
 import Page2 from './page2';
 import Page3 from './page3';
@@ -18,8 +13,10 @@ import '../static/css/CreatePL1.css';
 import '../static/css/CreatePL2.css';
 import { Button} from '@material-ui/core';
 import pdf from '../static/resources/ReleaseNotes.docx';
-import Try1 from './Try1';
-
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import ArrowForward from '@material-ui/icons/ArrowForward';
+import PictureAsPdf from '@material-ui/icons/PictureAsPdf';
+import '../static/css/SideBar.css';
 class SideBar3 extends Component {
 
     constructor()
@@ -35,6 +32,8 @@ class SideBar3 extends Component {
         {id: 6,name:'Configure the UCV ', component: <Page6 />},],
 
         activeStep:1,
+        isPrevDisabled:true,
+        isNextDisabled:false,
         
     }
 
@@ -42,8 +41,6 @@ class SideBar3 extends Component {
 }
 
 getNextStepDetails() {
-
-    console.log('Dekho yahan data hai kya ?')
 
     const { activeStep } = this.state;
     this.setState({
@@ -61,12 +58,50 @@ getNextStepDetails() {
 
  }
 
+ handlePrevious1 = () => {
+     if(this.state.activeStep===2)
+     {
+        this.setState(state => ({
+            activeStep: state.activeStep - 1,
+            isNextDisabled:false,
+            isPrevDisabled: true
+          }));
+     }
+     else
+     {
+        this.setState(state => ({
+            activeStep: state.activeStep - 1,
+            isNextDisabled:false,
+
+        }));
+     }
+     
+    
+};
+  handleNextClick() {
+    if(this.state.activeStep===this.state.steps.length-1)
+    {
+        this.setState({
+            isNextDisabled: true
+        });
+        this.getNextStepDetails();
+    }
+    else if(this.state.activeStep>=1)
+    {
+        this.setState({
+            isPrevDisabled: false
+        });
+        this.getNextStepDetails();
+  }
+   
+}
+
  getStepContent(step) {
     switch (step) {
       case 0:
         return <div></div>;
     case 1:
-        return <div id="screen"><Page1/></div>;
+        return <div id="screen" ><Page1/></div>;
     case 2:         
         return <div id="screen"><Page2/></div>;
     case 3:
@@ -90,51 +125,42 @@ getNextStepDetails() {
             
             <div>
                 <div id="sidebar">
-                    <div>
-                    <ul>
-                       
+                    <ul >
                         {steps.map(step=>
 
-                        <li class={activeStep<step.id ? 'disabled' : null} >{step.name}</li>)}
+                        <li class={activeStep<step.id ? 'disabled' : null} style={{color:"#383838",fontWeight:"bold",padding:20}}>{step.name}</li>)}
                     </ul>
-                    </div>
-                    <div style={{position:'absolute',bottom:'0',right:'0'}}>
-                   
-                        <a href={pdf} ><button>Open PDF Version</button></a>
-                        </div>
-                
                 </div>
 
                 <div id="sidebarContent">
-               
-                <Typography >{this.getStepContent(activeStep)}</Typography>
-                
-                           
-                               {
-                                   /*
-                               
-                              
-                                <Button style={{float:'right'}}
-                                variant="contained"
-                                color="primary"
-                                onClick={this.getNextStepDetails} disabled = {activeStep===steps.length}>Next</Button>
-                              
-                                <Button style={{float:'right'}} 
-                                variant="contained"
-                                color="primary"
-                                onClick={this.getPreviousStepDetails} disabled = {activeStep===1}>Previous</Button>
-
-                               */}
-                            
-                           
-                   
+                    
+                        <Typography style={{padding:20}}>
+                            {this.getStepContent(activeStep)}
+                        </Typography>
                 </div>
+                   
+                    <Button style={{float:'right'}} disabled = {this.state.isNextDisabled}
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleNextClick.bind(this)}>
+                        <ArrowForward></ArrowForward>
+                    </Button>
+                                
+                    <Button style={{float:'right',marginRight: "1rem"}} disabled = {this.state.isPrevDisabled}
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handlePrevious1}>
+                        <ArrowBack></ArrowBack>
+                    </Button>
+                    <a href={pdf} >
+                    
+                        Open PDF Version <PictureAsPdf/>
+                    
+                    </a>
+                    
 
                 
 
-                 
-                
-                
             </div>
 
         );

@@ -6,6 +6,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SetUp from './SetUp';
 import Try2 from '../../components/Try2'
 import ATC from '../../components/AutomatedToolChain'
+import SideBar3 from '../../components/SideBar3'
+import MonitorScreen from '../../components/MonitorScreen';
+import pipeline from '../../components/monitored/Pipelines'
 
 //import InfoCard from './components/InfoCard';
 
@@ -30,9 +33,12 @@ class Start extends Component {
                 <Router>
                     <Switch>  
                         <Route exact path="/" component={Home}/> 
-                        <Route exact path="/createPage" component={SetUp}/> 
-                        <Route exact path="/try2" component={Try2}/>
+                        
+                        <Route exact path="/createPage" component={Try2}/>
                         <Route exact path="/atc" component={ATC}/>
+                        <Route exact path="/sidebar3" component={SideBar3}/>
+                        <Route path="/monitor" component={MonitorScreen}/>
+                        <Route path="/pipeline" component={pipeline}/>
                         
                     </Switch>
                 </Router>

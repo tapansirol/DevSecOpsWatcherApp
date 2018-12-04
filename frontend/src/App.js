@@ -21,6 +21,7 @@ import ButtonPage from './components/TransferData/ButtonPage';
 import HeaderPage from './components/TransferData/HeaderPage';
 import ButtonPage2 from './components/TransferData/ButtonPage2';
 import Try2 from './components/Try2';
+import Setup from './components/SetupScreen';
 
 //practices
 import UdemyDemo1 from './components/udemy/UdemyDemo1'
@@ -66,6 +67,7 @@ class App extends Component {
                         <Route path="/hdrpage" component={HeaderPage}/>
                         <Route path="/btnpage2" component={ButtonPage2}/>
                         <Route path="/createPage" component={Try2}></Route>
+                        <Route path="/setup" component={Setup}></Route>
                     </Switch>
                 </Router>
             </div>

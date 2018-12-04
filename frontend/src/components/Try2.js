@@ -39,6 +39,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import AutomatedToolChain from './AutomatedToolChain';
 import ManualInstallation from './ManualInstallation';
+import ManualInstallationCheck from './ManualInstallationCheck';
 
 
 
@@ -161,7 +162,8 @@ class Test1 extends Component {
             isPrevDisabled:true,
             isNextDisabled:false,
             isStandardDashBoardDisabled:true,
-            isPremiumDashBoardDisabled:true
+            isPremiumDashBoardDisabled:true,
+            installationLog:''
             
         }
     }
@@ -180,6 +182,11 @@ class Test1 extends Component {
             isButtonDisabled: isButtonDisabled,
             selectedCapsule: title,
         })
+
+        this.getAvailablePipeline(title)
+
+        
+
         //console.log('selectedCapsule ',this.state.selectedCapsule)
     }
 
@@ -200,6 +207,32 @@ class Test1 extends Component {
             isButtonDisabled: isButtonDisabled,
         })
     }
+
+    getAvailablePipeline(selectedCapsule)
+    {
+        if(selectedCapsule===null)
+        {
+            fetch('api/services?capsule=')
+            .then(response => response.text())
+            .then(message => {
+                console.log("Dekho yarr :", JSON.parse(message));
+                localStorage.setItem("pa", JSON.parse(message))
+                this.setState({pipelineArray: JSON.parse(message)});
+            });
+
+        }
+        else{
+            fetch('api/services?capsule='+selectedCapsule)
+            .then(response => response.text())
+            .then(message => {
+                console.log("Dekho yarr :", JSON.parse(message));
+                localStorage.setItem("pa", JSON.parse(message))
+                this.setState({pipelineArray: JSON.parse(message)});
+            });
+
+        }
+        
+    }
     componentWillMount(){
         localStorage.removeItem("pipelineName");
    localStorage.removeItem("selectedCapsule");
@@ -207,48 +240,10 @@ class Test1 extends Component {
         APIService.get('api/capsules', null, (result) => { this.setStateFn('capsuleArray', result)});
         //For Pipeline
         //const capsule = localStorage.getItem('selectedCapsule');
-        fetch('api/services?capsule=JAVA')
-            .then(response => response.text())
-            .then(message => {
-                console.log(JSON.parse(message));
-                this.setState({pipelineArray: JSON.parse(message)});
-            });
+        this.selectedCapsule = null;
+        this.getAvailablePipeline(this.selectedCapsule);
 
-
-            fetch('/api/status')
-            .then(response => response.json())
-                    .then(message => {
-                       
-                        console.log('Message :', message)
-                        
-                    });
-
-                    fetch('/api/statusPremiumToolChain')
-                    .then(response => response.json())
-                            .then(message => {
-                              
-                                console.log('Message :', message)
-                                
-                            });
-
-          
-
-            fetch('/api/statusValueStandard')
-            .then(response => response.json())
-                    .then(message => {
-                        this.setState({isStandardDashBoardDisabled: message})
-
-                        console.log('Message :', message)
-                        
-                    });
-            fetch('/api/statusValuePremium')
-            .then(response => response.json())
-                    .then(message => {
-                        this.setState({isPremiumDashBoardDisabled: message})
-
-                        console.log('Message p:', message)
-                        
-                    });
+            
     }
 
 
@@ -343,7 +338,7 @@ class Test1 extends Component {
 
 if(activeStep===0)
 {
-    fetch('api/installPipeline', postobj)
+   /* fetch('api/pipeline', postobj)
         .then(response => response.text())
         .then(message => {
             console.log(JSON.parse(message));
@@ -356,22 +351,39 @@ if(activeStep===0)
         //    localStorage.removeItem("pipelineName");
         //    localStorage.removeItem("serviceArray");
         //    localStorage.removeItem("selectedPipelineIndex");
-        }).catch(error => console.error('Error:', error));
+        }).catch(error => console.error('Error:', error)); */
+
+
+
+        try{
+            localStorage.removeItem('installationLog')
+            const request = async () => {
+            const json = await fetch('api/installPipeline', postobj)
+            .then(response => response.text());
+            console.log("Installation Log ----------------------> ", json);
+            localStorage.setItem('installationLog', json)
+            }
+            request();
+            } catch (e) {
+            console.log("Installation catch ----------> ",e)
+            }
 
 }
         
     
 
 
-if(activeStep>1)
-{
+    if(activeStep>2)
+    {
         
-                 this.props.history.push({
-                 pathname: '/monitor',
-            //    pathname: '/manual',
-                    // pipelineArray: JSON.parse(message) 
-                 });
-            
+        let pipelineArray1 = this.state.pipelineArray;
+        console.log("plArray =====>>>>",pipelineArray1)
+        this.props.history.push({
+        pathname: '/monitor',
+    //    pathname: '/manual',
+        // pipelineArray: pipelineArray1
+        pipelineArray: this.state.pipelineArray
+        }); 
     
         }
     };   
@@ -448,9 +460,7 @@ if(activeStep>1)
         //return <div><Test4 ref={test4Ref => this.test4Ref = test4Ref}/></div>;
         return <ManualInstallation/>;
         case 3:
-        return null;
-        
-      
+        return <ManualInstallationCheck/>
     }
   }
 
@@ -460,7 +470,7 @@ if(activeStep>1)
         const { classes } = this.props;
         const steps = getSteps();
         const { capsuleArray, isButtonDisabled, pipelineName, pipelineArray, 
-            selectedPipelineIndex, temp ,value, isStandardDashBoardDisabled,isPremiumDashBoardDisabled} = this.state;
+            selectedPipelineIndex, temp ,value, isStandardDashBoardDisabled,isPremiumDashBoardDisabled,installationLog} = this.state;
        // console.log('yahan active step ka value :')
        console.log("value kya hai ?",isPremiumDashBoardDisabled)
         return(
@@ -500,28 +510,51 @@ if(activeStep>1)
                                                 value={pipelineName}
                                                 onChange={this.handleNameChange}
                                                 variant="filled"
-                                                fullWidth="true"
-                                                
+                                                fullWidth="true"  
                                             />
                                         </TableCell>
                                         <TableCell style={{textAlign:'center',width:"50%",border:0}}>
                                         <div className="wrapper_cpl1" >
                                         {capsuleArray.map((capsule, index) => {
-                                            return (
-                                                 <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'glowing-border':'border'}
-                                                 style={{margin:'1rem', width: '6rem', height: '5rem'}} 
-                                                            onClick= {() => {this.handleCapsuleClick(capsule)}}>
-                                                            <CardMedia
-                                                                component='img'
-                                                                className={classes.media}
-                                                                image={imageMap[capsule]}
-                                                                title={capsule}
-                                                            />
-                                                            <CheckCircle className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/>
-                                                        </CardActionArea>
-                                                    
-                                                    );
-                                            })}
+                                            if(index==0)
+                                            
+                                                return (
+                                                    <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'glowing-border':'border'}
+                                                    style={{margin:'1rem', width: '6rem', height: '5rem'}} 
+                                                               onClick= {() => {this.handleCapsuleClick(capsule)}}>
+                                                               <CardMedia
+                                                                   component='img'
+                                                                   className={classes.media}
+                                                                   image={imageMap[capsule]}
+                                                                   title={capsule}
+                                                               />
+                                                               <CheckCircle className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/>
+                                                           </CardActionArea>
+                                                       
+                                                       );
+                                            
+                                            else
+                                            {
+                                                return(
+                                                    <CardActionArea disabled={true} key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'glowing-border':'border'}
+                                                    style={{margin:'1rem', width: '6rem', height: '5rem'}} 
+                                                               onClick= {() => {this.handleCapsuleClick(capsule)}}>
+                                                               <CardMedia 
+                                                                   component='img'
+                                                                   className={classes.media}
+                                                                   image={imageMap[capsule]}
+                                                                   title={capsule}
+                                                               />
+                                                               <CheckCircle className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/>
+                                                           </CardActionArea>
+
+                                                )
+                                                
+                                            }
+                                            
+                                        })
+                                        }
+                                            
                                             </div>
                                         
                                         </TableCell>
@@ -544,7 +577,9 @@ if(activeStep>1)
                             </Tabs>
                             
                             {value == 0 && (
+                                
                             <TabContainer>
+                                {pipelineArray===null ? 'No Contents' :
                                 <div style={{textAlign: 'center'}}>
                                 {pipelineArray.map((serviceArray, sIndex) => {
                                     //console.log('here',serviceArray,sIndex,selectedPipelineIndex );
@@ -552,74 +587,90 @@ if(activeStep>1)
                                     return <div key={sIndex}>
                                         <div className={selectedPipelineIndex == sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
-                                        <div align="left" style={{width: '96%', margin: 'auto', marginTop: '7px',display: 'flex'}}>
-                                            <div className={classes.typo}>
-                                            <Typography variant="body2">
-                                                {sIndex === 0 ? 
-                                                 <div style={{width:'100%', border:'solid green'}}>
-                                                <table style={{width:'100%'}}>
-                                                    <tr style={{width:'100%'}}>
-                                                        <td style={{width:'1000%'}}>Standard Tool Chain</td>
-                                                        <td style={{width:'100%'}}>Typology</td>
-                                                        <td style={{width:'30%'}}>Tools</td>
-                                                    </tr>
-                                                </table></div>   : 'Jenkins + IBM'}
-                                            </Typography>
+                                        <div align="left" style={{width: '96%', margin: 'auto', marginTop: '7px',
+                                        display: 'flex'}}>
                                            
-                                            </div>
-                                        <div> <CheckCircle className={selectedPipelineIndex == sIndex ? 'check-visible':'check-hidden'}/>
-                                            </div>
                                             
-                                        </div>
-                                        <div style={{marginTop: '5px',marginBottom: '8px'}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
+                                                {sIndex === 0 ? 
+                                                
+                                                <table style={{width:'100%'}}>
+                                                    <tr >
+                                                        <td style={{width:'40%',fontWeight:'bold'}}>Standard Tool Chain</td>
+                                                        <td style={{width:'30%',fontWeight:'bold'}}>Typology : 
+                                                        <span style={{fontWeight:"normal"}}>Open Source + HCL</span>                                                        </td>
+                                                        <td style={{width:'30%',fontWeight:'bold'}}>Tools: 
+                                                        <span style={{fontWeight:"normal"}}>7</span></td>
+                                                        <td><CheckCircle style={{float: "right"}} className={selectedPipelineIndex == sIndex ? 'check-visible':'check-hidden'}/></td>
+                                                        
+                                                    </tr>
+                                                </table>
+                                              
+                                                   : 'Jenkins + IBM'}
+                                            </div>
+                                           
+                                            
+                                        
+                                        <div style={{marginTop: '5px',marginBottom: '8px', padding: 20}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
                                         
                                         </div>
+                                        </div>
                                         
-                                    </div>
+                                    
                                 })}
                                 
                                 
                                 </div>
+                                }
                             </TabContainer>   
                             )}
 
                             
-            {value === 1 && <TabContainer>
+            {value === 1 && <TabContainer> {pipelineArray===null ? <p>No Contents</p> :
                 <div style={{textAlign: 'center'}}>
                                 {pipelineArray.map((serviceArray, sIndex) => {
                                     if(sIndex==1)
+
+                                    if(serviceArray===null)
+                                    {
+                                       return <div >
+                                        ;;;;;;
+                                        <br/>
+                                    </div>
+                                    }
+                                    else{
+
                                     return <div key={sIndex}>
                                         <div className={selectedPipelineIndex == sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
-                                        <div align="left" style={{width: '96%', margin: 'auto', marginTop: '7px',display: 'flex'}}>
+                                        <div align="left" style={{width: '96%', margin: 'auto', marginTop: '7px',display: 'flex', border:"solid green"}}>
                                             <div className={classes.typo}><Typography variant="body2">
                                                 {sIndex === 0 ? 'Open Source + IBM..' : 'Jenkins + IBM'}
                                             </Typography></div>
                                        
-                                        <CheckCircle className={selectedPipelineIndex == sIndex ? 'check-visible':'check-hidden'}/>
+                                        <CheckCircle style={{float:"right"}}className={selectedPipelineIndex == sIndex ? 'check-visible':'check-hidden'}/>
                                          
                                         </div><div style={{width: '96%', margin: 'auto', marginTop: '0px',}}><Divider/></div>
                                         <div style={{marginTop: '5px',marginBottom: '8px'}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
                                         
                                         </div>
                                         <br/>
-                                    </div>
+                                    </div>}
                                 })}
                                 
                                 
                             </div>
-                            
+            }
                             </TabContainer>}
                             
                             </div>
                 </div>
                 </div>
-                <div style={{width:"100%", border: "solid green"}}>
-                <div style={{width:"100%", border: "solid red"}}>{this.getStepContent(activeStep,selectedPipelineIndex)}</div>
+                <div style={{width:"100%"}}>
+                <div style={{width:"100%"}}>{this.getStepContent(activeStep,selectedPipelineIndex)}</div>
                 </div>
                     {activeStep === steps.length ? null : (
             <div style={{margin: "1rem"}}>
-              <Button style={{float: "right"}}  disabled = {isButtonDisabled}
+              <Button style={{float: "right",marginLeft:"1rem"}}  disabled = {isButtonDisabled}
                   variant="contained"
                   color="primary"
                   onClick={this.handleNext.bind(this)}
@@ -627,23 +678,31 @@ if(activeStep>1)
                 >
                  {activeStep===0 ? 'Next: Install': [activeStep === steps.length - 1 ? 'DashBoard' : 'Next: manual Install']}
                 </Button>
-                {activeStep===1 || activeStep===2 ?
+                {activeStep===1 ?
                 <Button style={{float: "right"}} 
                 variant="outlined" color="primary"
                   
                   onClick={this.handleNextClick.bind(this)}
                   className={classes.button}
                 >
-                  Previous
-                </Button> : [activeStep === steps.length - 1 ?
+                  Previous: setup
+                </Button> : [activeStep === 2 ?
                 <Button style={{float: "right"}} 
+                variant="outlined"
+                color="primary"
+                onClick={this.handleNext}
+                className={classes.button}
+              >
+                 Previous : automated 
+              </Button> : [activeStep === steps.length - 1 ?
+                <Button style={{float: "right",marginLeft:"1rem"}} 
                 variant="contained"
                 color="primary"
                 onClick={this.handleNext}
                 className={classes.button}
               >
                  Refresh 
-              </Button> : null]}
+              </Button>: null]]}
 
                 {activeStep=== steps.length-1 ?
                 <Button style={{float: "right"}} disabled = {this.state.isPrevDisabled}

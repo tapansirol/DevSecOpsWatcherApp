@@ -19,6 +19,7 @@ class MonitorScreen extends Component {
         };
         
         this.setStateFn = this.setStateFn.bind(this);// to bind setStateFn as this is being passed to APIService
+        //console.log("pyare ====>",this.props.pipelineArray)
     }
 
     setStateFn = (key, result) => {//callback fn to be passed to APIService
@@ -30,6 +31,7 @@ class MonitorScreen extends Component {
      
     componentWillMount(){//lifecycle method of component
         let pipelineArray = this.props.pipelineArray;
+       // console.log("pipelineArray ===>",this.props.pipelineArray)
         if(!pipelineArray){
             APIService.get('api/pipelines', null, (result) => { this.setStateFn('pipelineArray', result)});
         } else {
@@ -37,12 +39,28 @@ class MonitorScreen extends Component {
                 pipelineArray: pipelineArray,
             })
         }
-        console.log('Monitor screen this.state.pipelineArray ', this.state.pipelineArray)
-    } 
+        console.log('Monitor screen this.state.pipelineArray ', pipelineArray); 
+
+
+
+       /* fetch('/api/pipelines')
+        .then(response => response.json())
+                .then(message => {
+                    console.log('Message p:', message)
+                    this.setState({pipelineArray: message})
+
+                    
+                    
+                });*/
+    }
+    
+    
+   
 
     render() {
 
         const { pipelineArray } = this.state;
+
         return(
             <div>
                 <SimpleTab pipelineArray={pipelineArray}/>

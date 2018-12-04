@@ -17,7 +17,7 @@ const styles = theme => ({
     },
     exp: {
       height: "100%",
-      overflow: "scroll"
+      //overflow: "scroll"
     }
   });
 
@@ -28,7 +28,7 @@ class page1 extends Component {
         const {classes} =  this.props;
         return(
             <div  id="HomeScreen">
-                    <ExpansionPanel defaultExpanded = {true}>
+                    <ExpansionPanel defaultExpanded = {true}  style={{height:'500px'}}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography>Steps to Configure Urban Code Deploy with Jenkins</Typography>
                         </ExpansionPanelSummary>

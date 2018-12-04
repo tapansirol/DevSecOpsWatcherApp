@@ -46,6 +46,8 @@ class SimpleTab extends React.Component {
     const { classes, pipelineArray } = this.props;
     const { value } = this.state;
 
+    //console.log("papapapapa :",pipelineArray)
+
     return (
     <div>
         {/* <Paper className={classes.root}> */}

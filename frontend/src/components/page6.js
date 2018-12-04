@@ -5,6 +5,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { withStyles } from '@material-ui/core/styles';
+import '../static/css/SideBar.css';
 
 const styles = theme => ({
     root: {
@@ -16,7 +17,7 @@ const styles = theme => ({
     },
     exp: {
       height: "100%",
-      overflow: "scroll"
+      //overflow: "scroll"
     }
   });
 class page1 extends Component {
@@ -26,7 +27,7 @@ class page1 extends Component {
         const {classes} =  this.props;
         return(
             <div  id="HomeScreen">
-                    <ExpansionPanel defaultExpanded = {true}>
+                    <ExpansionPanel defaultExpanded = {true} >
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography>Steps to Create TestScipt in HFT by recording.</Typography>
                         </ExpansionPanelSummary>

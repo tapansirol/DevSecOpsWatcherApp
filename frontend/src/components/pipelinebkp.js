@@ -83,7 +83,6 @@ class PipeLines extends Component{
 
     render() {
         const { classes, pipelineArray } = this.props;
-        console.log("sachin roy ====>",pipelineArray)
         return(
             <div style={{width: '100%', margin: 'auto'}}>
                 <Card className={classes.card}>
@@ -102,7 +101,7 @@ class PipeLines extends Component{
                                     </Typography></div>
                                 <div className={classes.div3}>
                                     <Typography className={classes.title3}>
-                                    {pipeline.services.length} services
+                                        {pipeline.services.length} services
                                     </Typography></div>
                                 <div className={classes.div4}><Typography className={classes.title4} style={{color: 'red'}}>
                                 {this.getUnavailableServicesCount(pipeline)} unavailables

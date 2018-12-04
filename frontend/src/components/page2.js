@@ -16,7 +16,7 @@ const styles = theme => ({
     },
     exp: {
       height: "100%",
-      overflow: "scroll"
+      //overflow: "scroll"
     }
   });
 class page1 extends Component {
@@ -26,7 +26,7 @@ class page1 extends Component {
         const { classes } = this.props;
         return(
             <div  id="HomeScreen">
-                    <ExpansionPanel defaultExpanded = {true}>
+                    <ExpansionPanel defaultExpanded = {true}  style={{height:'500px'}}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography>UCD-UCV Integration</Typography>
                         </ExpansionPanelSummary>

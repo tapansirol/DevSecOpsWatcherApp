@@ -6,6 +6,7 @@ import '../static/css/AutomatedToolChain.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Test3 from './Test3';
 import Test5 from './Test5';
+import TroubleShootingTips from './TroubleShootingTips'
 
 
 
@@ -52,8 +53,8 @@ class AutomatedToolChain extends Component{
         return(
             <div className={classes.root}>
                 <Card className={classes.card}>
-                    <h4 align="center"><b>Tool chain automated installation</b></h4>
-                    <Typography align="center">The system is running some scripts for the automated installation part of your toolchain.</Typography>
+                    <h4 align="center"><b>Tool chain manual installation check</b></h4>
+                    <Typography align="center">status of the manual installation.</Typography>
                     <div style={{padding:20}}>
                         <Card className={classes.progress}>
                             <table align="center" style={{width:'40%'}} >
@@ -70,11 +71,11 @@ class AutomatedToolChain extends Component{
                         <div style={{padding:20,width:'100%'}}>
                         <table align="center" style={{width:'100%',height:"3rem"}}>
                             <tr >
-                                <td style={{width:'48%'}}><Test3/></td>
-                                <td style={{width:'4%'}}></td>
-                                <td style={{width:'48%'}}>
+                                <td style={{width:'60%'}}><Test3/></td>
+                                <td style={{width:'5%'}}></td>
+                                <td style={{width:'35%'}}>
                                     <div style={{border: 'solid green',height:'100%',width: '100%',overflow:'scroll'}}>
-                                       {localStorage.getItem("installationLog")}
+                                        <TroubleShootingTips/>
 
                                     </div>
                                 </td>

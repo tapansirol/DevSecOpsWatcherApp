@@ -6,9 +6,6 @@ import '../static/css/AutomatedToolChain.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Test3 from './Test3';
 import Test5 from './Test5';
-import SideBar3 from './SideBar3';
-
-
 
 const styles = theme =>({
     root: {
@@ -38,7 +35,7 @@ const styles = theme =>({
   });
 
 
-class AutomatedToolChain extends Component{
+  class TroubleShootingTips extends Component{
 
     constructor()
     {
@@ -51,17 +48,28 @@ class AutomatedToolChain extends Component{
     {
         const { classes } = this.props;
         return(
-            <div className={classes.root}>
-                <Card className={classes.card}>
-                    <h4 align="center"><b>Tool chain Manual installation Steps</b></h4>
-                    <Typography align="center">Follow the steps to complete the manual installation part of your toolchain.</Typography>
-                    <SideBar3></SideBar3>
-                        
-                   
-                </Card>
-               
+            <div  style={{padding:20}}>
+                
+                <h3>Trouble Shooting tips</h3>
+
+                    <ol style={{padding:20}}>
+                        <li>
+                            Check that you followed correctly all the steps described on the Manual installation steps
+                        </li>
+                        <li>
+                            Check the tool user manual
+                        </li>
+                        <li>
+                            <a href="">Contact your admin</a> for help
+                        </li>
+                    </ol>
+
+                    <p>Once your troubleshooting is done click “Refresh” to check again the installation status.</p>
+
             </div>
-        );
+        )
+
+
+        }
     }
-}
-export default withStyles(styles)(AutomatedToolChain);
+    export default TroubleShootingTips;
