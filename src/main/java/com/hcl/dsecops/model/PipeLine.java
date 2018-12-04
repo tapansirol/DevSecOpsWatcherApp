@@ -10,13 +10,14 @@ public class PipeLine {
 	private long pipeleineId;
 	private String pipeleineName;
 	private Capsule capsule;
-	private List<Service> services;
+	private List<IService> services;
+	private ServiceType serviceType;
 
 	public PipeLine() {
 		
 	}
 	
-	public PipeLine(long pipeleineId, String pipeleineName, Capsule capsule, List<Service> services) {
+	public PipeLine(long pipeleineId, String pipeleineName, Capsule capsule, List<IService> services) {
 		super();
 		this.pipeleineId = pipeleineId;
 		this.pipeleineName = pipeleineName;
@@ -51,23 +52,26 @@ public class PipeLine {
 		this.pipeleineName = pipeleineName;
 	}
 
-	public List<Service> getServices() {
+	public List<IService> getServices() {
 		return services;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<IService> services) {
 		this.services = services;
 	}
+	
+	public ServiceType getServiceType() {
+		return serviceType;
+	}
 
+	public void setServiceType(ServiceType serviceType) {
+		this.serviceType = serviceType;
+	}
 
 	@Override
 	public String toString() {
 		return "PipeLine [pipeleineId=" + pipeleineId + ", pipeleineName=" + pipeleineName + ", capsule=" + capsule
-				+ ", services=" + services + "]";
+				+ ", services=" + services + ", serviceType=" + serviceType + "]";
 	}
-
-	
-	
-	
 	
 }

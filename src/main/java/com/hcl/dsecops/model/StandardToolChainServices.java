@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public enum StandardToolChainServices implements IService {
 	//maintain below sequence to adhere to UI Pipelines
 	GITHUB(GITHUB_CODE, GITHUB_DESC, ServiceType.STANDARD, ServiceCategory.DEVELOPANDTEST, true), 
-	JENKINS(JENKINS_CODE, JENKINS_DESC, ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, true), 
-	SONARQUBE(SONARQUBE_CODE, SONARQUBE_DESC, ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, false), 
-	ASOC(ASOC_CODE, ASOC_DESC, ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, false),
-	HFT(HFT_CODE, HFT_DESC, ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, false),
-	UCD(UCD_CODE, UCD_DESC, ServiceType.BOTH, ServiceCategory.RELEASEANDDEPLOY, false),
-	UCV(UCV_CODE, UCV_DESC, ServiceType.BOTH, ServiceCategory.RELEASEANDDEPLOY, false);
+	JENKINS(JENKINS_CODE, JENKINS_DESC, ServiceType.STANDARD, ServiceCategory.DEVELOPANDTEST, true), 
+	SONARQUBE(SONARQUBE_CODE, SONARQUBE_DESC, ServiceType.STANDARD, ServiceCategory.DEVELOPANDTEST, false), 
+	ASOC(ASOC_CODE, ASOC_DESC, ServiceType.STANDARD, ServiceCategory.DEVELOPANDTEST, false),
+	HFT(HFT_CODE, HFT_DESC, ServiceType.STANDARD, ServiceCategory.DEVELOPANDTEST, false),
+	UCD(UCD_CODE, UCD_DESC, ServiceType.STANDARD, ServiceCategory.RELEASEANDDEPLOY, false),
+	UCV(UCV_CODE, UCV_DESC, ServiceType.STANDARD, ServiceCategory.RELEASEANDDEPLOY, false);
 	
 	private String code;
 	private String displayName;

@@ -15,7 +15,7 @@ import com.hcl.dsecops.model.Capsule;
 import com.hcl.dsecops.model.IService;
 import com.hcl.dsecops.model.PipeLine;
 import com.hcl.dsecops.model.PremiumToolChainServices;
-import com.hcl.dsecops.model.Service;
+import com.hcl.dsecops.model.ServiceType;
 import com.hcl.dsecops.model.StandardToolChainServices;
 import com.hcl.dsecops.model.StatusPage;
 import com.hcl.dsecops.service.CheckToolsStatus;
@@ -30,53 +30,71 @@ public class PipeLineController {
 		return Capsule.values();
 	}
 
-	@GetMapping("/api/services")
-	public List<List<IService>> getAvailableServices(@RequestParam("capsule") Capsule capsule) {
-		System.out.println("PipeLineController.getAvailableServices()");
-		System.out.println("PipeLineController.getAvailableServices() capsule "+capsule);
+	@GetMapping("/api/availablePipelines")
+	public List<PipeLine> getAvailablePipelines(@RequestParam("capsule") Capsule capsule) {
+		System.out.println("PipeLineController.getAvailablePipelines()");
+		System.out.println("PipeLineController.getAvailablePipelines() capsule "+capsule);
 		List<IService> standardServices = Arrays.asList(StandardToolChainServices.values());
 		List<IService> premiumServices = Arrays.asList(PremiumToolChainServices.values());
-		List<List<IService>> services = new ArrayList<List<IService>>();
+		List<PipeLine> services = new ArrayList<PipeLine>();
+		PipeLine standard = new PipeLine();
+		standard.setCapsule(capsule);
+		PipeLine premium = new PipeLine();
+		premium.setCapsule(capsule);
 		if(capsule == Capsule.JAVA) {
-			services.add(standardServices);
-			services.add(premiumServices);
+			standard.setServices(standardServices);
+			premium.setServices(premiumServices);
+			services.add(standard);
+			services.add(premium);
 		} else if(capsule==Capsule.DOTNET) {
-			services.add(standardServices);
-		} else if (capsule==null) {
-			services.add(standardServices);
-			services.add(premiumServices);
+			standard.setServices(standardServices);
+			services.add(standard);
+		} else {
+			standard.setServices(standardServices);
+			premium.setServices(premiumServices);
+			services.add(standard);
+			services.add(premium);
 		}
 		return services;
 	}
 	
-	@GetMapping("/api/pipelines")
+	@GetMapping("/api/createdPipelines")
 	public List<PipeLine> getPipeline(){
 		return PipelineUtil.getPipelines();
 	}
 	
-	@PostMapping(path = "/api/installPipeline", consumes = "application/json", produces = "application/json")
+	@PostMapping(path = "/api/installPipeline", consumes = "application/json", produces = "application/text")
 	public String installPipeline(@RequestBody PipeLine pipeline){
 		if(pipeline != null) {
 			PipelineUtil.createPipeline(pipeline);
 		}
-		return new DeployToolChain().deploy();
+		return new DeployToolChain().installPipeline();
 	}
 	
+	@PostMapping(path = "/api/installTool", consumes = "application/json", produces = "application/text")
+	public String installTool(@RequestBody StatusPage statusPage){
+		if(statusPage == null) {
+			return "";
+		}
+		return new DeployToolChain().installTool(statusPage.getToolName());
+	}
+	
+	
 	@GetMapping("/api/status")
-	public List<StatusPage> getSetup() {
+	public List<StatusPage> getStatus() {
 		List<StatusPage> statusPages = new ArrayList<>();
 		CheckToolsStatus status = new CheckToolsStatus();
-		statusPages.add(new StatusPage("Jenkins",true,true,status.isToolAlive("http://35.174.141.72:8082"),"Jenkins_Link",
+		statusPages.add(new StatusPage("Jenkins",status.isToolAlive("http://35.174.141.72:8082"),"Jenkins_Link",
 				"Jenkins_tool_Link"));
-		statusPages.add(new StatusPage("UrbanCode Deploy",true,false,true,"UrbanCode_Deploy_Link",
+		statusPages.add(new StatusPage("UrbanCode Deploy",true,"UrbanCode_Deploy_Link",
 				"UrbanCode_Deploy_tool_Link"));
-		statusPages.add(new StatusPage("UrbanCode_Velocity",false,false,false,"UrbanCode_Velocity_Link",
+		statusPages.add(new StatusPage("UrbanCode_Velocity",false,"UrbanCode_Velocity_Link",
 				"UrbanCode_Velocity_tool_Link"));
-		statusPages.add(new StatusPage("SonarQube",true,false,true,"Jenkins_Link",
+		statusPages.add(new StatusPage("SonarQube",true,"Jenkins_Link",
 				"Jenkins_tool_Link"));
-		statusPages.add(new StatusPage("AppScan",false,false,true,"AppScan_Link",
+		statusPages.add(new StatusPage("AppScan",true,"AppScan_Link",
 				"AppScan_tool_Link"));
-		statusPages.add(new StatusPage("HCL Functional Tester",true,false,false,"HFT_Link",
+		statusPages.add(new StatusPage("HCL Functional Tester",false,"HFT_Link",
 				"HFT_tool_Link"));
 		
 		return statusPages;
@@ -85,33 +103,27 @@ public class PipeLineController {
 	@GetMapping("/api/statusPremiumToolChain")
 	public List<StatusPage> getSetupForToolChain() {
 		List<StatusPage> statusPages = new ArrayList<>();
-		statusPages.add(new StatusPage("Doors",true,false,false,"Doors_Link",
+		statusPages.add(new StatusPage("Doors",false,"Doors_Link",
 				"DOORS_tool_Link"));
-		statusPages.add(new StatusPage("RQM",true,false,false,"RQM_Link",
+		statusPages.add(new StatusPage("RQM",false,"RQM_Link",
 				"RQM_tool_Link"));
-		statusPages.add(new StatusPage("RTC",true,false,true,"RTC_Link",
+		statusPages.add(new StatusPage("RTC",true,"RTC_Link",
 				"RTC_tool_Link"));
-		statusPages.add(new StatusPage("Jenkins",true,true,true,"Jenkins_Link",
+		statusPages.add(new StatusPage("Jenkins",true,"Jenkins_Link",
 				"Jenkins_tool_Link"));
-		statusPages.add(new StatusPage("UrbanCode Deploy",true,false,true,"UrbanCode_Deploy_Link",
+		statusPages.add(new StatusPage("UrbanCode Deploy",true,"UrbanCode_Deploy_Link",
 				"UrbanCode_Deploy_tool_Link"));
-		statusPages.add(new StatusPage("UrbanCode_Velocity",false,false,false,"UrbanCode_Velocity_Link",
+		statusPages.add(new StatusPage("UrbanCode_Velocity",false,"UrbanCode_Velocity_Link",
 				"UrbanCode_Velocity_tool_Link"));
-		statusPages.add(new StatusPage("SonarQube",true,false,true,"Jenkins_Link",
+		statusPages.add(new StatusPage("SonarQube",true,"Jenkins_Link",
 				"Jenkins_tool_Link"));
-		statusPages.add(new StatusPage("AppScan",false,false,true,"AppScan_Link",
+		statusPages.add(new StatusPage("AppScan",true,"AppScan_Link",
 				"AppScan_tool_Link"));
-		statusPages.add(new StatusPage("HCL Functional Tester",true,false,false,"HFT_Link",
+		statusPages.add(new StatusPage("HCL Functional Tester",false,"HFT_Link",
 				"HFT_tool_Link"));
 		
 		
 		return statusPages;
 	}
 	
-	public static void main(String[] args) {
-		Service service = Service.ASOC;
-		if (service.getServiceCategory() == Service.ServiceCategory.DEVELOPANDTEST) {
-			System.out.println();
-		}
-	}
 }
