@@ -1,8 +1,6 @@
 package com.hcl.dsecops.service;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Base64;
 
@@ -39,44 +37,4 @@ public class GetPingStatus {
 		return result;
 	}
 	
-	/*public String isSiteUp(String url) {
-		String result = "";
-		int code = 200;
-        try {
-        	URL site = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection) site.openConnection();
-            conn.getContent();
-            if (conn.getResponseCode() == code) {
-            	result = "-> Green <-\t" + "Code: " + code;
-            } else {
-            	result = "-> Yellow <-\t" + "Code: " + code;
-            }
-        } catch (SocketTimeoutException tout) {
-        	result = "-> Red <-\t" + "Wrong domain - Exception: " + tout.getMessage();
-        } catch (IOException ioex) {
-            // You may decide on more specific behaviour...
-        	result = "-> Red <-\t" + "Wrong domain - Exception: " + ioex.getMessage();
-        }
-        
-        System.out.println(url + "\t\tStatus:" + result);
-		return result;
-      }
-	
-	public static void main(String args[]) throws Exception {
-		 
-		String[] hostList = { "http://18.204.68.202:9292/login?from=%2F", 
-				"http://18.204.68.202:9000", "https://18.204.68.202:8443", "https://18.204.68.202",
-				"http://18.204.68.202:8888/jpetstore/"};
-		GetPingStatus pintStatus = new GetPingStatus();
-		
-		for (int i = 0; i < hostList.length; i++) {
- 
-			String url = hostList[i];
-			pintStatus.isSiteUp(url);
- 
-		}
- 
-		System.out.println("Task completed...");
-	}
- */
 }

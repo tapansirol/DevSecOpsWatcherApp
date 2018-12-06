@@ -23,7 +23,6 @@ public enum StandardToolChainServices implements IService {
 	private ServiceCategory serviceCategory;
     private boolean available;
 	
-	  
 	private StandardToolChainServices(String code, String displayName, ServiceType serviceType, ServiceCategory serviceCategory, boolean available) {
 		this.code = code;
 		this.displayName = displayName;
