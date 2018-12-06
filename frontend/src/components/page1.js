@@ -12,7 +12,6 @@ const styles = theme => ({
     
     exp: {
       height: "100%",
-      //overflow: "scroll"
     }
   });
 
@@ -23,7 +22,8 @@ class page1 extends Component {
         const { classes } = this.props;
         return(
             <div  id="HomeScreen">
-                    <ExpansionPanel className={"expansion-panel"} defaultExpanded = {true}  style={{height:'500px'}}>
+            <Typography style={{padding:20,fontWeight:'bold'}}>Run the given scripts to start the docker container</Typography>
+                    <ExpansionPanel className={"expansion-panel"} defaultExpanded = {true}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography>Scripts to Start the Docker Container</Typography>
                         </ExpansionPanelSummary>

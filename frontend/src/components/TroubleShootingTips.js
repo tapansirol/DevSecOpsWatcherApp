@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import '../static/css/AutomatedToolChain.css';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Test3 from './Test3';
-import Test5 from './Test5';
+
+
 
 const styles = theme =>({
     root: {

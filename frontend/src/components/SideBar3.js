@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import '../static/css/SideBar.css';
-
 import Typography from '@material-ui/core/Typography';
 import Page1 from './page1';
 import Page2 from './page2';
@@ -12,7 +11,7 @@ import '../static/css/SideBar.css';
 import '../static/css/CreatePL1.css';
 import '../static/css/CreatePL2.css';
 import { Button} from '@material-ui/core';
-import pdf from '../static/resources/ReleaseNotes.docx';
+import pdf from '../static/resources/StandardToolChain.pdf';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import PictureAsPdf from '@material-ui/icons/PictureAsPdf';
@@ -25,11 +24,11 @@ class SideBar3 extends Component {
 
     this.state = {
         steps: [{id: 1,name:'Docker-Container', component: <Page1 />},
-        {id: 2,name:'UCD-UCV Integration', component: <Page2 />},
-        {id: 3,name:'Jenkins-UCD Integration', component: <Page3 />},
-        {id: 4,name:'Creation of process in UCD:', component: <Page4 />},
-        {id: 5,name:'Configure the UCV tool to see the Reports', component:<Page5 />},
-        {id: 6,name:'Configure the UCV ', component: <Page6 />},],
+        {id: 2,name:'Steps for Integration of all the tools', component: <Page2 />},
+        {id: 3,name:'Steps to Integrate Jenkins with UCD', component: <Page3 />},
+        {id: 4,name:'Steps to Configure the UCV tool to see the Reports', component: <Page4 />},
+        {id: 5,name:'Steps HCL Functional Tester Configuration', component:<Page5 />},
+        {id: 6,name:'Additional information', component: <Page6 />},],
 
         activeStep:1,
         isPrevDisabled:true,
@@ -152,15 +151,11 @@ getNextStepDetails() {
                         onClick={this.handlePrevious1}>
                         <ArrowBack></ArrowBack>
                     </Button>
-                    <a href={pdf} >
+                    <a href={pdf} target="_blank">
                     
                         Open PDF Version <PictureAsPdf/>
                     
                     </a>
-                    
-
-                
-
             </div>
 
         );

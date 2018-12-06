@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
+import '../static/css/CreatePL1.css';
 
 
 const styles = theme => ({
@@ -26,23 +27,26 @@ class Test3 extends Component{
     super(props);
     this.state = {
       status: [],
+      value: true
     }
   }
-
+getvalue(value)
+{
+ 
+}
   componentWillMount(){
     fetch('/api/status')
     .then(response => response.json())
             .then(message => {
                 this.setState({status: message})
-                
-               
             });
+            {localStorage.setItem("statusValue", true)}
   }
 
 
     render(){
             const {classes} = this.props;
-            const {status} = this.state;    
+            const {status,value} = this.state;    
                 return(
                     <div>
                       
@@ -56,7 +60,19 @@ class Test3 extends Component{
                             </TableRow>
                           </TableHead>
                           <TableBody>
+                          
                             {status.map(row => {
+                              if(!row.installationStatus)
+                              {
+
+                              
+                              {localStorage.setItem("statusValue", false)}
+                              console.log("Status value in Test3 ------>",localStorage.getItem('statusValue'))
+                              }
+                             // console.log("statusValue------> ",value);
+                             // console.log("check condition ------>",value && row.installationStatus)
+
+
                               return (
                                 <TableRow>
                                   <TableCell component="th" scope="row" style={{textAlign:'center'}}>
@@ -66,8 +82,15 @@ class Test3 extends Component{
                                     <center>{!row.installationStatus ? <HighlightOff style= {{color:'red'}}/>:<CheckCircle style= {{color:'green'}}/>}</center>
                                   </TableCell>
                                   <TableCell style={{textAlign:'center'}}><a href={row.actions}>User Manual</a></TableCell>
-                                  <TableCell style={{textAlign:'center'}}><a href={row.toolLink} target="_blank">OpenTool</a></TableCell>
+                              <TableCell style={{textAlign:'center'}}>
+                              {!row.installationStatus ?
+                              <a href="#">Re-run</a>
+                              :
+                              null
+                              }
+                              </TableCell>
                                 </TableRow>
+                                
                               );
                             })}
                           </TableBody>

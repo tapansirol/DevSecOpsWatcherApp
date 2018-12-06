@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-//import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import MonitoredServices from './MonitoredServices';
 import Pipelines from './Pipelines';
-import APIService from "../../util/APIService";
 
 function TabContainer(props) {
   return (
@@ -22,11 +20,6 @@ const styles = {
       flexGrow: 1,
     },
   };
-
-
-// TabContainer.propTypes = {
-//   children: PropTypes.node.isRequired
-// };
 
 
 class SimpleTab extends React.Component {
@@ -46,11 +39,9 @@ class SimpleTab extends React.Component {
     const { classes, pipelineArray } = this.props;
     const { value } = this.state;
 
-    //console.log("papapapapa :",pipelineArray)
-
     return (
     <div>
-        {/* <Paper className={classes.root}> */}
+  
         <Tabs
           value={value}
           onChange={this.handleChange}
@@ -61,7 +52,6 @@ class SimpleTab extends React.Component {
         <Tab label="MONITORED SERVICES"/>
         <Tab label="PIPELINE ASSEMBLY" />
         </Tabs>
-      {/* </Paper> */}
 
         {value == 0 && (
           <TabContainer>

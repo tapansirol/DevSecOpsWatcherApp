@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import { Button, CardActions} from '@material-ui/core';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import Rtc_IMG from '../static/images/services/rtc.JPG';
 import Dng_IMG from '../static/images/services/dng.JPG';
@@ -32,22 +31,13 @@ const styles = {
  class ManualDeploy extends Component{
     constructor(props) {
         super();
-       // let vartemp=localStorage.getItem("pl");
     }
     handleNext = () => {
-      //  localStorage.setItem("selectedCapsule", this.state.selectedCapsule);
-      //  localStorage.setItem("pipelineName", this.state.pipelineName);
-      //  console.log("Next called");
         this.props.history.push('/monitor');
     }
 
     handlePrevious = () => {
-       // console.log("Previous called");
-       // localStorage.setItem('selectedPipelineIndex', this.state.selectedPipelineIndex);
-       // localStorage.setItem('serviceArray', this.state.serviceArray);
-        
         this.props.history.push('/createpl3');
-        
     }
 
     render()

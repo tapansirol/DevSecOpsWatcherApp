@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import ServiceAssembly from '../ServiceAssembly'
-import APIService from '../../util/APIService';
 import LongMenu from './LongMenu';
 
 const styles = {
@@ -40,23 +39,18 @@ const styles = {
     },
     div1: {
         width:250,
-        // marginBottom: 2,
     },
     div2: {
         width:600,
-        // marginLeft: 50,
     },
     div3: {
         width:250,
-        // marginLeft: 120,
     },
     div4: {
         width:260,
-        //marginLeft: 50,
     },
     div5: {
         width:40,
-        //marginLeft: 50,
     }
   };
 

@@ -17,7 +17,6 @@ const styles = {
 class HomeCard extends Component {
     constructor(props) {
         super();
-        // console.log(props)
     }
 
 render() {

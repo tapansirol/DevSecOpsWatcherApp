@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
 import ServiceImageCard from './ServiceImageCard.js';
-import Card from "@material-ui/core/Card";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
-//import Java from './java-logo.jpg';
 import Git from '../../static/images/services1/git.JPG';
 import sonar from '../../static/images/services1/sonar.JPG';
 import ucdeploy from '../../static/images/services1/ucd.JPG';
@@ -47,15 +44,11 @@ const categoryMap = {
 }
 const style = {
     cardlist1: {
-     // minWidth: 100,
       width: 550,
       height: 180
       
     }
 };
-
-
-
 
 class ServicesList extends Component {
 
@@ -114,7 +107,6 @@ class ServicesList extends Component {
         
                     <div  className ="wrapper_sl">
                                 {this.getCommonServices(pipelineArray).map((capsule, cIndex) => {
-                                    // if(capsule['serviceCategory'] == selected || selected =='ALL')
                                     let cl='none';let tmp="true";let clr="blue;"
                                     if(capsule.available==false){cl='';tmp="false";clr="red" }
                                      if((capsule['serviceCategory'] == myvalue1 || myvalue1 =='ALL')&&(tmp==myvalue2|| myvalue2=='ALL'))
@@ -200,13 +192,3 @@ ServicesList.propTypes = {
     classes: PropTypes.object.isRequired
   };
 export default withStyles(style)(ServicesList);
-
-
-// headline={card.headline}
-                             // body={card.body}
-                    //key={card.id}
-                    //card={card}
-                    //moveRestUp={this.moveRestUp}
-                    //resetTravel={i === this.state.cards.length-1 ? this.resetTravel : null}
-                    // removeCard={this.removeCard}
-                    //beginRemoveCard={this.beginRemoveCard}

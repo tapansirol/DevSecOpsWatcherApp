@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
-// import CardActions from '@material-ui/core/CardActions';
 import { withStyles } from '@material-ui/core/styles';
 import ServicesList from './ServicesList';
-//import ImageCard from './ImageCard';
 import SearchIcon from '@material-ui/icons/Search';
 import Input from '@material-ui/core/Input';
 import InfoCard from './InfoCard';
-//import Java from '../static/images/java-logo.jpg';
 
 const styles = theme => ({
    
@@ -49,14 +46,12 @@ class MonitoredServices extends Component {
         this.setState({
           myvalue1: newvalue1
         });
-       // this.props.changeValue1(newvalue1);
       }
 
       onChangeValue2(newvalue2){
         this.setState({
           myvalue2: newvalue2
         });
-       // this.props.changeValue1(newvalue1);
       }
 
     render() {

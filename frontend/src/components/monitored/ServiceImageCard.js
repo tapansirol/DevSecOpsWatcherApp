@@ -2,24 +2,15 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import Divider from '@material-ui/core/Divider';
 import red from '../../static/images/extra/red.jpg';
-//import java12 from '/java-logo.jpg';
-//import '.src/components/java-logo.jpg';
+
 const styles = {
   card1: {
-   // minWidth: 100,
     width: 240,
     height: 260,
-   // borderStyle: 'solid',
-   // borderColor: 'lightblue',
-    //borderRadius: '1px',
   },
   media: {
     // ⚠️ object-fit is not supported by IE11.
@@ -30,11 +21,6 @@ const styles = {
     marginLeft: 10,
     marginRight: 10,
   },
-  //title: {
-    //marginTop: 0,
-   // marginBottom: 16,
-    //fontSize: 12
-  //},
   title: {
     marginTop: 10,
     marginLeft: 60,
@@ -42,7 +28,6 @@ const styles = {
   },
   name1: {
     marginTop: 0,
-   // marginBottom: 16,
     fontSize: 12
   },
   name2: {
@@ -51,7 +36,6 @@ const styles = {
     fontSize: 14
   },
   name3: {
-   // marginTop: 10,
    marginLeft: 10,
     fontSize: 14
   },
@@ -61,15 +45,12 @@ const styles = {
   },
   version: {
     marginTop: 0,
-   // marginBottom: 16,
     fontSize: 12
   },
   pos: {
     marginBottom: 12
   },
   reddot: {
-   // width:30,
-   // height:5,
   },
   div11: {
     width:220,

@@ -32,39 +32,26 @@ class page1 extends Component {
             <div  id="HomeScreen">
                     <ExpansionPanel defaultExpanded = {true} >
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Creation of process in UCD:</Typography>
+                            <Typography>Steps to add the App in UCD tool  from Jenkins source and UCD source</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className={classes.exp}>
 
-                          <Typography>  Precondition: Download the “Tomcat Apache UCD Plugin” and install in UCD tool.</Typography>
-                            <Typography>
-                                <ol>
-                                    <li>Login to UCD tool.</li>
-                                    <li>Navigate to the “Settings” tab.</li>
-                                    <li>Under Automation section, link on “Automation Plugins”.</li>
-                                <li>Click on “Load plugin”.</li>
-                                <li>Upload Tomcat 7.868953.zip.</li>
-                                <li>Link: <a>https://developer.ibm.com/urbancode/plugin/tomcat-ibmucd/</a></li>
-
-                                </ol>
+                          <Typography>
                             <ul>
-                                <li>Login to the UCD tool with valid username and password.</li>
-                                <li>Click on “Components” tab.</li>
-                                <li>Click on the “Component name” for eg. Jenkin-jpet-component.</li>
-                                <li>Click on  the “Processes” tab.</li>
-                                <li>Click on “Create Process”.</li>
-                                <li>In “Create Process” pop-up, give the Process name and click on “Save” button.</li>
-                                <li>Click on the “Design” tab and design the process for the component.</li>
-                                <li>Click on “Download Artifacts” and drag and drop after the “Start” step. This can be found under RepositoriesDownload Artefacts</li>
-                                <li>Click on “Start Tomcat” and drag and drop after “Download Artifacts” step. This can be found under Application ServerStart Tomcat.</li>
-                                <li>Click on Edit symbol, for “Start Tomcat”.</li>
-                                <li>Look for the “launcher” text area and give the path. (This is the path Apache Tomcat Server is mounted.) and click on “save” button.</li>
-                                <li>Click on “Copy Directory” and drag and drop after the “Start Tomcat “step. This can be found under UtilitiesFile UtilsCopy Directory.</li>
-                                <li>Click on Edit symbol for “Copy Directory” and feed the following data and then click on “OK” button.</li>
-                                <li>Name: Copy Directory</li>
-                                <li>Source Directory: “.” (here. Specifies current working directory)</li>
-                                <li>Destination Directories: Apache Server Static Path.</li>
-                                <li>Make sure that every component of the design is connected with each other.</li>
+                                <li>Login to Urban Code Velocity tool with valid username and password.
+                                </li><li>Click on Pipelines tab and click on "create pipeline" link.
+                                </li><li>Give the Name, Description and select the Team and click on Save button.
+                                </li><li>Click on "Add app" and select the option as "UrbanCodeDeploymemt" and give the "application Name" and click on Save button.
+                                </li><li>Click on "Add app" and select the option as "Jenkins" and give the "application Name" and click on Save button.
+                                </li><li>Click on plus sign under the Input section.
+                                </li><li>Under the “Create version”, select automatically and click on “Continue”.
+                                </li><li>Select the Job name from Jenkins and click on “save” button. (Initially the status of job will be “Not Yet Run”.
+                                </li><li>Login to Jenkin tool.
+                                </li><li>Navigate to the Pipeline solution for which you need to see the UCV reports.
+                                </li><li>Click on “Build Now” on the LHS.
+                                </li><li>Navigate to the UCV tool and check for the App created for Jenkins. It should display the recent Build number with green symbol.
+                                </li><li>Check for the App created for Urban Code Deployment, It should display Snapshot version from Urban Code Deployment tool.
+                                </li>
                                
                                 
                             </ul>
@@ -74,26 +61,32 @@ class page1 extends Component {
 
                     <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Steps to Create Snapshot in Urban Code Deploy.</Typography>
+                            <Typography>Steps to create the Report   in UCV tool.</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className={classes.exp}>
 
                           <Typography>
                             <ul>
-                                <li>Click on "Applications" tab.
-                                </li><li>Click on Application name, i.e JPetStore App.
-                                </li><li>Click on "Snapshots" link.
-                                </li><li>Click on "create snapshot" link.
-                                </li><li>Give the Snapshot name for e.g Test-Pipeline and click on "Save" button.
-                                </li><li>Click on "Add" link , next to the Component name, ie. jenkins-jpet-component.
-                                </li><li>Click on "latest available".
-                                </li><li>Click on "Application" tab.
-                                </li><li>Click on Application name i.e "JPetStore-App".
-                                </li><li>Click on "Run button" next to the environment name, i.e Test.
-                                </li><li>In the "Run Process on Test" tab, select the SnapshotName (which you created just now ) from "Snapshot" dropdown and click on submit.
-                                </li><li>Now go to UCV tool.
-                                </li><li>Click on "Pipeline" tab.
-                                </li><li>Click on the "Pipeline name", i.e JPetStore</li>
+                                <li>Login to Urban Code Velocity tool with valid username and password.
+                                </li><li>Click on “Reports” tab.
+                                </li><li>Click on “Add report” link.
+                                </li><li>Select the type of Report from the “Type of Report”.e.g “Custom”
+                                </li><li>Give the Report Name in “Report name” text area.
+                                </li><li>Give the brief description about the report in “Description”
+                                </li><li>Click on “Add” button. Report should be created successfully.
+                                </li><li>Now click on the Report name which you created just now.
+                                </li><li>Click on “Add Card”
+                                </li><li>Under “Select a Card”, select the type of options for e.g “Deployment Count”.
+                                </li><li>In “Time Period” field, select the time duration for e.g. ”Last 30 days”.
+                                </li><li>In “Environment” field, select Environment Name, for e.g. “All Environments”.
+                                </li><li>Under the Application field, choose the application name, e.g. Jpetstore app.
+                                </li><li>In “Team” field, select “all teams”.
+                                </li><li>In “Line of Business”, select “Not Mapped” and click on “Add”. So Now User could see the details like Application deployment, Successful Deployments and Failed Deployments etc.
+                                </li><li>Click on “Add Chart” link.
+                                </li><li>Give the Title name in the “Title”.
+                                </li><li>Select the type of chart for e.g. Total Application Deployment Counts by environment”.
+                                </li><li>Select the time from “Time period” selection box e.g. “last 30 days” and click on “Add button. User could see the Report which created in graphical format bottom of the page.
+                                </li>
                             </ul>
                             </Typography>
                         </ExpansionPanelDetails>

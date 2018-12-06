@@ -4,14 +4,9 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import Divider from '@material-ui/core/Divider';
-//import Dropdown from './Dropdown';
-//import Dropdown1 from './Dropdown1';
 import NativeSelects from './NativeSelects';
 import NativeSelects1 from './NativeSelects1';
 
-
-//import java12 from '/java-logo.jpg';
-//import '.src/components/java-logo.jpg';
 const styles = {
   card1: {
    // minWidth: 100,
@@ -25,14 +20,9 @@ const styles = {
     marginTop: 10,
     marginRight: 10,
   },
-  //title: {
-    //marginTop: 0,
-   // marginBottom: 16,
-    //fontSize: 12
-  //},
+ 
   
   name3: {
-   // marginTop: 10,
    marginLeft: 10,
     fontSize: 14
   },
@@ -41,15 +31,8 @@ const styles = {
     fontSize: 14
   },
   
- //serv: {
-  //  marginLeft: 34,
-   // fontSize: 70
- //},
-
  unavl: {
-//  marginLeft: 18,
     fontSize: 14,
-    
  },
 
  status: {
@@ -71,7 +54,6 @@ const styles = {
 
  dp1: {
     marginLeft: 18,
-   // width: 180,
  },
 };
 
@@ -179,8 +161,6 @@ getUnavailableServicesCount(pipelineArray){
         </Typography>
         <div><NativeSelects1 changeValue1={this.onChangeValue1.bind(this)}></NativeSelects1></div>
         <br/>
-       {/* <div><NativeSelects2 pipelineArray={pipelineArray}></NativeSelects2></div>
-        <div><NativeSelects3 pipelineArray={pipelineArray}></NativeSelects3></div> */}
         </div>
         
       </Card>

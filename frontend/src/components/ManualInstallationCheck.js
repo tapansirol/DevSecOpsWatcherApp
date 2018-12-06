@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import '../static/css/AutomatedToolChain.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Test3 from './Test3';
-import Test5 from './Test5';
 import TroubleShootingTips from './TroubleShootingTips'
 
 
@@ -30,8 +29,6 @@ const styles = theme =>({
       card: {
         minWidth: 275,
         padding: 20,
-        //align: 
-        //marginLeft: 30
       },
     
     
@@ -82,8 +79,6 @@ class AutomatedToolChain extends Component{
                             </tr>
                         </table>
                         </div>
-                        
-                   
                 </Card>
                
             </div>

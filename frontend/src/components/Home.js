@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Button } from '@material-ui/core';
-
 import { withRouter } from 'react-router-dom';
 import HomeCard from './HomeCard';
 import APIService from '../util/APIService';

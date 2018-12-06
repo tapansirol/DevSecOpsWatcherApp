@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import './Start.css';
 import MenuAppBar from '../Components/Header';
-import Home from './Home';
+import Home from '../../components/Home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import SetUp from './SetUp';
-import Try2 from '../../components/Try2'
+
+import Try2 from '../../components/Setup'
 import ATC from '../../components/AutomatedToolChain'
 import SideBar3 from '../../components/SideBar3'
 import MonitorScreen from '../../components/MonitorScreen';
-import pipeline from '../../components/monitored/Pipelines'
+import pipeline from '../../components/monitored/Pipelines';
+import ManualInstallation from '../../components/ManualInstallation'
 
 //import InfoCard from './components/InfoCard';
 
@@ -39,6 +40,7 @@ class Start extends Component {
                         <Route exact path="/sidebar3" component={SideBar3}/>
                         <Route path="/monitor" component={MonitorScreen}/>
                         <Route path="/pipeline" component={pipeline}/>
+                        <Route path="/mi" component={ManualInstallation}/>
                         
                     </Switch>
                 </Router>
