@@ -8,6 +8,8 @@ import java.util.Properties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.hcl.dsecops.service.Configurations;
+
 @SpringBootApplication
 public class DevSecOpsUIApp {
 
@@ -20,11 +22,13 @@ public class DevSecOpsUIApp {
 	}
 
 	private static void loadProperties() {
-		Properties prop = new Properties();
+		Properties props = new Properties();
 		try{
 			InputStream stream = new FileInputStream(" ../../config/config.properties");
-			prop.load(stream);
-			System.out.println("host.ip ====> "+prop.getProperty("host.ip"));
+			props.load(stream);
+			System.out.println("HOST_MACHINE_USER_NAME ====> "+props.getProperty("HOST_MACHINE_USER_NAME"));
+			Configurations.getInstance().setProperties(props);
+			
 		}
 		catch (IOException ioe) {
 			ioe.printStackTrace();
