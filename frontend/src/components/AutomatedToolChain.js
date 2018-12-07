@@ -58,14 +58,14 @@ class AutomatedToolChain extends Component{
         super();
         this.state = {
             value: '',
-            time: '',
+            time: null,
             flag: 'false',
         }
 
     }
     componentDidMount() {
 
-        this.interval = setInterval(() => this.setState({ time: localStorage.getItem('installationLog'), flag: true }), 6000);
+        this.interval = setInterval(() => this.setState({ time: localStorage.getItem('installationLog'), flag: true }), 1000);
         
       }
    
@@ -109,19 +109,17 @@ class AutomatedToolChain extends Component{
                                     </tr>
                                 </table>
                             </Card> : 
-                            <Card className={classes.progress}>
-                            <table align="center" style={{width:'100%'}} >
-                                <tr style={{width:'100%'}}>
-                                    <td align="right" style={{width:'20%'}}>
-                                        <CircularProgress style={{color:"blue"}} />
-                                    </td>
-                                    <td align="left" style={{width:'80%'}}>
-                                    <Typography  id = "Installation-in-prog">
-                                        Loading...
-                                    </Typography></td>
-                                </tr>
-                            </table>
-                        </Card>
+                             <Card className={classes.progress}>
+                             <table align="center" style={{width:'40%'}} >
+                                 <tr style={{width:'100%'}}>
+                                     <td align="right" style={{width:'50%'}}>
+                                         <CircularProgress/>
+                                     </td>
+                                     <td align="center" style={{width:'50%'}}><Typography  id = "Installation-in-prog">Installation in Progress</Typography></td>
+                                 </tr>
+                             </table>
+                             
+                         </Card>
                             ]}                   
                         
                     </div>
@@ -131,8 +129,8 @@ class AutomatedToolChain extends Component{
                                 <td style={{width:'48%'}}>
                                 {console.log("flag =--==->", this.state.flag)}
                                
-                                {this.state.flag===true ? 
-                                <Test3 className={this.state.flag==='true'? 'check-visible':'check-hidden'}/> :null}
+                                {this.state.time==null ? 
+                                null:<Test3/>}
                                 </td>
                                 <td style={{width:'4%'}}></td>
                                 <td style={{width:'48%'}}>
@@ -148,7 +146,7 @@ class AutomatedToolChain extends Component{
                             </tr>
                         </table>
                         </div>
-                        {this.state.flag}
+                      
                 </Card>
                
             </div> 

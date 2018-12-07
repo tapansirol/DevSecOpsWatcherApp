@@ -15,7 +15,7 @@ class Home extends Component {
             text2:'Please create a new Pipeline Assembly to monitor services.',
         }
 
-        APIService.get('/api/pipelines', null, (result) => {
+        APIService.get('/api/createdPipelines', null, (result) => {
             if(result && result.length !== 0) {
                 this.props.history.push({
                     pathname: '/monitor',

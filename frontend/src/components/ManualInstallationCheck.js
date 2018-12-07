@@ -5,7 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import '../static/css/AutomatedToolChain.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Test3 from './Test3';
-import TroubleShootingTips from './TroubleShootingTips'
+import TroubleShootingTips from './TroubleShootingTips';
+import CheckCircle from '@material-ui/icons/CheckCircle';
 
 
 
@@ -53,17 +54,18 @@ class AutomatedToolChain extends Component{
                     <h4 align="center"><b>Tool chain manual installation check</b></h4>
                     <Typography align="center">status of the manual installation.</Typography>
                     <div style={{padding:20}}>
-                        <Card className={classes.progress}>
-                            <table align="center" style={{width:'40%'}} >
+                    <Card className={classes.success}>
+                            <table align="center" style={{width:'50%'}} >
                                 <tr style={{width:'100%'}}>
-                                    <td align="right" style={{width:'50%'}}>
-                                        <CircularProgress/>
+                                    <td align="right" style={{width:'30%'}}>
+                                        <CheckCircle style={{color:'green'}}/>
                                     </td>
-                                    <td align="center" style={{width:'50%'}}><Typography  id = "Installation-in-prog">Installation in Progress</Typography></td>
+                                    <td align="left" style={{width:'50%'}}>
+                                    <Typography  id = "Installation-in-prog">
+                                    Automated installation successful
+                                    </Typography></td>
                                 </tr>
-                            </table>
-                            
-                        </Card>
+                            </table> </Card>
                     </div>
                         <div style={{padding:20,width:'100%'}}>
                         <table align="center" style={{width:'100%',height:"3rem"}}>

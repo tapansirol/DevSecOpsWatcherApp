@@ -30,9 +30,17 @@ class Test3 extends Component{
       value: true
     }
   }
-getvalue(value)
+getvalue()
 {
- 
+  /*fetch('/api/status')
+    .then(response => response.json())
+            .then(message => {
+                this.setState({status: message}),
+                this.setState({value: true})
+            });
+            {localStorage.setItem("statusValue", true)}
+            console.log("check the number of times ------>");*/
+  
 }
   componentWillMount(){
     fetch('/api/status')
@@ -41,7 +49,7 @@ getvalue(value)
                 this.setState({status: message})
             });
             {localStorage.setItem("statusValue", true)}
-            console.log("check the number of times ------>");
+            console.log("check the number of times ------>"); 
   }
 
 
@@ -49,6 +57,7 @@ getvalue(value)
             const {classes} = this.props;
             const {status,value} = this.state;    
                 return(
+                  
                     <div>
                       
                         <Table className={classes.table}>
@@ -65,11 +74,10 @@ getvalue(value)
                             {status.map(row => {
                               if(!row.installationStatus)
                               {
-
-                              
-                              {localStorage.setItem("statusValue", false)}
-                              console.log("Status value in Test3 ------>",localStorage.getItem('statusValue'))
+                                {localStorage.setItem("statusValue", false)}
+                                console.log("Status value in Test3 ------>",localStorage.getItem('statusValue'))
                               }
+                              
                              // console.log("statusValue------> ",value);
                              // console.log("check condition ------>",value && row.installationStatus)
 
@@ -82,7 +90,7 @@ getvalue(value)
                                   <TableCell>
                                     <center>{!row.installationStatus ? <HighlightOff style= {{color:'red'}}/>:<CheckCircle style= {{color:'green'}}/>}</center>
                                   </TableCell>
-                                  <TableCell style={{textAlign:'center'}}><a href={row.actions}>User Manual</a></TableCell>
+                                  <TableCell style={{textAlign:'center'}}><a href={row.actions} target="_blank">User Manual</a></TableCell>
                               <TableCell style={{textAlign:'center'}}>
                               {!row.installationStatus ?
                               <a href="#">Re-run</a>

@@ -189,7 +189,7 @@ class ServiceAssembly extends Component{
                 Information
                 </Typography>
                 <Typography id="text-style-2">
-                Version: 2.1
+                Version: {this.state.status.toolVersion}
                 </Typography>
             </div>
             
@@ -201,7 +201,7 @@ class ServiceAssembly extends Component{
             </Typography></div>
             </div><br/>
             <Typography variant="caption">
-             <a href={this.state.status.actions} target="_blank">Tool Documentation</a>
+             <a href={this.state.status.helpURL} target="_blank">Tool Documentation</a>
             </Typography>
             <Typography variant="caption">
              <a href="">Tool Online Assistance</a>
