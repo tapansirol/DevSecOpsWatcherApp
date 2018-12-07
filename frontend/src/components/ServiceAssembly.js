@@ -90,7 +90,7 @@ class ServiceAssembly extends Component{
       getToolDetails(name)
       {
           //this.setState(status:)
-        fetch('/api/tooldetails?toolName='+name)
+        fetch('/api/tooInfo?toolCode='+name)
         .then(response => response.json())
                 .then(message => {
                     this.setState({status: message})

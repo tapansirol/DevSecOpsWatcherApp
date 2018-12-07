@@ -7,6 +7,7 @@ import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import Test3 from './Test3';
 import '../static/css/CreatePL1.css';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 
@@ -64,7 +65,7 @@ class AutomatedToolChain extends Component{
     }
     componentDidMount() {
 
-        this.interval = setInterval(() => this.setState({ time: localStorage.getItem('installationLog'), flag: true }), 10000);
+        this.interval = setInterval(() => this.setState({ time: localStorage.getItem('installationLog'), flag: true }), 6000);
         
       }
    
@@ -112,11 +113,11 @@ class AutomatedToolChain extends Component{
                             <table align="center" style={{width:'100%'}} >
                                 <tr style={{width:'100%'}}>
                                     <td align="right" style={{width:'20%'}}>
-                                        <HighlightOff style={{color:"red"}} />
+                                        <CircularProgress style={{color:"blue"}} />
                                     </td>
                                     <td align="left" style={{width:'80%'}}>
                                     <Typography  id = "Installation-in-prog">
-                                    Some tools were not installed correcly. Re-run the script or <a href="">contact your Admin</a> for help.
+                                        Loading...
                                     </Typography></td>
                                 </tr>
                             </table>
