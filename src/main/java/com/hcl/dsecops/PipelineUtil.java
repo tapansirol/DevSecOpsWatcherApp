@@ -7,26 +7,22 @@ import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.HttpClientBuilder;
-
 import com.hcl.dsecops.model.PipeLine;
-
+/**
+ * Utility class for application
+ * @author varanganti.j
+ *
+ */
 public class PipelineUtil {
 	
 	private static final String FILE_NAME="pipelines.xml";
-		
+	/**
+	 * Adding the created pipeline into local storage (pipelines.xml)
+	 * @param pipeline to be added into local storage
+	 */
 	public static void createPipeline(PipeLine pipeline) {
 		XMLEncoder encoder=null;
 		List<PipeLine> pipelines = getPipelines();
@@ -40,6 +36,10 @@ public class PipelineUtil {
 		encoder.close();
 	}
 	
+	/**
+	 * Method to get the pipelines created in local storage (pipelines.xml)
+	 * @return all the pipelines which were created using this Application
+	 */
 	@SuppressWarnings("unchecked")
 	public static List<PipeLine> getPipelines() {
 		XMLDecoder decoder=null;
@@ -49,36 +49,14 @@ public class PipelineUtil {
 			System.out.println("ERROR: File pipeline.xml not found");
 			return new ArrayList<>();
 		}
-		List<PipeLine> bourneSeries = new ArrayList<>();
+		List<PipeLine> pipelines = new ArrayList<>();
 		Object object = decoder.readObject();
 		if (object!=null && object instanceof ArrayList) {
-			bourneSeries=(List<PipeLine>)object;
+			pipelines=(List<PipeLine>)object;
 		}
-		System.out.println(bourneSeries);
+		System.out.println(pipelines);
 		decoder.close();
-		return bourneSeries;
+		return pipelines;
 	}
 	
-//	private static String URL_SECURED_BY_BASIC_AUTHENTICATION = "http://35.174.141.72:8082";
-//	public static HttpResponse openJenkinsTool() {
-//		CredentialsProvider provider = new BasicCredentialsProvider();
-//		UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("admin", "admin");
-//		provider.setCredentials(AuthScope.ANY, credentials);
-//		HttpClient client = HttpClientBuilder.create().setDefaultCredentialsProvider(provider).build();
-//
-//		HttpResponse response = null;
-//		try {
-//			response = client.execute(new HttpGet(URL_SECURED_BY_BASIC_AUTHENTICATION));
-//		} catch (ClientProtocolException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println("response =====>  "+response);
-//		return response;
-//	}
-//	
-//	public static void main(String[] args) {
-//		openJenkinsTool();
-//	}
 }

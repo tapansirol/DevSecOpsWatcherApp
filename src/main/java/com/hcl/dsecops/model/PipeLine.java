@@ -10,14 +10,14 @@ public class PipeLine {
 	private long pipeleineId;
 	private String pipeleineName;
 	private Capsule capsule;
-	private List<IService> services;
+	private List<Service> services;
 	private ServiceType serviceType;
 
 	public PipeLine() {
 		
 	}
 	
-	public PipeLine(long pipeleineId, String pipeleineName, Capsule capsule, List<IService> services) {
+	public PipeLine(long pipeleineId, String pipeleineName, Capsule capsule, List<Service> services) {
 		super();
 		this.pipeleineId = pipeleineId;
 		this.pipeleineName = pipeleineName;
@@ -52,11 +52,11 @@ public class PipeLine {
 		this.pipeleineName = pipeleineName;
 	}
 
-	public List<IService> getServices() {
+	public List<Service> getServices() {
 		return services;
 	}
 
-	public void setServices(List<IService> services) {
+	public void setServices(List<Service> services) {
 		this.services = services;
 	}
 	
