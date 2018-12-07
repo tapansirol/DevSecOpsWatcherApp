@@ -2,11 +2,9 @@ import React, {Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
 
 
@@ -23,6 +21,7 @@ import Ucv_IMG from '../static/images/services/ucv.JPG';
 import rqm from '../static/images/services/rqm.jpg';
 import hotui from '../static/images/services/hcl_one_test_ui.jpg';
 import hotpt from '../static/images/services/hcl_one_test_pt.jpg';
+import '../static/css/ServiceAssembly.css'
 //import red from '../static/images/extra/red.jpg';
 
 const imageMap = {
@@ -49,8 +48,8 @@ const categoryMap = {
 
 const styles = {
     dlg:{
-        minWidth: 800,
-        height: 800,
+        //minWidth: 800,
+        //height: 800,
     },
 }
 class ServiceAssembly extends Component{
@@ -62,6 +61,7 @@ class ServiceAssembly extends Component{
             image: "",
             name: "",
             category:"",
+            status: "",
           };
     }
 
@@ -79,7 +79,23 @@ class ServiceAssembly extends Component{
         this.setState({image: imagetemp});
         this.setState({ name: name });
         this.setState({category: categoryMap[category]});
+
+        this.getToolDetails(name);
+
+
+        //Added for api/status
       };
+
+
+      getToolDetails(name)
+      {
+          //this.setState(status:)
+        fetch('/api/tooldetails?toolName='+name)
+        .then(response => response.json())
+                .then(message => {
+                    this.setState({status: message})
+                });
+      }
                              
       handleClose = () => {
         this.setState({ open: false });
@@ -87,6 +103,7 @@ class ServiceAssembly extends Component{
 
     render(){
         const {classes,serviceArray, sIndex,temp,bool} = this.props;
+        const {status} = this.state;
         return (
             <div  key={sIndex} style={{display: 'inline-flex'}}>
                             {this.containsInArray(serviceArray, 'serviceCategory', 'PLANANDMEASURE') &&  <div>
@@ -137,7 +154,7 @@ class ServiceAssembly extends Component{
                                 })}
                             </div>
                            
-          <Dialog 
+          <Dialog style={{backgroundColor: 'c3143a'}}
              open={this.state.open}
                               // onClose={this.handleClose}
                               className={classes.dlg}
@@ -149,13 +166,13 @@ class ServiceAssembly extends Component{
           </DialogActions>
 
           
-            <DialogContent>
+            <DialogContent style={{width: "400px",height: '300px'}}>
                 <div class="row"> 
-          <div className="col-md-6 col-md-offset-0"> <CardMedia
+          <div className="col-md-2 col-md-offset-0"> <CardMedia
            component="img"
-           image={this.state.image}
+           image={this.state.image} style={{height:'58px', width: '58px'}}
            /></div>
-           <div className="col-md-6 col-md-offset-0"> <Typography variant="h6">
+           <div className="col-md-6 col-md-offset-0"> <Typography variant="h1">
              {this.state.name} 
             </Typography>
             
@@ -165,26 +182,32 @@ class ServiceAssembly extends Component{
            </div>
 
            
-            </div><br/>
-            <Typography variant="caption">
-             Version 2.1
-            </Typography><br/><br/>
+            </div>
             <div class="row">
-            <div className="col-md-6 col-md-offset-0"><Typography variant="caption">
-             Open Service
-            </Typography></div>
-            <div className="col-md-6 col-md-offset-0"><Typography variant="caption">
-             Access Assistance
+            <div className="col-md-6 col-md-offset-0" id = "Information-Version" style={{marginTop:"15px"}}>
+                <Typography id="text-style-1">
+                Information
+                </Typography>
+                <Typography id="text-style-2">
+                Version: 2.1
+                </Typography>
+            </div>
+            
+            <div  ><button id="Background" ><label id="label" uppercase={false}>Open Tool</label></button></div>
+            <div className="col-md-6 col-md-offset-0">
+            <Typography>
+                
+             Helpful Links
             </Typography></div>
             </div><br/>
             <Typography variant="caption">
-             Documentation
-            </Typography><br/>
-            <Typography variant="caption">
-             Helpful pdf
+             <a href={this.state.status.actions} target="_blank">Tool Documentation</a>
             </Typography>
             <Typography variant="caption">
-             Helpful video
+             <a href="">Tool Online Assistance</a>
+            </Typography>
+            <Typography variant="caption">
+             <a href="">HCL Watcher tool installation instructions</a>
             </Typography>
           </DialogContent>
           

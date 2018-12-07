@@ -94,7 +94,7 @@ class AutomatedToolChain extends Component{
                                     Automated installation successful
                                     </Typography></td>
                                 </tr>
-                            </table> </Card>: 
+                            </table> </Card>: [localStorage.getItem('statusValue')=='false' ?
                             <Card className={classes.failure}>
                                 <table align="center" style={{width:'100%'}} >
                                     <tr style={{width:'100%'}}>
@@ -107,7 +107,21 @@ class AutomatedToolChain extends Component{
                                         </Typography></td>
                                     </tr>
                                 </table>
-                        </Card> }                   
+                            </Card> : 
+                            <Card className={classes.progress}>
+                            <table align="center" style={{width:'100%'}} >
+                                <tr style={{width:'100%'}}>
+                                    <td align="right" style={{width:'20%'}}>
+                                        <HighlightOff style={{color:"red"}} />
+                                    </td>
+                                    <td align="left" style={{width:'80%'}}>
+                                    <Typography  id = "Installation-in-prog">
+                                    Some tools were not installed correcly. Re-run the script or <a href="">contact your Admin</a> for help.
+                                    </Typography></td>
+                                </tr>
+                            </table>
+                        </Card>
+                            ]}                   
                         
                     </div>
                         <div style={{padding:20,width:'100%'}}>

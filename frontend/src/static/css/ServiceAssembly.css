@@ -1,0 +1,68 @@
+#Information-Version {
+    width: 84px;
+    height: 61px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #383838;
+  }
+
+  #Information-Version .text-style-1 {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.71;
+  }
+
+  #Information-Version .text-style-2 {
+    font-size: 14px;
+    line-height: 1.71;
+  }
+  #Background {
+    width: 96px;
+    height: 40px;
+    background-color: #0066b3;
+    
+  }
+  #label{
+    width: 64px;
+    height: 18px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+  }
+  #dialog
+  {
+      margin-left: 3rem;
+      margin-top: 3rem;
+      margin-right: 3rem;
+      border: solid black
+  }
+
+  #name {
+    width: 57px;
+    height: 20px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    color: #383838;
+  }
+  #dialogActions
+  {
+      margin-right: 1px;
+      margin-top: 1px;
+      
+  }

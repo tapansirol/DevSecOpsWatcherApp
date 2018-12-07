@@ -225,7 +225,8 @@ class Test1 extends Component {
     componentWillMount(){
         localStorage.removeItem("pipelineName");
    localStorage.removeItem("selectedCapsule");
-   localStorage.removeItem("selectedPipeline")
+   localStorage.removeItem("selectedPipeline");
+   localStorage.removeItem("statusValue")
         APIService.get('api/capsules', null, (result) => { this.setStateFn('capsuleArray', result)});
         //For Pipeline
         //const capsule = localStorage.getItem('selectedCapsule');
