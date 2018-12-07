@@ -4,13 +4,13 @@ public class StatusPage {
 	
 	private String toolName;
 	private Boolean installationStatus;
-	private String actions;
+	private String userManualLink;
 	private String toolLink;
 	
 	public StatusPage(String toolName,Boolean installationStatus, String actions,String toolLink) {
 		this.toolName = toolName;
 		this.installationStatus = installationStatus;
-		this.actions = actions;
+		this.userManualLink = actions;
 		this.toolLink = toolLink;
 	}
 	
@@ -30,10 +30,10 @@ public class StatusPage {
 	}
 
 	public String getActions() {
-		return actions;
+		return userManualLink;
 	}
 	public void setActions(String actions) {
-		this.actions = actions;
+		this.userManualLink = actions;
 	}
 	public String getToolLink() {
 		return toolLink;

@@ -20,6 +20,7 @@ import com.jcraft.jsch.Session;
 public class DeployToolChain {
 	public static String EXEC = "exec";
 	public static String IDENTITY_FILE_PATH = "C:\\Demo-SLT-ubuntu.pem";
+//	public static String IDENTITY_FILE_PATH = "/home/ubuntu/Tapan/config/Demo-SLT-ubuntu.pem";
 	public static int DEFAULT_PORT = 22;
 	public static String STRICT_HOST_CONFIG_KEY = "StrictHostKeyChecking";
 	public static String STRICT_HOST_CONFIG_VALUE = "no";
@@ -57,6 +58,7 @@ public class DeployToolChain {
             session.setServerAliveCountMax(30);
             ChannelExec channelExec = (ChannelExec) session.openChannel(EXEC);
             String command = SHELL_COMMAND+Configurations.getInstance().getHOME_PATH()+toolsMap.get(STARTUP_COMMAND);
+            System.out.println("COMMAND EXECUTING ================> "+command);
             channelExec.setCommand(command);
             channelExec.connect();
             InputStream in = channelExec.getExtInputStream();
@@ -68,7 +70,7 @@ public class DeployToolChain {
             }
             int exitStatus = channelExec.getExitStatus();
             if (exitStatus > 0) {
-            	result.append("Remote script exec error! " + exitStatus);
+//            	result.append("Remote script exec error! " + exitStatus);
                 System.out.println("Remote script exec error! " + exitStatus);
             }
             session.disconnect();
@@ -108,7 +110,7 @@ public class DeployToolChain {
             }
             int exitStatus = channelExec.getExitStatus();
             if (exitStatus > 0) {
-            	result.append("Remote script exec error! " + exitStatus);
+//            	result.append("Remote script exec error! " + exitStatus);
                 System.out.println("Remote script exec error! " + exitStatus);
             }
             session.disconnect();

@@ -17,6 +17,8 @@ import com.hcl.dsecops.model.PipeLine;
 import com.hcl.dsecops.model.PremiumToolChainServices;
 import com.hcl.dsecops.model.StandardToolChainServices;
 import com.hcl.dsecops.model.StatusPage;
+import com.hcl.dsecops.model.ToolInfo;
+import com.hcl.dsecops.model.ToolInfoFactory;
 import com.hcl.dsecops.service.CheckToolsStatus;
 import com.hcl.dsecops.service.DeployToolChain;
 
@@ -97,6 +99,10 @@ public class PipeLineController {
 		return new DeployToolChain().installTool(statusPage.getToolName());
 	}
 	
+	@GetMapping("/api/tooInfo")
+    public ToolInfo getToolInfo(@RequestParam("toolCode") String toolCode ) {
+		return new ToolInfoFactory().getToolInfo(toolCode);
+	}
 	
 	@GetMapping("/api/status")
     public List<StatusPage> getStatus() {
