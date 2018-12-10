@@ -20,6 +20,7 @@ import com.hcl.dsecops.model.StatusPage;
 import com.hcl.dsecops.model.ToolInfo;
 import com.hcl.dsecops.model.ToolInfoFactory;
 import com.hcl.dsecops.service.CheckToolsStatus;
+import com.hcl.dsecops.service.Configurations;
 import com.hcl.dsecops.service.DeployToolChain;
 
 @RestController
@@ -83,12 +84,21 @@ public class PipeLineController {
 		return PipelineUtil.getPipelines();
 	}
 	
-	@PostMapping(path = "/api/installPipeline", consumes = "application/json", produces = "application/text")
+	/*@PostMapping(path = "/api/installPipeline", consumes = "application/json", produces = "application/text")
 	public String installPipeline(@RequestBody PipeLine pipeline){
 		if(pipeline != null) {
 			PipelineUtil.createPipeline(pipeline);
 		}
 		return new DeployToolChain().installPipeline();
+	}*/
+	
+	
+	@PostMapping(path = "/api/installPipeline", consumes = "application/json")
+	public void installPipeline(@RequestBody PipeLine pipeline){
+		if(pipeline != null) {
+			PipelineUtil.createPipeline(pipeline);
+		}
+		new DeployToolChain().installPipeline();
 	}
 	
 	@PostMapping(path = "/api/installTool", consumes = "application/json", produces = "application/text")
@@ -99,7 +109,12 @@ public class PipeLineController {
 		return new DeployToolChain().installTool(statusPage.getToolName());
 	}
 	
-	@GetMapping("/api/tooInfo")
+	@GetMapping("/api/installationLog")
+    public String getInstallationLog() {
+		return new DeployToolChain().result.toString();
+	}
+	
+	@GetMapping("/api/toolInfo")
     public ToolInfo getToolInfo(@RequestParam("toolCode") String toolCode ) {
 		return new ToolInfoFactory().getToolInfo(toolCode);
 	}
@@ -108,20 +123,21 @@ public class PipeLineController {
     public List<StatusPage> getStatus() {
         List<StatusPage> statusPages = new ArrayList<>();
         CheckToolsStatus status = new CheckToolsStatus();
-        statusPages.add(new StatusPage("Jenkins",true,"https://jenkins.io/doc/",
-                "Jenkins_tool_Link"));
-        statusPages.add(new StatusPage("UrbanCode Deploy",false,
+        String host = Configurations.getInstance().getIP();
+        statusPages.add(new StatusPage("Jenkins",status.isToolAlive("http://"+host+":9292"),"https://jenkins.io/doc/",
+        		"http://"+host+":9292"));
+        statusPages.add(new StatusPage("UrbanCode Deploy",status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCD_PORT()),
                 "https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html",
-                "UrbanCode_Deploy_tool_Link"));
-        statusPages.add(new StatusPage("UrbanCode_Velocity",true,
+                "https://"+host+":"+Configurations.getInstance().getUCD_PORT()));
+        statusPages.add(new StatusPage("UrbanCode_Velocity",status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCV_PORT()),
                 "https://www.ibm.com/support/knowledgecenter/en/SSCKX6_1.0.0/com.ibm.uvelocity.doc/ucv_version_welcome.html",
-                "UrbanCode_Velocity_tool_Link"));
-        statusPages.add(new StatusPage("SonarQube",true,
+                "https://"+host+":"+Configurations.getInstance().getUCV_PORT()));
+        statusPages.add(new StatusPage("SonarQube",status.isToolAlive( "http://"+host+":"+Configurations.getInstance().getSONAR_PORT()),
                 "https://docs.sonarqube.org/latest/",
-                "Jenkins_tool_Link"));
-        statusPages.add(new StatusPage("AppScan",true,
+                "http://"+host+":"+Configurations.getInstance().getSONAR_PORT()));
+        statusPages.add(new StatusPage("AppScan",status.isToolAlive("https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home"),
                 "https://www.ibm.com/support/knowledgecenter/en/SSPH29_9.0.3/com.ibm.help.common.infocenter.aps/helpindex_appscan.html",
-                "AppScan_tool_Link"));
+                "https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home"));
         return statusPages;
     }
 	

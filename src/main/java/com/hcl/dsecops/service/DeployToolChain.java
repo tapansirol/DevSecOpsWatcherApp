@@ -28,6 +28,8 @@ public class DeployToolChain {
 	private static String SHELL_COMMAND = "sh ";
 	private static String STARTUP_COMMAND = "STARTUP_COMMAND";
 	private static Map<String, String> toolsMap = new HashMap<>();
+	
+	public static StringBuilder result = new StringBuilder();;
 
 	/**
 	 * Default constructor for initializing a map for tools and its respective shell command to execute. 
@@ -47,7 +49,7 @@ public class DeployToolChain {
 	 */
 	public String installPipeline() {
         JSch jsch = new JSch();
-        StringBuilder result = new StringBuilder();
+         result.setLength(0);
         Session session;
         try {
         	
@@ -68,9 +70,9 @@ public class DeployToolChain {
             	result.append(line +LINE_BREAK);
                 System.out.println(line);
             }
+            result.append("***COMPLETED***");
             int exitStatus = channelExec.getExitStatus();
             if (exitStatus > 0) {
-//            	result.append("Remote script exec error! " + exitStatus);
                 System.out.println("Remote script exec error! " + exitStatus);
             }
             session.disconnect();
@@ -108,9 +110,9 @@ public class DeployToolChain {
             	result.append(line +LINE_BREAK);
                 System.out.println(line);
             }
+            result.append("***COMPLETED***");
             int exitStatus = channelExec.getExitStatus();
             if (exitStatus > 0) {
-//            	result.append("Remote script exec error! " + exitStatus);
                 System.out.println("Remote script exec error! " + exitStatus);
             }
             session.disconnect();
