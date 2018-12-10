@@ -26,7 +26,7 @@ class page1 extends Component {
         const { classes } = this.props;
         return(
             <div  id="HomeScreen">
-                <Typography style={{padding:20,fontWeight:'bold'}}>2- Integration of the tools</Typography>
+                <Typography style={{padding:20,fontWeight:'bold'}}>1- Integration of the tools</Typography>
                     <ExpansionPanel defaultExpanded = {true}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography>Jenkins-UCV Integration</Typography>

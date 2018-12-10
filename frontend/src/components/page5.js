@@ -30,7 +30,7 @@ class page1 extends Component {
             <Typography style={{fontWeight:'bold'}}>Precondition:HCL Functional tester tool should be installed in windows machine.</Typography>
                     <ExpansionPanel defaultExpanded = {true}  >
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Steps to Create TestScipt in HFT by recording.</Typography>
+                            <Typography>2. Steps to Create TestScipt in HFT by recording.</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             

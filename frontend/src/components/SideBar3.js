@@ -23,12 +23,8 @@ class SideBar3 extends Component {
     super();
 
     this.state = {
-        steps: [{id: 1,name:'Docker-Container', component: <Page1 />},
-        {id: 2,name:'Steps for Integration of all the tools', component: <Page2 />},
-        {id: 3,name:'Steps to Integrate Jenkins with UCD', component: <Page3 />},
-        {id: 4,name:'Steps to Configure the UCV tool to see the Reports', component: <Page4 />},
-        {id: 5,name:'Steps HCL Functional Tester Configuration', component:<Page5 />},
-        {id: 6,name:'Additional information', component: <Page6 />},],
+        steps: [{id: 1,name:'1. Steps to configure Urban Code Velocity', component: <Page2 />},
+        {id: 2,name:'2. Steps to Install and Configure HCL Functional Tester', component:<Page5 />},],
 
         activeStep:1,
         isPrevDisabled:true,
@@ -58,7 +54,7 @@ getNextStepDetails() {
  }
 
  handlePrevious1 = () => {
-     if(this.state.activeStep===2)
+     if(this.state.activeStep!=1)
      {
         this.setState(state => ({
             activeStep: state.activeStep - 1,
@@ -99,18 +95,10 @@ getNextStepDetails() {
     switch (step) {
       case 0:
         return <div></div>;
-    case 1:
-        return <div id="screen" ><Page1/></div>;
-    case 2:         
+    case 1:         
         return <div id="screen"><Page2/></div>;
-    case 3:
-        return <div id="screen"><Page3/></div>;
-    case 4:
-        return <div id="screen"><Page4/></div>;
-    case 5:
+    case 2:
         return <div id="screen"><Page5/></div>;
-    case 6:
-        return <div id="screen"><Page6/></div>;
     default:
         return 'Unknown step';
     }
