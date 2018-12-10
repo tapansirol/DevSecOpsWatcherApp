@@ -29,7 +29,7 @@ public class DeployToolChain {
 	private static String STARTUP_COMMAND = "STARTUP_COMMAND";
 	private static Map<String, String> toolsMap = new HashMap<>();
 	
-	private StringBuilder result = null;
+	public static StringBuilder result = new StringBuilder();;
 
 	/**
 	 * Default constructor for initializing a map for tools and its respective shell command to execute. 
@@ -43,20 +43,13 @@ public class DeployToolChain {
 		
 	}
 	
-	public String getProcessResult() {
-		if (result!=null) {
-			return result.toString();
-		}
-		return "";
-	}
-	
 	/**
 	 * Method to execute scripts for installation of the tools included in automated pipeline
 	 * @return the console log from shell execution command
 	 */
 	public String installPipeline() {
         JSch jsch = new JSch();
-        result = new StringBuilder();
+         result.setLength(0);
         Session session;
         try {
         	
@@ -77,9 +70,9 @@ public class DeployToolChain {
             	result.append(line +LINE_BREAK);
                 System.out.println(line);
             }
+            result.append("***COMPLETED***");
             int exitStatus = channelExec.getExitStatus();
             if (exitStatus > 0) {
-//            	result.append("Remote script exec error! " + exitStatus);
                 System.out.println("Remote script exec error! " + exitStatus);
             }
             session.disconnect();
@@ -117,9 +110,9 @@ public class DeployToolChain {
             	result.append(line +LINE_BREAK);
                 System.out.println(line);
             }
+            result.append("***COMPLETED***");
             int exitStatus = channelExec.getExitStatus();
             if (exitStatus > 0) {
-//            	result.append("Remote script exec error! " + exitStatus);
                 System.out.println("Remote script exec error! " + exitStatus);
             }
             session.disconnect();
