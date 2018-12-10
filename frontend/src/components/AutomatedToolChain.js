@@ -128,15 +128,19 @@ class AutomatedToolChain extends Component{
                             <tr >
                                 <td style={{width:'48%'}}>
                                 {console.log("flag =--==->", this.state.flag)}
+                                {console.log("time =--==->", this.state.time)}
                                
-                                {this.state.time==null ? 
-                                null:<Test3/>}
+                                {//this.state.time==null || this.state.time==''
+                                localStorage.getItem("installationLog")===null ? null :
+                                localStorage.getItem("installationLog").includes("*COMPLETED***")===true ?
+                                
+                                <Test3/>:null}
                                 </td>
                                 <td style={{width:'4%'}}></td>
                                 <td style={{width:'48%'}}>
-                                    <div id="t" style={{border: 'solid green',height:'100%',width: '100%',overflow:'auto'}}>
+                                    <div id="t" style={{border: 'solid green',height:'100%',width: '100%',overflow:'auto', backgroundColor:'black'}}>
                                     
-                                       {localStorage.getItem("installationLog")}
+                                       <span style={{color:'white'}}>{localStorage.getItem("installationLog")}</span>
                                        {/*Loading...
                                        {localStorage.getItem('statusValue')}
                                        {console.log("check statusValue in atc----->"+localStorage.getItem('statusValue'))}*/}

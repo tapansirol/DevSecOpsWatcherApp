@@ -192,8 +192,8 @@ class ServiceAssembly extends Component{
                 Version: {this.state.status.toolVersion}
                 </Typography>
             </div>
-            
-            <div  ><button id="Background" ><label id="label" uppercase={false}>Open Tool</label></button></div>
+            {console.log("Tool URL :",this.state.status.toolURL)}
+            <div  ><button id="Background" ><label id="label" uppercase={false} onClick={this.state.status.toolURL}>Open Tool</label></button></div>
             <div className="col-md-6 col-md-offset-0">
             <Typography>
                 

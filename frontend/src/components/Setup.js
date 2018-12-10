@@ -152,7 +152,8 @@ class Test1 extends Component {
             isNextDisabled:false,
             isStandardDashBoardDisabled:true,
             isPremiumDashBoardDisabled:true,
-            installationLog:''
+            installationLog:'',
+            isFetching: true
             
         }
     }
@@ -279,11 +280,49 @@ class Test1 extends Component {
         })
     }
 
-    installPipeline()
+    installPipeline(postobj)
     {
+        localStorage.removeItem('installationLog');
 
-        localStorage.setItem("selectedCapsule",this.state.selectedCapsule)
+        this.setState({...this.state, isFetching: true})
 
+        const json =  fetch('api/installPipeline', postobj);
+      /*  try{
+            
+            localStorage.removeItem('installationLog')
+            const request = async () => {
+            const json = await fetch('api/installPipeline', postobj)
+            .then(response => response.text());
+            console.log("Installation Log ----------------------> ", json);
+            localStorage.setItem('installationLog', json)
+            }
+            request();
+            } catch (e) {
+            console.log("Installation catch ----------> ",e)
+            }*/
+    }
+
+    getNextStep()
+    {
+        const { activeStep } = this.state;
+
+  
+    this.setState({
+      activeStep: activeStep + 1,
+    });
+    }
+
+  handleNext = () => {
+
+    const { activeStep } = this.state;
+    if(activeStep>=0)
+    {
+        document.getElementById("screen1").style.display ="none";
+    } 
+    if(activeStep===0)
+    {
+        localStorage.setItem("selectedCapsule",this.state.selectedCapsule);
+        localStorage.removeItem("installationLog");
         let selectedCapsule = localStorage.getItem("selectedCapsule");
         let pipelineName = localStorage.getItem("pipelineName");
         let data = {
@@ -306,65 +345,14 @@ class Test1 extends Component {
             body: JSON.stringify(data), // body data type must match "Content-Type" header
         }
 
-        try{
-            localStorage.removeItem('installationLog')
-            const request = async () => {
-            const json = await fetch('api/installPipeline', postobj)
-            .then(response => response.text());
-            console.log("Installation Log ----------------------> ", json);
-            localStorage.setItem('installationLog', json)
-            }
-            request();
-            } catch (e) {
-            console.log("Installation catch ----------> ",e)
-            }
-
-            this.getNextStep();
-
-    }
-
-    getNextStep()
-    {
-        const { activeStep } = this.state;
-
-  
-    this.setState({
-      activeStep: activeStep + 1,
-    });
-    }
-
-  handleNext = () => {
-
-    const { activeStep } = this.state;
-
-  
-   
-    if(activeStep>=0)
-    {
-        document.getElementById("screen1").style.display ="none";
-       
-    }
-
-    
-      
-if(activeStep===0)
-{
-   /* fetch('api/pipeline', postobj)
-        .then(response => response.text())
-        .then(message => {
-            console.log(JSON.parse(message));
-             this.props.history.push({
-            // pathname: '/monitor',
-        //    pathname: '/manual',
-                 pipelineArray: JSON.parse(message) 
-             });
-        //    localStorage.removeItem("selectedCapsule");
-        //    localStorage.removeItem("pipelineName");
-        //    localStorage.removeItem("serviceArray");
-        //    localStorage.removeItem("selectedPipelineIndex");
-        }).catch(error => console.error('Error:', error)); */
-
-        this.installPipeline();
+        this.installPipeline(postobj);
+        this.getNextStep();
+        this.getInstallationLog();
+        if(this.state.isFetching===true)
+        {
+            this.timer = setInterval(() => this.getInstallationLog(postobj), 5000);
+        }
+        
 
         /*try{
             localStorage.removeItem('installationLog')
@@ -379,16 +367,12 @@ if(activeStep===0)
             console.log("Installation catch ----------> ",e)
             }*/
 
-}
+    }
 
-if(activeStep>0 && activeStep<3)
-{
-    this.getNextStep();
-}
-        
-    
-
-
+    if(activeStep>0 && activeStep<3)
+    {
+        this.getNextStep();
+    }   
     if(activeStep>2)
     {
         
@@ -396,13 +380,28 @@ if(activeStep>0 && activeStep<3)
         console.log("plArray =====>>>>",pipelineArray1)
         this.props.history.push({
         pathname: '/monitor',
-    //    pathname: '/manual',
+        //    pathname: '/manual',
         // pipelineArray: pipelineArray1
         pipelineArray: this.state.pipelineArray
         }); 
     
-        }
-    };   
+    }
+};
+
+getInstallationLog()
+{
+    fetch('/api/installationLog')
+            .then(response => response.text())
+            .then(message => {
+                console.log("Dekho yahan ===>", message);
+                localStorage.setItem("installationLog", message)
+               // this.setState({isFetching:false})
+                //this.setState({pipelineArray: JSON.parse(message)});
+            });
+
+            
+            
+}
    
   handlePrevious() {
         if(this.foo.state.activeStep===2)
@@ -495,6 +494,11 @@ handlePreviousAutomated = () => {
         return <ManualInstallationCheck/>
     }
   }
+
+
+  componentWillUnmount() {
+      this.timer = null;
+    } 
 
     render() 
     {
