@@ -28,6 +28,8 @@ public class DeployToolChain {
 	private static String SHELL_COMMAND = "sh ";
 	private static String STARTUP_COMMAND = "STARTUP_COMMAND";
 	private static Map<String, String> toolsMap = new HashMap<>();
+	
+	private StringBuilder result = null;
 
 	/**
 	 * Default constructor for initializing a map for tools and its respective shell command to execute. 
@@ -41,13 +43,20 @@ public class DeployToolChain {
 		
 	}
 	
+	public String getProcessResult() {
+		if (result!=null) {
+			return result.toString();
+		}
+		return "";
+	}
+	
 	/**
 	 * Method to execute scripts for installation of the tools included in automated pipeline
 	 * @return the console log from shell execution command
 	 */
 	public String installPipeline() {
         JSch jsch = new JSch();
-        StringBuilder result = new StringBuilder();
+        result = new StringBuilder();
         Session session;
         try {
         	

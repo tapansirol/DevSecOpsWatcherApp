@@ -83,12 +83,21 @@ public class PipeLineController {
 		return PipelineUtil.getPipelines();
 	}
 	
-	@PostMapping(path = "/api/installPipeline", consumes = "application/json", produces = "application/text")
+	/*@PostMapping(path = "/api/installPipeline", consumes = "application/json", produces = "application/text")
 	public String installPipeline(@RequestBody PipeLine pipeline){
 		if(pipeline != null) {
 			PipelineUtil.createPipeline(pipeline);
 		}
 		return new DeployToolChain().installPipeline();
+	}*/
+	
+	
+	@PostMapping(path = "/api/installPipeline", consumes = "application/json")
+	public void installPipeline(@RequestBody PipeLine pipeline){
+		if(pipeline != null) {
+			PipelineUtil.createPipeline(pipeline);
+		}
+		new DeployToolChain().installPipeline();
 	}
 	
 	@PostMapping(path = "/api/installTool", consumes = "application/json", produces = "application/text")
@@ -97,6 +106,11 @@ public class PipeLineController {
 			return "";
 		}
 		return new DeployToolChain().installTool(statusPage.getToolName());
+	}
+	
+	@GetMapping("/api/installationLog")
+    public String getInstallationLog() {
+		return new DeployToolChain().getProcessResult();
 	}
 	
 	@GetMapping("/api/tooInfo")
@@ -110,7 +124,7 @@ public class PipeLineController {
         CheckToolsStatus status = new CheckToolsStatus();
         statusPages.add(new StatusPage("Jenkins",true,"https://jenkins.io/doc/",
                 "Jenkins_tool_Link"));
-        statusPages.add(new StatusPage("UrbanCode Deploy",false,
+        statusPages.add(new StatusPage("UrbanCode Deploy",true,
                 "https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html",
                 "UrbanCode_Deploy_tool_Link"));
         statusPages.add(new StatusPage("UrbanCode_Velocity",true,
