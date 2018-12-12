@@ -28,7 +28,7 @@ public class CheckToolsStatus {
 	private final String HTTP = "http";
 	private final String HTTPS = "https";
 	private final String REQUEST_METHOD = "HEAD";
-	private int timeout = 100;
+	private int timeout = 2000;
 
 	/**
 	 * This method checks whether particular service up or not.
@@ -51,13 +51,20 @@ public class CheckToolsStatus {
 	 */
 	public boolean isToolAlive(String url, int timeOut) {
 		int responseCode = -1;
+		System.out.println("URLS :"+url);
 		try {
 			if(isHttpsUrl(url))
+			{
+				System.out.println("Inside HTTPS URL "+url);
 				responseCode = sendHttpsRequest(url, timeOut);
+			}
 			else
+			{
+				System.out.println("Inside HTTP URL "+url);
 			    responseCode = sendHttpRequest(url, timeOut);
+			}
 		
-			
+			System.out.println("Response Code :"+responseCode+"   --->"+url);
 			if (responseCode == 200 || responseCode == 401 || responseCode == 403) {
 				return true;
 			}
@@ -152,7 +159,7 @@ public class CheckToolsStatus {
 		connection.setReadTimeout(timeOut);
 		connection.setRequestMethod(REQUEST_METHOD);
 		int responseCode = connection.getResponseCode();
-
+		System.out.println("Res ==>"+url+"  --->"+responseCode);
 		return responseCode;
 	}
 
@@ -162,7 +169,7 @@ public class CheckToolsStatus {
 	 */
 	public static void main(String[] args) {
 		CheckToolsStatus chkToolStatus = new CheckToolsStatus();
-		String url = "http://35.174.141.72:8082";
-		System.out.println("isAlive : " + chkToolStatus.isToolAlive(url, 1000));
+		String url = "http://10.134.43.155:9292";
+		System.out.println("isAlive : " + chkToolStatus.isToolAlive(url));
 	}
 }

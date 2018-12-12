@@ -19,8 +19,8 @@ import com.jcraft.jsch.Session;
  */
 public class DeployToolChain {
 	public static String EXEC = "exec";
-	public static String IDENTITY_FILE_PATH = "C:\\Demo-SLT-ubuntu.pem";
-//	public static String IDENTITY_FILE_PATH = "/home/ubuntu/Tapan/config/Demo-SLT-ubuntu.pem";
+//	public static String IDENTITY_FILE_PATH = "C:\\Demo-SLT-ubuntu.pem";
+	public static String IDENTITY_FILE_PATH = "/home/ubuntu/Tapan/config/Demo-SLT-ubuntu.pem";
 	public static int DEFAULT_PORT = 22;
 	public static String STRICT_HOST_CONFIG_KEY = "StrictHostKeyChecking";
 	public static String STRICT_HOST_CONFIG_VALUE = "no";

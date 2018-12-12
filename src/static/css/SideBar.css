@@ -1,0 +1,48 @@
+#sidebar{
+    position: absolute;
+    width: 300px;
+    height: 65%;
+    background: white;
+   margin-top: 20px;
+    overflow-y: auto;
+    cursor: pointer;
+}
+#sidebar ul li {
+    color: white;
+    list-style: none;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgb(100,100,100);
+    font-size: 13px;
+   
+}
+#HomeScreen{
+    margin-left: 300px;
+    height:500px;
+    
+    overflow: auto;
+}
+#AboutScreen,#ContactScreen{
+    margin-left: 300px;
+    display: none;
+}
+
+.step-progress
+{
+    color:red;   
+    cursor: pointer;
+}
+.disabled {
+    pointer-events:none; 
+    opacity:0.6;  
+}
+#sidebarContent{
+    height: 50%;  
+    position: relative;
+    
+    
+}
+.expansion-panel {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}

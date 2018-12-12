@@ -28,11 +28,11 @@ public class ToolInfoFactory {
 			toolInfo = new ToolInfo("https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home","1.0.0","https://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/Welcome.html");
 			break;
 		case IService.GITHUB_CODE:
-			toolInfo = new ToolInfo("https://github.com/tapansirol/jpet-store","","");
+			toolInfo = new ToolInfo("https://github.com/tapansirol/jpet-store","2.1","https://guides.github.com/");
 			break;
-//		case IService.HFT_CODE:
-//			toolInfo = new ToolInfo("","","");
-//			break;
+		case IService.HFT_CODE:
+			toolInfo = new ToolInfo("_blank","9.2.0","https://www.ibm.com/support/knowledgecenter/SSJMXE_9.2.0/com.ibm.rational.test.ft.doc/rft_welcome.html");
+			break;
 		}
 		return toolInfo;
 	}

@@ -8,80 +8,53 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
-import '../static/css/CreatePL1.css';
 
 
-const styles = theme => ({
-    root: {
-      width: '100%',
-      marginTop: theme.spacing.unit * 3,
-      overflowX: 'auto',
-    },
-    table: {
-      minWidth: 400,
-    },
-  });
+
 
 class Test3 extends Component{
   constructor(props){
-    super(props);
+    super();
     this.state = {
       status: [],
-      value: true
+      var1: true,
     }
   }
-getvalue()
-{
-  /*fetch('/api/status')
-    .then(response => response.json())
-            .then(message => {
-                this.setState({status: message}),
-                this.setState({value: true})
-            });
-            {localStorage.setItem("statusValue", true)}
-            console.log("check the number of times ------>");*/
-  
-}
+
   componentWillMount(){
-    fetch('/api/status')
+    fetch('/api/statusPremiumToolChain')
     .then(response => response.json())
             .then(message => {
                 this.setState({status: message})
+               
             });
-            {localStorage.setItem("statusValue", null)}
-            console.log("check the number of times ------>"); 
+            fetch('/api/statusValue')
+            .then(response => response.json())
+            .then(message => {
+                this.setState({var1: message})
+               
+            });
   }
 
 
     render(){
             const {classes} = this.props;
-            const {status,value} = this.state;    
+            const {status,var1} = this.state;    
                 return(
-                  
                     <div>
-                      
-                        <Table className={classes.table}>
+                      <Paper >
+                        <Table >
                           <TableHead>
                             <TableRow>
                               <TableCell style={{textAlign:'center'}}>Tool Name</TableCell>
                               <TableCell style={{textAlign:'center'}}>Installation</TableCell>
+                              
                               <TableCell style={{textAlign:'center'}}>Actions</TableCell>
                               <TableCell style={{textAlign:'center'}}>...</TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                          
                             {status.map(row => {
-                              if(!row.installationStatus)
-                              {
-                                {localStorage.setItem("statusValue", false)}
-                                console.log("Status value in Test3 ------>",localStorage.getItem('statusValue'))
-                              }
-                              
-                             // console.log("statusValue------> ",value);
-                             // console.log("check condition ------>",value && row.installationStatus)
-
-
                               return (
                                 <TableRow>
                                   <TableCell component="th" scope="row" style={{textAlign:'center'}}>
@@ -90,24 +63,18 @@ getvalue()
                                   <TableCell>
                                     <center>{!row.installationStatus ? <HighlightOff style= {{color:'red'}}/>:<CheckCircle style= {{color:'green'}}/>}</center>
                                   </TableCell>
+                                 
                                   <TableCell style={{textAlign:'center'}}><a href={row.actions} target="_blank">User Manual</a></TableCell>
-                              <TableCell style={{textAlign:'center'}}>
-                              {!row.installationStatus ?
-                              <a href="#">Re-run</a>
-                              :
-                              null
-                              }
-                              </TableCell>
+                                  <TableCell style={{textAlign:'center'}}><a href={row.toolLink} target="_blank">OpenTool</a></TableCell>
                                 </TableRow>
-                                
                               );
                             })}
                           </TableBody>
                         </Table>
-                     
+                      </Paper>
                     </div>
                   );
             }
 }
 
-export default withStyles(styles)(Test3);
+export default Test3;

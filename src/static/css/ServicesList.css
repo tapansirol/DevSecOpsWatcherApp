@@ -1,0 +1,7 @@
+.wrapper_sl {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: left;
+    margin: 20px;
+    margin-top: 0px;
+}

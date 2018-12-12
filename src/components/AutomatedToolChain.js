@@ -82,19 +82,20 @@ class AutomatedToolChain extends Component{
                     <div style={{padding:20}}>
                    {/*{ console.log("check statusValue here----->"+localStorage.getItem('statusValue'))}
                    {console.log("VVVVVVVV------>",localStorage.getItem('statusValue')&&true)}*/}
-                        {localStorage.getItem('statusValue')===null ? 
-                        <Card className={classes.progress}>
-                        <table align="center" style={{width:'40%'}} >
-                            <tr style={{width:'100%'}}>
-                                <td align="right" style={{width:'50%'}}>
-                                    <CircularProgress/>
-                                </td>
-                                <td align="center" style={{width:'50%'}}><Typography  id = "Installation-in-prog">Installation in Progress</Typography></td>
-                            </tr>
-                        </table>
+                        {localStorage.getItem('statusValue')=='true' ? 
                         
-                    </Card>
-                        : [localStorage.getItem('statusValue')=='false' ?
+                        <Card className={classes.success}>
+                            <table align="center" style={{width:'50%'}} >
+                                <tr style={{width:'100%'}}>
+                                    <td align="right" style={{width:'30%'}}>
+                                        <CheckCircle style={{color:'green'}}/>
+                                    </td>
+                                    <td align="left" style={{width:'50%'}}>
+                                    <Typography  id = "Installation-in-prog">
+                                    Automated installation successful
+                                    </Typography></td>
+                                </tr>
+                            </table> </Card>: [localStorage.getItem('statusValue')=='false' ?
                             <Card className={classes.failure}>
                                 <table align="center" style={{width:'100%'}} >
                                     <tr style={{width:'100%'}}>
@@ -107,19 +108,18 @@ class AutomatedToolChain extends Component{
                                         </Typography></td>
                                     </tr>
                                 </table>
-                            </Card> : <Card className={classes.success}>
-                            <table align="center" style={{width:'50%'}} >
-                                <tr style={{width:'100%'}}>
-                                    <td align="right" style={{width:'30%'}}>
-                                        <CheckCircle style={{color:'green'}}/>
-                                    </td>
-                                    <td align="left" style={{width:'50%'}}>
-                                    <Typography  id = "Installation-in-prog">
-                                    Automated installation successful
-                                    </Typography></td>
-                                </tr>
-                            </table> </Card>
+                            </Card> : 
+                             <Card className={classes.progress}>
+                             <table align="center" style={{width:'40%'}} >
+                                 <tr style={{width:'100%'}}>
+                                     <td align="right" style={{width:'50%'}}>
+                                         <CircularProgress/>
+                                     </td>
+                                     <td align="center" style={{width:'50%'}}><Typography  id = "Installation-in-prog">Installation in Progress</Typography></td>
+                                 </tr>
+                             </table>
                              
+                         </Card>
                             ]}                   
                         
                     </div>
@@ -137,7 +137,7 @@ class AutomatedToolChain extends Component{
                                 <Test3/>:null}
                                 </td>
                                 <td style={{width:'4%'}}></td>
-                                <td style={{width:'48%', height:'300px'}}>
+                                <td style={{width:'48%'}}>
                                     <div id="t" style={{border: 'solid green',height:'100%',width: '100%',overflow:'auto', backgroundColor:'black'}}>
                                     
                                        <span style={{color:'white'}}>{localStorage.getItem("installationLog")}</span>

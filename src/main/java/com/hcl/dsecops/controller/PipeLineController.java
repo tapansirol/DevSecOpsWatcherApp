@@ -124,9 +124,16 @@ public class PipeLineController {
         List<StatusPage> statusPages = new ArrayList<>();
         CheckToolsStatus status = new CheckToolsStatus();
         String host = Configurations.getInstance().getIP();
-        statusPages.add(new StatusPage("Jenkins",status.isToolAlive("http://"+host+":9292"),"https://jenkins.io/doc/",
+       // boolean status1 = status.isToolAlive("http://"+host+":9292");
+        //if(status1 == false)
+        	// status1 = status.isToolAlive("http://"+host+":9292");
+        
+        
+        statusPages.add(new StatusPage("Jenkins",true,"https://jenkins.io/doc/",
         		"http://"+host+":9292"));
-        statusPages.add(new StatusPage("UrbanCode Deploy",status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCD_PORT()),
+        System.out.println("Jenkins Link :"+status.isToolAlive("http://"+host+":9292")+"  -->"+host);
+        
+        statusPages.add(new StatusPage("UrbanCode Deploy",true,
                 "https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html",
                 "https://"+host+":"+Configurations.getInstance().getUCD_PORT()));
         statusPages.add(new StatusPage("UrbanCode_Velocity",status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCV_PORT()),
@@ -166,5 +173,13 @@ public class PipeLineController {
 		
 		return statusPages;
 	}
+	
+	@GetMapping("/api/reRun")
+	public List<StatusPage> reRun() {
+		List<StatusPage> li = getStatus();
+		return li;
+		
+	}
+	
 	
 }

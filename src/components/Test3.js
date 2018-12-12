@@ -48,7 +48,7 @@ getvalue()
             .then(message => {
                 this.setState({status: message})
             });
-            {localStorage.setItem("statusValue", null)}
+            {localStorage.setItem("statusValue", true)}
             console.log("check the number of times ------>"); 
   }
 

@@ -9,14 +9,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Service {
 	//maintain below sequence to adhere to UI Pipelines
-	RTC("RTC", "Rational Team Concert", ServiceType.PREMIUM, ServiceCategory.PLANANDMEASURE,false),
+	RTC("RTC", "Rational Team Concert", ServiceType.PREMIUM, ServiceCategory.PLANANDMEASURE,true),
 	DNG("DNG", "Doors NG", ServiceType.PREMIUM, ServiceCategory.PLANANDMEASURE, true),
 	GITHUB("GITHUB", "Github", ServiceType.STANDARD, ServiceCategory.DEVELOPANDTEST, true), 
 	JENKINS("JENKINS", "Jenkins", ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, true), 
 	HFT("HFT", "HCL Functional Tester", ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, true), /*for Standard Tool Chain*/
-	SONARQUBE("SONARQUBE", "Sonarqube", ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, false), 
+	SONARQUBE("SONARQUBE", "Sonarqube", ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, true), 
 	ASOC("ASOC", "AppScan on Cloud", ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, true), 
-	RQM("RQM", "Rational Quality Manager", ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, false), 
+	RQM("RQM", "Rational Quality Manager", ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, true), 
 	HOTUI("HOTUI", "HCL One Test UI", ServiceType.BOTH, ServiceCategory.DEVELOPANDTEST, true), 
 	HOTPT("HOTPT", "HCL One Test Performance Tester", ServiceType.PREMIUM, ServiceCategory.DEVELOPANDTEST, true), /*jenkins, ucv, ucd, asoc for Premium Tool Chain*/ 
 	UCD("UCD", "Urban Code Deploy", ServiceType.BOTH, ServiceCategory.RELEASEANDDEPLOY, true),

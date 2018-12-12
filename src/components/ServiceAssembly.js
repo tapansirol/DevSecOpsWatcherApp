@@ -90,7 +90,7 @@ class ServiceAssembly extends Component{
       getToolDetails(name)
       {
           //this.setState(status:)
-        fetch('/api/toolInfo?toolCode='+name)
+        fetch('/api/tooInfo?toolCode='+name)
         .then(response => response.json())
                 .then(message => {
                     this.setState({status: message})
@@ -193,7 +193,7 @@ class ServiceAssembly extends Component{
                 </Typography>
             </div>
             {console.log("Tool URL :",this.state.status.toolURL)}
-            <div  ><a href={this.state.status.toolURL} target="_blank">Open Tool</a></div>
+            <div  ><button id="Background" ><label id="label" uppercase={false} onClick={this.state.status.toolURL}>Open Tool</label></button></div>
             <div className="col-md-6 col-md-offset-0">
             <Typography>
                 

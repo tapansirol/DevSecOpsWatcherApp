@@ -24,8 +24,8 @@ public class DevSecOpsUIApp {
 	private static void loadProperties() {
 		Properties props = new Properties();
 		try{
-			InputStream stream = new FileInputStream(" ../../config/config.properties");
-//			InputStream stream = new FileInputStream("/home/ubuntu/Tapan/config/config.properties");
+//			InputStream stream = new FileInputStream(" ../../config/config.properties");
+			InputStream stream = new FileInputStream("/home/ubuntu/Tapan/config/config.properties");
 			props.load(stream);
 			System.out.println("HOST_MACHINE_USER_NAME ====> "+props.getProperty("HOST_MACHINE_USER_NAME"));
 			Configurations.getInstance().setProperties(props);
