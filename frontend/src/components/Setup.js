@@ -15,7 +15,7 @@ import Sap_IMG from '../static/images/capsules/new/sap.JPG';
 import Cpp_IMG from '../static/images/capsules/new/c++.JPG';
 import Embedded_IMG from '../static/images/capsules/new/embedded.JPG';
 import APIService from '../util/APIService';
-import { Button} from '@material-ui/core';
+import { Button, TableBody} from '@material-ui/core';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Divider from '@material-ui/core/Divider';
@@ -112,18 +112,19 @@ class Test1 extends Component {
 
     constructor(props) {
         super();
-        console.log('propertiesp',props)
+        //console.log('propertiesp',props)
         
         this.setStateFn = this.setStateFn.bind(this);// to bind setStateFn as this is being passed to APIService
         let selectedCapsule = localStorage.getItem("selectedCapsule");
         let pipelineName = localStorage.getItem("pipelineName");
+       // let selectedPipelineIndex = localStorage.getItem('selectedPipelineIndex');
         let isButtonDisabled = true;
         if(pipelineName && selectedCapsule && selectedPipelineIndex) {
             isButtonDisabled = false;
         }
 
         //For Pipeline
-        let pl=localStorage.getItem("pl");
+        //let pl=localStorage.getItem("pl");
         let serviceArray = localStorage.getItem('serviceArray');
         let selectedPipelineIndex = localStorage.getItem('selectedPipelineIndex');
        // console.log(serviceArray+" serviceArray <> selectedPipelineIndex "+selectedPipelineIndex);
@@ -153,19 +154,20 @@ class Test1 extends Component {
             isStandardDashBoardDisabled:true,
             isPremiumDashBoardDisabled:true,
             installationLog:'',
-            isFetching: true
+            isFetching: true,
+            isManualButtonDisabled: true
             
         }
     }
 
     handleCapsuleClick = (title) => {
-        console.log('capsule selected', title);
+        //console.log('capsule selected', title);
         const { pipelineName, selectedPipelineIndex } = this.state;
         //const {  } = this.state;
         
         let isButtonDisabled = true;
        // console.log('selectedPipelineIndex',selectedPipelineIndex)
-        if((selectedPipelineIndex!=null) && (pipelineName!='')) {
+        if((selectedPipelineIndex!==null) && (pipelineName!=='')) {
             isButtonDisabled = false;
         }
         this.setState({
@@ -188,7 +190,7 @@ class Test1 extends Component {
         let isButtonDisabled = true;
 
         const { selectedCapsule, selectedPipelineIndex } = this.state;
-        if((selectedPipelineIndex!=null) && (pipelineName!='') && (selectedCapsule!=null)) {
+        if((selectedPipelineIndex!==null) && (pipelineName!=='') && (selectedCapsule!==null)) {
             
             isButtonDisabled = false;
         }
@@ -205,7 +207,7 @@ class Test1 extends Component {
             fetch('api/services?capsule=')
             .then(response => response.text())
             .then(message => {
-                console.log("Dekho yarr :", JSON.parse(message));
+                //console.log("Dekho yarr :", JSON.parse(message));
                 localStorage.setItem("pa", JSON.parse(message))
                 this.setState({pipelineArray: JSON.parse(message)});
             });
@@ -215,7 +217,7 @@ class Test1 extends Component {
             fetch('api/services?capsule='+selectedCapsule)
             .then(response => response.text())
             .then(message => {
-                console.log("Dekho yarr :", JSON.parse(message));
+                //console.log("Dekho yarr :", JSON.parse(message));
                 localStorage.setItem("pa", JSON.parse(message))
                 this.setState({pipelineArray: JSON.parse(message)});
             });
@@ -229,6 +231,7 @@ class Test1 extends Component {
    localStorage.removeItem("selectedPipeline");
    localStorage.removeItem("statusValue");
    localStorage.removeItem("installationLog");
+   localStorage.removeItem("pl");
         APIService.get('api/capsules', null, (result) => { this.setStateFn('capsuleArray', result)});
         //For Pipeline
         //const capsule = localStorage.getItem('selectedCapsule');
@@ -252,9 +255,9 @@ class Test1 extends Component {
 
     
     handleSelectPipeline = (serviceArray, sIndex) => {
-        if(sIndex==0)
+        if(sIndex===0)
         localStorage.setItem("pl","pl1");
-        if(sIndex==1)
+        if(sIndex===1)
         localStorage.setItem("pl","pl2");
         const { pipelineName } = this.state;
         const { selectedCapsule } = this.state;
@@ -266,11 +269,11 @@ class Test1 extends Component {
         
         });
         const { selectedPipelineIndex } = this.state;
-        console.log('selectedPipelineIndex', selectedPipelineIndex)
-        console.log('sIndex',sIndex)
+        //console.log('selectedPipelineIndex', selectedPipelineIndex)
+        //console.log('sIndex',sIndex)
         //console.log('try',selectedPipelineIndex);
         //console.log('called',serviceArray, sIndex);
-        if((sIndex!=null) && (pipelineName!='') && (selectedCapsule!=null)) {
+        if((sIndex!==null) && (pipelineName!=='') && (selectedCapsule!==null)) {
            isButtonDisabled = false;
         }
         
@@ -306,7 +309,7 @@ class Test1 extends Component {
     {
         const { activeStep } = this.state;
 
-  
+        console.log("Coming till here..."+activeStep)
     this.setState({
       activeStep: activeStep + 1,
     });
@@ -325,6 +328,9 @@ class Test1 extends Component {
         localStorage.removeItem("installationLog");
         let selectedCapsule = localStorage.getItem("selectedCapsule");
         let pipelineName = localStorage.getItem("pipelineName");
+        console.log("selected capsule :"+selectedCapsule);
+        console.log("Pipeline Name :"+pipelineName);
+        console.log("Service Array :"+this.state.serviceArray)
         let data = {
             "pipeleineId": '',
             "pipeleineName": pipelineName,
@@ -369,6 +375,8 @@ class Test1 extends Component {
 
     }
 
+    
+
     if(activeStep>0 && activeStep<3)
     {
         this.getNextStep();
@@ -376,8 +384,8 @@ class Test1 extends Component {
     if(activeStep>2)
     {
         
-        let pipelineArray1 = this.state.pipelineArray;
-        console.log("plArray =====>>>>",pipelineArray1)
+        //let pipelineArray1 = this.state.pipelineArray;
+        //console.log("plArray =====>>>>",pipelineArray1)
         this.props.history.push({
         pathname: '/monitor',
         //    pathname: '/manual',
@@ -390,10 +398,11 @@ class Test1 extends Component {
 
 getInstallationLog()
 {
+    console.log("active Step :"+this.state.activeStep)
     fetch('/api/installationLog')
             .then(response => response.text())
             .then(message => {
-                console.log("Dekho yahan ===>", message);
+                //console.log("Dekho yahan ===>", message);
                 localStorage.setItem("installationLog", message)
                // this.setState({isFetching:false})
                 //this.setState({pipelineArray: JSON.parse(message)});
@@ -479,19 +488,21 @@ handlePreviousAutomated = () => {
 
   getStepContent(step,selectedPipelineIndex) {
     switch (step) {
-      case 0:
-        return <div></div>
-      case 1:
-      console.log('pipeline name :',selectedPipelineIndex);
-      if(!selectedPipelineIndex)
-        //return < ref={foo => this.foo = foo}/>;
-        return <AutomatedToolChain ref={foo => this.foo = foo}/>
-      case 2:
-      if(!selectedPipelineIndex)
-        //return <div><Test4 ref={test4Ref => this.test4Ref = test4Ref}/></div>;
-        return <ManualInstallation/>;
+        case 0:
+            return <div></div>
+        case 1:
+            //console.log('pipeline name :',selectedPipelineIndex);
+           // if(selectedPipelineIndex)
+                //return < ref={foo => this.foo = foo}/>;
+                return <AutomatedToolChain ref={foo => this.foo = foo}/>; break;
+        case 2:
+            if(!selectedPipelineIndex)
+                //return <div><Test4 ref={test4Ref => this.test4Ref = test4Ref}/></div>;
+                return <ManualInstallation/>;break;
         case 3:
-        return <ManualInstallationCheck/>
+            return <ManualInstallationCheck/>;
+        default:
+            return 'Unknown step';
     }
   }
 
@@ -506,9 +517,9 @@ handlePreviousAutomated = () => {
         const { classes } = this.props;
         const steps = getSteps();
         const { capsuleArray, isButtonDisabled, pipelineName, pipelineArray, 
-            selectedPipelineIndex, temp ,value, isStandardDashBoardDisabled,isPremiumDashBoardDisabled,installationLog} = this.state;
+            selectedPipelineIndex, temp ,value, isManualButtonDisabled,isPremiumDashBoardDisabled,installationLog} = this.state;
        // console.log('yahan active step ka value :')
-       console.log("value kya hai ?",isPremiumDashBoardDisabled)
+       //console.log("value kya hai ?",isPremiumDashBoardDisabled)
         return(
             <div className={classes.root}>
                 
@@ -532,11 +543,13 @@ handlePreviousAutomated = () => {
                
                 
                 <div >
-                                <Table className={classes.table}>                               
-                                    <TableRow>
-                                        <TableCell style={{textAlign:'left',width:"50%",border:0}}>Name</TableCell>
-                                        <TableCell style={{textAlign:'center',width:"50%", border:0}}>Select Stack Technology</TableCell>
-                                    </TableRow>
+                                <Table className={classes.table}>
+                                    <TableBody>                               
+                                        <TableRow>
+                                            <TableCell style={{textAlign:'left',width:"50%",border:0}}>Name</TableCell>
+                                            <TableCell style={{textAlign:'center',width:"50%", border:0}}>Select Stack Technology</TableCell>
+                                        </TableRow>
+                                    
                                     <TableRow>
                                         <TableCell style={{textAlign:'left',width:"50%",border:0}}>
                                             <TextField 
@@ -546,13 +559,13 @@ handlePreviousAutomated = () => {
                                                 value={pipelineName}
                                                 onChange={this.handleNameChange}
                                                 variant="filled"
-                                                fullWidth="true"  
+                                                fullWidth="true" 
                                             />
                                         </TableCell>
                                         <TableCell style={{textAlign:'center',width:"50%",border:0}}>
                                         <div className="wrapper_cpl1" >
                                         {capsuleArray.map((capsule, index) => {
-                                            if(index==0)
+                                            if(index===0)
                                             
                                                 return (
                                                     <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'glowing-border':'border'}
@@ -595,6 +608,7 @@ handlePreviousAutomated = () => {
                                         
                                         </TableCell>
                                     </TableRow>
+                                    </TableBody>
                                 </Table>                                                   
                        
                     
@@ -609,19 +623,20 @@ handlePreviousAutomated = () => {
 
                             <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary" >
                                 <Tab label="Standard"/>
-                                <Tab label="Premium" disabled/>
+                                <Tab label="Premium"/>
                             </Tabs>
                             
-                            {value == 0 && (
+                            {value === 0 && (
                                 
                             <TabContainer>
                                 {pipelineArray===null ? 'No Contents' :
                                 <div style={{textAlign: 'center'}}>
                                 {pipelineArray.map((serviceArray, sIndex) => {
                                     //console.log('here',serviceArray,sIndex,selectedPipelineIndex );
-                                    if(sIndex==0)
+                                    if(sIndex===0)
                                     return <div key={sIndex}>
-                                        <div className={selectedPipelineIndex == sIndex ? 'glowing-border-cpl2':'border-cpl2'}
+                                   
+                                        <div className={selectedPipelineIndex === sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
                                         <div align="left" style={{width: '96%', margin: 'auto', marginTop: '7px',
                                         display: 'flex'}}>
@@ -630,15 +645,17 @@ handlePreviousAutomated = () => {
                                                 {sIndex === 0 ? 
                                                 
                                                 <table style={{width:'100%'}}>
+                                                <tbody>
                                                     <tr >
                                                         <td style={{width:'40%',fontWeight:'bold'}}>Standard Tool Chain</td>
                                                         <td style={{width:'30%',fontWeight:'bold'}}>Typology : 
                                                         <span style={{fontWeight:"normal"}}>Open Source + HCL</span>                                                        </td>
                                                         <td style={{width:'30%',fontWeight:'bold'}}>Tools: 
                                                         <span style={{fontWeight:"normal"}}>7</span></td>
-                                                        <td><CheckCircle style={{float: "right"}} className={selectedPipelineIndex == sIndex ? 'check-visible':'check-hidden'}/></td>
+                                                        <td><CheckCircle style={{float: "right"}} className={selectedPipelineIndex === sIndex ? 'check-visible':'check-hidden'}/></td>
                                                         
                                                     </tr>
+                                                    </tbody>
                                                 </table>
                                               
                                                    : 'Jenkins + IBM'}
@@ -664,7 +681,7 @@ handlePreviousAutomated = () => {
             {value === 1 && <TabContainer> {pipelineArray===null ? <p>No Contents</p> :
                 <div style={{textAlign: 'center'}}>
                                 {pipelineArray.map((serviceArray, sIndex) => {
-                                    if(sIndex==1)
+                                    if(sIndex===1)
 
                                     if(serviceArray===null)
                                     {
@@ -676,17 +693,31 @@ handlePreviousAutomated = () => {
                                     else{
 
                                     return <div key={sIndex}>
-                                        <div className={selectedPipelineIndex == sIndex ? 'glowing-border-cpl2':'border-cpl2'}
+                                   
+                                    <div className={selectedPipelineIndex === sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
-                                        <div align="left" style={{width: '96%', margin: 'auto', marginTop: '7px',display: 'flex', border:"solid green"}}>
-                                            <div className={classes.typo}><Typography variant="body2">
-                                                {sIndex === 0 ? 'Open Source + IBM..' : 'Jenkins + IBM'}
-                                            </Typography></div>
-                                       
-                                        <CheckCircle style={{float:"right"}}className={selectedPipelineIndex == sIndex ? 'check-visible':'check-hidden'}/>
-                                         
-                                        </div><div style={{width: '96%', margin: 'auto', marginTop: '0px',}}><Divider/></div>
-                                        <div style={{marginTop: '5px',marginBottom: '8px'}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
+                                        >
+                                            <div align="left" style={{width: '96%', margin: 'auto', marginTop: '7px',
+                                                display: 'flex'}}>
+                                    
+                                                <table style={{width:'100%'}}>
+                                                    <tbody>
+                                                        <tr >
+                                                            <td style={{width:'40%',fontWeight:'bold'}}>Premium Tool Chain</td>
+                                                            <td style={{width:'30%',fontWeight:'bold'}}>Typology : 
+                                                            <span style={{fontWeight:"normal"}}>IBM + Jenkins</span> </td>
+                                                            <td style={{width:'30%',fontWeight:'bold'}}>Tools: 
+                                                            <span style={{fontWeight:"normal"}}>9</span></td>
+                                                            <td><CheckCircle style={{float: "right"}} className={selectedPipelineIndex === sIndex ? 'check-visible':'check-hidden'}/></td>
+                                                            
+                                                        </tr>
+                                                        </tbody>
+                                                </table>
+                                            </div>
+                                           
+                                            
+                                        
+                                        <div style={{marginTop: '5px',marginBottom: '8px', padding: 20}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
                                         
                                         </div>
                                         <br/>
@@ -712,7 +743,8 @@ handlePreviousAutomated = () => {
                   onClick={this.handleNext.bind(this)}
                   className={classes.button}
                 >
-                 {activeStep===0 ? 'Next: Install': [activeStep === steps.length - 1 ? 'DashBoard' : 'Next: manual Install']}
+                 {activeStep===0 ? 'Next: Install': [activeStep === steps.length - 1 ? 'DashBoard' : 
+                 [activeStep === steps.length - 2 ? 'Next: Check And Deploy':'Next: manual Install']]}
                 </Button>
                 {activeStep===1 ?
                 <Button style={{float: "right"}} 
@@ -734,7 +766,7 @@ handlePreviousAutomated = () => {
                 <Button style={{float: "right",marginLeft:"1rem"}} 
                 variant="contained"
                 color="primary"
-                onClick={this.handleNext}
+                onClick={this.forceUpdate}
                 className={classes.button}
               >
                  Refresh 

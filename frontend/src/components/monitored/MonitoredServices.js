@@ -59,19 +59,7 @@ class MonitoredServices extends Component {
         return(
             <div style={{display: 'inline-flex', margin: '20px', marginTop: '0px', width: '100%'}}>
                 <div>
-                    <div className={classes.search} style={{border: 'groove', background: 'white'}}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <Input style= {{marginLeft: 50}}
-                            placeholder="Search…"
-                            disableUnderline
-                            classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                            }}
-                            />   
-                    </div>
+                    
                     <InfoCard pipelineArray = {pipelineArray} changeValue1={this.onChangeValue1.bind(this)} changeValue2={this.onChangeValue2.bind(this)}></InfoCard>
                 </div>
             

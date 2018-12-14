@@ -35,11 +35,7 @@ const styles = theme =>({
 
 class AutomatedToolChain extends Component{
 
-    constructor()
-    {
-        super();
-
-    }
+   
 
 
     render()

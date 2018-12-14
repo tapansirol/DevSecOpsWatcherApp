@@ -6,11 +6,12 @@ import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
 import Divider from '@material-ui/core/Divider';
 import red from '../../static/images/extra/red.jpg';
+import open_tool from '../../static/images/extra/open_tool.png';
 
 const styles = {
   card1: {
-    width: 240,
-    height: 260,
+    width: 208,
+    height: 144,
   },
   media: {
     // ⚠️ object-fit is not supported by IE11.
@@ -27,8 +28,9 @@ const styles = {
     fontSize: 12
   },
   name1: {
-    marginTop: 0,
-    fontSize: 12
+    //marginTop: 24,
+    fontSize: 14,
+    fontweight: 'bold'
   },
   name2: {
     marginTop: 10,
@@ -67,58 +69,42 @@ class ServiceImageCard extends Component {
     const { classes, title, image,version,name1,name2,style,tempcolor,onClick } = this.props;
 
     return (
-      <Card className={classes.card1} style={{borderStyle: 'solid',borderColor: 'blue',borderTopColor: tempcolor}} onClick={onClick}>
-             <div style={{display: 'flex'}}>
-            <div className={classes.div11}><Typography className={classes.title} color="textSecondary">
-              {title}
-            </Typography></div>
-                 <div className={classes.reddot} style={{display: 'inline'}}> 
-                 <img src={red} style={{display: style}}></img>
-                 </div>
-            </div>
+      <Card className={classes.card1} style={{borderTopColor: tempcolor,padding:24}} onClick={onClick}>
+            
           
         <div className="row" >
-        <div className="col-md-5 col-md-offset-0" align="right" >
-          <CardMedia component="img"
+        <div className="col-md-5 col-md-offset-0" align="right" style={{ height:50, width:50}} >
+          <CardMedia component="img" 
                   className={classes.media}
                   image={image}
                   title={title}/>
           </div>
-          <div className="col-md-7 col-md-offset-0" align="left">
           
+          <div>
           <Typography className={classes.name1} variant="headline" component="h2">
               {name1}
             </Typography>
-            <Typography className={classes.version} variant="headline" component="h2">
-              {version}Version 2.1
+            <Typography style={{fontSize:12, color:'908f8f'}}>
+              {title}
             </Typography>
+            </div>
+           
           
           </div>
-          </div>
-          <Divider className={classes.dividr}/>
-          <div align="left">
-          <Typography className={classes.name2} variant="headline" component="h2" color="primary">
-              {name2}-Open Service
-            </Typography>
-            <Typography className={classes.name2} variant="headline" component="h2" color="primary">
-              {name2}-Access Assistance
-            </Typography>
-            </div>
+          <div>
             <br/>
-            <div align="left">
-            <Typography className={classes.doc} variant="headline" component="h2">
-              {version}Documentation
-            </Typography>
-            </div>
+
+            <div className="row" >
             
-            <div align="left">
-          <Typography className={classes.name3} variant="headline" component="h2" color="primary">
-              {name2}-Helpful pdf
-            </Typography>
-            <Typography className={classes.name3} variant="headline" component="h2" color="primary">
-              {name2}-Helpful video
-            </Typography>
-            </div>
+          <CardMedia 
+                  image={open_tool}
+                  title={title} style={{width: 10.5,
+                    height: 10.5}}
+                   />
+                   <a href={name2} style={{}}>Open Tool</a>
+                   </div>
+          </div>
+          
       </Card>
     );
   }

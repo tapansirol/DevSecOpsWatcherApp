@@ -6,14 +6,21 @@ import Typography from "@material-ui/core/Typography";
 import Divider from '@material-ui/core/Divider';
 import NativeSelects from './NativeSelects';
 import NativeSelects1 from './NativeSelects1';
+import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input';
+import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 
 const styles = {
   card1: {
    // minWidth: 100,
     marginTop: 30,
-    width: 250,
-    height: 485
+    width: 242,
+    height: 322,
+    
   },
+
+  
  
   dividr: {
     marginLeft: 10,
@@ -27,8 +34,9 @@ const styles = {
     fontSize: 14
   },
   doc1: {
-    marginLeft:18,
-    fontSize: 14
+   // marginLeft:16,
+    fontSize: 16,
+    //fontFamily: 'Roboto'
   },
   
  unavl: {
@@ -55,6 +63,24 @@ const styles = {
  dp1: {
     marginLeft: 18,
  },
+ searchIcon: {
+  height: 16,// '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width:16,
+  padding:16
+},
+
+search: {
+  position: 'relative',
+  //borderRadius: theme.shape.borderRadius,
+  marginTop: 20,
+},
+
+
 };
 
 class InfoCard extends Component {
@@ -119,49 +145,55 @@ getUnavailableServicesCount(pipelineArray){
 }
 
   render() {
-    const { classes, pipelineArray,title, image,version,name1,name2 } = this.props;
+    const { classes, pipelineArray } = this.props;
 
     return (
-      <Card className={classes.card1}>
-      <br/>
-             <div align="left">
-             <Typography className={classes.doc1} variant="headline" component="h2" >
-              Info
-            </Typography>
-            </div>
-            <Divider className={classes.dividr}/>
-          <br/>
+      <Card className={classes.card1} style={{padding:16, backgroundColor:"white"}}>
           <div className="row">
-          <div className="col-md-5 col-md-offset-0" align="right" ><Typography component="p">
-           {this.getCommonServicesCount(pipelineArray)} services
-        </Typography></div>
-        <div className="col-md-7 col-md-offset-0" align="left" >
-        <Typography component="p" style={{color: 'red'}} className={classes.unavl}>
-           {this.getUnavailableServicesCount(pipelineArray)} unavailables
-        </Typography></div>
-        </div>
-        <br/>
-        <div align="left">
-             <Typography className={classes.doc1} variant="headline" component="h2" >
-              Filters
-            </Typography>
-            </div>
-            <Divider className={classes.dividr}/>
+              <div className="col-md-5 col-md-offset-0" >
+                <Typography component="p" style={{fontSize:"16px"}}>
+                  Tools ({this.getCommonServicesCount(pipelineArray)})
+                </Typography>
+              </div>
+              <div className="col-md-7 col-md-offset-0">
+                <Typography component="p" style={{fontSize:"16px"}} className={classes.unavl}>
+                  unavailable ({this.getUnavailableServicesCount(pipelineArray)})
+                </Typography>
+              </div>
+          </div>
+          
+          <div className={classes.search} style={{width: "209px", height: "40px",background: "#f5f5f5"}}>
+                        <div className={classes.searchIcon}>
+                            <SearchIcon />
+                        </div>
+                        <Input style= {{marginLeft: 32}}
+                            placeholder="Search"
+                            variant="filled"
+                            disableUnderline
+                            classes={{
+                            root: classes.inputRoot,
+                            input: classes.inputInput,
+                            
+                            }}
+                            />   
+          </div>
           <br/>
-          <div align="left">
-          <Typography className={classes.status} color="textSecondary">
-          Status
-        </Typography>
-        <div><NativeSelects changeValue={this.onChangeValue.bind(this)}></NativeSelects></div>
+             <Typography className={classes.doc1} variant="headline" component="h2" >
+              Filter by :
+            </Typography>
         
+            <br/>
+        
+        <div style={{background: '#f5f5f5', width:"210", height:"40px"}}>
+          <NativeSelects changeValue={this.onChangeValue.bind(this)}></NativeSelects>
         </div>
-        <div align="left">
-          <Typography className={classes.sections} color="textSecondary">
-          Sections
-        </Typography>
-        <div><NativeSelects1 changeValue1={this.onChangeValue1.bind(this)}></NativeSelects1></div>
         <br/>
+        <div style={{background: '#f5f5f5', width:"210", height:"40px"}}>
+          <NativeSelects1 changeValue1={this.onChangeValue1.bind(this)}></NativeSelects1>
         </div>
+        
+      
+        
         
       </Card>
     );

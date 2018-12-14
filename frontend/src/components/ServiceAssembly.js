@@ -55,7 +55,7 @@ const styles = {
 class ServiceAssembly extends Component{
     constructor(props) {
         super();
-        console.log(props);
+        //console.log(props);
         this.state = {
             open: false,
             image: "",
@@ -192,7 +192,7 @@ class ServiceAssembly extends Component{
                 Version: {this.state.status.toolVersion}
                 </Typography>
             </div>
-            {console.log("Tool URL :",this.state.status.toolURL)}
+            
             <div  ><a href={this.state.status.toolURL} target="_blank">Open Tool</a></div>
             <div className="col-md-6 col-md-offset-0">
             <Typography>

@@ -18,13 +18,13 @@ export default class NativeSelects1 extends React.Component {
   render() {
     return (
       <FormControl >
-        <NativeSelect
+        <NativeSelect disableUnderline
           onChange={this.handleChange().bind(this)}
         >
           
-          <option value="ALL">ALL</option>
-          <option value="true">ACTIVE</option>
-          <option value="false">INACTIVE</option>
+          <option value="ALL">All Sections</option>
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
         </NativeSelect>
         
       </FormControl>

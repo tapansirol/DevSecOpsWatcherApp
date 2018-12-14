@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import '../static/css/SideBar.css';
 import Typography from '@material-ui/core/Typography';
-import Page1 from './page1';
 import Page2 from './page2';
-import Page3 from './page3';
-import Page4 from './page4';
 import Page5 from './page5';
-import Page6 from './page6';
 import '../static/css/SideBar.css';
 import '../static/css/CreatePL1.css';
 import '../static/css/CreatePL2.css';
@@ -81,7 +77,7 @@ getNextStepDetails() {
         });
         this.getNextStepDetails();
     }
-    else if(this.state.activeStep>=1)
+    if(this.state.activeStep>=1)
     {
         this.setState({
             isPrevDisabled: false

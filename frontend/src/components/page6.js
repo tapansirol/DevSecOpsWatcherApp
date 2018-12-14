@@ -24,7 +24,7 @@ class page1 extends Component {
 
     render()
     {
-        const {classes} =  this.props;
+        //const {classes} =  this.props;
         return(
             <div  id="HomeScreen">
                     <ExpansionPanel defaultExpanded = {true} >

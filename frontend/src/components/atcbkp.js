@@ -57,15 +57,40 @@ class AutomatedToolChain extends Component{
     {
         super();
         this.state = {
-            value: '',
-            time: null,
+            value: false,
+            time: '',
             flag: 'false',
         }
 
     }
     componentDidMount() {
+        console.log("value insidr:",this.state.value)
+        if(this.state.time!==null && this.state.time.includes("*COMPLETED***"))
+                                {
+                                   
+                                }
+                                else{
+                                    this.interval = setInterval(() => {
 
-        this.interval = setInterval(() => this.setState({ time: localStorage.getItem('installationLog'), flag: true }), 1000);
+                                    
+                                    if(this.state.time!=null && !this.state.time.includes("*COMPLETED***"))
+                                    {
+                                        this.setState({ time: localStorage.getItem('installationLog'), flag: true })
+                                    }
+                                    else {
+                                        //this.forceUpdate();
+                                        clearInterval(this.interval)
+                                      }
+                                    },
+                                    1000
+                                  )
+                                   
+                                }
+
+
+
+                              
+        
         
       }
    
@@ -75,7 +100,7 @@ class AutomatedToolChain extends Component{
        
         return(
             <div className={classes.root}>
-            
+            {console.log("St. Value -->", localStorage.getItem("statusValue"))}
                 <Card className={classes.card}>
                     <h4 align="center"><b>Tool chain automated installation</b></h4>
                     <Typography align="center">The system is running some scripts for the automated installation part of your toolchain.</Typography>
@@ -129,12 +154,21 @@ class AutomatedToolChain extends Component{
                                 <td style={{width:'48%'}}>
                                 {console.log("flag =--==->", this.state.flag)}
                                 {console.log("time =--==->", this.state.time)}
+                                {console.log("value here==-:",this.state.value)}
+                                
                                
                                 {//this.state.time==null || this.state.time==''
-                                localStorage.getItem("installationLog")===null ? null :
-                                localStorage.getItem("installationLog").includes("*COMPLETED***")===true ?
+                                this.state.time==='' || this.state.time===null ? null :
+                                [this.state.time.includes("*COMPLETED***")===true 
+                                ?
+                                <div>
+                                {localStorage.setItem("p","p")}
                                 
-                                <Test3/>:null}
+                                {console.log("value :",this.state.value)}
+                                
+                                <Test3/></div>
+                                :
+                                null]}
                                 </td>
                                 <td style={{width:'4%'}}></td>
                                 <td style={{width:'48%', height:'300px'}}>

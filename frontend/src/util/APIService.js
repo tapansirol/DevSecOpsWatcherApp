@@ -17,7 +17,7 @@ export default class APIService{
         fetch(getURL)
                 .then(response => response.text())
                 .then(message => {
-                    console.log('GET URL ' + getURL,JSON.parse(message));
+                    //console.log('GET URL ' + getURL,JSON.parse(message));
                     cb(JSON.parse(message));
                 }).catch(error => console.error('Error:', error));
     }

@@ -24,7 +24,7 @@ class page1 extends Component {
 
     render()
     {
-        const {classes} =  this.props;
+       // const {classes} =  this.props;
         return(
             <div  id="HomeScreen">
             <Typography style={{fontWeight:'bold'}}>Precondition:HCL Functional tester tool should be installed in windows machine.</Typography>

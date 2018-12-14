@@ -5,7 +5,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 
@@ -38,8 +37,8 @@ class Test3 extends Component{
 
 
     render(){
-            const {classes} = this.props;
-            const {status,var1} = this.state;    
+           
+            const {status} = this.state;    
                 return(
                     <div>
                       <Paper >
