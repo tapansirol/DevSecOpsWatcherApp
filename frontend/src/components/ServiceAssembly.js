@@ -75,6 +75,7 @@ class ServiceAssembly extends Component{
     }
 
     handleClickOpen = (imagetemp,category,name) => {
+        //console.log
        this.setState({ open: true });
         this.setState({image: imagetemp});
         this.setState({ name: name });
@@ -102,8 +103,9 @@ class ServiceAssembly extends Component{
       };
 
     render(){
-        const {classes,serviceArray, sIndex,temp,bool} = this.props;
+        const {classes,serviceArray, sIndex,temp,bool,activeStep} = this.props;
         const {status} = this.state;
+        {console.log("act step ::::"+activeStep)}
         return (
             <div  key={sIndex} style={{display: 'inline-flex'}}>
                             {this.containsInArray(serviceArray, 'serviceCategory', 'PLANANDMEASURE') &&  <div>
@@ -121,7 +123,8 @@ class ServiceAssembly extends Component{
                                                 key={cIndex}
                                                 image={imageMap[service['code']]}
                                                 title={service['displayName']}
-                                                onClick={()=>this.handleClickOpen(imageMap[service['code']], service.serviceCategory,service['code'])}
+                                                onClick={activeStep!==0 ?
+                                                    ()=>this.handleClickOpen(imageMap[service['code']], service.serviceCategory,service['code']):''}
                                             /></div>
                                            {/* <div style={{display: temp}}> <img src={red} style={{display: dis}}></img></div>*/}
                                         </div>
@@ -146,7 +149,8 @@ class ServiceAssembly extends Component{
                                                 key={cIndex}
                                                 image={imageMap[service['code']]}
                                                 title={service['displayName']}
-                                                onClick={()=>this.handleClickOpen(imageMap[service['code']], service.serviceCategory,service['code'])}
+                                                onClick={activeStep!==0 ?
+                                                    ()=>this.handleClickOpen(imageMap[service['code']], service.serviceCategory,service['code']):''}
                                             /></div>
                                             {/*<div style={{display: temp}}> <img src={red} style={{display: dis}}></img></div>*/}
                                         </div>
@@ -229,7 +233,8 @@ class ServiceAssembly extends Component{
                                                 key={cIndex}
                                                 image={imageMap[service['code']]}
                                                 title={service['displayName']}
-                                                onClick={()=>this.handleClickOpen(imageMap[service['code']], service.serviceCategory,service['code'])}
+                                                onClick={activeStep!==0 ?
+                                                    ()=>this.handleClickOpen(imageMap[service['code']], service.serviceCategory,service['code']):''}
                                             /></div>
                                           {/*  <div style={{display: temp}}><img src={red} style={{display:dis}}></img></div>*/}
                                         </div>

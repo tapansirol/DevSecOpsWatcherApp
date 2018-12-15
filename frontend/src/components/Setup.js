@@ -155,7 +155,8 @@ class Test1 extends Component {
             isPremiumDashBoardDisabled:true,
             installationLog:'',
             isFetching: true,
-            isManualButtonDisabled: true
+            isManualButtonDisabled: true,
+            isd: false
             
         }
     }
@@ -316,6 +317,8 @@ class Test1 extends Component {
     }
 
   handleNext = () => {
+
+
 
     const { activeStep } = this.state;
     if(activeStep>=0)
@@ -494,7 +497,8 @@ handlePreviousAutomated = () => {
             //console.log('pipeline name :',selectedPipelineIndex);
            // if(selectedPipelineIndex)
                 //return < ref={foo => this.foo = foo}/>;
-                return <AutomatedToolChain ref={foo => this.foo = foo}/>; break;
+                return <AutomatedToolChain ref={foo => this.foo = foo}/>; 
+                break;
         case 2:
             if(!selectedPipelineIndex)
                 //return <div><Test4 ref={test4Ref => this.test4Ref = test4Ref}/></div>;
@@ -509,7 +513,17 @@ handlePreviousAutomated = () => {
 
   componentWillUnmount() {
       this.timer = null;
-    } 
+    }
+
+    checkStatus()
+    {
+        console.log("status check here====>>>"+this.foo.state.nextButtonStatus)
+    }
+    changeStatus()
+    {
+        console.log("cha---->"+this.state.isd)
+        this.setState({isd: true})
+    }
 
     render() 
     {
@@ -663,7 +677,7 @@ handlePreviousAutomated = () => {
                                            
                                             
                                         
-                                        <div style={{marginTop: '5px',marginBottom: '8px', padding: 20}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
+                                        <div style={{marginTop: '5px',marginBottom: '8px', padding: 20}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false} activeStep={activeStep}/></div>
                                         
                                         </div>
                                         </div>
@@ -696,7 +710,7 @@ handlePreviousAutomated = () => {
                                    
                                     <div className={selectedPipelineIndex === sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
-                                        >
+                                        
                                             <div align="left" style={{width: '96%', margin: 'auto', marginTop: '7px',
                                                 display: 'flex'}}>
                                     
@@ -734,10 +748,12 @@ handlePreviousAutomated = () => {
                 </div>
                 <div style={{width:"100%"}}>
                 <div style={{width:"100%"}}>{this.getStepContent(activeStep,selectedPipelineIndex)}</div>
+                
                 </div>
                     {activeStep === steps.length ? null : (
             <div style={{margin: "1rem"}}>
-              <Button style={{float: "right",marginLeft:"1rem"}}  disabled = {isButtonDisabled}
+              <Button style={{float: "right",marginLeft:"1rem"}}  disabled = {activeStep===0 ? isButtonDisabled: this.state.isd}
+              onLoad={this.checkStatus}
                   variant="contained"
                   color="primary"
                   onClick={this.handleNext.bind(this)}
