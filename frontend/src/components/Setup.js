@@ -29,6 +29,7 @@ import TableRow from '@material-ui/core/TableRow';
 import AutomatedToolChain from './AutomatedToolChain';
 import ManualInstallation from './ManualInstallation';
 import ManualInstallationCheck from './ManualInstallationCheck';
+import ManualInstallationPremium from './ManualInstallationPremium';
 
 
 
@@ -151,15 +152,17 @@ class Test1 extends Component {
             activeStep: 0,
             isPrevDisabled:true,
             isNextDisabled:false,
-            isStandardDashBoardDisabled:true,
-            isPremiumDashBoardDisabled:true,
+            //isStandardDashBoardDisabled:true,
+            isDashBoardDisabled:true,
             installationLog:'',
             isFetching: true,
             isManualButtonDisabled: true,
-            isd: false
+            isd: true
             
         }
     }
+
+  
 
     handleCapsuleClick = (title) => {
         //console.log('capsule selected', title);
@@ -497,14 +500,19 @@ handlePreviousAutomated = () => {
             //console.log('pipeline name :',selectedPipelineIndex);
            // if(selectedPipelineIndex)
                 //return < ref={foo => this.foo = foo}/>;
-                return <AutomatedToolChain ref={foo => this.foo = foo}/>; 
+                return <AutomatedToolChain selectedPipelineIndex={selectedPipelineIndex} triggerUpdate={this.onChangeLink.bind(this)} ref={foo => this.foo = foo}/>; 
                 break;
         case 2:
             if(!selectedPipelineIndex)
                 //return <div><Test4 ref={test4Ref => this.test4Ref = test4Ref}/></div>;
-                return <ManualInstallation/>;break;
+                return <ManualInstallation />;
+
+            else
+                return <ManualInstallationPremium />;
+                
+            break;
         case 3:
-            return <ManualInstallationCheck/>;
+            return <ManualInstallationCheck selectedPipelineIndex={selectedPipelineIndex} triggerUpdate1={this.onManualCheck.bind(this)}/>;
         default:
             return 'Unknown step';
     }
@@ -515,14 +523,19 @@ handlePreviousAutomated = () => {
       this.timer = null;
     }
 
-    checkStatus()
+  
+    onChangeLink()
     {
-        console.log("status check here====>>>"+this.foo.state.nextButtonStatus)
+        this.setState({isd: false})
+        console.log("hahah :==>")
+        console.log("Is Disabled ?"+this.state.isd)
     }
-    changeStatus()
+
+    onManualCheck()
     {
-        console.log("cha---->"+this.state.isd)
-        this.setState({isd: true})
+        this.setState({isDashBoardDisabled: false})
+        console.log("hahah :==>")
+        console.log("Is Disabled ?"+this.state.isDashBoardDisabled)
     }
 
     render() 
@@ -752,14 +765,18 @@ handlePreviousAutomated = () => {
                 </div>
                     {activeStep === steps.length ? null : (
             <div style={{margin: "1rem"}}>
-              <Button style={{float: "right",marginLeft:"1rem"}}  disabled = {activeStep===0 ? isButtonDisabled: this.state.isd}
-              onLoad={this.checkStatus}
+              <Button style={{float: "right",marginLeft:"1rem"}}  disabled = {activeStep===0 ? isButtonDisabled :
+              activeStep>2 ? this.state.isDashBoardDisabled:  activeStep===1?this.state.isd:''}
+
+              
+             /* [activeStep===1? this.state.isd: this.state.isDashBoardDisabled]}*/
+             
                   variant="contained"
                   color="primary"
                   onClick={this.handleNext.bind(this)}
                   className={classes.button}
                 >
-                 {activeStep===0 ? 'Next: Install': [activeStep === steps.length - 1 ? 'DashBoard' : 
+                 {activeStep===0 ? 'Next: Install': [activeStep === steps.length - 1 ? 'Go To DashBoard' : 
                  [activeStep === steps.length - 2 ? 'Next: Check And Deploy':'Next: manual Install']]}
                 </Button>
                 {activeStep===1 ?

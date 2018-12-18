@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import '../static/css/AutomatedToolChain.css';
-import SideBar3 from './SideBar3';
+import SideBarPremium from './SideBarPremium';
 
 
 
@@ -33,7 +33,7 @@ const styles = theme =>({
   });
 
 
-class ManualInstallation extends Component{
+class ManualInstallationPremium extends Component{
 
    
 
@@ -46,7 +46,7 @@ class ManualInstallation extends Component{
                 <Card className={classes.card}>
                     <h4 align="center"><b>Tool chain Manual installation Steps</b></h4>
                     <Typography align="center">Follow the steps to complete the manual installation part of your toolchain.</Typography>
-                    <SideBar3></SideBar3>
+                    <SideBarPremium></SideBarPremium>
                         
                    
                 </Card>
@@ -55,4 +55,4 @@ class ManualInstallation extends Component{
         );
     }
 }
-export default withStyles(styles)(ManualInstallation);
+export default withStyles(styles)(ManualInstallationPremium);

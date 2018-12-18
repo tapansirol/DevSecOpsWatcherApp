@@ -60,29 +60,52 @@ class AutomatedToolChain extends Component{
             value: '',
             time: null,
             flag: 'false',
+            nextButtonStatus : false,
+            data : 0
         }
 
+    }
+    setNextButton = (data) =>
+    {
+       console.log("dchs")
+        if(data===0)
+        {
+            this.setState({data: data+1});
+            console.log("taosandn")
+            {this.props.triggerUpdate()}
+            
+        }
+        else{
+            //this.setState({data: data+1})
+        }
     }
     componentDidMount() {
 
         this.interval = setInterval(() => this.setState({ time: localStorage.getItem('installationLog'), flag: true }), 1000);
         
       }
+      getValue()
+      {
+            this.setState({
+                nextButtonStatus: true
+            })
+      }
    
     render()
     {
-        const { classes } = this.props;
+        const { classes,selectedPipelineIndex } = this.props;
+        const nextButtonStatus = this.state.nextButtonStatus;
        
         return(
             <div className={classes.root}>
-            
+           
                 <Card className={classes.card}>
                     <h4 align="center"><b>Tool chain automated installation</b></h4>
                     <Typography align="center">The system is running some scripts for the automated installation part of your toolchain.</Typography>
                     <div style={{padding:20}}>
                    {/*{ console.log("check statusValue here----->"+localStorage.getItem('statusValue'))}
                    {console.log("VVVVVVVV------>",localStorage.getItem('statusValue')&&true)}*/}
-                        {localStorage.getItem('statusValue')===null ? 
+                        {localStorage.getItem('statusValue')===null || localStorage.getItem('statusValue')==='null'? 
                         <Card className={classes.progress}>
                         <table align="center" style={{width:'40%'}} >
                             <tr style={{width:'100%'}}>
@@ -107,7 +130,9 @@ class AutomatedToolChain extends Component{
                                         </Typography></td>
                                     </tr>
                                 </table>
-                            </Card> : <Card className={classes.success}>
+                            </Card> : 
+                            <div>{this.setNextButton(this.state.data)}
+                            <Card className={classes.success} onLoad={this.getValue}>
                             <table align="center" style={{width:'50%'}} >
                                 <tr style={{width:'100%'}}>
                                     <td align="right" style={{width:'30%'}}>
@@ -118,7 +143,7 @@ class AutomatedToolChain extends Component{
                                     Automated installation successful
                                     </Typography></td>
                                 </tr>
-                            </table> </Card>
+                            </table> </Card></div>
                              
                             ]}                   
                         
@@ -134,7 +159,7 @@ class AutomatedToolChain extends Component{
                                 localStorage.getItem("installationLog")===null ? null :
                                 localStorage.getItem("installationLog").includes("*COMPLETED***")===true ?
                                 
-                                <Test3/>:null}
+                                <Test3 selectedPipelineIndex={selectedPipelineIndex}/>:null}
                                 </td>
                                 <td style={{width:'4%'}}></td>
                                 <td style={{width:'48%', height:'300px'}}>
@@ -158,3 +183,4 @@ class AutomatedToolChain extends Component{
     }
 }
 export default withStyles(styles)(AutomatedToolChain);
+//export default AutomatedToolChain;

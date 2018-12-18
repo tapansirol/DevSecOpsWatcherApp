@@ -9,7 +9,12 @@ import ATC from '../../components/AutomatedToolChain'
 import SideBar3 from '../../components/SideBar3'
 import MonitorScreen from '../../components/MonitorScreen';
 import pipeline from '../../components/monitored/Pipelines';
-import ManualInstallation from '../../components/ManualInstallation'
+import ManualInstallation from '../../components/ManualInstallation';
+import ButtonPage from '../../components/TransferData/ButtonPage';
+import HeaderPage from '../../components/TransferData/HeaderPage';
+import ButtonPage2 from '../../components/TransferData/ButtonPage2';
+import ManualInstallationCheck from '../../components/ManualInstallationCheck';
+import ManualInstallationPremium from '../../components/ManualInstallationPremium';
 
 //import InfoCard from './components/InfoCard';
 
@@ -40,7 +45,12 @@ class Start extends Component {
                         <Route exact path="/sidebar3" component={SideBar3}/>
                         <Route path="/monitor" component={MonitorScreen}/>
                         <Route path="/pipeline" component={pipeline}/>
-                        <Route path="/mi" component={ManualInstallation}/>
+                        <Route path="/mi" component={ManualInstallationPremium}/>
+
+                        <Route path="/btnpage" component={ButtonPage}/>
+                        <Route path="/hdrpage" component={HeaderPage}/>
+                        <Route path="/btnpage2" component={ButtonPage2}/>
+                        <Route path="/mic" component={ManualInstallationCheck}/>
                         
                     </Switch>
                 </Router>

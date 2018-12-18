@@ -43,19 +43,33 @@ getvalue()
   
 }
   componentWillMount(){
-    fetch('/api/status')
+    if(this.props.selectedPipelineIndex)
+    {
+      fetch('/api/AutomatedstatusPremium')
+      .then(response => response.json())
+              .then(message => {
+                  this.setState({status: message})
+              });
+              {localStorage.setItem("statusValue",null)}
+              console.log("check the number of times ------>"); 
+    }
+    else{
+      fetch('/api/status')
     .then(response => response.json())
             .then(message => {
                 this.setState({status: message})
             });
-            {localStorage.setItem("statusValue", null)}
+            {localStorage.setItem("statusValue",null)}
             console.log("check the number of times ------>"); 
+    }
+    
   }
 
 
     render(){
             const {classes} = this.props;
-            const {status,value} = this.state;    
+            const {status,value} = this.state; 
+            let count=0;   
                 return(
                   
                     <div>
@@ -76,6 +90,15 @@ getvalue()
                               {
                                 {localStorage.setItem("statusValue", false)}
                                 console.log("Status value in Test3 ------>",localStorage.getItem('statusValue'))
+                              }
+                              if(row.installationStatus)
+                              {
+                                  count = count+1;
+
+                              }
+                              if(count===status.length)
+                              {
+                                {localStorage.setItem("statusValue", true)}
                               }
                               
                              // console.log("statusValue------> ",value);

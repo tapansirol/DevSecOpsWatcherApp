@@ -45,22 +45,36 @@ const styles = theme =>({
         const { classes } = this.props;
         return(
             <div  style={{padding:20}}>
+            {this.props.status===true ? 
+                
+                <div style={{height:"300"}}>
                 
                 <h3>Trouble Shooting tips</h3>
 
-                    <ol style={{padding:20}}>
-                        <li>
-                            Check that you followed correctly all the steps described on the Manual installation steps
-                        </li>
-                        <li>
-                            Check the tool user manual
-                        </li>
-                        <li>
-                            <a href="">Contact your admin</a> for help
-                        </li>
-                    </ol>
+                
 
-                    <p>Once your troubleshooting is done click “Refresh” to check again the installation status.</p>
+                <p>Once your troubleshooting is done click “Refresh” to check again the installation status.</p>
+
+            </div> :
+            [this.props.status===false ?
+            <div style={{height:"300"}}>
+                
+            <h3>Trouble Shooting tips</h3>
+
+            <ol style={{padding:20}}>
+                <li>
+                    Check that you followed correctly all the steps described on the Manual installation steps
+                </li>
+                <li>
+                    Check the tool user manual
+                </li>
+                <li>
+                    <a href="">Contact your admin</a> for help
+                </li>
+            </ol>
+
+            <p>Once your troubleshooting is done click “Refresh” to check again the installation status.</p>
+            </div>:null ]}
 
             </div>
         )
