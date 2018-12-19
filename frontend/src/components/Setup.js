@@ -157,7 +157,8 @@ class Test1 extends Component {
             installationLog:'',
             isFetching: true,
             isManualButtonDisabled: true,
-            isd: true
+            isd: true,
+            isRefreshDisabled: false
             
         }
     }
@@ -512,7 +513,8 @@ handlePreviousAutomated = () => {
                 
             break;
         case 3:
-            return <ManualInstallationCheck selectedPipelineIndex={selectedPipelineIndex} triggerUpdate1={this.onManualCheck.bind(this)}/>;
+            return <ManualInstallationCheck selectedPipelineIndex={selectedPipelineIndex} triggerUpdate1={this.onManualCheck.bind(this)}
+            triggerUpdate2 = {this.onManualCheck2.bind(this)}/>;
         default:
             return 'Unknown step';
     }
@@ -536,6 +538,12 @@ handlePreviousAutomated = () => {
         this.setState({isDashBoardDisabled: false})
         console.log("hahah :==>")
         console.log("Is Disabled ?"+this.state.isDashBoardDisabled)
+    }
+    onManualCheck2()
+    {
+        this.setState({isRefreshDisabled: true})
+        console.log("hahah :==>")
+        console.log("Is Disabled Refresh ?"+this.state.isRefreshDisabled)
     }
 
     render() 
@@ -766,7 +774,7 @@ handlePreviousAutomated = () => {
                     {activeStep === steps.length ? null : (
             <div style={{margin: "1rem"}}>
               <Button style={{float: "right",marginLeft:"1rem"}}  disabled = {activeStep===0 ? isButtonDisabled :
-              activeStep>2 ? this.state.isDashBoardDisabled:  activeStep===1?this.state.isd:''}
+              activeStep>2 ? this.state.isDashBoardDisabled:  /*activeStep===1?this.state.isd:*/''}
 
               
              /* [activeStep===1? this.state.isd: this.state.isDashBoardDisabled]}*/
@@ -801,6 +809,7 @@ handlePreviousAutomated = () => {
                 color="primary"
                 onClick={this.forceUpdate}
                 className={classes.button}
+                disabled = {this.state.isRefreshDisabled}
               >
                  Refresh 
               </Button>: null]]}

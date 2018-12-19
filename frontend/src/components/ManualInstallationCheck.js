@@ -56,7 +56,8 @@ class ManualInstallationCheck extends Component{
 
         this.state = {
             isStatus: '',
-            data: 0
+            data: 0,
+            refreshData: 0
         }
 
     }
@@ -89,6 +90,20 @@ class ManualInstallationCheck extends Component{
             //this.setState({data: data+1})
         }
     }
+    setRefreshButton = (refreshData) =>
+    {
+       console.log("dchs")
+        if(refreshData===0)
+        {
+            this.setState({refreshData: refreshData+1});
+            console.log("taosandn")
+            {this.props.triggerUpdate2()}
+            
+        }
+        else{
+            //this.setState({data: data+1})
+        }
+    }
     
 
 
@@ -106,6 +121,7 @@ class ManualInstallationCheck extends Component{
                     
                     {this.state.isStatus ?
                     <div>{this.setNextButton(this.state.data)}
+                    {this.setRefreshButton(this.state.refreshData)}
                     <Card className={classes.success}>
                             <table align="center" style={{width:'50%'}} >
                                 <tr style={{width:'100%'}}>

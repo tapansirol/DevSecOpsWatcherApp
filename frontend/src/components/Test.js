@@ -11,6 +11,7 @@ import CheckCircle from '@material-ui/icons/CheckCircle';
 import '../static/css/CreatePL1.css';
 
 
+
 const styles = theme => ({
     root: {
       width: '100%',
@@ -141,7 +142,9 @@ setTrueValue =(dataOne) =>
                                     <center>{!row.installationStatus ? <HighlightOff style= {{color:'red'}}/>:<CheckCircle style= {{color:'green'}}/>}</center>
                                   </TableCell>
                                   <TableCell style={{textAlign:'center'}}><a href={row.actions} target="_blank">User Manual</a></TableCell>
-                                  <TableCell style={{textAlign:'center'}}><a href={row.toolLink} target="_blank">Open</a></TableCell>
+                                  <TableCell style={{textAlign:'center'}}><a href={row.toolLink} target="_blank" className={!row.installationStatus?'disabled':''}>
+                                  Open
+                                  </a></TableCell>
                                 </TableRow>
                                 
                               );
