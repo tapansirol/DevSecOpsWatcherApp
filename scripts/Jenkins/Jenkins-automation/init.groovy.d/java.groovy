@@ -8,7 +8,7 @@ def descriptor = new JDK.DescriptorImpl();
 
 def List<JDK> installations = []
 
-javaTools=[['name':'JDK_local', 'url':'file:/var/jenkins_home/downloads/jdk-8u181-linux-x64.tar.gz', 'subdir':'jdk1.8.0_181']]
+javaTools=[['name':'JDK_local', 'url':'file:/var/jenkins_home/jdk-8u181-linux-x64.tar.gz', 'subdir':'jdk1.8.0_181']]
 
 javaTools.each { javaTool ->
 

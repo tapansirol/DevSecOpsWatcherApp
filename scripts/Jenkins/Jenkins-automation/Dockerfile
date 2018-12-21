@@ -5,7 +5,7 @@ FROM jenkinsci/jenkins
 #just info about who created this
 
 USER root
-MAINTAINER Kripa
+MAINTAINER Tapan
 
 #get rid of admin password setup
 
@@ -26,3 +26,4 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 COPY init.groovy.d/* /usr/share/jenkins/ref/init.groovy.d/
 Copy scripts/* /var/jenkins_home/plugins/
 COPY conf/* /var/jenkins_home/
+COPY downloads/* /var/jenkins_home/

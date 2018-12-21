@@ -30,23 +30,9 @@
     ```
 
 ## Running the project
-1. Download the docker compose installer on the server/VM where Velocity should be running.
+1. Download the docker compose installer from the Releases tab for your version/OS to the server/VM where Velocity should be running.
 
-    ```sh
-    $ wget https://github.com/IBM/velocity-se/releases/download/1.0.0/velocity-se-1-0-0-docker-compose.tar.gz
-    $ tar -xvzf velocity-se-1-0-0-docker-compose.tar.gz
-    $ cd velocity-se-1-0-0-docker-compose
-    ```
-
-2. Open the `.env` file in your editor and set the required environment variables.
-
-    ```sh
-    $ vim .env
-    # Set ACCESS_KEY - obtained from IBM Passport Advantage
-    # Set NGINX_HOST - hostname of the VM
-    # Review other values and change if necessary
-    # Save and quit
-    ```
+2. Follow the prompts in the installer to set initial configuration values.
 
 3. Run
 

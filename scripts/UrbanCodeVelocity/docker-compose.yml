@@ -1,13 +1,23 @@
 version: '2.1'
+
+x-logging:
+  &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "2"
+
+
 services:
   velocity-router:
-    image: nginx:1.12
+    image: nginx:1.14
+    logging: *default-logging
     volumes:
      - ./conf/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf.template
      - ./conf/ssl/server.crt:/etc/nginx/ssl/server.crt
      - ./conf/ssl/server.key:/etc/nginx/ssl/server.key
     ports:
-      - "${NGINX_PORT}:${NGINX_PORT}"
+      - "${NGINX_PORT_EXPOSED}:${NGINX_PORT}"
     environment:
       - NGINX_PROTOCOL=${NGINX_PROTOCOL}
       - NGINX_HOST=${NGINX_HOST}
@@ -18,31 +28,22 @@ services:
       - release-events-api
       - security-api
       - continuous-release-ui
-      - multi-app-pipeline-ui
       - multi-app-pipeline-api
       - application-api
       - continuous-release-consumer
       - reporting-sync-api
       - reporting-consumer
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
 
   database:
     image:  mongo:3.4
+    logging: *default-logging
     command: mongod --quiet --logpath=/dev/null
     volumes:
       - mongodb:/data/db
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
 
   reporting-ui:
-    image: ibmcom/velocity-se-reporting-ui:1.0.58
+    image: ${DOCKER_REGISTRY_PREFIX}reporting-ui:1.0.74
+    logging: *default-logging
     depends_on:
       security-api:
         condition: service_healthy
@@ -62,20 +63,16 @@ services:
       - JWT_HMAC_KEY=${HMAC_KEY}
       - SECURITY_AUTH_URL=${NGINX_PROTOCOL}://${NGINX_HOST}:${NGINX_PORT}/security-api/auth
       - SECURITY_API_AUTH_TOKEN=${API_TOKEN}
-      - VELOCITY_VERSION=${VELOCITY_VERSION}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
+      - VELOCITY_VERSION=1.1.2
 
   reporting-consumer:
-    image: ibmcom/velocity-se-reporting-consumer:1.0.28
+    image: ${DOCKER_REGISTRY_PREFIX}reporting-consumer:1.0.59
+    logging: *default-logging
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:6004/ping"]
       interval: 5s
       timeout: 5s
-      retries: 30
+      retries: 10
     links:
       - database
     environment:
@@ -86,14 +83,10 @@ services:
       - LOG_LEVEL=${LOG_LEVEL}
       - AMQP_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASS}@rabbitnode1:5672/
       - NODE_TLS_REJECT_UNAUTHORIZED=0
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
 
   continuous-release-consumer:
-    image: ibmcom/velocity-se-continuous-release-consumer:1.0.160
+    image: ${DOCKER_REGISTRY_PREFIX}continuous-release-consumer:1.0.167
+    logging: *default-logging
     links:
       - rabbitnode1
     environment:
@@ -103,14 +96,10 @@ services:
       - CIPHER_KEY=${CIPHER_KEY}
       - HMAC_KEY=${HMAC_KEY}
       - AMQP_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASS}@rabbitnode1:5672/
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
 
   reporting-sync-api:
-    image: ibmcom/velocity-se-reporting-sync-api:1.0.26
+    image: ${DOCKER_REGISTRY_PREFIX}reporting-sync-api:1.0.28
+    logging: *default-logging
     links:
       - rabbitnode1
     environment:
@@ -118,16 +107,13 @@ services:
       - PORT=3499
       - BEARER_TOKEN=${API_TOKEN}
       - AMQP_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASS}@rabbitnode1:5672/
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
 
   application-api:
-    image: ibmcom/velocity-se-application-api:1.0.319
+    image: ${DOCKER_REGISTRY_PREFIX}application-api:1.0.349
+    logging: *default-logging
     links:
       - database
+      - security-api
     environment:
       - DB_TYPE=mongo
       - MONGO_URL=mongodb://database:27017
@@ -135,14 +121,12 @@ services:
       - NODE_ENV=onprem
       - PORT=3499
       - BEARER_TOKEN=${API_TOKEN}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
+      - SECURITY_API_URL=http://security-api:3911
+      - SECURITY_API_AUTH_TOKEN=${API_TOKEN}
 
   release-events-ui:
-    image: ibmcom/velocity-se-release-events-ui:1.0.151
+    image: ${DOCKER_REGISTRY_PREFIX}release-events-ui:1.0.240
+    logging: *default-logging
     depends_on:
       release-events-api:
         condition: service_started
@@ -153,15 +137,11 @@ services:
       - release_events_api__host=${NGINX_PROTOCOL}://${NGINX_HOST}:${NGINX_PORT}/release-events-api
       - security_api__host=${NGINX_PROTOCOL}://${NGINX_HOST}:${NGINX_PORT}/security-api
       - NODE_TLS_REJECT_UNAUTHORIZED=0
-      - version=${VELOCITY_VERSION}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
+      - version=1.1.2
 
   release-events-api:
-    image: ibmcom/velocity-se-release-events-api:1.0.163
+    image: ${DOCKER_REGISTRY_PREFIX}release-events-api:1.0.212
+    logging: *default-logging
     depends_on:
       security-api:
         condition: service_healthy
@@ -190,27 +170,26 @@ services:
       - BEARER_TOKEN=${API_TOKEN}
       - AMQP_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASS}@rabbitnode1:5672/
       - MAP_API_URL=http://multi-app-pipeline-api:9090
-      - MAP_API_PATH=/v1/multi-app-pipeline
+      - MAP_API_PATH=${MAP_API_PATH}
       - MAP_API_TOKEN=${API_TOKEN}
-      - ISSUES_API_URL=http://issues-service
       - REPORTING_CONSUMER_API_URL=http://reporting-consumer:6004
       - NODE_TLS_REJECT_UNAUTHORIZED=0
       - REPORTING_UI_URL=http://reporting-ui/reports
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
+      - APP_API_URL=http://application-api:3499
 
   security-api:
-    image: ibmcom/velocity-se-security-api:1.0.47
+    image: ${DOCKER_REGISTRY_PREFIX}security-api:1.0.82
+    logging: *default-logging
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3911/api/v1/status"]
       interval: 5s
       timeout: 5s
       retries: 10
+    depends_on:
+      - rcl-web-client
     links:
       - database
+      - rcl-web-client
     environment:
       - NODE_ENV=local
       - PORT=3911
@@ -226,17 +205,15 @@ services:
       - JWT_HMAC_KEY=${HMAC_KEY}
       - NODE_TLS_REJECT_UNAUTHORIZED=0
       - ACCESS_KEY=${ACCESS_KEY}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
+      - RCL_WEB_CLIENT_URL=http://rcl-web-client:4567
+      - AMQP_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASS}@rabbitnode1:5672/
 
   continuous-release-ui:
+    image: ${DOCKER_REGISTRY_PREFIX}continuous-release-ui:1.0.163
+    logging: *default-logging
     depends_on:
       security-api:
         condition: service_healthy
-    image: ibmcom/velocity-se-continuous-release-ui:1.0.133
     links:
       - database
       - rabbitnode1
@@ -254,7 +231,7 @@ services:
       - REPORTING_CONSUMER_API_AUTH_TOKEN=${API_TOKEN}
       - RELEASE_API_URL=http://release-events-api:8080/graphql
       - RELEASE_API_AUTH_TOKEN=${API_TOKEN}
-      - MAP_API_URL=http://multi-app-pipeline-api:9090/v1/multi-app-pipeline/graphql
+      - MAP_API_URL=http://multi-app-pipeline-api:9090${MAP_API_PATH}/graphql
       - MAP_API_AUTH_TOKEN=${API_TOKEN}
       - JWT_HMAC_KEY=${HMAC_KEY}
       - CR_CIPHER_KEY=${CIPHER_KEY}
@@ -272,7 +249,7 @@ services:
           "public": {
             "requireAuth": true,
             "securityAuthUrl": "${NGINX_PROTOCOL}://${NGINX_HOST}:${NGINX_PORT}/security-api/auth",
-            "version": "${VELOCITY_VERSION}",
+            "version": "1.1.2",
             "features": {
               "SlackTask": false,
               "PipelineV2Task": false,
@@ -286,20 +263,16 @@ services:
             }
           }
         }
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
 
   rabbitnode1:
+    image: 'rabbitmq:3.6-management'
+    logging: *default-logging
     environment:
       - RABBITMQ_ERLANG_COOKIE='128ad9b8-3d9f-11e8-b467-0ed5f89f718c'
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASS}
       - RABBITMQ_DEFAULT_VHOST=/
     hostname: rabbitnode1
-    image: 'rabbitmq:3.6-management'
     healthcheck:
       test: ["CMD", "rabbitmqctl", "status"]
       interval: 5s
@@ -307,25 +280,21 @@ services:
       retries: 10
     #NOTE Expose ports only for access from outside the cluster.
     ports:
-      - '15672:15672'
-      - '5672:5672'
+      - "15672:15672"
+      - "5672:5672"
     volumes:
       - rabbit1:/var/lib/rabbitmq
       - ./conf/rabbit:/etc/rabbitmq/
     command:  bash -c 'sleep 10; rabbitmq-server;'
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
 
   multi-app-pipeline-api:
-    image: ibmcom/velocity-se-multi-app-pipeline-api:1.0.70
+    image: ${DOCKER_REGISTRY_PREFIX}multi-app-pipeline-api:1.0.105
+    logging: *default-logging
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9090/v1/multi-app-pipeline/status"]
       interval: 5s
       timeout: 5s
-      retries: 30
+      retries: 3
     depends_on:
       security-api:
         condition: service_healthy
@@ -338,16 +307,15 @@ services:
       - PORT=9090
       - mongo__url=mongodb://database:27017
       - mongo__db=multi-app-pipeline
-      - appPath=/v1/multi-app-pipeline
+      - appPath=${MAP_API_PATH}
       - authToken=${API_TOKEN}
       - securityApi__url=http://security-api:3911
       - securityApi__auth_secret=${HMAC_KEY}
-      - securityApi__token=${API_TOKEN}
       - deployPlanApi__url=http://continuous-release-ui/deploymentPlans
       - deployPlanApi__cipherKey=${CIPHER_KEY}
       - deployPlanApi__hmacKey=${HMAC_KEY}
       - applicationApi__url=http://application-api:3499
-      - applicationApi__token=${API_TOKEN}
+      - bearerToken=${API_TOKEN}
       - cipher__key=${CIPHER_KEY}
       - hmac__key=${HMAC_KEY}
       - registrationApi__token=${API_TOKEN}
@@ -357,79 +325,31 @@ services:
       - releaseEventsApi__cipherKey=${CIPHER_KEY}
       - releaseEventsApi__hmacKey=${HMAC_KEY}
       - releaseEventsApi__url=http://release-events-api:8080/graphql
-      - amqp__enabled=false
-      - amqp__host=rabbitnode1
-      - amqp__port=5672
-      - amqp__path=
-      - amqp__user=${RABBITMQ_USER}
-      - amqp__password=${RABBITMQ_PASS}
-      - amqp__protocol=amqp
+      - amqp__velocity__url=amqp://rabbitnode1:5672/
+      - amqp__velocity__password=${RABBITMQ_PASS}
+      - amqp__velocity__user=${RABBITMQ_USER}
       - newRelic__enabled=false
       - redis__enabled=false
       - tunnel__enabled=false
       - serviceProvider__credentials=Y29udF9yZWxlYXNlX3N2Yzp0cDRNQk53TU0y
       - NODE_TLS_REJECT_UNAUTHORIZED=0
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
-
-  multi-app-pipeline-ui:
-    depends_on:
-      security-api:
-        condition: service_healthy
-    links:
-      - security-api
-      - multi-app-pipeline-api
-    image: ibmcom/velocity-se-multi-app-pipeline-ui:1.0.68
-    environment:
-      - PORT=3030
-      - NODE_TLS_REJECT_UNAUTHORIZED=0
-      - security_api__host=${NGINX_PROTOCOL}://${NGINX_HOST}:${NGINX_PORT}/security-api
-      - redis__enabled=false
-      - map_api__frontEndHost=${NGINX_PROTOCOL}://${NGINX_HOST}:${NGINX_PORT}/multi-app-pipeline-api
-      - map_api__host=http://multi-app-pipeline-api:9090
-      - map_api__appPath=/v1/multi-app-pipeline
-      - deployPlanFrontEndUrl=${NGINX_PROTOCOL}://${NGINX_HOST}:${NGINX_PORT}/deploymentPlans
-      - version=${VELOCITY_VERSION}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
-
-  issues-service:
-    depends_on:
-      security-api:
-        condition: service_healthy
-    image: ibmcom/velocity-se-issues_service:1.0.78
-    environment:
-      - MONGO_DB=issue-tracking
-      - MONGO_URL=mongodb://database:27017
-      - BEARER_TOKEN=${API_TOKEN}
-      - PORT=80
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
 
   continuous-release-poller:
+    image: ${DOCKER_REGISTRY_PREFIX}continuous-release-poller:1.0.15
+    logging: *default-logging
     links:
       - application-api
-    image: ibmcom/velocity-se-continuous-release-poller:1.0.13
     environment:
       - MONGO_URL=mongodb://database:27017/velocity
       - APP_API_TOKEN=${API_TOKEN}
       - APP_API_URL=http://application-api:3499
       - NODE_ENV=prod
       - AMQP_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASS}@rabbitnode1:5672/
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "2"
+
+  rcl-web-client:
+    image: ${DOCKER_REGISTRY_PREFIX}rcl-web-client:1.0.40
+    logging: *default-logging
+
 volumes:
   mongodb:
     driver: local
