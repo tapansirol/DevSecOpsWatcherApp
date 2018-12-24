@@ -13,14 +13,14 @@ import '../static/css/CreatePL1.css';
 
 
 const styles = theme => ({
-    root: {
-      width: '100%',
-      marginTop: theme.spacing.unit * 3,
-      overflowX: 'auto',
-    },
-    table: {
-      minWidth: 400,
-    },
+    // root: {
+    //   width: '100%',
+    //   marginTop: theme.spacing.unit * 3,
+    //   overflowX: 'auto',
+    // },
+    // table: {
+    //   minWidth: 400,
+    // },
   });
 
 class Test3 extends Component{
@@ -98,15 +98,15 @@ setTrueValue =(dataOne) =>
             let count =0; 
                 return(
                   
-                    <div>
+                   
                       
-                        <Table className={classes.table}>
-                          <TableHead>
+                        <Table id="statusTable">
+                          <TableHead id="statusTableHead">
                             <TableRow>
-                              <TableCell style={{textAlign:'center'}}>Tool Name</TableCell>
-                              <TableCell style={{textAlign:'center'}}>Installation</TableCell>
-                              <TableCell style={{textAlign:'center'}}>Actions</TableCell>
-                              <TableCell style={{textAlign:'center'}}>...</TableCell>
+                              <TableCell id ="tableHeadingFirst" >Tool Name</TableCell>
+                              <TableCell id ="tableHeadingStatus">Status</TableCell>
+                              <TableCell id ="tableHeadingActions">Actions</TableCell>
+                              <TableCell >...</TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
@@ -135,13 +135,13 @@ setTrueValue =(dataOne) =>
 
                               return (
                                 <TableRow>
-                                  <TableCell component="th" scope="row" style={{textAlign:'center'}}>
+                                  <TableCell component="th" scope="row" id ="tableRowFirst">
                                     {row.toolName}
                                   </TableCell>
-                                  <TableCell>
-                                    <center>{!row.installationStatus ? <HighlightOff style= {{color:'red'}}/>:<CheckCircle style= {{color:'green'}}/>}</center>
+                                  <TableCell id ="tableRowStatus">
+                                    {!row.installationStatus ? <HighlightOff id="highlightOff"/>:<CheckCircle id="checkCircle"/>}
                                   </TableCell>
-                                  <TableCell style={{textAlign:'center'}}><a href={row.actions} target="_blank">User Manual</a></TableCell>
+                                  <TableCell id ="tableRowActions"><a href={row.actions} target="_blank">User Manual</a></TableCell>
                                   <TableCell style={{textAlign:'center'}}><a href={row.toolLink} target="_blank" className={!row.installationStatus?'disabled':''}>
                                   Open
                                   </a></TableCell>
@@ -152,7 +152,7 @@ setTrueValue =(dataOne) =>
                           </TableBody>
                         </Table>
                      
-                    </div>
+                   
                   );
             }
 }

@@ -49,9 +49,7 @@ const styles = {
     marginTop: 0,
     fontSize: 12
   },
-  pos: {
-    marginBottom: 12
-  },
+
   reddot: {
   },
   div11: {
@@ -69,41 +67,40 @@ class ServiceImageCard extends Component {
     const { classes, title, image,version,name1,name2,style,tempcolor,onClick } = this.props;
 
     return (
-      <Card className={classes.card1} style={{borderTop:'5px solid green',borderTopColor: tempcolor,padding:24}} onClick={onClick}>
+      <Card className={classes.card1} style={{borderTop:'5px solid green',borderTopColor: tempcolor}} onClick={onClick}>
             
           
         <div className="row" >
-        <div className="col-md-5 col-md-offset-0" align="right" style={{ height:50, width:50}} >
+        
           <CardMedia component="img" 
                   className={classes.media}
                   image={image}
-                  title={title}/>
-          </div>
-          
+                  title={title}
+                  style={{height:50, width:50,marginLeft:34,marginTop:24}}/>
           <div>
-          <Typography className={classes.name1} variant="headline" component="h2">
+          <Typography  style={{marginLeft:16,marginTop:32}} className={classes.name1} variant="headline" component="h2">
               {name1}
             </Typography>
-            <Typography style={{fontSize:12, color:'908f8f'}}>
+            <Typography style={{fontSize:12, color:'908f8f',marginLeft:16}}>
               {title}
             </Typography>
             </div>
            
           
           </div>
-          <div>
-            <br/>
-
-            <div className="row" >
+          
+           <div className="row" >
             
-          <CardMedia 
+              <CardMedia 
                   image={open_tool}
                   title={title} style={{width: 10.5,
-                    height: 10.5}}
-                   />
-                   <a href={name2} style={{}}>Open Tool</a>
-                   </div>
-          </div>
+                    height: 10.5,marginLeft:34,marginTop:28}}>
+              </CardMedia>
+              <div style={{width:52, height: 14, color:'383838',fontSize: 12,marginLeft:14, fontFamily: 'roboto',marginTop:24}}>
+                    <a href={name2}>Open Tool</a>
+              </div>
+            </div>
+          
           
       </Card>
     );

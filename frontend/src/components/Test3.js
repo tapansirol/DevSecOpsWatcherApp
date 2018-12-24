@@ -12,14 +12,14 @@ import '../static/css/CreatePL1.css';
 
 
 const styles = theme => ({
-    root: {
-      width: '100%',
-      marginTop: theme.spacing.unit * 3,
-      overflowX: 'auto',
-    },
-    table: {
-      minWidth: 400,
-    },
+    // root: {
+    //   width: '100%',
+    //   marginTop: theme.spacing.unit * 3,
+    //   overflowX: 'auto',
+    // },
+    // table: {
+    //   minWidth: 400,
+    // },
   });
 
 class Test3 extends Component{
@@ -30,18 +30,6 @@ class Test3 extends Component{
       value: true
     }
   }
-getvalue()
-{
-  /*fetch('/api/status')
-    .then(response => response.json())
-            .then(message => {
-                this.setState({status: message}),
-                this.setState({value: true})
-            });
-            {localStorage.setItem("statusValue", true)}
-            console.log("check the number of times ------>");*/
-  
-}
   componentWillMount(){
     if(this.props.selectedPipelineIndex)
     {
@@ -73,18 +61,7 @@ getvalue()
                 return(
                   
                     <div>
-                      
-                        <Table className={classes.table}>
-                          <TableHead>
-                            <TableRow>
-                              <TableCell style={{textAlign:'center'}}>Tool Name</TableCell>
-                              <TableCell style={{textAlign:'center'}}>Installation</TableCell>
-                              <TableCell style={{textAlign:'center'}}>Actions</TableCell>
-                              <TableCell style={{textAlign:'center'}}>...</TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                          
+
                             {status.map(row => {
                               if(!row.installationStatus)
                               {
@@ -100,20 +77,30 @@ getvalue()
                               {
                                 {localStorage.setItem("statusValue", true)}
                               }
-                              
-                             // console.log("statusValue------> ",value);
-                             // console.log("check condition ------>",value && row.installationStatus)
-
-
+                            })}
+                      
+                        <Table id="automatedStatusTable">
+                          <TableHead>
+                            <TableRow>
+                              <TableCell id ="tableHeadingFirst" >Tool Name</TableCell>
+                              <TableCell id ="tableHeadingStatus">Status</TableCell>
+                              <TableCell id ="tableHeadingActions">Actions</TableCell>
+                              <TableCell >...</TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                          
+                            {status.map(row => {
+                          
                               return (
                                 <TableRow>
-                                  <TableCell component="th" scope="row" style={{textAlign:'center'}}>
+                                  <TableCell component="th" scope="row">
                                     {row.toolName}
                                   </TableCell>
                                   <TableCell>
-                                    <center>{!row.installationStatus ? <HighlightOff style= {{color:'red'}}/>:<CheckCircle style= {{color:'green'}}/>}</center>
+                                    {!row.installationStatus ? <HighlightOff style= {{color:'red'}}/>:<CheckCircle style= {{color:'green'}}/>}
                                   </TableCell>
-                                  <TableCell style={{textAlign:'center'}}><a href={row.actions} target="_blank">User Manual</a></TableCell>
+                                  <TableCell><a href={row.actions} target="_blank">User Manual</a></TableCell>
                               <TableCell style={{textAlign:'center'}}>
                               {!row.installationStatus ?
                               <a href="#">Re-run</a>

@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import '../static/css/AutomatedToolChain.css';
+import { Typography } from '@material-ui/core';
+import DESKTOP_IMAGE from '../static/images/extra/desktop.png';
+import CardMedia from "@material-ui/core/CardMedia";
 
 
 
@@ -44,36 +47,40 @@ const styles = theme =>({
     {
         const { classes } = this.props;
         return(
-            <div  style={{padding:20}}>
-            {this.props.status===true ? 
+            <div>
+                {this.props.status===true ? 
                 
-                <div style={{height:"300"}}>
+                <div>
                 
-                <h3>Trouble Shooting tips</h3>
-
-                
-
-                <p>Once your troubleshooting is done click “Refresh” to check again the installation status.</p>
+                <CardMedia 
+                  image={DESKTOP_IMAGE}
+                   style={{width: 120,
+                    height: 120,marginLeft:107,marginTop:86}}>
+              </CardMedia>
+              <Typography id="troubleShootingContent5">The dashboard is ready for display and real-time monitoring</Typography>
 
             </div> :
             [this.props.status===false ?
-            <div style={{height:"300"}}>
+            <div>
                 
-            <h3>Trouble Shooting tips</h3>
+            <Typography id="troubleShootingHeading">Trouble Shooting tips</Typography>
 
-            <ol style={{padding:20}}>
-                <li>
-                    Check that you followed correctly all the steps described on the Manual installation steps
-                </li>
-                <li>
-                    Check the tool user manual
-                </li>
-                <li>
-                    <a href="">Contact your admin</a> for help
-                </li>
-            </ol>
+            <div id="troubleShootingContent">
+                <Typography id ="troubleShootingContent1">
+                   1-  Check that you followed correctly all the steps described on the Manual installation steps
+                </Typography>
+                <Typography id ="troubleShootingContent2">
+                   2-  Check the tool user manual
+                </Typography>
+                <Typography id ="troubleShootingContent3">
+                    3- <a href="">Contact your admin</a> for help
+                </Typography>
+                <Typography id ="troubleShootingContent4">
+                Once your troubleshooting is done click “Refresh” to check again the installation status.
+                </Typography>
+            </div>
 
-            <p>Once your troubleshooting is done click “Refresh” to check again the installation status.</p>
+            
             </div>:null ]}
 
             </div>

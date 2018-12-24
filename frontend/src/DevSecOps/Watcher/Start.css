@@ -7,6 +7,7 @@ body {
     width: 1440px;
     height: 50px;
     background-color:#0066b3;
+    min-height: 10px;
   }
   #HCL-Dashboard
   {
@@ -26,3 +27,447 @@ body {
     font-weight: bold;
   }
   
+
+  /* pipeline Dashboard */
+  #pipeline {
+    
+    background-color: #ffffff;
+    margin-left: 255px;
+    margin-right: 255px;
+
+  }
+  #name {
+
+    height: 15px;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    color: #383838;
+    display: flex;
+
+  }
+  #manualInstallation
+  {
+    width: 1196.4px;
+  height: 662px;
+  background-color: #ffffff;
+  margin-top: 178px;
+  margin-left: 128px;
+
+  
+  }
+  #manualInstallationHeading{
+
+    width: 357px;
+    height: 35px;
+    font-family: Roboto;
+    font-size: 22px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.59;
+    letter-spacing: normal;
+    text-align: center;
+    color: #383838;
+    margin-left: 418.5px;
+    margin-top: 40px
+  }
+#manualInstallationSubHeading{
+  width: 213px;
+  height: 18px;
+  
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: center;
+  color: #383838;
+  margin-left: 490px
+}
+#manualSuccess{
+  width: 1120px;
+  height: 40px;
+  background-color: #effae7;
+  margin-left: 35px;
+  margin-top: 39.2px;
+  display: flex;
+}
+#successButton
+{
+  width: 24px;
+  height: 23.5px;
+  color: #79d732;
+  margin-left: 403px;
+  margin-top: 8px;
+}
+#successText
+{
+  width: 273px;
+  height: 20px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #383838;
+  margin-top: 8px;
+  margin-left: 16px;
+}
+
+#manualFailure{
+  width: 1120px;
+  height: 40px;
+  background-color: #faf0f1;
+  margin-left: 35px;
+  margin-top: 39.2px;
+  display: flex;
+}
+#failureButton
+{
+  width: 24px;
+  height: 24px;
+  color: #eb1946;
+  margin-left: 403px;
+  margin-top: 8px;
+  
+}
+#failureText
+{
+  width: 273px;
+  height: 20px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #383838;
+  margin-top: 8px;
+  margin-left: 16px;
+}
+#manualProgress{
+  width: 1120px;
+  height: 40px;
+  
+  margin-left: 35px;
+  margin-top: 39.2px;
+  display: flex;
+  background-color: #e7f3ff;
+}
+#progressButton
+{
+  width: 24px;
+  height: 5px;
+  
+  margin-left: 403px;
+  
+}
+#statusTableDiv
+{
+  margin-top: 32px;
+  margin-left: 36px;
+  display: flex;
+  
+}
+
+#statusTable
+{
+  width: 756.6px;
+  border:  1px solid grey
+}
+#statusTableHead
+{
+  width: 756.6px;
+  height: 40px;
+  background-color: #efefef;
+}
+#tableHeadingFirst
+{
+  width: 162px;
+  height: 16px;
+  /* background-color: #383838; */
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+  margin-left: 31.4px;
+}
+#tableHeadingStatus
+{
+  width:162px;
+  height: 16px;
+  /* background-color: #383838; */
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+  margin-left: 90.5px;
+}
+#tableHeadingActions
+{
+  width:162px;
+  height: 16px;
+  /* background-color: #383838; */
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+  margin-left: 90.5px;
+}
+
+#troubleShootingDiv
+{
+  margin-left: 42px;
+
+}
+#troubleShootingDiv
+{
+  width: 322px;
+  height: 352px;
+  border: 1px solid green
+}
+#troubleShootingHeading
+{
+  width: 149.2px;
+  height: 18px;
+  
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: center;
+  color: #383838;
+  margin-top: 32px;
+  margin-left: 87px
+}
+#troubleShootingContent
+{
+  
+  margin-left: 32px;
+  margin-right: 32px;
+}
+#troubleShootingContent1
+{
+  width: 258px;
+  height: 60px;
+ 
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #383838;
+  margin-top: 32px;
+}
+#troubleShootingContent2
+{
+  width: 258px;
+  height: 20px;
+  
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #383838;
+  margin-top: 20px;
+}
+#troubleShootingContent3
+{
+  width: 258px;
+  height: 20px;
+  
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #0066b3;
+  margin-top: 28px;
+}
+#troubleShootingContent4
+{
+  width: 258px;
+  height: 60px;
+  
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: #383838;
+  margin-top: 29px;
+}
+#troubleShootingContent5
+{
+  width: 258px;
+  height: 36px;
+  
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: center;
+  color: #383838;
+  margin-top: 24px;
+  margin-left: 32px;
+}
+
+#tableRowFirst
+{
+  width: 162px;
+  height: 16px;
+  /* background-color: #383838; */
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+  margin-left: 31.4px;
+}
+#tableRowStatus
+{
+  width:162px;
+  height: 16px;
+  /* background-color: #383838; */
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+  margin-left: 90.5px;
+}
+#tableRowActions
+{
+  width:162px;
+  height: 16px;
+  /* background-color: #383838; */
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+  margin-left: 90.5px;
+}
+#checkCircle
+{
+  color:#79d732;
+  height:16px;
+  width:16px
+}
+#highlightOff
+{
+  color:#eb1946;
+  height:16px;
+  width:16px
+}
+
+
+/* Automated Installation */
+#automatedInstallationHeading{
+
+  width: 326px;
+  height: 35px;
+  font-family: Roboto;
+  font-size: 22px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.59;
+  letter-spacing: normal;
+  text-align: center;
+  color: #383838;
+  margin-left: 437px;
+  margin-top: 40px
+}
+#automatedlInstallationSubHeading
+{
+  width: 558px;
+  height: 18px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: center;
+  color: #383838;
+  margin-left: 321px;
+}
+#automatedProgress{
+  width: 1120px;
+  height: 40px;
+  
+  margin-left: 40px;
+  margin-top: 40px;
+  display: flex;
+  background-color: #e7f3ff;
+}
+#automatedFailureButton
+{
+  width: 24px;
+  height: 24px;
+  color: #eb1946;
+  margin-left: 229px;
+  margin-top: 8px;
+  
+}
+#automatedFailureText
+{
+  width: 622px;
+  height: 19px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #383838;
+  margin-top: 12px;
+  margin-left: 16px
+}
+#automatedStatusTable
+{
+  width: 539px;
+  border:  1px solid grey
+}

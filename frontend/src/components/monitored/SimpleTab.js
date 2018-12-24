@@ -49,8 +49,8 @@ class SimpleTab extends React.Component {
           textColor="primary"
           centered
         >
-        <Tab label="MONITORED SERVICES"/>
-        <Tab label="PIPELINE ASSEMBLY" />
+        <Tab label="Monitored Tools"/>
+        <Tab label="Pipeline" />
         </Tabs>
 
         {value == 0 && (
