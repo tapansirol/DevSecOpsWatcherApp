@@ -9,7 +9,7 @@ import ATC from '../../components/AutomatedToolChain'
 import SideBar3 from '../../components/SideBar3'
 import MonitorScreen from '../../components/MonitorScreen';
 import pipeline from '../../components/monitored/Pipelines';
-import ManualInstallation from '../../components/ManualInstallation';
+
 import ButtonPage from '../../components/TransferData/ButtonPage';
 import HeaderPage from '../../components/TransferData/HeaderPage';
 import ButtonPage2 from '../../components/TransferData/ButtonPage2';

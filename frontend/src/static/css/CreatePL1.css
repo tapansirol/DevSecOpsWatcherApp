@@ -9,31 +9,5 @@
     float: right;
     vertical-align: bottom;
 }
-.glowing-border { 
-    border: ridge;
-    outline: none;
-    border-color: #2b74b9;
-    /* box-shadow: 0 0 4px #145da1; */
-}
-.border{
-    border: ridge;
-    outline: none;
-}
 
-.check-visible{ 
-    color: #2b74b9;
-    visibility: visible;
-    align-self: end;
 
-}
-.check-hidden{
-    color: #2b74b9;
-    visibility: hidden;
-    align-self: end;
-}
-.display-visible{
-    display: block;
-}
-.display-none{
-    display: none;
-}

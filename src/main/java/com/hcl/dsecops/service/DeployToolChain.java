@@ -12,6 +12,7 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+
 /**
  * Deploy tool chain on specified host machine.
  * @author varanganti.j
@@ -60,7 +61,7 @@ public class DeployToolChain {
             session.setServerAliveCountMax(30);
             ChannelExec channelExec = (ChannelExec) session.openChannel(EXEC);
             String command = SHELL_COMMAND+Configurations.getInstance().getHOME_PATH()+toolsMap.get(STARTUP_COMMAND);
-            System.out.println("COMMAND EXECUTING ================> "+command);
+            System.out.println("Executing shell script: "+command);
             channelExec.setCommand(command);
             channelExec.connect();
             InputStream in = channelExec.getExtInputStream();
@@ -124,4 +125,34 @@ public class DeployToolChain {
         return result.toString();
 	}
 	
+
+	/**
+	 * Method to execute scripts for installation of the tools included in automated pipeline
+	 * @return the console log from shell execution command
+	 */
+	public String installPipeline_forImage() {
+		result.setLength(0);
+		String line;
+		Process process=null;
+		try {
+			String command = SHELL_COMMAND+Configurations.getInstance().getHOME_PATH()+toolsMap.get(STARTUP_COMMAND);
+			System.out.println("Executing command "+command);
+			process = Runtime.getRuntime().exec(command);
+			BufferedReader br = new BufferedReader(
+					new InputStreamReader(process.getInputStream()));
+			while ((line = br.readLine()) != null) {
+				result.append(line +LINE_BREAK);
+				System.out.println(line);
+			}
+			result.append("***COMPLETED***");
+		} catch (Exception e) {
+			System.out.println("Script exec error !");
+			e.printStackTrace();
+		}
+		finally{
+			if(process!=null) process.destroy();
+		}  
+		return result.toString();
+	}
+
 }
