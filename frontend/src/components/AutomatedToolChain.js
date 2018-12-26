@@ -62,7 +62,8 @@ class AutomatedToolChain extends Component{
             time: null,
             flag: 'false',
             nextButtonStatus : false,
-            data : 0
+            data : 0,
+            width:1120
         }
 
     }
@@ -95,6 +96,15 @@ class AutomatedToolChain extends Component{
                 nextButtonStatus: true
             })
       }
+      check()
+      {
+        if(localStorage.getItem("installationLog").includes("*COMPLETED***"))
+        {
+            this.setState({
+                width: 540
+            })
+        }
+      }
    
     render()
     {
@@ -122,8 +132,8 @@ class AutomatedToolChain extends Component{
                                 </Typography>
                             </Card> : 
                             <div>{this.setNextButton(this.state.data)}
-                                <Card className={classes.success} onLoad={this.getValue}>
-                                    <CheckCircle id="manualSuccess"/>
+                                <Card className={classes.success} onLoad={this.getValue} id="manualSuccess">
+                                    <CheckCircle id="successButton"/>
                                     <Typography  id = "successText">
                                     Automated installation successful
                                     </Typography>
@@ -131,18 +141,24 @@ class AutomatedToolChain extends Component{
                             </div>
                              
                             ]}                   
-                        <div id="statusTableDiv">
+                        <div id="automatedStatusTableDiv">
                                
                             {localStorage.getItem("installationLog")===null ? 
                             null 
                             :
-                                <Slide direction="right" in={localStorage.getItem("installationLog").includes("*COMPLETED***")}>
+                            localStorage.getItem("installationLog").includes("*COMPLETED***") ?
+                                <Slide direction="right" 
+                                in={localStorage.getItem("installationLog").includes("*COMPLETED***")}>
+                                
                                     <Test3 selectedPipelineIndex={selectedPipelineIndex}/>
                                 </Slide>
+                                :null
                             }
-                            <div id="t" style={{width: '100%',overflow:'auto', backgroundColor:'black'}}>
+                            
+                            <div  style={{width: "1120px"}} id="logDiv">
                                 <span style={{color:'white'}}>{localStorage.getItem("installationLog")}</span>
                             </div>
+                           
                                 
                         </div>
                       

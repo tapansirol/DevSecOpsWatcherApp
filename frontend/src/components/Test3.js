@@ -82,9 +82,9 @@ class Test3 extends Component{
                         <Table id="automatedStatusTable">
                           <TableHead>
                             <TableRow>
-                              <TableCell id ="tableHeadingFirst" >Tool Name</TableCell>
+                              <TableCell id ="automatedTableHeadingFirst" >Tool Name</TableCell>
                               <TableCell id ="tableHeadingStatus">Status</TableCell>
-                              <TableCell id ="tableHeadingActions">Actions</TableCell>
+                              <TableCell id ="automatedTableHeadingActions">Actions</TableCell>
                               <TableCell >...</TableCell>
                             </TableRow>
                           </TableHead>
@@ -94,13 +94,13 @@ class Test3 extends Component{
                           
                               return (
                                 <TableRow>
-                                  <TableCell component="th" scope="row">
+                                  <TableCell component="th" scope="row" id ="tableRowFirst">
                                     {row.toolName}
                                   </TableCell>
-                                  <TableCell>
-                                    {!row.installationStatus ? <HighlightOff style= {{color:'red'}}/>:<CheckCircle style= {{color:'green'}}/>}
+                                  <TableCell id ="tableRowStatus">
+                                    {!row.installationStatus ? <HighlightOff id="highlightOff"/>:<CheckCircle id="checkCircle"/>}
                                   </TableCell>
-                                  <TableCell><a href={row.actions} target="_blank">User Manual</a></TableCell>
+                                  <TableCell id ="automatedTableRowActions"><a href={row.actions} target="_blank">User manual</a></TableCell>
                               <TableCell style={{textAlign:'center'}}>
                               {!row.installationStatus ?
                               <a href="#">Re-run</a>
