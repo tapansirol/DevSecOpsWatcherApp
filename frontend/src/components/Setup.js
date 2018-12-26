@@ -20,7 +20,8 @@ import { Button, TableBody} from '@material-ui/core';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Divider from '@material-ui/core/Divider';
-import ServiceAssembly from './ServiceAssembly';
+import StandardServiceAssembly from './StandardServiceAssembly';
+import PremiumServiceAssembly from './PremiumServiceAssembly';
 // import '../static/css/CreatePL2.css';
 // import '../static/css/SideBar.css';
 // import '../static/css/CreatePL1.css';
@@ -53,9 +54,9 @@ const styles = theme =>({
    
     root: {
       flexGrow: 1,
-    //   width: '90%',
-      marginLeft:100,
-      marginRight:100,
+    //    width: '100%',
+      marginLeft:'10%',
+      marginRight:'10%',
     //   margin: 'auto'
     },
     // grow: {
@@ -103,7 +104,7 @@ const styles = theme =>({
       bootstrapInput: {
         borderRadius: 4,
         backgroundColor: '#f5f5f5',
-        width:600,
+        width:520,
         height:30,
         fontSize: 18,
       },
@@ -426,8 +427,10 @@ class SetupPage extends Component {
 
 getInstallationLog()
 {
-    console.log("active Step :"+this.state.activeStep)
+    // console.log("active Step ===========> :"+this.state.activeStep)
     // console.log("installationLog :"+localStorage.getItem("installationLog"))
+    
+    // if (localStorage.getItem("installationLog")!==null && !localStorage.getItem("installationLog").includes('***COMPLETED***')) {
     fetch('/api/installationLog')
             .then(response => response.text())
             .then(message => {
@@ -437,7 +440,7 @@ getInstallationLog()
                 //this.setState({pipelineArray: JSON.parse(message)});
             });
 
-            
+        // } 
             
 }
    
@@ -520,10 +523,10 @@ handlePreviousAutomated = () => {
         case 0:
             return <div></div>
         case 1:
-            //console.log('pipeline name :',selectedPipelineIndex);
+            console.log('pipeline name ======> :',selectedPipelineIndex);
            // if(selectedPipelineIndex)
                 //return < ref={foo => this.foo = foo}/>;
-                return <AutomatedToolChain selectedPipelineIndex={selectedPipelineIndex} triggerUpdate={this.onChangeLink.bind(this)} ref={foo => this.foo = foo}/>; 
+                 return <AutomatedToolChain selectedPipelineIndex={selectedPipelineIndex} triggerUpdate={this.onChangeLink.bind(this)} ref={foo => this.foo = foo}/>; 
                 break;
         case 2:
             if(!selectedPipelineIndex)
@@ -596,31 +599,31 @@ handlePreviousAutomated = () => {
                     <Typography  id='create-toolchain-text'>Create a new toolchain</Typography>
                     <Typography  id ="setup-your-projects">Setup your project's toolchain</Typography>
                      
-                            <div style={{marginLeft:'40px', marginRight:'40px'}}>
-                             <div id='flex-container'>
+                            <div>
+                             <div id='flex-container' style={{marginBottom:16}}>
                                 <Typography  id='label-name'>Name</Typography>
-                                <Typography  id='label-name'>Select Stack Technology</Typography> 
+                                <Typography  id='label-stack-technology'>Select Stack Technology</Typography> 
                                 </div>
 
                                 <div id='flex-container'>
                                     <InputBase
                                     // id="bootstrap-input"
+
                                     placeholder="Enter a name"
                                     value={pipelineName}
                                     onChange={this.handleNameChange}
                                     classes={{
-                                        root: classes.bootstrapRoot,
+                                        // root: classes.bootstrapRoot,
                                         input: classes.bootstrapInput,
                                     }}
                                 />
-                            <div id='flex-container'>
+                            <div style={{marginLeft:110}} id='flex-container'>
+                            {console.log("capsuleArray=====> ",capsuleArray)}
                                  {capsuleArray.map((capsule, index) => {
                                             // if(index===0)
                                             
                                     return (
-                                         <div style={{
-                                             
-                                             padding:'30px'}}>
+                                         <div style={{ marginRight:'40px'}}>
                                             <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'capsule-focus':'capsule-active'}
                                                 onClick= {() => {this.handleCapsuleClick(capsule)}}>
                                             
@@ -640,11 +643,11 @@ handlePreviousAutomated = () => {
                     <div style={{width: '100%', margin: 'auto'}}>
                         
                             <div>
-                                <Typography>
+                                <Typography id='label-available-toolchain' >
                                     Select one of the available toolchains
                                 </Typography> 
                             </div>
-                            <div style={{marginBottom: '20px'}}>
+                            <div style={{marginBottom: '25px'}}>
                             <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary" >
                                 <Tab style={{textAlign:'left', minWidth:'60px', width:'75px'}} label="Standard"/>
                                 <Tab style={{textAlign:'left', minWidth:'80px', width:'80px'}} label="Premium"/>
@@ -655,7 +658,7 @@ handlePreviousAutomated = () => {
                                 
                             <TabContainer>
                                 {pipelineArray===null ? 'No Contents' :
-                                <div style={{textAlign: 'center'}}>
+                                <div style={{width:1120, height:215}}>
                                 {pipelineArray.map((serviceArray, sIndex) => {
                                     //console.log('here',serviceArray,sIndex,selectedPipelineIndex );
                                     if(sIndex===0)
@@ -663,32 +666,15 @@ handlePreviousAutomated = () => {
                                    
                                         <div className={selectedPipelineIndex === sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
-                                         <div align="left" style={{width: '96%', margin: 'auto', marginTop: '10px',
-                                                display: 'flex'}}>
-                                           
-                                            
-                                                {sIndex === 0 ? 
-                                                
-                                                <table style={{width:'100%'}}>
-                                                <tbody>
-                                                    <tr >
-                                                        <td style={{fontWeight:'bold'}}>Standard Tool Chain</td>
-                                                        <td style={{fontWeight:'bold'}}>Typology : 
-                                                        <span style={{fontWeight:"normal"}}>Open Source + HCL</span> </td>
-                                                        <td style={{fontWeight:'bold'}}>Tools: 
-                                                        <span style={{fontWeight:"normal"}}>7</span></td>
-                                                        <td><CheckCircle style={{float: "right"}} className={selectedPipelineIndex === sIndex ? 'check-visible':'check-hidden'}/></td>
-                                                        
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                              
-                                                   : 'Jenkins + IBM'}
-                                            </div>
-                                           
-                                            
-                                        
-                                        <div style={{marginTop: '10px',marginBottom: '10px', padding: 20}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false} activeStep={activeStep}/></div>
+                                        <div style={{marginTop:23, marginBottom:26,marginLeft:32, display:'flex' }}>
+                                            <div style={{width:673,display:'flex'}}>
+                                                <Typography id='label-standard-toolchain'>Standard toolchain</Typography>
+                                                <Typography style={{marginLeft:100}} id='label-standard-toolchain'>Typology:&nbsp; </Typography> Open Source + HCL
+                                                <Typography style={{marginLeft:100}} id='label-standard-toolchain'>Tools:&nbsp; </Typography>7
+                                             </div>
+                                             <CheckCircle style={{marginLeft:373}} className={selectedPipelineIndex === sIndex ? 'check-visible':'check-hidden'}/>
+                                        </div>
+                                    <div style={{marginLeft:32, width:'95%'}}><StandardServiceAssembly serviceArray={serviceArray} sIndex= {sIndex}  bool={false} activeStep={activeStep}/></div>
                                         
                                         </div>
                                         </div>
@@ -704,7 +690,7 @@ handlePreviousAutomated = () => {
 
                             
             {value === 1 && <TabContainer> {pipelineArray===null ? <p>No Contents</p> :
-                <div style={{textAlign: 'center'}}>
+                <div style={{width:1120, height:215}}>
                                 {pipelineArray.map((serviceArray, sIndex) => {
                                     if(sIndex===1)
 
@@ -721,7 +707,20 @@ handlePreviousAutomated = () => {
                                    
                                     <div className={selectedPipelineIndex === sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
+                                         <div style={{marginTop:23, marginBottom:26,marginLeft:32, display:'flex' }}>
+                                        <div style={{width:673,display:'flex'}}>
+                                        <Typography id='label-standard-toolchain'>Premium Tool Chain</Typography>
+                                        <Typography style={{marginLeft:100}} id='label-standard-toolchain'>Typology:&nbsp; </Typography> IBM + Jenkins
+                                        <Typography style={{marginLeft:100}} id='label-standard-toolchain'>Tools:&nbsp; </Typography>9
+                                        </div>
+                                        <CheckCircle style={{marginLeft:373}} className={selectedPipelineIndex === sIndex ? 'check-visible':'check-hidden'}/>
+                                        </div>
+                                        <div style={{marginLeft:32, width:'95%'}}><PremiumServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} bool={false} activeStep={activeStep}/></div>
                                         
+                                        
+                                       
+                                        {/*                                         
+    
                                             <div align="left" style={{width: '96%', margin: 'auto', marginTop: '10px',
                                                 display: 'flex'}}>
                                     
@@ -742,8 +741,8 @@ handlePreviousAutomated = () => {
                                            
                                             
                                         
-                                        <div style={{marginTop: '10px',marginBottom: '10px', padding: 20}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
-                                        
+                                        <div style={{marginLeft:32}}><PremiumServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
+                                         */}
                                         </div>
                                         <br/>
                                     </div>}
@@ -756,15 +755,15 @@ handlePreviousAutomated = () => {
                             
                             </div>
                 </div>
-               
-                
+                </div>
+               {console.log("Moving to next page .........") }
                 <div style={{width:"100%"}}>{this.getStepContent(activeStep,selectedPipelineIndex)}</div>
                 
                 
                     {activeStep === steps.length ? null : (
-            <div style={{margin: "1rem"}}>
+            <div style={{marginLeft:'40px',marginRight:'40px',marginTop:'32px', marginBottom:32}}>
               <Button style={{float: "right",marginLeft:"1rem", marginRight:'20px'}}  disabled = {activeStep===0 ? isButtonDisabled :
-              activeStep>2 ? this.state.isDashBoardDisabled:  /*activeStep===1?this.state.isd:*/''}
+              activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:*/ false}
 
               
              /* [activeStep===1? this.state.isd: this.state.isDashBoardDisabled]}*/
@@ -839,7 +838,7 @@ handlePreviousAutomated = () => {
               </div>
             </div>
           )}
-           </div>
+          
           </Card>
            </div>
    

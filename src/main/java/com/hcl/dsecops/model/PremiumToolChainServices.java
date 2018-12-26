@@ -15,7 +15,6 @@ public enum PremiumToolChainServices implements IService {
 	ASOC(ASOC_CODE, ASOC_DESC, ServiceType.PREMIUM, ServiceCategory.DEVELOPANDTEST, false),
 	RQM(RQM_CODE, RQM_DESC, ServiceType.PREMIUM, ServiceCategory.DEVELOPANDTEST, false), 
 	HFT(HFT_CODE, HFT_DESC, ServiceType.PREMIUM, ServiceCategory.DEVELOPANDTEST, false), 
-	HOTPT(HPT_CODE, HPT_DESC, ServiceType.PREMIUM, ServiceCategory.DEVELOPANDTEST, false),
 	UCD(UCD_CODE, UCD_DESC, ServiceType.PREMIUM, ServiceCategory.RELEASEANDDEPLOY, false),
 	UCV(UCV_CODE, UCV_DESC, ServiceType.PREMIUM, ServiceCategory.RELEASEANDDEPLOY, false);
 	

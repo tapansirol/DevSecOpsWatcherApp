@@ -17,37 +17,8 @@ const styles = theme =>({
       flexGrow: 1,
       width: '100%',
       margin: 'auto',
-      
+            
     },
-    // progress: {
-    //     flexGrow: 1,
-    //     padding: 10,
-    //     margin: 'auto',
-    //     background:'#e7f3ff',
-    //     height: '3.5rem'
-    //   },
-    //   success: {
-    //     flexGrow: 1,
-    //     padding: 10,
-    //     margin: 'auto',
-    //     background:'#effae7',
-    //     height: '3.5rem'
-    //   },
-    //   failure: {
-    //     flexGrow: 1,
-    //     padding: 10,
-    //     margin: 'auto',
-    //     background:'#faf0f1',
-    //     height: '3.5rem'
-    //   },
-    
-
-
-    //   card: {
-    //     minWidth: 275,
-    //     padding: 20,
-    //   },
-    
     
   });
 
@@ -63,22 +34,16 @@ class AutomatedToolChain extends Component{
             flag: 'false',
             nextButtonStatus : false,
             data : 0,
-            width:1120
+            width:'100%',
         }
 
     }
     setNextButton = (data) =>
     {
-       console.log("dchs")
         if(data===0)
         {
             this.setState({data: data+1});
-            console.log("taosandn")
             {this.props.triggerUpdate()}
-            
-        }
-        else{
-            //this.setState({data: data+1})
         }
     }
     componentWillMount()
@@ -96,15 +61,15 @@ class AutomatedToolChain extends Component{
                 nextButtonStatus: true
             })
       }
-      check()
-      {
-        if(localStorage.getItem("installationLog").includes("*COMPLETED***"))
-        {
-            this.setState({
-                width: 540
-            })
-        }
-      }
+    //   check()
+    //   {
+    //     if(localStorage.getItem("installationLog").includes("*COMPLETED***"))
+    //     {
+    //         this.setState({
+    //             width: '50%'
+    //         })
+    //     }
+    //   }
    
     render()
     {
@@ -112,9 +77,9 @@ class AutomatedToolChain extends Component{
         const nextButtonStatus = this.state.nextButtonStatus;
        
         return(
-            <div className={classes.root}>
+            // <div className={classes.root}>
            
-                <Card className={classes.card}>
+                <div className={classes.card}>
                     <Typography id="automatedInstallationHeading">Tool chain automated installation</Typography>
                     <Typography id="automatedlInstallationSubHeading">
                         The system is running some scripts for the automated installation part of your toolchain.
@@ -155,16 +120,16 @@ class AutomatedToolChain extends Component{
                                 :null
                             }
                             
-                            <div  style={{width: "1120px"}} id="logDiv">
+                            <div  style={{width: "100%"}} id="logDiv">
                                 <span style={{color:'white'}}>{localStorage.getItem("installationLog")}</span>
                             </div>
                            
                                 
                         </div>
                       
-                </Card>
+                </div>
                
-            </div> 
+            // </div> 
         );
     }
 }
