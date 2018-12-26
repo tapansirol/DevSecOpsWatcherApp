@@ -427,6 +427,7 @@ class SetupPage extends Component {
 getInstallationLog()
 {
     console.log("active Step :"+this.state.activeStep)
+    // console.log("installationLog :"+localStorage.getItem("installationLog"))
     fetch('/api/installationLog')
             .then(response => response.text())
             .then(message => {
@@ -591,7 +592,7 @@ handlePreviousAutomated = () => {
                       
                  
                     <Card >
-                     
+                        <div className={classes.card} id="screen1">
                     <Typography  id='create-toolchain-text'>Create a new toolchain</Typography>
                     <Typography  id ="setup-your-projects">Setup your project's toolchain</Typography>
                      
@@ -838,9 +839,10 @@ handlePreviousAutomated = () => {
               </div>
             </div>
           )}
+           </div>
           </Card>
            </div>
-  
+   
         );
     }
 
