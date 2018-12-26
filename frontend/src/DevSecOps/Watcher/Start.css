@@ -4,10 +4,12 @@ body {
     font-family: sans-serif;
   }
   #header-background {
-    width: 1440px;
-    height: 50px;
+    /* width: 1440px;
+    height: 50px; */
+    /* min-height: 10px; */
+    top: 15px;
+    left: 65px;
     background-color:#0066b3;
-    min-height: 10px;
   }
   #HCL-Dashboard
   {
@@ -26,6 +28,125 @@ body {
   {
     font-weight: bold;
   }
+
+  /*
+    stepper component styles
+  */
+
+  #main-stepper {
+    padding:0px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 25%;
+    margin-right: 25%;
+    width:40%;
+    background-color: #f5f5f5;
+  }
+
+  #create-toolchain-text {
+    margin-top: 40px;
+    height: 35px;
+    font-size: 22px;
+    /* font-family: Roboto; */
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.59;
+    letter-spacing: normal;
+    text-align: center;
+    color: #383838;
+  }
+
+  #setup-your-projects {
+    margin-bottom: 40px;
+    /* width: 192px; */
+    height: 18px;
+    /* font-family: Roboto; */
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: center;
+    color: #383838;
+  }
+
+  #label-name {
+    width: 43px;
+    height: 19px;
+    /* font-family: Roboto; */
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    color: #152935;
+    flex-grow: 2;
+  }
+
+  #flex-container {
+    display: flex;
+  }
+
+  #icon-button-style 
+  {
+    height:16px;
+    width: 16px;
+    margin: 5px;
+  }
+
+  #toolbar-style
+  {
+    min-height:50px;
+    padding-left: 0px;
+    padding-right: 5px;
+  }
+
+  /*
+  Capsule card styles
+  */
+  .check-visible{ 
+    color: #2b74b9;
+    visibility: visible;
+    vertical-align: top;
+}
+.check-hidden{
+    visibility: hidden;
+    /* align-self: right; */
+    
+}
+.display-visible{
+    display: block;
+}
+
+.capsule-active {
+
+  width: 130px;
+  height: 40px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.capsule-focus {
+  width: 130px;
+  height: 40px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+
+.display-none{
+  display: none;
+}
+
+.glowing-border-cpl2 { 
+  border: ridge 1px;
+  border-color: darkblue;
+  outline: none;
+  /* border-color: #2b74b9; */
+}
   
 
   /* pipeline Dashboard */

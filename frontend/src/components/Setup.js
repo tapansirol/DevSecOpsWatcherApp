@@ -6,10 +6,11 @@ import StepLabel from '@material-ui/core/StepLabel';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
+import InputBase from '@material-ui/core/InputBase';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import CheckCircle from '@material-ui/icons/CheckCircle';
-import Java_IMG from '../static/images/capsules/new/java.JPG';
+import Java_IMG from '../static/images/capsules/new/java.jpg';
 import Dotnet_IMG from '../static/images/capsules/new/dotnet.JPG';
 import Sap_IMG from '../static/images/capsules/new/sap.JPG';
 import Cpp_IMG from '../static/images/capsules/new/c++.JPG';
@@ -20,9 +21,10 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Divider from '@material-ui/core/Divider';
 import ServiceAssembly from './ServiceAssembly';
-import '../static/css/CreatePL2.css';
-import '../static/css/SideBar.css';
-import '../static/css/CreatePL1.css';
+// import '../static/css/CreatePL2.css';
+// import '../static/css/SideBar.css';
+// import '../static/css/CreatePL1.css';
+import '../DevSecOps/Watcher/Start.css';
 import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
@@ -30,6 +32,7 @@ import AutomatedToolChain from './AutomatedToolChain';
 import ManualInstallation from './ManualInstallation';
 import ManualInstallationCheck from './ManualInstallationCheck';
 import ManualInstallationPremium from './ManualInstallationPremium';
+import { grey } from '@material-ui/core/colors';
 
 
 
@@ -47,46 +50,62 @@ const imageMap = {
 
 
 const styles = theme =>({
+   
     root: {
       flexGrow: 1,
-      width: '80%',
-      margin: 'auto'
+    //   width: '90%',
+      marginLeft:100,
+      marginRight:100,
+    //   margin: 'auto'
     },
-    grow: {
-      flexGrow: 1,
-    },
-    backButton: {
-        marginRight: theme.spacing.unit,
-      },
-      instructions: {
-        marginTop: theme.spacing.unit,
-        marginBottom: theme.spacing.unit,
-      },
+    // grow: {
+    //   flexGrow: 1,
+    // },
+    // backButton: {
+    //     marginRight: theme.spacing.unit,
+    //   },
+    //   instructions: {
+    //     marginTop: theme.spacing.unit,
+    //     marginBottom: theme.spacing.unit,
+    //   },
 
 
-      card: {
-        minWidth: 275,
-        padding: 20,
-        //align: 
-        //marginLeft: 30
-      },
-      bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-      },
+    //   card: {
+    //     minWidth: 275,
+    //     padding: 20,
+    //     //align: 
+    //     //marginLeft: 30
+    //   },
+    //   bullet: {
+    //     display: 'inline-block',
+    //     margin: '0 2px',
+    //     transform: 'scale(0.8)',
+    //   },
       
-      media: {
-        // ⚠️ object-fit is not supported by IE11.
-        objectFit: 'cover',
-    },
+    //   media: {
+    //     // ⚠️ object-fit is not supported by IE11.
+    //     objectFit: 'cover',
+    // },
 
-      title: {
-        fontSize: 14,
+    //   title: {
+    //     fontSize: 14,
         
-      },
-      pos: {
-        marginBottom: 12,
+    //   },
+    //   pos: {
+    //     marginBottom: 12,
+    //   },
+     
+    // bootstrapRoot: {
+    //     'label + &': {
+    //       marginTop: theme.spacing.unit * 3,
+    //     },
+    //   },
+      bootstrapInput: {
+        borderRadius: 4,
+        backgroundColor: '#f5f5f5',
+        width:600,
+        height:30,
+        fontSize: 18,
       },
      
     
@@ -102,14 +121,14 @@ const styles = theme =>({
   //For pipeline
   function TabContainer(props) {
     return (
-      <Typography component="div" style={{ padding: 8 * 3 }}>
+      <Typography component="div" style={{ padding: 0 }}>
         {props.children}
       </Typography>
     );
   }
 
 
-class Test1 extends Component {
+class SetupPage extends Component {
 
     constructor(props) {
         super();
@@ -275,7 +294,9 @@ class Test1 extends Component {
         });
         const { selectedPipelineIndex } = this.state;
         //console.log('selectedPipelineIndex', selectedPipelineIndex)
-        //console.log('sIndex',sIndex)
+        console.log('sIndex',sIndex)
+        console.log('pipelineName',pipelineName)
+        console.log('selectedCapsule',selectedCapsule)
         //console.log('try',selectedPipelineIndex);
         //console.log('called',serviceArray, sIndex);
         if((sIndex!==null) && (pipelineName!=='') && (selectedCapsule!==null)) {
@@ -406,6 +427,7 @@ class Test1 extends Component {
 getInstallationLog()
 {
     console.log("active Step :"+this.state.activeStep)
+    // console.log("installationLog :"+localStorage.getItem("installationLog"))
     fetch('/api/installationLog')
             .then(response => response.text())
             .then(message => {
@@ -557,10 +579,8 @@ handlePreviousAutomated = () => {
        //console.log("value kya hai ?",isPremiumDashBoardDisabled)
         return(
             <div className={classes.root}>
-                
-                    <div align="center" style={{background: '#f5f5f5'}}>
-                        <div style={{width:'50%'}} >            
-                        <Stepper activeStep={activeStep} alternativeLabel style={{background: '#f5f5f5'}}>
+                                    
+                        <Stepper activeStep={activeStep} alternativeLabel id='main-stepper'>
                                 {steps.map(label => {
                                     return (
                                         <Step key={label}>
@@ -569,97 +589,67 @@ handlePreviousAutomated = () => {
                                     );
                                 })}
                             </Stepper>
-                        </div>
-                    </div >
-                    <Card>
+                      
+                 
+                    <Card >
                         <div className={classes.card} id="screen1">
-                    <h4 align="center"><b>Create a new toolchain</b></h4>
-                    <Typography align="center">Setup your project's toolchain</Typography>
-               
-                
-                <div >
-                                <Table className={classes.table}>
-                                    <TableBody>                               
-                                        <TableRow>
-                                            <TableCell style={{textAlign:'left',width:"50%",border:0}}>Name</TableCell>
-                                            <TableCell style={{textAlign:'center',width:"50%", border:0}}>Select Stack Technology</TableCell>
-                                        </TableRow>
-                                    
-                                    <TableRow>
-                                        <TableCell style={{textAlign:'left',width:"50%",border:0}}>
-                                            <TextField 
-                                                required
-                                                id="input-name"
-                                                placeholder="Enter a name"
-                                                value={pipelineName}
-                                                onChange={this.handleNameChange}
-                                                variant="filled"
-                                                fullWidth="true" 
-                                            />
-                                        </TableCell>
-                                        <TableCell style={{textAlign:'center',width:"50%",border:0}}>
-                                        <div className="wrapper_cpl1" >
-                                        {capsuleArray.map((capsule, index) => {
-                                            if(index===0)
-                                            
-                                                return (
-                                                    <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'glowing-border':'border'}
-                                                    style={{margin:'1rem', width: '6rem', height: '5rem'}} 
-                                                               onClick= {() => {this.handleCapsuleClick(capsule)}}>
-                                                               <CardMedia
-                                                                   component='img'
-                                                                   className={classes.media}
-                                                                   image={imageMap[capsule]}
-                                                                   title={capsule}
-                                                               />
-                                                               <CheckCircle className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/>
-                                                           </CardActionArea>
-                                                       
-                                                       );
-                                            
-                                            else
-                                            {
-                                                return(
-                                                    <CardActionArea disabled={true} key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'glowing-border':'border'}
-                                                    style={{margin:'1rem', width: '6rem', height: '5rem'}} 
-                                                               onClick= {() => {this.handleCapsuleClick(capsule)}}>
-                                                               <CardMedia 
-                                                                   component='img'
-                                                                   className={classes.media}
-                                                                   image={imageMap[capsule]}
-                                                                   title={capsule}
-                                                               />
-                                                               <CheckCircle className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/>
-                                                           </CardActionArea>
+                    <Typography  id='create-toolchain-text'>Create a new toolchain</Typography>
+                    <Typography  id ="setup-your-projects">Setup your project's toolchain</Typography>
+                     
+                            <div style={{marginLeft:'40px', marginRight:'40px'}}>
+                             <div id='flex-container'>
+                                <Typography  id='label-name'>Name</Typography>
+                                <Typography  id='label-name'>Select Stack Technology</Typography> 
+                                </div>
 
-                                                )
-                                                
-                                            }
+                                <div id='flex-container'>
+                                    <InputBase
+                                    // id="bootstrap-input"
+                                    placeholder="Enter a name"
+                                    value={pipelineName}
+                                    onChange={this.handleNameChange}
+                                    classes={{
+                                        root: classes.bootstrapRoot,
+                                        input: classes.bootstrapInput,
+                                    }}
+                                />
+                            <div id='flex-container'>
+                                 {capsuleArray.map((capsule, index) => {
+                                            // if(index===0)
                                             
-                                        })
-                                        }
+                                    return (
+                                         <div style={{
+                                             
+                                             padding:'30px'}}>
+                                            <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'capsule-focus':'capsule-active'}
+                                                onClick= {() => {this.handleCapsuleClick(capsule)}}>
                                             
-                                            </div>
+                                            {capsule}
+                                            <img src={imageMap[capsule]} /> 
+                                           
+                                            <CheckCircle style={{float: "right",fontSize:'16px'}} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/>
                                         
-                                        </TableCell>
-                                    </TableRow>
-                                    </TableBody>
-                                </Table>                                                   
-                       
-                    
-
+                                        </CardActionArea>
+                                             </div>
+                                        );
+                                    })
+                                 }
+                                 </div>
+                            </div>
+                
                     <div style={{width: '100%', margin: 'auto'}}>
                         
                             <div>
-                                <Typography fontSize= '14'>
+                                <Typography>
                                     Select one of the available toolchains
                                 </Typography> 
                             </div>
-
+                            <div style={{marginBottom: '20px'}}>
                             <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary" >
-                                <Tab label="Standard"/>
-                                <Tab label="Premium"/>
+                                <Tab style={{textAlign:'left', minWidth:'60px', width:'75px'}} label="Standard"/>
+                                <Tab style={{textAlign:'left', minWidth:'80px', width:'80px'}} label="Premium"/>
                             </Tabs>
+                            </div>
                             
                             {value === 0 && (
                                 
@@ -673,8 +663,8 @@ handlePreviousAutomated = () => {
                                    
                                         <div className={selectedPipelineIndex === sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
-                                        <div align="left" style={{width: '96%', margin: 'auto', marginTop: '7px',
-                                        display: 'flex'}}>
+                                         <div align="left" style={{width: '96%', margin: 'auto', marginTop: '10px',
+                                                display: 'flex'}}>
                                            
                                             
                                                 {sIndex === 0 ? 
@@ -682,10 +672,10 @@ handlePreviousAutomated = () => {
                                                 <table style={{width:'100%'}}>
                                                 <tbody>
                                                     <tr >
-                                                        <td style={{width:'40%',fontWeight:'bold'}}>Standard Tool Chain</td>
-                                                        <td style={{width:'30%',fontWeight:'bold'}}>Typology : 
-                                                        <span style={{fontWeight:"normal"}}>Open Source + HCL</span>                                                        </td>
-                                                        <td style={{width:'30%',fontWeight:'bold'}}>Tools: 
+                                                        <td style={{fontWeight:'bold'}}>Standard Tool Chain</td>
+                                                        <td style={{fontWeight:'bold'}}>Typology : 
+                                                        <span style={{fontWeight:"normal"}}>Open Source + HCL</span> </td>
+                                                        <td style={{fontWeight:'bold'}}>Tools: 
                                                         <span style={{fontWeight:"normal"}}>7</span></td>
                                                         <td><CheckCircle style={{float: "right"}} className={selectedPipelineIndex === sIndex ? 'check-visible':'check-hidden'}/></td>
                                                         
@@ -698,7 +688,7 @@ handlePreviousAutomated = () => {
                                            
                                             
                                         
-                                        <div style={{marginTop: '5px',marginBottom: '8px', padding: 20}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false} activeStep={activeStep}/></div>
+                                        <div style={{marginTop: '10px',marginBottom: '10px', padding: 20}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false} activeStep={activeStep}/></div>
                                         
                                         </div>
                                         </div>
@@ -732,7 +722,7 @@ handlePreviousAutomated = () => {
                                     <div className={selectedPipelineIndex === sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
                                         
-                                            <div align="left" style={{width: '96%', margin: 'auto', marginTop: '7px',
+                                            <div align="left" style={{width: '96%', margin: 'auto', marginTop: '10px',
                                                 display: 'flex'}}>
                                     
                                                 <table style={{width:'100%'}}>
@@ -752,7 +742,7 @@ handlePreviousAutomated = () => {
                                            
                                             
                                         
-                                        <div style={{marginTop: '5px',marginBottom: '8px', padding: 20}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
+                                        <div style={{marginTop: '10px',marginBottom: '10px', padding: 20}}><ServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
                                         
                                         </div>
                                         <br/>
@@ -761,19 +751,19 @@ handlePreviousAutomated = () => {
                                 
                                 
                             </div>
-            }
+                             }
                             </TabContainer>}
                             
                             </div>
                 </div>
-                </div>
-                <div style={{width:"100%"}}>
+               
+                
                 <div style={{width:"100%"}}>{this.getStepContent(activeStep,selectedPipelineIndex)}</div>
                 
-                </div>
+                
                     {activeStep === steps.length ? null : (
             <div style={{margin: "1rem"}}>
-              <Button style={{float: "right",marginLeft:"1rem"}}  disabled = {activeStep===0 ? isButtonDisabled :
+              <Button style={{float: "right",marginLeft:"1rem", marginRight:'20px'}}  disabled = {activeStep===0 ? isButtonDisabled :
               activeStep>2 ? this.state.isDashBoardDisabled:  /*activeStep===1?this.state.isd:*/''}
 
               
@@ -849,11 +839,13 @@ handlePreviousAutomated = () => {
               </div>
             </div>
           )}
+           </div>
           </Card>
            </div>
+   
         );
     }
 
 }
 
-export default withStyles(styles)(Test1);
+export default withStyles(styles)(SetupPage);

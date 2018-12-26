@@ -30,7 +30,7 @@ public class PipelineUtil {
 		try{
 		encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILE_NAME)));
 		}catch(FileNotFoundException fileNotFound){
-			System.out.println("ERROR: While Creating or Opening the File pipeline.xml");
+			System.out.println("No pipeline XML file found or error occured while creating or opening the File pipeline.xml");
 		}
 		encoder.writeObject(pipelines);
 		encoder.close();
@@ -46,7 +46,7 @@ public class PipelineUtil {
 		try {
 			decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(FILE_NAME)));
 		} catch (FileNotFoundException e) {
-			System.out.println("ERROR: File pipeline.xml not found");
+			System.out.println("No pipeline XML file found or error occured while creating or opening the File pipeline.xml");
 			return new ArrayList<>();
 		}
 		List<PipeLine> pipelines = new ArrayList<>();
