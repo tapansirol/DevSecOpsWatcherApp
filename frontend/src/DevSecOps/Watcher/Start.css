@@ -591,4 +591,117 @@ body {
 {
   width: 539px;
   border:  1px solid grey
+  margin-right: 40px;
+}
+#automatedTableHeadingFirst
+{
+  width: 188px;
+  height: 16px;
+  /* background-color: #383838; */
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+  margin-left: 29px;
+}
+#automatedTableHeadingStatus
+{
+  
+  width: 116px;
+  height: 19px;
+  background-color: #383838;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+
+}
+#automatedTableHeadingActions
+{
+  
+  height: 16px;
+  width: 86px;
+  /* background-color: #0066b3; */
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+  padding: 0px
+  
+}
+#logDiv
+{
+  background-color: #000000;
+  height: 350px;
+  overflow: scroll
+}
+#automatedStatusTableDiv
+{
+  margin-top: 32px;
+  margin-left: 36px;
+  display: flex;
+  width: 1120px;
+}
+#automatedTableRowActions
+{
+  width:86px;
+  height: 16px;
+  /* background-color: #383838; */
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
+  padding: 0px 0px 0px 0px;
+}
+
+
+/*--- Manual Steps ---*/
+#manualStepsHeading{
+  width: 353px;
+  height: 35px;
+  font-family: Roboto;
+  font-size: 22px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.59;
+  letter-spacing: normal;
+  text-align: center;
+  color: #383838;
+  margin-left: 421px;
+  margin-top: 40px;
+
+
+}
+#manualStepsSubHeading{
+  width: 473px;
+  height: 18px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: center;
+  color: #383838;
+  margin-left: 361px;
+  margin-bottom: 24px
+  
 }
