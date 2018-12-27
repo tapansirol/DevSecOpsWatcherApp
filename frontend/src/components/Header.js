@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import AccSettings from '@material-ui/icons/Settings';
 import Help from '@material-ui/icons/HelpOutlined';
 import { withStyles } from '@material-ui/core/styles';
-import '../Watcher/Start.css';
+import '../static/css/Start.css';
 
 const styles = {
     grow: {

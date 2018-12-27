@@ -25,7 +25,7 @@ import PremiumServiceAssembly from './PremiumServiceAssembly';
 // import '../static/css/CreatePL2.css';
 // import '../static/css/SideBar.css';
 // import '../static/css/CreatePL1.css';
-import '../DevSecOps/Watcher/Start.css';
+import '../static/css/Start.css';
 import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';

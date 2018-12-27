@@ -25,13 +25,6 @@ const imageMap = {
     RQM: rqm,
 }
 
-
-const categoryMap = {
-    DEVELOPANDTEST: "DEVELOP & TEST",
-    PLANANDMEASURE: "PLAN & MEASURE",
-    RELEASEANDDEPLOY: "RELEASE & DEPLOY",
-}
-
 class PremiumServiceAssembly extends Component{
     constructor(props) {
         super();

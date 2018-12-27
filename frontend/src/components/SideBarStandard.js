@@ -3,15 +3,12 @@ import '../static/css/SideBar.css';
 import Typography from '@material-ui/core/Typography';
 import Page2 from './page2';
 import Page5 from './page5';
-import '../static/css/SideBar.css';
-import '../static/css/CreatePL1.css';
-import '../static/css/CreatePL2.css';
 import { Button} from '@material-ui/core';
 import pdf from '../static/resources/StandardToolChain.pdf';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import PictureAsPdf from '@material-ui/icons/PictureAsPdf';
-import '../static/css/SideBar.css';
+
 class SideBar3 extends Component {
 
     constructor()

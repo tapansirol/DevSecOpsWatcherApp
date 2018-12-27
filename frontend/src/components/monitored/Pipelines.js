@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import ServiceAssembly from '../ServiceAssembly'
 import LongMenu from './LongMenu';
-import '../../DevSecOps/Watcher/Start.css'
+import '../../components/Start.js'
 
 const styles = {
 //     card: {

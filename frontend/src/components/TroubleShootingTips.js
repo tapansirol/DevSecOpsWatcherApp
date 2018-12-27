@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../static/css/AutomatedToolChain.css';
 import { Typography } from '@material-ui/core';
 import DESKTOP_IMAGE from '../static/images/extra/desktop.png';
 import CardMedia from "@material-ui/core/CardMedia";

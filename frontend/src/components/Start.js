@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import './Start.css';
-import MenuAppBar from '../Components/Header';
-import Home from '../../components/Home';
+import '../static/css/Start.css';
+import MenuAppBar from './Header';
+import Home from './Home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Try2 from '../../components/Setup'
-import ATC from '../../components/AutomatedToolChain'
-import SideBar3 from '../../components/SideBarStandard'
-import MonitorScreen from '../../components/MonitorScreen';
-import pipeline from '../../components/monitored/Pipelines';
+import Try2 from './Setup'
+import ATC from './AutomatedToolChain'
+import SideBar3 from './SideBarStandard'
+import MonitorScreen from './MonitorScreen';
+import pipeline from './monitored/Pipelines';
 
-import ManualInstallationCheck from '../../components/ManualInstallationCheck';
-import ManualInstallationPremium from '../../components/ManualInstallationPremium';
+import ManualInstallationCheck from './ManualInstallationCheck';
+import ManualInstallationPremium from './ManualInstallationPremium';
 
 //import InfoCard from './components/InfoCard';
 

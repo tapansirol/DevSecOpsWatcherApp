@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import '../static/css/AutomatedToolChain.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Test from './Test';
 import TroubleShootingTips from './TroubleShootingTips';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import HighlightOff from '@material-ui/icons/HighlightOff';
+import StatusTableManual from './StatusTableManual';
 
 const styles = theme =>({
     root: {
@@ -152,7 +151,7 @@ class ManualInstallationCheck extends Component{
                     
                         <div id="statusTableDiv">
                         
-                                <Test  count = {count} selectedPipelineIndex={selectedPipelineIndex} findValue={this.getFalseValue.bind(this)}
+                                <StatusTableManual  count = {count} selectedPipelineIndex={selectedPipelineIndex} findValue={this.getFalseValue.bind(this)}
                                 findTrueValue={this.getTrueValue.bind(this)}/>
                                 
                                         <div id = "troubleShootingDiv"><TroubleShootingTips status={this.state.isStatus}/></div>

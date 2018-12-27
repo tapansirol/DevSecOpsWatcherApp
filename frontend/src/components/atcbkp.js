@@ -2,14 +2,10 @@ import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import '../static/css/AutomatedToolChain.css';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import StatusTable from './StatusTable';
-import '../static/css/CreatePL1.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-
 
 const styles = theme =>({
     root: {

@@ -18,8 +18,8 @@ public interface IService {
 	String ASOC_DESC = "AppScan on Cloud"; 
 	String RQM_CODE = "RQM";
 	String RQM_DESC = "Rational Quality Manager"; 
-	String HPT_CODE = "HOTPT";
-	String HPT_DESC = "HCL One Test Performance Tester";
+	String HPT_CODE = "HPT";
+	String HPT_DESC = "HCL Performance Tester";
 	String UCD_CODE = "UCD";
 	String UCD_DESC = "Urban Code Deploy";
 	String UCV_CODE = "UCV";
