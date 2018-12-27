@@ -1,13 +1,6 @@
 import React, {Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
-import { withStyles } from "@material-ui/core/styles";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import Button from '@material-ui/core/Button';
-
-
 
 import Jenkins_IMG from '../static/images/services/jenkins.JPG';
 import Git_IMG from '../static/images/services/git.JPG';
@@ -18,8 +11,6 @@ import Rtc_IMG from '../static/images/services/rtc.JPG';
 import Ucd_IMG from '../static/images/services/ucd.JPG';
 import Ucv_IMG from '../static/images/services/ucv.JPG';
 import rqm from '../static/images/services/rqm.jpg';
-// import '../static/css/ServiceAssembly.css'
-//import red from '../static/images/extra/red.jpg';
 
 const imageMap = {
     JENKINS: Jenkins_IMG,
@@ -49,7 +40,6 @@ class PremiumServiceAssembly extends Component{
             image: "",
             name: "",
             category:"",
-            status: "",
           };
     }
 
@@ -85,7 +75,6 @@ class PremiumServiceAssembly extends Component{
                                                 title={service['displayName']}
                                                
                                             /></div>
-                                           {/* <div style={{display: temp}}> <img src={red} style={{display: dis}}></img></div>*/}
                                         </div>
                                     );
                                 })}
@@ -111,7 +100,6 @@ class PremiumServiceAssembly extends Component{
                                                 title={service['displayName']}
 
                                             />
-                                            {/*<div style={{display: temp}}> <img src={red} style={{display: dis}}></img></div>*/}
                                         </div>
                                     );
                                 })}
@@ -135,7 +123,6 @@ class PremiumServiceAssembly extends Component{
                                                 title={service['displayName']}
                                 
                                             />
-                                          {/*  <div style={{display: temp}}><img src={red} style={{display:dis}}></img></div>*/}
                                         </div>
                                     );
                                 })}

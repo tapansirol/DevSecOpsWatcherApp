@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import '../static/css/AutomatedToolChain.css';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
-import Test3 from './Test3';
+import StatusTable from './StatusTable';
 import '../static/css/CreatePL1.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Slide from "@material-ui/core/Slide";
@@ -16,8 +16,7 @@ const styles = theme =>({
     root: {
       flexGrow: 1,
       width: '100%',
-      margin: 'auto',
-            
+      margin: 'auto',    
     },
     
   });
@@ -61,15 +60,6 @@ class AutomatedToolChain extends Component{
                 nextButtonStatus: true
             })
       }
-    //   check()
-    //   {
-    //     if(localStorage.getItem("installationLog").includes("*COMPLETED***"))
-    //     {
-    //         this.setState({
-    //             width: '50%'
-    //         })
-    //     }
-    //   }
    
     render()
     {
@@ -77,8 +67,6 @@ class AutomatedToolChain extends Component{
         const nextButtonStatus = this.state.nextButtonStatus;
        
         return(
-            // <div className={classes.root}>
-           
                 <div className={classes.card}>
                     <Typography id="automatedInstallationHeading">Tool chain automated installation</Typography>
                     <Typography id="automatedlInstallationSubHeading">
@@ -115,23 +103,17 @@ class AutomatedToolChain extends Component{
                                 <Slide direction="right" 
                                 in={localStorage.getItem("installationLog").includes("*COMPLETED***")}>
                                 
-                                    <Test3 selectedPipelineIndex={selectedPipelineIndex}/>
+                                    <StatusTable selectedPipelineIndex={selectedPipelineIndex}/>
                                 </Slide>
                                 :null
                             }
                             
                             <div  style={{width: "100%"}} id="logDiv">
                                 <span style={{color:'white'}}>{localStorage.getItem("installationLog")}</span>
-                            </div>
-                           
-                                
-                        </div>
-                      
+                            </div>              
+                        </div>     
                 </div>
-               
-            // </div> 
         );
     }
 }
 export default withStyles(styles)(AutomatedToolChain);
-//export default AutomatedToolChain;

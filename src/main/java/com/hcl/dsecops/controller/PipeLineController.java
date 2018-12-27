@@ -1,7 +1,6 @@
 package com.hcl.dsecops.controller;
  
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
  
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
  
 import com.hcl.dsecops.PipelineUtil;
 import com.hcl.dsecops.model.Capsule;
-import com.hcl.dsecops.model.IService;
 import com.hcl.dsecops.model.PipeLine;
-import com.hcl.dsecops.model.PremiumToolChainServices;
-import com.hcl.dsecops.model.StandardToolChainServices;
+import com.hcl.dsecops.model.Service;
 import com.hcl.dsecops.model.StatusPage;
 import com.hcl.dsecops.model.ToolInfo;
 import com.hcl.dsecops.model.ToolInfoFactory;
@@ -34,20 +31,18 @@ public class PipeLineController {
  
     
     @GetMapping("/api/services")
-    public List<List<IService>> getAvailableServices(@RequestParam("capsule") Capsule capsule) {
+    public List<List<Service>> getAvailableServices(@RequestParam("capsule") Capsule capsule) {
         System.out.println("PipeLineController.getAvailableServices()");
         System.out.println("PipeLineController.getAvailableServices() capsule "+capsule);
-        List<IService> standardServices = Arrays.asList(StandardToolChainServices.values());
-        List<IService> premiumServices = Arrays.asList(PremiumToolChainServices.values());
-        List<List<IService>> services = new ArrayList<List<IService>>();
+        List<List<Service>> services = new ArrayList<List<Service>>();
         if(capsule == Capsule.JAVA) {
-            services.add(standardServices);
-            services.add(premiumServices);
+            services.add(PipelineUtil.getStandardServices());
+            services.add(PipelineUtil.getPremiumServices());
         } else if(capsule==Capsule.DOTNET) {
-            services.add(standardServices);
+            services.add(PipelineUtil.getStandardServices());
         } else if (capsule==null) {
-            services.add(standardServices);
-            services.add(premiumServices);
+            services.add(PipelineUtil.getStandardServices());
+            services.add(PipelineUtil.getPremiumServices());
         }
         return services;
     }
@@ -76,7 +71,7 @@ public class PipeLineController {
     
     @GetMapping("/api/installationLog")
     public String getInstallationLog() {
-        return new DeployToolChain().result.toString();
+        return DeployToolChain.result.toString();
     }
     
     @GetMapping("/api/toolInfo")

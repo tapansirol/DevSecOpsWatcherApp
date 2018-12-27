@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import '../static/css/AutomatedToolChain.css';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
-import Test3 from './Test3';
+import StatusTable from './StatusTable';
 import '../static/css/CreatePL1.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -166,7 +166,7 @@ class AutomatedToolChain extends Component{
                                 
                                 {console.log("value :",this.state.value)}
                                 
-                                <Test3/></div>
+                                <StatusTable/></div>
                                 :
                                 null]}
                                 </td>

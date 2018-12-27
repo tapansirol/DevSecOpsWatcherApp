@@ -6,13 +6,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Try2 from '../../components/Setup'
 import ATC from '../../components/AutomatedToolChain'
-import SideBar3 from '../../components/SideBar3'
+import SideBar3 from '../../components/SideBarStandard'
 import MonitorScreen from '../../components/MonitorScreen';
 import pipeline from '../../components/monitored/Pipelines';
 
-import ButtonPage from '../../components/TransferData/ButtonPage';
-import HeaderPage from '../../components/TransferData/HeaderPage';
-import ButtonPage2 from '../../components/TransferData/ButtonPage2';
 import ManualInstallationCheck from '../../components/ManualInstallationCheck';
 import ManualInstallationPremium from '../../components/ManualInstallationPremium';
 
@@ -46,10 +43,6 @@ class Start extends Component {
                         <Route path="/monitor" component={MonitorScreen}/>
                         <Route path="/pipeline" component={pipeline}/>
                         <Route path="/mi" component={ManualInstallationPremium}/>
-
-                        <Route path="/btnpage" component={ButtonPage}/>
-                        <Route path="/hdrpage" component={HeaderPage}/>
-                        <Route path="/btnpage2" component={ButtonPage2}/>
                         <Route path="/mic" component={ManualInstallationCheck}/>
                         
                     </Switch>

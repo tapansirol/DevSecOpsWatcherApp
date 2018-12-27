@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import '../static/css/CreatePL1.css';
+import { Typography } from '@material-ui/core';
 
 
 const styles = theme => ({
@@ -22,7 +23,7 @@ const styles = theme => ({
     // },
   });
 
-class Test3 extends Component{
+class StatusTable extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -66,7 +67,7 @@ class Test3 extends Component{
                               if(!row.installationStatus)
                               {
                                 {localStorage.setItem("statusValue", false)}
-                                console.log("Status value in Test3 ------>",localStorage.getItem('statusValue'))
+                                console.log("Status value in StatusTable ------>",localStorage.getItem('statusValue'))
                               }
                               if(row.installationStatus)
                               {
@@ -103,7 +104,7 @@ class Test3 extends Component{
                                   <TableCell id ="automatedTableRowActions"><a href={row.actions} target="_blank">User manual</a></TableCell>
                               <TableCell style={{textAlign:'center'}}>
                               {!row.installationStatus ?
-                              <a href="#">Re-run</a>
+                              <Typography>Re-run</Typography>
                               :
                               null
                               }
@@ -120,4 +121,4 @@ class Test3 extends Component{
             }
 }
 
-export default withStyles(styles)(Test3);
+export default withStyles(styles)(StatusTable);

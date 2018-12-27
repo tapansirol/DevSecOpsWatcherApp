@@ -4,7 +4,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
@@ -23,7 +22,7 @@ const styles = theme => ({
     // },
   });
 
-class Test3 extends Component{
+class Test extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -116,7 +115,7 @@ setTrueValue =(dataOne) =>
                               {
                                   
                                 {localStorage.setItem("manualToolStatus", false)}
-                                console.log("Manual status value in Test3 ------>",localStorage.getItem('manualToolStatus'))
+                                console.log("Manual status value in Test ------>",localStorage.getItem('manualToolStatus'))
                                 {this.setValue(this.state.data)}
                               }
                               if(row.installationStatus)
@@ -157,4 +156,4 @@ setTrueValue =(dataOne) =>
             }
 }
 
-export default withStyles(styles)(Test3);
+export default withStyles(styles)(Test);

@@ -8,10 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 
-
-
-
-class Test3 extends Component{
+class Test4 extends Component{
   constructor(props){
     super();
     this.state = {
@@ -76,4 +73,4 @@ class Test3 extends Component{
             }
 }
 
-export default Test3;
+export default Test4;

@@ -9,7 +9,6 @@ import Asoc_IMG from '../static/images/services/asoc.JPG';
 import Hft_IMG from '../static/images/services/hft.JPG';
 import Ucd_IMG from '../static/images/services/ucd.JPG';
 import Ucv_IMG from '../static/images/services/ucv.JPG';
-// import '../static/css/ServiceAssembly.css'
 
 const imageMap = {
     JENKINS: Jenkins_IMG,
@@ -38,7 +37,6 @@ class StandardServiceAssembly extends Component{
             image: "",
             name: "",
             category:"",
-            status: "",
           };
     }
 
@@ -76,7 +74,7 @@ class StandardServiceAssembly extends Component{
                                                 title={service['displayName']}
 
                                             />
-                                            {/*<div style={{display: temp}}> <img src={red} style={{display: dis}}></img></div>*/}
+                                            
                                         </div>
                                     );
                                 })}
@@ -100,7 +98,7 @@ class StandardServiceAssembly extends Component{
                                                 title={service['displayName']}
                                 
                                             />
-                                          {/*  <div style={{display: temp}}><img src={red} style={{display:dis}}></img></div>*/}
+                                          
                                         </div>
                                     );
                                 })}
