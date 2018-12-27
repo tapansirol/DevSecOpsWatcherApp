@@ -41,27 +41,68 @@ public class DeployToolChain {
 		toolsMap.put(IService.UCV_CODE, Configurations.getInstance().getVelocity_script());
 		toolsMap.put(IService.SONARQUBE_CODE, Configurations.getInstance().getSonar_script());
 		toolsMap.put(STARTUP_COMMAND, Configurations.getInstance().getStartup());
-		
 	}
 	
 	/**
 	 * Method to execute scripts for installation of the tools included in automated pipeline
 	 * @return the console log from shell execution command
 	 */
-	public String installPipeline() {
-        JSch jsch = new JSch();
+	public String installPipeline_remote() {
+//        JSch jsch = new JSch();
          result.setLength(0);
+         result.append("***COMPLETED***");
+         return result.toString();
+//        Session session;
+//        try {
+//        	
+//        	jsch.addIdentity(IDENTITY_FILE_PATH);
+//        	session = jsch.getSession(Configurations.getInstance().getHOST_MACHINE_USER_NAME(), Configurations.getInstance().getIP(), DEFAULT_PORT);
+//            session.setConfig(STRICT_HOST_CONFIG_KEY, STRICT_HOST_CONFIG_VALUE);
+//            session.connect();
+//            session.setServerAliveCountMax(30);
+//            ChannelExec channelExec = (ChannelExec) session.openChannel(EXEC);
+//            String command = SHELL_COMMAND+Configurations.getInstance().getHOME_PATH()+toolsMap.get(STARTUP_COMMAND);
+//            System.out.println("Executing shell script: "+command);
+//            channelExec.setCommand(command);
+//            channelExec.connect();
+//            InputStream in = channelExec.getExtInputStream();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//            	result.append(line +LINE_BREAK);
+//                System.out.println(line);
+//            }
+//            result.append("***COMPLETED***");
+//            int exitStatus = channelExec.getExitStatus();
+//            if (exitStatus > 0) {
+//                System.out.println("Remote script exec error! " + exitStatus);
+//            }
+//            session.disconnect();
+//        } catch (JSchException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return result.toString();
+	}
+	
+	/**
+	 * Method to execute script for installation of a specified tool which is included in automated pipeline
+	 * @param toolCode to install in automated pipeline
+	 * @return the console log from shell execution command
+	 */
+	public String installTool_remote(String toolCode) {
+        JSch jsch = new JSch();
+        StringBuilder result = new StringBuilder();
         Session session;
         try {
-        	
         	jsch.addIdentity(IDENTITY_FILE_PATH);
         	session = jsch.getSession(Configurations.getInstance().getHOST_MACHINE_USER_NAME(), Configurations.getInstance().getIP(), DEFAULT_PORT);
             session.setConfig(STRICT_HOST_CONFIG_KEY, STRICT_HOST_CONFIG_VALUE);
             session.connect();
             session.setServerAliveCountMax(30);
             ChannelExec channelExec = (ChannelExec) session.openChannel(EXEC);
-            String command = SHELL_COMMAND+Configurations.getInstance().getHOME_PATH()+toolsMap.get(STARTUP_COMMAND);
-            System.out.println("Executing shell script: "+command);
+            String command = SHELL_COMMAND+Configurations.getInstance().getHOME_PATH()+toolsMap.get(toolCode);
             channelExec.setCommand(command);
             channelExec.connect();
             InputStream in = channelExec.getExtInputStream();
@@ -87,42 +128,34 @@ public class DeployToolChain {
 	
 	/**
 	 * Method to execute script for installation of a specified tool which is included in automated pipeline
-	 * @param toolName to install in automated pipeline
+	 * @param toolCode to install in automated pipeline
 	 * @return the console log from shell execution command
 	 */
-	public String installTool(String toolName) {
-        JSch jsch = new JSch();
-        StringBuilder result = new StringBuilder();
-        Session session;
-        try {
-        	jsch.addIdentity(IDENTITY_FILE_PATH);
-        	session = jsch.getSession(Configurations.getInstance().getHOST_MACHINE_USER_NAME(), Configurations.getInstance().getIP(), DEFAULT_PORT);
-            session.setConfig(STRICT_HOST_CONFIG_KEY, STRICT_HOST_CONFIG_VALUE);
-            session.connect();
-            session.setServerAliveCountMax(30);
-            ChannelExec channelExec = (ChannelExec) session.openChannel(EXEC);
-            String command = SHELL_COMMAND+Configurations.getInstance().getHOME_PATH()+toolsMap.get(toolsMap.get(toolName));
-            channelExec.setCommand(command);
-            channelExec.connect();
-            InputStream in = channelExec.getExtInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = reader.readLine()) != null) {
-            	result.append(line +LINE_BREAK);
-                System.out.println(line);
-            }
-            result.append("***COMPLETED***");
-            int exitStatus = channelExec.getExitStatus();
-            if (exitStatus > 0) {
-                System.out.println("Remote script exec error! " + exitStatus);
-            }
-            session.disconnect();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result.toString();
+	public String installTool(String toolCode) {
+		StringBuilder result = new StringBuilder();
+		Process process=null;
+		String line;
+		try {
+			 String command = SHELL_COMMAND+Configurations.getInstance().getHOME_PATH()+toolsMap.get(toolCode);
+			System.out.println("Executing command "+command);
+			process = Runtime.getRuntime().exec(command);
+			BufferedReader br = new BufferedReader(
+					new InputStreamReader(process.getInputStream()));
+			while ((line = br.readLine()) != null) {
+				result.append(line +LINE_BREAK);
+				System.out.println(line);
+			}
+		} catch (Exception e) {
+			System.out.println("Script exec error !");
+			result.append("Script exec error !");
+			e.printStackTrace();
+		}
+		finally{
+			result.append("***COMPLETED***");
+			if(process!=null) process.destroy();
+		}  
+		
+		return result.toString();
 	}
 	
 
@@ -130,7 +163,7 @@ public class DeployToolChain {
 	 * Method to execute scripts for installation of the tools included in automated pipeline
 	 * @return the console log from shell execution command
 	 */
-	public String installPipeline_forImage() {
+	public String installPipeline() {
 		result.setLength(0);
 		String line;
 		Process process=null;
@@ -144,12 +177,12 @@ public class DeployToolChain {
 				result.append(line +LINE_BREAK);
 				System.out.println(line);
 			}
-			result.append("***COMPLETED***");
 		} catch (Exception e) {
 			System.out.println("Script exec error !");
 			e.printStackTrace();
 		}
 		finally{
+			result.append("***COMPLETED***");
 			if(process!=null) process.destroy();
 		}  
 		return result.toString();
