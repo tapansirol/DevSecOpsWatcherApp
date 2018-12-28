@@ -419,7 +419,7 @@ class SetupPage extends Component {
         pathname: '/monitor',
         //    pathname: '/manual',
         // pipelineArray: pipelineArray1
-        pipelineArray: this.state.pipelineArray
+        // pipelineArray: this.state.pipelineArray
         }); 
     
     }

@@ -47,7 +47,9 @@ public class PipeLineController {
     
     @GetMapping("/api/createdPipelines")
     public List<PipeLine> getPipeline(){
-        return PipelineUtil.getPipelines();
+    	List<PipeLine> pipeLineList = PipelineUtil.getPipelines();
+    	PipelineUtil.updateServiceStatus(pipeLineList);
+        return pipeLineList;
     }
     
     

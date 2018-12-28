@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
-
 
 export default class NativeSelects extends React.Component {
   
@@ -37,7 +35,4 @@ export default class NativeSelects extends React.Component {
   }
 }
 
-NativeSelects.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 

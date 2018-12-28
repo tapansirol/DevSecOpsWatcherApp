@@ -50,7 +50,7 @@ class PremiumServiceAssembly extends Component{
         {console.log("act step ::::"+activeStep)}
         return (
             <div  key={sIndex} style={{display: 'flex'}}>
-            <div style={{width:'22%'}} >
+            <div style={{width:'20%'}} >
                             {this.containsInArray(serviceArray, 'serviceCategory', 'PLANANDMEASURE') &&  <div>
                             <Typography style={{textAlign:'center', background:'#edf5ff'}}>PLAN & MEASURE</Typography>
                                 {serviceArray.map((service, cIndex) => {
@@ -58,7 +58,7 @@ class PremiumServiceAssembly extends Component{
                                     if(service.available==false){dis=' ';tcolor="red";}
                                     if(service.serviceCategory == 'PLANANDMEASURE')
                                     return ( 
-                                        <div key={cIndex} style={{display: 'inline-flex', margin:'6%', marginTop:25, marginBottom:25}}>
+                                        <div key={cIndex} style={{display: 'inline-flex', margin:'4%', marginTop:25, marginBottom:25}}>
                                             <div><CardMedia 
                                                 style={imageMap[service['code']] ? {}: {display: 'none'}}
                                                 style={bool?{borderStyle: 'groove',borderTopColor: tcolor}:{}}
@@ -74,7 +74,7 @@ class PremiumServiceAssembly extends Component{
                             </div>}
                 </div>
                          
-                         <div style={{marginLeft:'5%',width:'45%'}} >
+                         <div style={{marginLeft:'5%',width:'55%'}} >
                             
                             <Typography  style={{ textAlign:'center', background:'#edf5ff'}}>DEVELOP & TEST</Typography>
                                 {serviceArray.map((service, cIndex) => {
@@ -82,7 +82,7 @@ class PremiumServiceAssembly extends Component{
                                     if(service.available==false){dis=' ';tcolor="red";}
                                     if(service.serviceCategory == 'DEVELOPANDTEST')
                                     return ( 
-                                        <div key={cIndex} style={{display: 'inline-block', margin:'4%', marginTop:25, marginBottom:25}}>
+                                        <div key={cIndex} style={{display: 'inline-block', margin:'2%', marginTop:25, marginBottom:25}}>
                                          
                                           <CardMedia 
                                                 style={imageMap[service['code']] ? {}: {display: 'none'}}
@@ -98,14 +98,14 @@ class PremiumServiceAssembly extends Component{
                                 })}
                             </div>
           
-                            <div style={{marginLeft:'5%',width:'23%'}}>
+                            <div style={{marginLeft:'5%',width:'20%'}}>
                             <Typography  style={{textAlign:'center',background:'#edf5ff'}}>RELEASE & DEPLOY</Typography>
                                 {serviceArray.map((service, cIndex) => {
                                     let dis='none';let tcolor="";
                                     if(service.available==false){dis=' ';tcolor="red";}
                                     if(service.serviceCategory == 'RELEASEANDDEPLOY')
                                     return ( 
-                                        <div key={cIndex} style={{display: 'inline-flex', margin:'6%', marginTop:25, marginBottom:25}}>
+                                        <div key={cIndex} style={{display: 'inline-flex', margin:'4%', marginTop:25, marginBottom:25}}>
                                            
                                                 <CardMedia 
                                                 style={imageMap[service['code']] ? {}: {display: 'none'}}

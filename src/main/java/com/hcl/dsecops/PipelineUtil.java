@@ -148,25 +148,40 @@ public class PipelineUtil {
         String host = Configurations.getInstance().getIP();
         StatusPage statusPage= null;
         switch(toolCode) {
-        case IService.JENKINS_CODE: statusPage = new StatusPage(IService.JENKINS_CODE,"Jenkins",true,"https://jenkins.io/doc/",
+        case IService.GITHUB_CODE: statusPage = new StatusPage(IService.GITHUB_CODE,IService.GITHUB_DESC,status.isToolAlive(Configurations.getInstance().getGIT_REPO_URL()),"https://guides.github.com/",
+        		Configurations.getInstance().getGIT_REPO_URL());
+        	break;
+        case IService.JENKINS_CODE: statusPage = new StatusPage(IService.JENKINS_CODE,IService.JENKINS_DESC,true,"https://jenkins.io/doc/",
                 "http://"+host+":9292");
         	break;
-        case IService.ASOC_CODE: statusPage = new StatusPage(IService.ASOC_CODE,"AppScan",status.isToolAlive("https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home"),
+        case IService.ASOC_CODE: statusPage = new StatusPage(IService.ASOC_CODE,IService.ASOC_DESC,status.isToolAlive("https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home"),
                 "https://www.ibm.com/support/knowledgecenter/en/SSPH29_9.0.3/com.ibm.help.common.infocenter.aps/helpindex_appscan.html",
                 "https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home");
         	break;
-        case IService.SONARQUBE_CODE: statusPage = new StatusPage(IService.SONARQUBE_CODE,"SonarQube",status.isToolAlive( "http://"+host+":"+Configurations.getInstance().getSONAR_PORT()),
+        case IService.SONARQUBE_CODE: statusPage = new StatusPage(IService.SONARQUBE_CODE,IService.SONARQUBE_CODE,status.isToolAlive( "http://"+host+":"+Configurations.getInstance().getSONAR_PORT()),
                 "https://docs.sonarqube.org/latest/",
                 "http://"+host+":"+Configurations.getInstance().getSONAR_PORT());
         	break;
-        case IService.UCV_CODE: statusPage = new StatusPage(IService.UCV_CODE,"UrbanCode_Velocity",status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCV_PORT()),
+        case IService.UCV_CODE: statusPage = new StatusPage(IService.UCV_CODE,IService.UCV_DESC,status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCV_PORT()),
                 "https://www.ibm.com/support/knowledgecenter/en/SSCKX6_1.0.0/com.ibm.uvelocity.doc/ucv_version_welcome.html",
                 "https://"+host+":"+Configurations.getInstance().getUCV_PORT());
         	break;
-        case IService.UCD_CODE: statusPage = new StatusPage(IService.UCD_CODE,"UrbanCode Deploy",true,
-                "https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html",
+        case IService.UCD_CODE: statusPage = new StatusPage(IService.UCD_CODE,IService.UCD_DESC,status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCD_PORT()),
+        		"https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html",
                 "https://"+host+":"+Configurations.getInstance().getUCD_PORT());
         	break;
+        case IService.RQM_CODE: statusPage = new StatusPage(IService.RQM_CODE,IService.RQM_DESC,status.isToolAlive("https://"+host+":9443/qm"),
+        		"https://www.ibm.com/developerworks/downloads/r/rft/index.html",
+                "https://"+host+":9443/qm");
+        	break;
+        case IService.RTC_CODE: statusPage = new StatusPage(IService.RTC_CODE,IService.RTC_DESC,status.isToolAlive("https://"+host+":9443/ccm"),
+        		"https://www.ibm.com/developerworks/downloads/r/rft/index.html",
+        		"https://"+host+":9443/ccm");
+        	break;
+        case IService.DOORS_NG_CODE: statusPage = new StatusPage(IService.DOORS_NG_CODE,IService.DOORS_NG_DESC,status.isToolAlive("https://"+host+":9443/rm"),
+        		"https://www.ibm.com/developerworks/downloads/r/rft/index.html",
+        		"https://"+host+":9443/rm");
+        	break;	
         
         default: 
         }
@@ -242,6 +257,17 @@ public class PipelineUtil {
                "https://www.ibm.com/developerworks/downloads/r/rft/index.html",
                ""));
        return statusPages;
+	}
+	
+	public static void updateServiceStatus(List<PipeLine> pipeLineList) {
+		for (PipeLine pipeline:pipeLineList) {
+			for(Service service:pipeline.getServices()) {
+				StatusPage statusPage = getToolStatus(service.getCode());
+				if(statusPage!=null) {
+					service.setAvailable(statusPage.getInstallationStatus());
+				} 
+			}
+		}
 	}
 	
 }
