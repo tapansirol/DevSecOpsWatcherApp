@@ -32,7 +32,9 @@ public class PipelineUtil {
 	 */
 	public static void createPipeline(PipeLine pipeline) {
 		XMLEncoder encoder=null;
-		List<PipeLine> pipelines = getPipelines();
+		//This line will be enabled when provided support for multiple-pipeline 
+//		List<PipeLine> pipelines = getPipelines();
+		List<PipeLine> pipelines = new ArrayList<>();
 		pipelines.add(pipeline);
 		try{
 		encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILE_NAME)));
