@@ -26,8 +26,8 @@ class page1 extends Component {
     {
        // const {classes} =  this.props;
         return(
-            <div  id="HomeScreen">
-            <Typography style={{fontWeight:'bold'}}>Precondition:HCL Functional tester tool should be installed in windows machine.</Typography>
+            <div  id="HomeScreen"  style={{height:400}}>
+            <Typography style={{fontWeight:'bold',marginLeft:24,marginTop:24,marginBottom:24}}>Precondition:HCL Functional tester tool should be installed in windows machine.</Typography>
                     <ExpansionPanel defaultExpanded = {true}  >
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography>2. Steps to Create TestScipt in HFT by recording.</Typography>

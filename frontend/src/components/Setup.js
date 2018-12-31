@@ -5,12 +5,10 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import TextField from '@material-ui/core/TextField';
 import InputBase from '@material-ui/core/InputBase';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardMedia from '@material-ui/core/CardMedia';
 import CheckCircle from '@material-ui/icons/CheckCircle';
-import Java_IMG from '../static/images/capsules/new/java.jpg';
+import Java_IMG from '../static/images/capsules/new/java.JPG';
 import Dotnet_IMG from '../static/images/capsules/new/dotnet.JPG';
 import Sap_IMG from '../static/images/capsules/new/sap.JPG';
 import Cpp_IMG from '../static/images/capsules/new/c++.JPG';
@@ -19,16 +17,9 @@ import APIService from '../util/APIService';
 import { Button, TableBody} from '@material-ui/core';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Divider from '@material-ui/core/Divider';
 import StandardServiceAssembly from './StandardServiceAssembly';
 import PremiumServiceAssembly from './PremiumServiceAssembly';
-// import '../static/css/CreatePL2.css';
-// import '../static/css/SideBar.css';
-// import '../static/css/CreatePL1.css';
 import '../static/css/Start.css';
-import Table from '@material-ui/core/Table';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
 import AutomatedToolChain from './AutomatedToolChain';
 import ManualInstallation from './ManualInstallation';
 import ManualInstallationCheck from './ManualInstallationCheck';
@@ -58,6 +49,9 @@ const styles = theme =>({
       marginLeft:'10%',
       marginRight:'10%',
     //   margin: 'auto'
+    },
+    marginRight20: {
+        marginRight: 20
     },
     // grow: {
     //   flexGrow: 1,
@@ -762,7 +756,7 @@ handlePreviousAutomated = () => {
                 
                     {activeStep === steps.length ? null : (
             <div style={{marginLeft:'40px',marginRight:'40px',marginTop:'32px', marginBottom:32}}>
-              <Button style={{float: "right",marginLeft:"1rem", marginRight:'20px'}}  disabled = {activeStep===0 ? isButtonDisabled :
+              <Button style={{float: "right",marginLeft:"1rem"}}  disabled = {activeStep===0 ? isButtonDisabled :
               activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:*/ false}
 
               
@@ -771,7 +765,7 @@ handlePreviousAutomated = () => {
                   variant="contained"
                   color="primary"
                   onClick={this.handleNext.bind(this)}
-                  className={classes.button}
+                  className={activeStep === steps.length - 2 ? '':classes.marginRight20}
                 >
                  {activeStep===0 ? 'Next: Install': [activeStep === steps.length - 1 ? 'Go To DashBoard' : 
                  [activeStep === steps.length - 2 ? 'Next: Check And Deploy':'Next: manual Install']]}
@@ -782,6 +776,7 @@ handlePreviousAutomated = () => {
                   
                   onClick={this.handlePreviousSetup.bind(this)}
                   className={classes.button}
+                  disabled={true}
                 >
                   Previous: setup
                 </Button> : [activeStep === 2 ?
@@ -790,6 +785,7 @@ handlePreviousAutomated = () => {
                 color="primary"
                 onClick={this.handlePreviousAutomated}
                 className={classes.button}
+                disabled={true}
               >
                  Previous : automated 
               </Button> : [activeStep === steps.length - 1 ?

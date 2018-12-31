@@ -1,30 +1,20 @@
 #sidebar{
-    position: absolute;
-    width: 300px;
-    height: 65%;
+    /* position: absolute;*/
+    width: 280px;
+    height: 400px;
     background: white;
-   margin-top: 20px;
-    overflow-y: auto;
-    cursor: pointer;
+   /* margin-left: 40px;  */
+   /* border: 1px solid grey */
+   border-right: 1px solid grey
 }
-#sidebar ul li {
-    color: white;
-    list-style: none;
-    padding: 15px 10px;
-    border-bottom: 1px solid rgb(100,100,100);
-    font-size: 13px;
-   
-}
+
 #HomeScreen{
-    margin-left: 300px;
+     margin-left: 24px; 
     height:500px;
-    
     overflow: auto;
+   /* height: 400px; */
 }
-#AboutScreen,#ContactScreen{
-    margin-left: 300px;
-    display: none;
-}
+
 
 .step-progress
 {
@@ -36,8 +26,7 @@
     opacity:0.6;  
 }
 #sidebarContent{
-    height: 50%;  
-    position: relative;
+    
     
     
 }

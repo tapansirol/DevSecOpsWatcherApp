@@ -91,13 +91,13 @@ getNextStepDetails() {
       case 0:
         return <div></div>;
     case 1:         
-        return <div id="screen"><Page2/></div>;
+        return <Page2/>;
     case 2:
-        return <div id="screen"><Page5/></div>;
+        return <Page5/>;
     case 3:
-        return <div id="screen"><Page5/></div>;
+        return <Page5/>;
     case 4:
-        return <div id="screen"><Page5/></div>;
+        return <Page5/>;
     default:
         return 'Unknown step';
     }
@@ -110,21 +110,26 @@ getNextStepDetails() {
         return(
             
             <div>
-                <div id="sidebar">
-                    <ul >
+                <div style={{display: 'flex', border: '1px solid grey',marginLeft: 40,marginRight:40 }}>
+                    <div id="sidebar" >
+                   
                         {steps.map(step=>
 
-                        <li class={activeStep<step.id ? 'disabled' : null} style={{color:"#383838",fontWeight:"bold",padding:20}}>{step.name}</li>)}
-                    </ul>
-                </div>
+                            <Typography class={activeStep<step.id ? 'disabled' : null} 
+                                style={{color:"#383838",fontWeight:"bold",marginLeft:16,fontSize: 12, width: '80%',height: 40,marginTop: 20}}>
+                                    {step.name}
+                            </Typography>
+                        )}
+                    </div>
 
-                <div id="sidebarContent">
+                    <div>
                     
-                        <Typography style={{padding:20}}>
+                        <Typography>
                             {this.getStepContent(activeStep)}
                         </Typography>
+                    </div>
                 </div>
-                   
+                <div style={{marginLeft:40,marginRight:40,marginTop: 24, marginBottom:24}}>
                     <Button style={{float:'right'}} disabled = {this.state.isNextDisabled}
                         variant="contained"
                         color="primary"
@@ -143,6 +148,7 @@ getNextStepDetails() {
                         Open PDF Version <PictureAsPdf/>
                     
                     </a>
+                </div>  
             </div>
 
         );

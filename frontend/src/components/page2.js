@@ -5,7 +5,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { withStyles } from '@material-ui/core/styles';
-
+import Card from '@material-ui/core/Card';
 const styles = theme => ({
     root: {
       width: "100%"
@@ -25,9 +25,9 @@ class page1 extends Component {
     {
         const { classes } = this.props;
         return(
-            <div  id="HomeScreen">
-                <Typography style={{padding:20,fontWeight:'bold'}}>1- Integration of the tools</Typography>
-                    <ExpansionPanel defaultExpanded = {true}>
+            <div  id="HomeScreen" style={{height:400}}>
+                <Typography style={{fontWeight:'bold', marginLeft:24,marginTop:24,marginBottom:24}}>1- Integration of the tools</Typography>
+                    <ExpansionPanel defaultExpanded = {true} >
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography>Jenkins-UCV Integration</Typography>
                         </ExpansionPanelSummary>

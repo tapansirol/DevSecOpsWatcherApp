@@ -9,7 +9,7 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import PictureAsPdf from '@material-ui/icons/PictureAsPdf';
 
-class SideBar3 extends Component {
+class SideBarStandard extends Component {
 
     constructor()
 {
@@ -17,7 +17,7 @@ class SideBar3 extends Component {
 
     this.state = {
         steps: [{id: 1,name:'1. Steps to configure Urban Code Velocity', component: <Page2 />},
-        {id: 2,name:'2. Steps to Install and Configure HCL Functional Tester', component:<Page5 />},],
+        {id: 2,name:'2. Install and Configure HCL Functional Tester', component:<Page5 />},],
 
         activeStep:1,
         isPrevDisabled:true,
@@ -89,9 +89,9 @@ getNextStepDetails() {
       case 0:
         return <div></div>;
     case 1:         
-        return <div id="screen"><Page2/></div>;
+        return <Page2/>;
     case 2:
-        return <div id="screen"><Page5/></div>;
+        return <Page5/>;
     default:
         return 'Unknown step';
     }
@@ -103,22 +103,28 @@ getNextStepDetails() {
        
         return(
             
-            <div>
-                <div id="sidebar">
-                    <ul >
+            <div >
+                <div style={{display: 'flex', border: '1px solid grey',marginLeft: 40,marginRight:40 }}>
+                    <div id="sidebar" >
+                    
                         {steps.map(step=>
 
-                        <li class={activeStep<step.id ? 'disabled' : null} style={{color:"#383838",fontWeight:"bold",padding:20}}>{step.name}</li>)}
-                    </ul>
-                </div>
+                            <Typography class={activeStep<step.id ? 'disabled' : null} 
+                                style={{color:"#383838",fontWeight:"bold",marginLeft:16,fontSize: 12, width: '80%',height: 40,marginTop: 10}}>
+                                {step.name}
+                            </Typography>
+                        )}
+                        
+                    </div>
 
-                <div id="sidebarContent">
+                    <div>
                     
-                        <Typography style={{padding:20}}>
+                        <Typography>
                             {this.getStepContent(activeStep)}
                         </Typography>
+                    </div>
                 </div>
-                   
+                <div style={{marginLeft:40,marginRight:40,marginTop: 24, marginBottom:24}}>
                     <Button style={{float:'right'}} disabled = {this.state.isNextDisabled}
                         variant="contained"
                         color="primary"
@@ -126,7 +132,7 @@ getNextStepDetails() {
                         <ArrowForward></ArrowForward>
                     </Button>
                                 
-                    <Button style={{float:'right',marginRight: "1rem"}} disabled = {this.state.isPrevDisabled}
+                    <Button style={{float:'right',marginRight: "0.75rem"}} disabled = {this.state.isPrevDisabled}
                         variant="contained"
                         color="primary"
                         onClick={this.handlePrevious1}>
@@ -137,10 +143,11 @@ getNextStepDetails() {
                         Open PDF Version <PictureAsPdf/>
                     
                     </a>
+                </div>
             </div>
 
         );
     }
 
 }
-export default SideBar3;
+export default SideBarStandard;
