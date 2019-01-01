@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.hcl.dsecops.model.IService;
+import com.hcl.dsecops.model.ServiceType;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -27,7 +28,8 @@ public class DeployToolChain {
 	public static String STRICT_HOST_CONFIG_VALUE = "no";
 	private static String LINE_BREAK = "<br>";
 	private static String SHELL_COMMAND = "sh ";
-	private static String STARTUP_COMMAND = "STARTUP_COMMAND";
+	private static String STANDARD_STARTUP_COMMAND = "STANDARD_STARTUP_COMMAND";
+	private static String PREMIUM_STARTUP_COMMAND = "PREMIUM_STARTUP_COMMAND";
 	private static Map<String, String> toolsMap = new HashMap<>();
 	
 	public static StringBuilder result = new StringBuilder();;
@@ -40,7 +42,8 @@ public class DeployToolChain {
 		toolsMap.put(IService.UCD_CODE, Configurations.getInstance().getuDeploy_script());
 		toolsMap.put(IService.UCV_CODE, Configurations.getInstance().getVelocity_script());
 		toolsMap.put(IService.SONARQUBE_CODE, Configurations.getInstance().getSonar_script());
-		toolsMap.put(STARTUP_COMMAND, Configurations.getInstance().getStartup());
+		toolsMap.put(STANDARD_STARTUP_COMMAND, Configurations.getInstance().getStartupStandard());
+		toolsMap.put(PREMIUM_STARTUP_COMMAND, Configurations.getInstance().getStartupPremium());
 	}
 	
 	/**
@@ -158,17 +161,21 @@ public class DeployToolChain {
 		return result.toString();
 	}
 	
-
 	/**
-	 * Method to execute scripts for installation of the tools included in automated pipeline
+	 * Method to execute service type scripts for installation of the tools included in automated pipeline
+	 * @param serviceType service type to install
 	 * @return the console log from shell execution command
 	 */
-	public String installPipeline() {
+	public String installPipeline(ServiceType serviceType) {
 		result.setLength(0);
 		String line;
 		Process process=null;
 		try {
-			String command = SHELL_COMMAND+Configurations.getInstance().getHOME_PATH()+toolsMap.get(STARTUP_COMMAND);
+			String startScript = toolsMap.get(STANDARD_STARTUP_COMMAND);
+			if (ServiceType.PREMIUM.equals(serviceType)) {
+				startScript = toolsMap.get(PREMIUM_STARTUP_COMMAND);
+			}
+			String command = SHELL_COMMAND+Configurations.getInstance().getHOME_PATH()+startScript;
 			System.out.println("Executing command "+command);
 			process = Runtime.getRuntime().exec(command);
 			BufferedReader br = new BufferedReader(

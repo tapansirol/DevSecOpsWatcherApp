@@ -85,8 +85,11 @@ public class Configurations {
 	public String getASOC_SECRET() {
 		return  getProperty("ASOC_SECRET");
 	}
-	public String getStartup() {
-		return  getProperty("startup");
+	public String getStartupStandard() {
+		return  getProperty("startup_standard");
+	}
+	public String getStartupPremium() {
+		return  getProperty("startup_premium");
 	}
 	public String getJenkins_script() {
 		return  getProperty("jenkins_script");

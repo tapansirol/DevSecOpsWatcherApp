@@ -13,6 +13,7 @@ import com.hcl.dsecops.PipelineUtil;
 import com.hcl.dsecops.model.Capsule;
 import com.hcl.dsecops.model.PipeLine;
 import com.hcl.dsecops.model.Service;
+import com.hcl.dsecops.model.ServiceType;
 import com.hcl.dsecops.model.StatusPage;
 import com.hcl.dsecops.model.ToolInfo;
 import com.hcl.dsecops.model.ToolInfoFactory;
@@ -55,10 +56,12 @@ public class PipeLineController {
     
     @PostMapping(path = "/api/installPipeline", consumes = "application/json")
     public void installPipeline(@RequestBody PipeLine pipeline){
+    	ServiceType defaultServiceType = ServiceType.STANDARD;
         if(pipeline != null) {
             PipelineUtil.createPipeline(pipeline);
+            defaultServiceType = pipeline.getServiceType();
         }
-        new DeployToolChain().installPipeline();
+        new DeployToolChain().installPipeline(defaultServiceType);
     }
     
     @GetMapping("/api/installTool")
