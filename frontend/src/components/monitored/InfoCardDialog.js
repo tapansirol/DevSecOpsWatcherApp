@@ -6,6 +6,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
+import HighlightOff from '@material-ui/icons/HighlightOff';
 
 class InfoCardDialog extends Component{
 
@@ -35,7 +36,8 @@ class InfoCardDialog extends Component{
            
           <DialogActions>
             <Button onClick={close} >
-              <i className="material-icons">X</i>
+              {/* <i className="material-icons">X</i> */}
+              <HighlightOff/>
             </Button>
           </DialogActions>
 
@@ -67,7 +69,7 @@ class InfoCardDialog extends Component{
                 </Typography>
             </div>
             
-            <div  ><a href={status.toolURL} target="_blank">Open Tool</a></div>
+            <div  style={{marginLeft: 40}}><Button href={status.toolURL} target="_blank" color="primary"  variant="contained">Open Tool</Button></div>
             <div className="col-md-6 col-md-offset-0">
             <Typography>
                 

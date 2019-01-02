@@ -8,55 +8,27 @@ import CheckCircle from '@material-ui/icons/CheckCircle';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import StatusTableManual from './StatusTableManual';
 
-const styles = theme =>({
-    root: {
-      flexGrow: 1,
-      width: '100%',
-      margin: 'auto',
+// const styles = theme =>({
+//     root: {
+//       flexGrow: 1,
+//       width: '100%',
+//       margin: 'auto',
       
-     },
-    // progress: {
-    //     flexGrow: 1,
-    //     padding: 10,
-    //     margin: 'auto',
-    //     background:'#e7f3ff',
-    //     height: '3.5rem'
-    //   },
-    
-
-
-    //   card: {
-    //     minWidth: 275,
-        
-    //   },
-    //   success: {
-    //     flexGrow: 1,
-    //     //padding: 10,
-    //     //margin: 'auto',
-    //     //background:'#effae7',
-    //     //height: '3.5rem'
-    //   },
-    //   failure: {
-    //     flexGrow: 1,
-    //     padding: 10,
-    //     margin: 'auto',
-    //     background:'#faf0f1',
-    //     height: '3.5rem'
-    //   },
-    
-  });
+//      },   
+//   });
 
 
 class ManualInstallationCheck extends Component{
 
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
 
         this.state = {
             isStatus: '',
             data: 0,
-            refreshData: 0
+            refreshData: 0,
+            refreshButtonIndex: 0
         }
 
     }
@@ -103,6 +75,11 @@ class ManualInstallationCheck extends Component{
             //this.setState({data: data+1})
         }
     }
+    RefreshButton()
+    {
+       console.log("inside refresh button method...")
+       this.setState({refreshButtonIndex: 1});
+    }
     
 
 
@@ -111,7 +88,7 @@ class ManualInstallationCheck extends Component{
         const { classes,selectedPipelineIndex } = this.props;
         var count =0;
         return(
-            <div className={classes.root}>
+            <div /*className={classes.root}*/>
                 <div  >
                     <Typography id="manualInstallationHeading">Tool chain manual installation check</Typography>
                     <Typography id="manualInstallationSubHeading">status of the manual installation.</Typography>
@@ -120,7 +97,7 @@ class ManualInstallationCheck extends Component{
                     {this.state.isStatus ?
                         <div>
                             {this.setNextButton(this.state.data)}
-                            {this.setRefreshButton(this.state.refreshData)}
+                            {/* {this.setRefreshButton(this.state.refreshData)} */}
                             <Card id="manualSuccess">
                                 <CheckCircle id="successButton"/> 
                                 <Typography  id = "successText">
@@ -132,7 +109,7 @@ class ManualInstallationCheck extends Component{
                     :
                         [this.state.isStatus === false ?
                             <div>
-                                <Card className={classes.failure} id="manualFailure">
+                                <Card /*className={classes.failure}*/ id="manualFailure">
                                     <HighlightOff id="failureButton" />
                                     <Typography  id = "failureText">
                                         Some tools were not installed correcly.
@@ -140,7 +117,7 @@ class ManualInstallationCheck extends Component{
                                 </Card>
                             </div> 
                         :
-                            <Card className={classes.progress} id = "manualProgress">
+                            <Card /*className={classes.progress}*/ id = "manualProgress">
                                 <CircularProgress id="progressButton"/>
                                 <Typography  id = "successText">
                                     Installation in Progress
@@ -164,4 +141,5 @@ class ManualInstallationCheck extends Component{
         );
     }
 }
-export default withStyles(styles)(ManualInstallationCheck);
+//export default withStyles(styles)(ManualInstallationCheck);
+export default ManualInstallationCheck;

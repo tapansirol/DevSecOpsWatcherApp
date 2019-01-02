@@ -200,6 +200,10 @@ class SetupPage extends Component {
 
         //console.log('selectedCapsule ',this.state.selectedCapsule)
     }
+    refreshpage()
+    {
+        this.refs.MIC.RefreshButton();
+    }
 
    
       handleNameChange = ($event) => {
@@ -453,6 +457,8 @@ getInstallationLog()
                 isPrevDisabled: false,
                 isNextDisabled: false
             });
+
+            
            
             this.foo.getPreviousStepDetails();
         }
@@ -533,7 +539,7 @@ handlePreviousAutomated = () => {
             break;
         case 3:
             return <ManualInstallationCheck selectedPipelineIndex={selectedPipelineIndex} triggerUpdate1={this.onManualCheck.bind(this)}
-            triggerUpdate2 = {this.onManualCheck2.bind(this)}/>;
+            triggerUpdate2 = {this.onManualCheck2.bind(this)} ref="MIC"/>;
         default:
             return 'Unknown step';
     }
@@ -643,8 +649,8 @@ handlePreviousAutomated = () => {
                             </div>
                             <div style={{marginBottom: '25px'}}>
                             <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary" >
-                                <Tab style={{textAlign:'left', minWidth:'60px', width:'75px'}} label="Standard"/>
-                                <Tab style={{textAlign:'left', minWidth:'80px', width:'80px'}} label="Premium"/>
+                                <Tab style={{textAlign:'left', minWidth:'60px', width:'75px',textTransform:"none"}} label="Standard"/>
+                                <Tab style={{textAlign:'left', minWidth:'80px', width:'80px',textTransform:"none"}} label="Premium"/>
                             </Tabs>
                             </div>
                             
@@ -750,28 +756,28 @@ handlePreviousAutomated = () => {
                             </div>
                 </div>
                 </div>
-               {console.log("Moving to next page .........") }
+               {console.log("Moving to next page ........."+activeStep) }
                 <div style={{width:"100%"}}>{this.getStepContent(activeStep,selectedPipelineIndex)}</div>
                 
                 
                     {activeStep === steps.length ? null : (
             <div style={{marginLeft:'40px',marginRight:'40px',marginTop:'32px', marginBottom:32}}>
-              <Button style={{float: "right",marginLeft:"1rem"}}  disabled = {activeStep===0 ? isButtonDisabled :
+              <Button style={{float: "right",marginLeft:"1rem",textTransform:"none"}}  disabled = {activeStep===0 ? isButtonDisabled :
               activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:*/ false}
 
               
              /* [activeStep===1? this.state.isd: this.state.isDashBoardDisabled]}*/
-             
+                    //style={{textTransform: "none"}}
                   variant="contained"
                   color="primary"
                   onClick={this.handleNext.bind(this)}
                   className={activeStep === steps.length - 2 ? '':classes.marginRight20}
                 >
-                 {activeStep===0 ? 'Next: Install': [activeStep === steps.length - 1 ? 'Go To DashBoard' : 
-                 [activeStep === steps.length - 2 ? 'Next: Check And Deploy':'Next: manual Install']]}
+                 {activeStep===0 ? 'Next: Install': [activeStep === steps.length - 1 ? 'Go to DashBoard' : 
+                 [activeStep === steps.length - 2 ? 'Next: check and deploy':'Next: manual install']]}
                 </Button>
                 {activeStep===1 ?
-                <Button style={{float: "right"}} 
+                <Button style={{float: "right",textTransform:"none"}} 
                 variant="outlined" color="primary"
                   
                   onClick={this.handlePreviousSetup.bind(this)}
@@ -780,7 +786,7 @@ handlePreviousAutomated = () => {
                 >
                   Previous: setup
                 </Button> : [activeStep === 2 ?
-                <Button style={{float: "right"}} 
+                <Button style={{float: "right",textTransform:"none"}} 
                 variant="outlined"
                 color="primary"
                 onClick={this.handlePreviousAutomated}
@@ -789,10 +795,10 @@ handlePreviousAutomated = () => {
               >
                  Previous : automated 
               </Button> : [activeStep === steps.length - 1 ?
-                <Button style={{float: "right",marginLeft:"1rem"}} 
+                <Button style={{float: "right",marginLeft:"1rem",textTransform:"none"}} 
                 variant="contained"
                 color="primary"
-                onClick={this.forceUpdate}
+                onClick={this.refreshpage.bind(this)}
                 className={classes.button}
                 disabled = {this.state.isRefreshDisabled}
               >
@@ -800,7 +806,7 @@ handlePreviousAutomated = () => {
               </Button>: null]]}
 
                 {activeStep=== steps.length-1 ?
-                <Button style={{float: "right"}} disabled = {this.state.isPrevDisabled}
+                <Button style={{float: "right",textTransform:"none"}} disabled = {this.state.isPrevDisabled}
                 variant="outlined" color="primary"
                   
                   onClick={this.handlePrevious.bind(this)}
@@ -809,7 +815,7 @@ handlePreviousAutomated = () => {
                   Previous
                 </Button>
                 : [activeStep === steps.length - 1 ?
-                    <Button style={{float: "right"}} 
+                    <Button style={{float: "right",textTransform:"none"}} 
                     variant="outlined"
                     color="primary"
                     onClick={this.handlePrevious1}
@@ -824,6 +830,7 @@ handlePreviousAutomated = () => {
                 className = {activeStep>=1 ? 'check-visible':'check-hidden'}
                 variant="outlined" color="primary"
                   onClick={this.handleCancel}
+                  style={{textTransform:"none"}}
                 //  className={classes.button}
                 >
                   Cancel

@@ -66,7 +66,7 @@ class AutomatedToolChain extends Component{
        
         return(
                 <div className={classes.card}>
-                    <Typography id="automatedInstallationHeading">Tool chain automated installation</Typography>
+                    <Typography id="automatedInstallationHeading">Toolchain automated installation</Typography>
                     <Typography id="automatedlInstallationSubHeading">
                         The system is running some scripts for the automated installation part of your toolchain.
                     </Typography>

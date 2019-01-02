@@ -157,7 +157,7 @@ getUnavailableServicesCount(pipelineArray){
               </div>
               <div className="col-md-7 col-md-offset-0">
                 <Typography component="p" style={{fontSize:"16px"}} className={classes.unavl}>
-                  unavailable ({this.getUnavailableServicesCount(pipelineArray)})
+                  Unavailable ({this.getUnavailableServicesCount(pipelineArray)})
                 </Typography>
               </div>
           </div>

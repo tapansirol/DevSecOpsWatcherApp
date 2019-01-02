@@ -22,9 +22,9 @@ export default class NativeSelects1 extends React.Component {
           onChange={this.handleChange().bind(this)}
         >
           
-          <option value="ALL">ALL</option>
-          <option value="true">Active</option>
-          <option value="false">Inactive</option>
+          <option value="ALL">All Tool status</option>
+          <option value="true">Active Tools in pipeline</option>
+          <option value="false">Inactive Tools in pipeline</option>
         </NativeSelect>
         
       </FormControl>

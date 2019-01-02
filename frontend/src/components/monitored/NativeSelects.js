@@ -21,7 +21,7 @@ export default class NativeSelects extends React.Component {
           onChange={this.handleChange().bind(this)}
         >
           <option value="ALL">
-            ALL
+            All Sections
             </option>
           <option value="DEVELOPANDTEST">DEVELOP AND TEST</option>
           <option value="RELEASEANDDEPLOY">RELEASE AND DEPLOY</option>
