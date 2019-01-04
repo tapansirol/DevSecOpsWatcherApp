@@ -7,8 +7,11 @@ import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import com.hcl.dsecops.model.IService;
 import com.hcl.dsecops.model.PipeLine;
@@ -26,11 +29,14 @@ import com.hcl.dsecops.service.Configurations;
 public class PipelineUtil {
 	
 	private static final String FILE_NAME="pipelines.xml";
+//	private static String CONFIG_FILE_PATH = " ../../config/config.properties";
+	private static String CONFIG_FILE_PATH = "/home/config/config.properties";
 	/**
 	 * Adding the created pipeline into local storage (pipelines.xml)
 	 * @param pipeline to be added into local storage
 	 */
 	public static void createPipeline(PipeLine pipeline) {
+		loadProperties();
 		XMLEncoder encoder=null;
 		//This line will be enabled when provided support for multiple-pipeline 
 //		List<PipeLine> pipelines = getPipelines();
@@ -44,6 +50,24 @@ public class PipelineUtil {
 		encoder.writeObject(pipelines);
 		encoder.close();
 	}
+	
+	private static void loadProperties() {
+		Properties props = new Properties();
+		try{
+			InputStream stream = new FileInputStream(CONFIG_FILE_PATH);
+			props.load(stream);
+			System.out.println("HOST_MACHINE_USER_NAME ====> "+props.getProperty("HOST_MACHINE_USER_NAME"));
+			Configurations.getInstance().setProperties(props);
+			
+		}
+		catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+		catch(Exception e) {
+			System.out.print("Unable to read the configurations file from "+CONFIG_FILE_PATH);
+			System.out.println(e.getMessage());
+		}
+	} 
 	
 	/**
 	 * Method to get the pipelines created in local storage (pipelines.xml)
