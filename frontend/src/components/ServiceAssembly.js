@@ -47,6 +47,7 @@ class ServiceAssembly extends Component {
             name: "",
             category: "",
             status: "",
+            clr: ""
         };
     }
 
@@ -59,12 +60,12 @@ class ServiceAssembly extends Component {
         return false;
     }
 
-    handleClickOpen = (imagetemp, category, name) => {
+    handleClickOpen = (imagetemp, category, name,tcolor) => {
         this.setState({ open: true });
         this.setState({ image: imagetemp });
         this.setState({ name: name });
         this.setState({ category: categoryMap[category] });
-
+        this.setState({clr: tcolor})
         this.getToolDetails(name);
 
     };
@@ -102,7 +103,7 @@ class ServiceAssembly extends Component {
                                         image={imageMap[service['code']]}
                                         title={service['displayName']}
                                         onClick={activeStep !== 0 ?
-                                            () => this.handleClickOpen(imageMap[service['code']], service.serviceCategory, service['code']) : ''}
+                                            () => this.handleClickOpen(imageMap[service['code']], service.serviceCategory, service['code'],tcolor) : ''}
                                     /></div>
                                 </div>
                             );
@@ -113,7 +114,7 @@ class ServiceAssembly extends Component {
 
                     <Typography style={{ background: '#edf5ff' }}>DEVELOP & TEST</Typography>
                     {serviceArray.map((service, cIndex) => {
-                        let dis = 'none'; let tcolor = "";
+                        let dis = 'none'; let tcolor = "white";
                         if (service.available == false) { dis = ' '; tcolor = "red"; }
                         if (service.serviceCategory == 'DEVELOPANDTEST')
                             return (
@@ -127,7 +128,7 @@ class ServiceAssembly extends Component {
                                         image={imageMap[service['code']]}
                                         title={service['displayName']}
                                         onClick={activeStep !== 0 ?
-                                            () => this.handleClickOpen(imageMap[service['code']], service.serviceCategory, service['code']) : ''}
+                                            () => this.handleClickOpen(imageMap[service['code']], service.serviceCategory, service['code'],tcolor) : ''}
                                     /></div>
 
                                 </div>
@@ -155,7 +156,7 @@ class ServiceAssembly extends Component {
                                             image={imageMap[service['code']]}
                                             title={service['displayName']}
                                             onClick={activeStep !== 0 ?
-                                                () => this.handleClickOpen(imageMap[service['code']], service.serviceCategory, service['code']) : ''}
+                                                () => this.handleClickOpen(imageMap[service['code']], service.serviceCategory, service['code'],tcolor) : ''}
                                         /></div>
 
                                 </div>

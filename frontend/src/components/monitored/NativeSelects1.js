@@ -20,7 +20,7 @@ export default class NativeSelects1 extends React.Component {
       <FormControl >
         <NativeSelect disableUnderline
           onChange={this.handleChange().bind(this)}
-        >
+          style={{marginLeft: 10}}>
           
           <option value="ALL">All Tool status</option>
           <option value="true">Active Tools in pipeline</option>

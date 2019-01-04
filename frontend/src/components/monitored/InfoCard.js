@@ -185,11 +185,13 @@ getUnavailableServicesCount(pipelineArray){
             <br/>
         
         <div style={{background: '#f5f5f5', width:"210", height:"40px"}}>
-          <NativeSelects changeValue={this.onChangeValue.bind(this)}></NativeSelects>
+          {/* <NativeSelects changeValue={this.onChangeValue.bind(this)}></NativeSelects> */}
+          <NativeSelects1 changeValue1={this.onChangeValue1.bind(this)}></NativeSelects1>
         </div>
         <br/>
         <div style={{background: '#f5f5f5', width:"210", height:"40px"}}>
-          <NativeSelects1 changeValue1={this.onChangeValue1.bind(this)}></NativeSelects1>
+        <NativeSelects changeValue={this.onChangeValue.bind(this)}></NativeSelects>
+          {/* <NativeSelects1 changeValue1={this.onChangeValue1.bind(this)}></NativeSelects1> */}
         </div>
         
       

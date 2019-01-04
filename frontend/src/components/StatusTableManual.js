@@ -14,7 +14,8 @@ class StatusTableManual extends Component {
       status: [],
       value: true,
       data: 0,
-      dataOne: 0
+      dataOne: 0,
+      //dataTwo: 0,
     }
   }
   setValue = (data) => {
@@ -36,6 +37,8 @@ class StatusTableManual extends Component {
 
   }
   componentWillMount() {
+    //console.log("ccccooooooommmmmmmmmmmpppppp")
+
     if (this.props.selectedPipelineIndex) {
       fetch('/api/manualInstallStatusPremium')
         .then(response => response.json())
@@ -46,6 +49,7 @@ class StatusTableManual extends Component {
 
     }
     else {
+      console.log("Inside Status table manual standars")
       fetch('/api/manualInstallStatusStandard')
         .then(response => response.json())
         .then(message => {
@@ -54,6 +58,33 @@ class StatusTableManual extends Component {
       { localStorage.setItem("manualToolStatus", null) }
 
     }
+
+
+    
+    
+  }
+  callAPI()
+  {
+    if (this.props.selectedPipelineIndex) {
+      fetch('/api/manualInstallStatusPremium')
+        .then(response => response.json())
+        .then(message => {
+          this.setState({ status: message })
+        });
+      { localStorage.setItem("manualToolStatus", null) }
+
+    }
+    else {
+      console.log("Inside Status table manual standars")
+      fetch('/api/manualInstallStatusStandard')
+        .then(response => response.json())
+        .then(message => {
+          this.setState({ status: message })
+        });
+      { localStorage.setItem("manualToolStatus", null) }
+
+    }
+
 
   }
 
@@ -67,6 +98,8 @@ class StatusTableManual extends Component {
 
 
       <Table id="statusTable">
+      {console.log("Suggestions :")}
+      
         <TableHead id="statusTableHead">
           <TableRow>
             <TableCell id="tableHeadingFirst" >Tool Name</TableCell>

@@ -35,7 +35,7 @@ class MenuAppBar extends Component {
                 <AppBar position="static" id='header-background'>
                     <Toolbar id='toolbar-style'>
                         <Typography variant="title" color="inherit" className={classes.grow} id = 'HCL-Dashboard'>
-                           <span id = 'text-style-1'>HCL</span> Watcher
+                           <span style={{fontWeight:'bold'}}>HCL</span> Watcher
                         </Typography>
                             <AccSettings id='icon-button-style'/>
                             <Help id='icon-button-style'/>

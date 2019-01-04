@@ -58,6 +58,7 @@ class ServicesList extends Component {
             name: "",
             category: "",
             status: "",
+            clr: "",
         };
     }
 
@@ -83,11 +84,12 @@ class ServicesList extends Component {
         return commonServices;
     }
 
-    handleClickOpen = (imagetemp, category, name) => {
+    handleClickOpen = (imagetemp, category, name,clr) => {
         this.setState({ open: true });
         this.setState({ image: imagetemp });
         this.setState({ name: name });
         this.setState({ category: categoryMap[category] });
+        this.setState({clr: clr})
         this.getToolDetails(name);
     };
 
@@ -126,7 +128,7 @@ class ServicesList extends Component {
                                     title={categoryMap[capsule['serviceCategory']]}
                                     name1={capsule['displayName']}
                                     style={cl}
-                                    onClick={() => this.handleClickOpen(imageMap[capsule['code']], capsule['serviceCategory'], capsule['code'])}
+                                    onClick={() => this.handleClickOpen(imageMap[capsule['code']], capsule['serviceCategory'], capsule['code'],clr)}
 
                                 />
                             </div>

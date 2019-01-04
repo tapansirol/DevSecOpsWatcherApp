@@ -39,7 +39,7 @@ class LongMenu extends React.Component {
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-          <MoreVertIcon />
+        <MoreVertIcon /> 
         </IconButton>
         <Menu
           id="long-menu"

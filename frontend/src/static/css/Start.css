@@ -23,10 +23,11 @@ body {
   line-height: normal;
   letter-spacing: normal;
   color: #ffffff;
+  margin-left: 65px;
   }
   #text-style-1
   {
-    font-weight: bold;
+    /* font-weight: bold; */
   }
 
   /*
@@ -767,3 +768,5 @@ body {
    cursor: default;
    color: grey;
 }
+
+

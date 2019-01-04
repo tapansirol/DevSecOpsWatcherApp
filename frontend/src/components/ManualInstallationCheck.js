@@ -77,8 +77,10 @@ class ManualInstallationCheck extends Component{
     }
     RefreshButton()
     {
+        this.refs.stm.callAPI();
        console.log("inside refresh button method...")
        this.setState({refreshButtonIndex: 1});
+
     }
     
 
@@ -90,18 +92,18 @@ class ManualInstallationCheck extends Component{
         return(
             <div /*className={classes.root}*/>
                 <div  >
-                    <Typography id="manualInstallationHeading">Tool chain manual installation check</Typography>
+                    <Typography id="manualInstallationHeading">Toolchain manual Installation check</Typography>
                     <Typography id="manualInstallationSubHeading">status of the manual installation.</Typography>
                     <div>
                     {console.log("manual tool status chekc :==> "+localStorage.getItem("manualToolStatus"))}
                     {this.state.isStatus ?
                         <div>
                             {this.setNextButton(this.state.data)}
-                            {/* {this.setRefreshButton(this.state.refreshData)} */}
+                             {this.setRefreshButton(this.state.refreshData)} 
                             <Card id="manualSuccess">
                                 <CheckCircle id="successButton"/> 
                                 <Typography  id = "successText">
-                                    All tools have been Correctly Installed
+                                    All tools have been correctly installed
                                 </Typography>
                                
                             </Card>
@@ -112,7 +114,7 @@ class ManualInstallationCheck extends Component{
                                 <Card /*className={classes.failure}*/ id="manualFailure">
                                     <HighlightOff id="failureButton" />
                                     <Typography  id = "failureText">
-                                        Some tools were not installed correcly.
+                                        Some tools were not installed correctly.
                                     </Typography>
                                 </Card>
                             </div> 
@@ -127,8 +129,8 @@ class ManualInstallationCheck extends Component{
                     </div>
                     
                         <div id="statusTableDiv">
-                        
-                                <StatusTableManual  count = {count} selectedPipelineIndex={selectedPipelineIndex} findValue={this.getFalseValue.bind(this)}
+                        {console.log("After Refresh Call")}
+                                <StatusTableManual ref="stm"  count = {count} selectedPipelineIndex={selectedPipelineIndex} findValue={this.getFalseValue.bind(this)}
                                 findTrueValue={this.getTrueValue.bind(this)}/>
                                 
                                         <div id = "troubleShootingDiv"><TroubleShootingTips status={this.state.isStatus}/></div>

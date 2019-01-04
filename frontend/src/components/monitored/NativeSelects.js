@@ -19,13 +19,13 @@ export default class NativeSelects extends React.Component {
       <FormControl >
         <NativeSelect disableUnderline
           onChange={this.handleChange().bind(this)}
-        >
-          <option value="ALL">
+          style={{marginLeft: 10}}>
+          <option value="ALL" >
             All Sections
             </option>
-          <option value="DEVELOPANDTEST">DEVELOP AND TEST</option>
-          <option value="RELEASEANDDEPLOY">RELEASE AND DEPLOY</option>
-          <option value="PLANANDMEASURE">PLAN AND MEASURE</option>
+          <option value="DEVELOPANDTEST">Develop and Test</option>
+          <option value="RELEASEANDDEPLOY">Release and Deploy</option>
+          <option value="PLANANDMEASURE">Plan and Measure&emsp;&emsp;</option>
         </NativeSelect>
         
       </FormControl>

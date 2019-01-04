@@ -31,7 +31,7 @@ class ServiceImageCard extends Component {
     const { classes, title, image, version, name1, name2, style, tempcolor, onClick } = this.props;
 
     return (
-      <Card className={classes.card1} style={{ borderTop: '5px solid green', borderTopColor: tempcolor }} onClick={onClick}>
+      <Card className={classes.card1} style={{ borderTop: '2px solid white', borderTopColor: tempcolor }} onClick={onClick}>
 
 
         <div style={{ display: 'flex' }} >

@@ -24,7 +24,7 @@ import AutomatedToolChain from './AutomatedToolChain';
 import ManualInstallation from './ManualInstallation';
 import ManualInstallationCheck from './ManualInstallationCheck';
 import ManualInstallationPremium from './ManualInstallationPremium';
-import { grey } from '@material-ui/core/colors';
+import { grey, red } from '@material-ui/core/colors';
 
 
 
@@ -101,6 +101,7 @@ const styles = theme =>({
         width:520,
         height:30,
         fontSize: 18,
+        //textColor: red
       },
      
     
@@ -604,11 +605,12 @@ handlePreviousAutomated = () => {
                                 <Typography  id='label-name'>Name</Typography>
                                 <Typography  id='label-stack-technology'>Select Stack Technology</Typography> 
                                 </div>
+                                
 
                                 <div id='flex-container'>
                                     <InputBase
                                     // id="bootstrap-input"
-
+                                    //style={{:placeholder: {color:red}}}
                                     placeholder="Enter a name"
                                     value={pipelineName}
                                     onChange={this.handleNameChange}
@@ -627,8 +629,8 @@ handlePreviousAutomated = () => {
                                             <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'capsule-focus':'capsule-active'}
                                                 onClick= {() => {this.handleCapsuleClick(capsule)}}>
                                             
-                                            {capsule}
-                                            <img src={imageMap[capsule]} /> 
+                                            <span style={{marginLeft:10}}>{capsule==='DOTNET'?'.NET':[capsule==='JAVA'?'Java':capsule]}</span>
+                                            <img src={imageMap[capsule]} style={{marginLeft:23}}/> 
                                            
                                             <CheckCircle style={{float: "right",fontSize:'16px'}} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/>
                                         
@@ -649,7 +651,7 @@ handlePreviousAutomated = () => {
                             </div>
                             <div style={{marginBottom: '25px'}}>
                             <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary" >
-                                <Tab style={{textAlign:'left', minWidth:'60px', width:'75px',textTransform:"none"}} label="Standard"/>
+                                <Tab style={{textAlign:'left', minWidth:'60px', width:'75px',textTransform:"none",fontSize: 14,color: '#0066b3'}} label="Standard"/>
                                 <Tab style={{textAlign:'left', minWidth:'80px', width:'80px',textTransform:"none"}} label="Premium"/>
                             </Tabs>
                             </div>
@@ -812,7 +814,7 @@ handlePreviousAutomated = () => {
                   onClick={this.handlePrevious.bind(this)}
                   className={classes.button}
                 >
-                  Previous
+                  Previous:manual steps
                 </Button>
                 : [activeStep === steps.length - 1 ?
                     <Button style={{float: "right",textTransform:"none"}} 

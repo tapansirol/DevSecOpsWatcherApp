@@ -30,30 +30,31 @@ class InfoCardDialog extends Component{
 
     render() {
         const { status,state,close} = this.props;
+        const color = state.clr;
         return(
             
             <Dialog style={{backgroundColor: 'c3143a'}} open={state.open}>
-           
-          <DialogActions>
-            <Button onClick={close} >
-              {/* <i className="material-icons">X</i> */}
-              <HighlightOff/>
-            </Button>
-          </DialogActions>
+           <div style={{borderTop:"2px solid white",borderTopColor:color}}>
+            <DialogActions>
+              <Button onClick={close} >
+                {/* <i className="material-icons">X</i> */}
+                <HighlightOff/>
+              </Button>
+            </DialogActions>
 
           
             <DialogContent style={{width: "400px",height: '300px'}}>
-                <div className="row"> 
-          <div className="col-md-2 col-md-offset-0"> <CardMedia
+                <div style={{display: 'flex'}}> 
+          <div > <CardMedia
            component="img"
            image={state.image} style={{height:'58px', width: '58px'}}
            /></div>
-           <div className="col-md-6 col-md-offset-0"> <Typography >
-             {status.name} 
+           <div style={{marginLeft: 24}}> <Typography >
+             {state.name} 
             </Typography>
             
             <Typography variant="caption">
-            {status.category}
+            {state.category}
             </Typography>
            </div>
 
@@ -64,16 +65,19 @@ class InfoCardDialog extends Component{
                 <Typography id="text-style-1">
                 Information
                 </Typography>
-                <Typography id="text-style-2">
-                Version: {status.toolVersion}
+                <Typography id="text-style-2" style={{marginTop: 10}}>
+                <b>Version:</b> {status.toolVersion}
                 </Typography>
             </div>
             
-            <div  style={{marginLeft: 40}}><Button href={status.toolURL} target="_blank" color="primary"  variant="contained">Open Tool</Button></div>
+            <div  style={{marginLeft: 40}}><Button href={status.toolURL} target="_blank" color="primary"  variant="contained"
+            style={{textTransform: "none"}}>
+            Open Tool
+            </Button></div>
             <div className="col-md-6 col-md-offset-0">
             <Typography>
                 
-             Helpful Links
+             Helpful links
             </Typography></div>
             </div><br/>
             <Typography variant="caption">
@@ -86,7 +90,7 @@ class InfoCardDialog extends Component{
              <a href="">HCL Watcher tool installation instructions</a>
             </Typography>
           </DialogContent>
-          
+          </div>
         </Dialog>
         );
     }
