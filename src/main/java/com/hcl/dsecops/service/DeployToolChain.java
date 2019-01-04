@@ -167,7 +167,6 @@ public class DeployToolChain {
 	 * @return the console log from shell execution command
 	 */
 	public String installPipeline(ServiceType serviceType) {
-		result.setLength(0);
 		String line;
 		Process process=null;
 		try {
@@ -193,6 +192,14 @@ public class DeployToolChain {
 			if(process!=null) process.destroy();
 		}  
 		return result.toString();
+	}
+	
+	public static String getResult() {
+		return result.toString();
+	}
+	
+	public static void clear() {
+		result.setLength(0);
 	}
 
 }

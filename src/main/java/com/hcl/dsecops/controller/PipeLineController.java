@@ -56,6 +56,7 @@ public class PipeLineController {
     
     @PostMapping(path = "/api/installPipeline", consumes = "application/json")
     public void installPipeline(@RequestBody PipeLine pipeline){
+    	DeployToolChain.clear();
     	ServiceType defaultServiceType = ServiceType.STANDARD;
         if(pipeline != null) {
             PipelineUtil.createPipeline(pipeline);
@@ -74,7 +75,7 @@ public class PipeLineController {
     
     @GetMapping("/api/installationLog")
     public String getInstallationLog() {
-        return DeployToolChain.result.toString();
+        return DeployToolChain.getResult();
     }
     
     @GetMapping("/api/toolInfo")
