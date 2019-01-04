@@ -8,7 +8,7 @@ public class ToolInfoFactory {
 		if (toolCode==null || toolCode.isEmpty()) {
 			return null;
 		} 
-		String host = Configurations.getInstance().getIP();
+		String host = Configurations.getInstance().getHOST_IP();
 		ToolInfo toolInfo = null;
 		switch(toolCode) {
 		case

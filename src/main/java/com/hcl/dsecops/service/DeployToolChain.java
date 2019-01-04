@@ -32,7 +32,7 @@ public class DeployToolChain {
 	private static String PREMIUM_STARTUP_COMMAND = "PREMIUM_STARTUP_COMMAND";
 	private static Map<String, String> toolsMap = new HashMap<>();
 	
-	public static StringBuilder result = new StringBuilder();;
+	public static StringBuilder result = new StringBuilder();
 
 	/**
 	 * Default constructor for initializing a map for tools and its respective shell command to execute. 
@@ -100,7 +100,7 @@ public class DeployToolChain {
         Session session;
         try {
         	jsch.addIdentity(IDENTITY_FILE_PATH);
-        	session = jsch.getSession(Configurations.getInstance().getHOST_MACHINE_USER_NAME(), Configurations.getInstance().getIP(), DEFAULT_PORT);
+        	session = jsch.getSession(Configurations.getInstance().getHOST_MACHINE_USER_NAME(), Configurations.getInstance().getHOST_IP(), DEFAULT_PORT);
             session.setConfig(STRICT_HOST_CONFIG_KEY, STRICT_HOST_CONFIG_VALUE);
             session.connect();
             session.setServerAliveCountMax(30);

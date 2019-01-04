@@ -34,8 +34,8 @@ public class Configurations {
 		return  getProperty("HOME_PATH");
 	}
 	
-	public String getIP() {
-		return  getProperty("IP");
+	public String getHOST_IP() {
+		return  getProperty("HOST_IP");
 	}
 	public String getHOST_MACHINE_USER_NAME() {
 		return getProperty("HOST_MACHINE_USER_NAME");
@@ -73,11 +73,17 @@ public class Configurations {
 	public String getSONAR_PORT() {
 		return  getProperty("SONAR_PORT");
 	}
+	public String getJENKINS_PORT() {
+		return  getProperty("JENKINS_PORT");
+	}
 	public String getUCV_USER_NAME() {
 		return  getProperty("UCV_USER_NAME");
 	}
 	public String getUCV_PASSWORD() {
 		return  getProperty("UCV_PASSWORD");
+	}
+	public String getASOC_URL() {
+		return getProperty("ASOC_URL");
 	}
 	public String getASOC_ID() {
 		return  getProperty("ASOC_ID");

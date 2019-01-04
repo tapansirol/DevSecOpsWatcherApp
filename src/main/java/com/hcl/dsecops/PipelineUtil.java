@@ -28,9 +28,21 @@ import com.hcl.dsecops.service.Configurations;
  */
 public class PipelineUtil {
 	
+	private static final String GIT_DOC = "https://guides.github.com/";
+	private static final String JENKINS_DOC = "https://jenkins.io/doc/";
+	private static final String ASOC_DOC = "https://www.ibm.com/support/knowledgecenter/en/SSPH29_9.0.3/com.ibm.help.common.infocenter.aps/helpindex_appscan.html";
+	private static final String SONAR_DOC = "https://docs.sonarqube.org/latest/";
+	private static final String UCD_DOC = "https://www.ibm.com/support/knowledgecenter/en/SSCKX6_1.0.0/com.ibm.uvelocity.doc/ucv_version_welcome.html";
+	private static final String UCV_DOC = "https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html";
+	private static final String CLM_DOC = "https://jazz.net/help-dev/clm/index.jsp?topic=%2Fcom.ibm.rational.test.qm.doc%2Ftopics%2Fc_qm_overview.html";
+	private static final String TEST_DOC = "https://www.ibm.com/developerworks/downloads/r/rft/index.html";
+	
 	private static final String FILE_NAME="pipelines.xml";
 //	private static String CONFIG_FILE_PATH = " ../../config/config.properties";
 	private static String CONFIG_FILE_PATH = "/home/config/config.properties";
+	
+	private static String HTTP = "HTTP://";
+	private static String HTTPS = "HTTPS://";
 	/**
 	 * Adding the created pipeline into local storage (pipelines.xml)
 	 * @param pipeline to be added into local storage
@@ -171,42 +183,54 @@ public class PipelineUtil {
 	
 	public static StatusPage getToolStatus(String toolCode) {
 		CheckToolsStatus status = new CheckToolsStatus();
-        String host = Configurations.getInstance().getIP();
+        String host = HTTP+Configurations.getInstance().getHOST_IP()+":";
+        String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+":";
         StatusPage statusPage= null;
         switch(toolCode) {
-        case IService.GITHUB_CODE: statusPage = new StatusPage(IService.GITHUB_CODE,IService.GITHUB_DESC,status.isToolAlive(Configurations.getInstance().getGIT_REPO_URL()),"https://guides.github.com/",
+        case IService.GITHUB_CODE: statusPage = new StatusPage(IService.GITHUB_CODE,IService.GITHUB_DESC,
+        		status.isToolAlive(Configurations.getInstance().getGIT_REPO_URL()),
+        		GIT_DOC,
         		Configurations.getInstance().getGIT_REPO_URL());
         	break;
-        case IService.JENKINS_CODE: statusPage = new StatusPage(IService.JENKINS_CODE,IService.JENKINS_DESC,true,"https://jenkins.io/doc/",
-                "http://"+host+":9292");
+        case IService.JENKINS_CODE: statusPage = new StatusPage(IService.JENKINS_CODE,IService.JENKINS_DESC,
+        		status.isToolAlive(host+Configurations.getInstance().getJENKINS_PORT()),
+        		JENKINS_DOC,
+        		 host+Configurations.getInstance().getJENKINS_PORT());
         	break;
-        case IService.ASOC_CODE: statusPage = new StatusPage(IService.ASOC_CODE,IService.ASOC_DESC,status.isToolAlive("https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home"),
-                "https://www.ibm.com/support/knowledgecenter/en/SSPH29_9.0.3/com.ibm.help.common.infocenter.aps/helpindex_appscan.html",
-                "https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home");
+        case IService.ASOC_CODE: statusPage = new StatusPage(IService.ASOC_CODE,IService.ASOC_DESC,
+        		status.isToolAlive(Configurations.getInstance().getASOC_URL()),
+                ASOC_DOC,
+                Configurations.getInstance().getASOC_URL());
         	break;
-        case IService.SONARQUBE_CODE: statusPage = new StatusPage(IService.SONARQUBE_CODE,IService.SONARQUBE_CODE,status.isToolAlive( "http://"+host+":"+Configurations.getInstance().getSONAR_PORT()),
-                "https://docs.sonarqube.org/latest/",
-                "http://"+host+":"+Configurations.getInstance().getSONAR_PORT());
+        case IService.SONARQUBE_CODE: statusPage = new StatusPage(IService.SONARQUBE_CODE,IService.SONARQUBE_CODE,
+        		status.isToolAlive(host+Configurations.getInstance().getSONAR_PORT()),
+        		SONAR_DOC,
+                host+Configurations.getInstance().getSONAR_PORT());
         	break;
-        case IService.UCV_CODE: statusPage = new StatusPage(IService.UCV_CODE,IService.UCV_DESC,status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCV_PORT()),
-                "https://www.ibm.com/support/knowledgecenter/en/SSCKX6_1.0.0/com.ibm.uvelocity.doc/ucv_version_welcome.html",
-                "https://"+host+":"+Configurations.getInstance().getUCV_PORT());
+        case IService.UCV_CODE: statusPage = new StatusPage(IService.UCV_CODE,IService.UCV_DESC,
+        		status.isToolAlive(secureHost+Configurations.getInstance().getUCV_PORT()),
+        		UCD_DOC,
+                secureHost+Configurations.getInstance().getUCV_PORT());
         	break;
-        case IService.UCD_CODE: statusPage = new StatusPage(IService.UCD_CODE,IService.UCD_DESC,status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCD_PORT()),
-        		"https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html",
-                "https://"+host+":"+Configurations.getInstance().getUCD_PORT());
+        case IService.UCD_CODE: statusPage = new StatusPage(IService.UCD_CODE,IService.UCD_DESC,
+        		status.isToolAlive( secureHost+Configurations.getInstance().getUCD_PORT()),
+        		UCV_DOC,
+        		secureHost+Configurations.getInstance().getUCD_PORT());
         	break;
-        case IService.RQM_CODE: statusPage = new StatusPage(IService.RQM_CODE,IService.RQM_DESC,status.isToolAlive("https://"+host+":9443/qm"),
-        		"https://www.ibm.com/developerworks/downloads/r/rft/index.html",
-                "https://"+host+":9443/qm");
+        case IService.RQM_CODE: statusPage = new StatusPage(IService.RQM_CODE,IService.RQM_DESC,
+        		status.isToolAlive(secureHost+"9443/qm"),
+        		CLM_DOC,
+        		secureHost+"9443/qm");
         	break;
-        case IService.RTC_CODE: statusPage = new StatusPage(IService.RTC_CODE,IService.RTC_DESC,status.isToolAlive("https://"+host+":9443/ccm"),
-        		"https://www.ibm.com/developerworks/downloads/r/rft/index.html",
-        		"https://"+host+":9443/ccm");
+        case IService.RTC_CODE: statusPage = new StatusPage(IService.RTC_CODE,IService.RTC_DESC,
+        		status.isToolAlive(secureHost+"9443/ccm"),
+        		CLM_DOC,
+        		secureHost+"9443/ccm");
         	break;
-        case IService.DOORS_NG_CODE: statusPage = new StatusPage(IService.DOORS_NG_CODE,IService.DOORS_NG_DESC,status.isToolAlive("https://"+host+":9443/rm"),
-        		"https://www.ibm.com/developerworks/downloads/r/rft/index.html",
-        		"https://"+host+":9443/rm");
+        case IService.DOORS_NG_CODE: statusPage = new StatusPage(IService.DOORS_NG_CODE,IService.DOORS_NG_DESC,
+        		status.isToolAlive(secureHost+"9443/rm"),
+        		CLM_DOC,
+        		secureHost+"9443/rm");
         	break;	
         
         default: 
@@ -218,39 +242,52 @@ public class PipelineUtil {
 	public static List<StatusPage> getAutoInstallStatusStandard() {
 		List<StatusPage> statusPages = new ArrayList<>();
 		CheckToolsStatus status = new CheckToolsStatus();
-        String host = Configurations.getInstance().getIP();
-        statusPages.add(new StatusPage(IService.JENKINS_CODE,"Jenkins",true,"https://jenkins.io/doc/",
-                "http://"+host+":9292"));
-        statusPages.add(new StatusPage(IService.ASOC_CODE,"AppScan",status.isToolAlive("https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home"),
-                "https://www.ibm.com/support/knowledgecenter/en/SSPH29_9.0.3/com.ibm.help.common.infocenter.aps/helpindex_appscan.html",
-                "https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home"));
-       statusPages.add(new StatusPage(IService.SONARQUBE_CODE,"SonarQube",status.isToolAlive( "http://"+host+":"+Configurations.getInstance().getSONAR_PORT()),
-                "https://docs.sonarqube.org/latest/",
-                "http://"+host+":"+Configurations.getInstance().getSONAR_PORT()));
-       statusPages.add(new StatusPage(IService.UCV_CODE,"UrbanCode_Velocity",status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCV_PORT()),
-                "https://www.ibm.com/support/knowledgecenter/en/SSCKX6_1.0.0/com.ibm.uvelocity.doc/ucv_version_welcome.html",
-                "https://"+host+":"+Configurations.getInstance().getUCV_PORT()));
-       statusPages.add(new StatusPage(IService.UCD_CODE,"UrbanCode Deploy",true,
-                "https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html",
-                "https://"+host+":"+Configurations.getInstance().getUCD_PORT()));
+		String host = HTTP+Configurations.getInstance().getHOST_IP()+":";
+		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+":";
+        statusPages.add(new StatusPage(IService.JENKINS_CODE, IService.JENKINS_DESC,	
+        		status.isToolAlive( host+Configurations.getInstance().getJENKINS_PORT()),
+        		JENKINS_DOC,
+        		host+Configurations.getInstance().getJENKINS_PORT()));
+        statusPages.add(new StatusPage(IService.ASOC_CODE,	IService.ASOC_DESC,
+        		status.isToolAlive(Configurations.getInstance().getASOC_URL()),
+                ASOC_DOC,
+                Configurations.getInstance().getASOC_URL()));
+       statusPages.add(new StatusPage(IService.SONARQUBE_CODE, IService.SONARQUBE_DESC,
+    		   status.isToolAlive(host+Configurations.getInstance().getSONAR_PORT()),
+               SONAR_DOC,
+               host+Configurations.getInstance().getSONAR_PORT()));
+       statusPages.add(new StatusPage(IService.UCV_CODE, IService.UCV_DESC,
+    		   status.isToolAlive(secureHost +Configurations.getInstance().getUCV_PORT()),
+               UCV_DOC,
+                secureHost+Configurations.getInstance().getUCV_PORT()));
+       statusPages.add(new StatusPage(IService.UCD_CODE, IService.UCD_DESC,
+    		   status.isToolAlive( secureHost+Configurations.getInstance().getUCD_PORT()),
+               UCD_DOC,
+                secureHost+Configurations.getInstance().getUCD_PORT()));
        return statusPages;
 	}
 	
 	public static List<StatusPage> getAutoInstallStatusPremium() {
 		List<StatusPage> statusPages = new ArrayList<>();
 		CheckToolsStatus status = new CheckToolsStatus();
-        String host = Configurations.getInstance().getIP();
-        statusPages.add(new StatusPage(IService.JENKINS_CODE,"Jenkins",true,"https://jenkins.io/doc/",
-                "http://"+host+":9292"));
-        statusPages.add(new StatusPage(IService.ASOC_CODE,"AppScan",status.isToolAlive("https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home"),
-                "https://www.ibm.com/support/knowledgecenter/en/SSPH29_9.0.3/com.ibm.help.common.infocenter.aps/helpindex_appscan.html",
-                "https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home"));
-       statusPages.add(new StatusPage(IService.UCV_CODE,"UrbanCode_Velocity",status.isToolAlive( "https://"+host+":"+Configurations.getInstance().getUCV_PORT()),
-                "https://www.ibm.com/support/knowledgecenter/en/SSCKX6_1.0.0/com.ibm.uvelocity.doc/ucv_version_welcome.html",
-                "https://"+host+":"+Configurations.getInstance().getUCV_PORT()));
-       statusPages.add(new StatusPage(IService.UCD_CODE,"UrbanCode Deploy",true,
-                "https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html",
-                "https://"+host+":"+Configurations.getInstance().getUCD_PORT()));
+		String host = HTTP+Configurations.getInstance().getHOST_IP()+":";
+		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+":";
+        statusPages.add(new StatusPage(IService.JENKINS_CODE, IService.JENKINS_DESC,
+        		status.isToolAlive( host+Configurations.getInstance().getJENKINS_PORT()),
+        		JENKINS_DOC,
+        		host+Configurations.getInstance().getJENKINS_PORT()));
+        statusPages.add(new StatusPage(IService.ASOC_CODE, IService.ASOC_DESC,
+        		status.isToolAlive(Configurations.getInstance().getASOC_URL()),
+               ASOC_DOC,
+                Configurations.getInstance().getASOC_URL()));
+       statusPages.add(new StatusPage(IService.UCV_CODE,"UrbanCode_Velocity",
+    		   status.isToolAlive( secureHost+Configurations.getInstance().getUCV_PORT()),
+                UCV_DOC,
+                secureHost+Configurations.getInstance().getUCV_PORT()));
+       statusPages.add(new StatusPage(IService.UCD_CODE,"UrbanCode Deploy",
+    		   status.isToolAlive(secureHost+Configurations.getInstance().getUCD_PORT()),
+               UCD_DOC,
+                secureHost+Configurations.getInstance().getUCD_PORT()));
        return statusPages;
 	}
 	
@@ -258,7 +295,7 @@ public class PipelineUtil {
 		List<StatusPage> statusPages = new ArrayList<>();
 //		CheckToolsStatus status = new CheckToolsStatus();
 //        String host = Configurations.getInstance().getIP();
-        statusPages.add(new StatusPage(IService.HFT_CODE,IService.HFT_DESC,true,"https://www.ibm.com/developerworks/downloads/r/rft/index.html",
+        statusPages.add(new StatusPage(IService.HFT_CODE,IService.HFT_DESC,true,TEST_DOC,
                 " "));
        return statusPages;
 	}
@@ -266,21 +303,27 @@ public class PipelineUtil {
 	public static List<StatusPage> getManualInstallStatusPremium() {
 		List<StatusPage> statusPages = new ArrayList<>();
 		CheckToolsStatus status = new CheckToolsStatus();
-        String host = Configurations.getInstance().getIP();
-        statusPages.add(new StatusPage(IService.DOORS_NG_CODE,IService.DOORS_NG_DESC,true,
-        		"https://jazz.net/help-dev/clm/index.jsp?topic=%2Fcom.ibm.rational.test.qm.doc%2Ftopics%2Fc_qm_overview.html",
-                "https://"+host+":9443/rm"));
-        statusPages.add(new StatusPage(IService.RTC_CODE,IService.RTC_DESC,true,
-                "https://jazz.net/help-dev/clm/index.jsp?topic=%2Fcom.ibm.rational.test.qm.doc%2Ftopics%2Fc_qm_overview.html",
-                "https://"+host+":9443/ccm"));
-       statusPages.add(new StatusPage(IService.RQM_CODE,IService.RQM_DESC,true,
-    		    "https://jazz.net/help-dev/clm/index.jsp?topic=%2Fcom.ibm.rational.test.qm.doc%2Ftopics%2Fc_qm_overview.html",
-                "https://"+host+":9443/qm"));
-       statusPages.add(new StatusPage(IService.HFT_CODE,IService.HFT_DESC,true,
-                "https://www.ibm.com/developerworks/downloads/r/rft/index.html",
+		String host = HTTP+Configurations.getInstance().getHOST_IP()+":";
+		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+":";
+        statusPages.add(new StatusPage(IService.DOORS_NG_CODE,IService.DOORS_NG_DESC,
+        		status.isToolAlive(secureHost+"9443/rm"),
+        		CLM_DOC,
+        		secureHost+"9443/rm"));
+        statusPages.add(new StatusPage(IService.RTC_CODE,IService.RTC_DESC,
+        		status.isToolAlive(secureHost+"9443/ccm"),
+                CLM_DOC,
+                secureHost+"9443/ccm"));
+       statusPages.add(new StatusPage(IService.RQM_CODE,IService.RQM_DESC,
+    		   status.isToolAlive(secureHost+"9443/qm"),
+    		   CLM_DOC,
+    		    secureHost+"9443/qm"));
+       statusPages.add(new StatusPage(IService.HFT_CODE,IService.HFT_DESC,
+    		   true,
+    		   TEST_DOC,
                 ""));
-       statusPages.add(new StatusPage(IService.HPT_CODE,IService.HPT_DESC,true,
-               "https://www.ibm.com/developerworks/downloads/r/rft/index.html",
+       statusPages.add(new StatusPage(IService.HPT_CODE,IService.HPT_DESC,
+    		   true,
+    		   TEST_DOC,
                ""));
        return statusPages;
 	}
