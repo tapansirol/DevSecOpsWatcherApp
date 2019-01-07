@@ -84,10 +84,10 @@ class InfoCardDialog extends Component{
              <a href={status.helpURL} target="_blank">Tool Documentation</a>
             </Typography>
             <Typography variant="caption">
-             <a href="">Tool Online Assistance</a>
+             <a href="" className='disabledOpen' >Tool Online Assistance</a>
             </Typography>
             <Typography variant="caption">
-             <a href="">HCL Watcher tool installation instructions</a>
+             <a href="" className='disabledOpen'>HCL Watcher tool installation instructions</a>
             </Typography>
           </DialogContent>
           </div>

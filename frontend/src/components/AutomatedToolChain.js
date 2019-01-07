@@ -7,6 +7,7 @@ import CheckCircle from '@material-ui/icons/CheckCircle';
 import StatusTable from './StatusTable';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Slide from "@material-ui/core/Slide";
+import ProgressBarPage from './ProgressBarPage';
 
 
 
@@ -49,7 +50,22 @@ class AutomatedToolChain extends Component{
     }
     componentDidMount() {
 
-        this.interval = setInterval(() => this.setState({ time: localStorage.getItem('installationLog'), flag: true }), 1000);
+        //this.interval = setInterval(() => this.setState({ time: localStorage.getItem('installationLog'), flag: true }), 1000);
+
+        this.timer = setInterval(() => 
+        {
+            if(localStorage.getItem("installationLog")!==null && localStorage.getItem("installationLog").includes('***COMPLETED***'))
+            {
+                console.log("Inside IF ATC condn",this.timer);
+                this.setState({flag:true})
+                clearInterval(this.timer)
+            }
+            else{
+                console.log("Inside ELSE ATC condn",this.timer)
+                this.setState({ time: localStorage.getItem('installationLog') })
+            }
+        }
+        , 1000);
         
       }
       getValue()
@@ -58,6 +74,12 @@ class AutomatedToolChain extends Component{
                 nextButtonStatus: true
             })
       }
+
+      getData(val){
+        // do not forget to bind getData in constructor
+        console.log("VAL++",val);
+        this.refs.pbp.updateValue(val);
+    }
    
     render()
     {
@@ -70,7 +92,7 @@ class AutomatedToolChain extends Component{
                     <Typography id="automatedlInstallationSubHeading">
                         The system is running some scripts for the automated installation part of your toolchain.
                     </Typography>
-                    {localStorage.getItem('statusValue')===null || localStorage.getItem('statusValue')==='null'? 
+                    {/* {localStorage.getItem('statusValue')===null || localStorage.getItem('statusValue')==='null'? 
                         <Card id="automatedProgress">
                            <CircularProgress id="progressButton"/>
                             <Typography  id = "successText">Installation in Progress</Typography>
@@ -91,7 +113,9 @@ class AutomatedToolChain extends Component{
                                 </Card>
                             </div>
                              
-                            ]}                   
+                            ]}                    */}
+
+                            <ProgressBarPage ref="pbp"/>
                         <div id="automatedStatusTableDiv">
                                
                             {localStorage.getItem("installationLog")===null ? 
@@ -101,7 +125,7 @@ class AutomatedToolChain extends Component{
                                 <Slide direction="right" 
                                 in={localStorage.getItem("installationLog").includes("*COMPLETED***")}>
                                 
-                                    <StatusTable selectedPipelineIndex={selectedPipelineIndex}/>
+                                    <StatusTable sendData={this.getData.bind(this)} selectedPipelineIndex={selectedPipelineIndex}/>
                                 </Slide>
                                 :null
                             }

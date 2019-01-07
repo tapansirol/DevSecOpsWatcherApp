@@ -342,9 +342,6 @@ class SetupPage extends Component {
     }
 
   handleNext = () => {
-
-
-
     const { activeStep } = this.state;
     if(activeStep>=0)
     {
@@ -382,10 +379,24 @@ class SetupPage extends Component {
         this.installPipeline(postobj);
         this.getNextStep();
         this.getInstallationLog();
-        if(this.state.isFetching===true)
-        {
-            this.timer = setInterval(() => this.getInstallationLog(postobj), 5000);
-        }
+        
+                    this.timer = setInterval(() => 
+
+                    {
+                        if(localStorage.getItem("installationLog")!==null && localStorage.getItem("installationLog").includes('***COMPLETED***'))
+                        {
+                            console.log("Inside IF condn",this.timer)
+                            clearInterval(this.timer)
+                        }
+                        else{
+                            console.log("Inside ELSE condn",this.timer)
+                            this.getInstallationLog(postobj)
+                        }
+                    }
+                    , 5000);
+                
+                
+        
         
 
         /*try{

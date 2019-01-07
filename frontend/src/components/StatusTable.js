@@ -6,12 +6,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
+import { Button } from '@material-ui/core';
 
 class StatusTable extends Component{
   constructor(props){
     super(props);
     this.state = {
-      status: []
+      status: [],
+      flagProgress:null
     }
   }
   componentWillMount(){
@@ -48,16 +50,37 @@ class StatusTable extends Component{
 
             {this.fetchAllToolStatus}
   }
+  
+   triggerFlag(value)
+   {
+    this.props.sendData(value);
+   }
 
 
     render(){
             const {status} = this.state; 
             let count=0;   
+
+            {status.map(row => {
+              if(!row.installationStatus)
+              {
+                this.triggerFlag(false);
+              }
+              if(row.installationStatus)
+              {
+                  count = count+1;
+
+              }
+              if(count===status.length)
+              {
+                this.triggerFlag(true);
+              }
+            })}
                 return(
                   
                     <div>
 
-                            {status.map(row => {
+                            {/* {status.map(row => {
                               if(!row.installationStatus)
                               {
                                 {localStorage.setItem("statusValue", false)}
@@ -72,7 +95,9 @@ class StatusTable extends Component{
                               {
                                 {localStorage.setItem("statusValue", true)}
                               }
-                            })}
+                            })} */}
+
+                            
                       
                         <Table id="automatedStatusTable">
                           <TableHead>
@@ -98,7 +123,8 @@ class StatusTable extends Component{
                                   <TableCell id ="automatedTableRowActions"><a href={row.actions} target="_blank">User manual</a></TableCell>
                               <TableCell style={{textAlign:'center'}}>
                               {!row.installationStatus ?
-                              <a style={{cursor:'pointer'}} onClick={()=>this.installTool(row.toolCode)}>Re-run</a>
+                              <span style={{cursor:'pointer'}} onClick={()=>this.installTool(row.toolCode)}
+                              style={{textTransform:"none",textAlign:"left"}}>Re-run</span>
                               :
                               null
                               }
