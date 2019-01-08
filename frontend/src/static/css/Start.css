@@ -334,7 +334,7 @@ body {
 }
 #progressButton
 {
-  width: 24px;
+  width: 5px;
   height: 5px;
   
   margin-left: 403px;
@@ -767,6 +767,14 @@ body {
   pointer-events: none;
    cursor: default;
    color: grey;
+}
+
+
+#disableCapsule
+{
+  /* background-color:lightgrey; */
+  pointer-events: none;
+  opacity: 0.3;
 }
 
 

@@ -45,13 +45,14 @@ class ProgressBarPage extends Component
                                  </Typography>
                             </Card> 
                         :
-
-                        <Card id="manualSuccess">
+                            <div>{this.props.setnextButton}
+                                <Card id="manualSuccess">
                                      <CheckCircle id="successButton"/>
                                      <Typography  id = "successText">
                                      Automated installation successful
                                      </Typography>
                                  </Card>
+                            </div>
 
                         
                         ]

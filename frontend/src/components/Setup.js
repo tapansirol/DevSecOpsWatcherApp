@@ -173,7 +173,9 @@ class SetupPage extends Component {
             isFetching: true,
             isManualButtonDisabled: true,
             isd: true,
-            isRefreshDisabled: false
+            isRefreshDisabled: false,
+            cleanupMessage: '',
+            stopMessage: ''
             
         }
     }
@@ -234,7 +236,7 @@ class SetupPage extends Component {
                 //console.log("Dekho yarr :", JSON.parse(message));
                 localStorage.setItem("pa", JSON.parse(message))
                 this.setState({pipelineArray: JSON.parse(message)});
-            });
+            }).catch(err => console.log('There was an error:'));
 
         }
         else{
@@ -490,6 +492,12 @@ handlePreviousSetup = () => {
         activeStep: state.activeStep - 1,
 
     }));
+    fetch('api/stopServices')
+            .then(response => response.text())
+            .then(message => {
+               
+                this.setState({stopMessage: JSON.parse(message)});
+            }).catch(err => console.log('There was an error:'));
     document.getElementById("screen1").style.display ="block";
 }
 handlePreviousAutomated = () => {
@@ -518,9 +526,16 @@ handlePreviousAutomated = () => {
 }
 
   handleCancel = () => {
-    this.setState(state => ({
+    this.setState({
       activeStep: 0,
-    }));
+    });
+
+    fetch('api/cleanUp')
+            .then(response => response.text())
+            .then(message => {
+               
+                this.setState({stopMessage: JSON.parse(message)});
+            }).catch(err => console.log('There was an error:'));
 
     const { activeStep } = this.state;
     if(activeStep>=1)
@@ -636,9 +651,9 @@ handlePreviousAutomated = () => {
                                             // if(index===0)
                                             
                                     return (
-                                         <div style={{ marginRight:'40px'}}>
+                                         <div style={{ marginRight:'40px'}} >
                                             <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'capsule-focus':'capsule-active'}
-                                                onClick= {() => {this.handleCapsuleClick(capsule)}}>
+                                                onClick= {() => {this.handleCapsuleClick(capsule)}} id = {capsule!=='JAVA' ? 'disableCapsule':''}>
                                             
                                             <span style={{marginLeft:10}}>{capsule==='DOTNET'?'.NET':[capsule==='JAVA'?'Java':capsule]}</span>
                                             <img src={imageMap[capsule]} style={{marginLeft:23}}/> 
@@ -666,12 +681,17 @@ handlePreviousAutomated = () => {
                                 <Tab style={{textAlign:'left', minWidth:'80px', width:'80px',textTransform:"none"}} label="Premium"/>
                             </Tabs>
                             </div>
+                            {console.log('dekh le 7879',pipelineArray )}
+                                {pipelineArray.length===0 || pipelineArray==='' ?
+                                <h5 style={{color:'red'}}> There is some error loading the pipeline. Please check if server is running.
+                                    Else contact to the administrator. </h5> :''}
                             
                             {value === 0 && (
                                 
                             <TabContainer>
                                 {pipelineArray===null ? 'No Contents' :
                                 <div style={{width:1120, height:215}}>
+                                
                                 {pipelineArray.map((serviceArray, sIndex) => {
                                     //console.log('here',serviceArray,sIndex,selectedPipelineIndex );
                                     if(sIndex===0)
@@ -795,7 +815,7 @@ handlePreviousAutomated = () => {
                   
                   onClick={this.handlePreviousSetup.bind(this)}
                   className={classes.button}
-                  disabled={true}
+                  //disabled={true}
                 >
                   Previous: setup
                 </Button> : [activeStep === 2 ?
@@ -819,10 +839,10 @@ handlePreviousAutomated = () => {
               </Button>: null]]}
 
                 {activeStep=== steps.length-1 ?
-                <Button style={{float: "right",textTransform:"none"}} disabled = {this.state.isPrevDisabled}
+                <Button style={{float: "right",textTransform:"none"}} //disabled = {this.state.isPrevDisabled}
                 variant="outlined" color="primary"
                   
-                  onClick={this.handlePrevious.bind(this)}
+                  onClick={this.handlePreviousAutomated.bind(this)}
                   className={classes.button}
                 >
                   Previous:manual steps
@@ -839,7 +859,7 @@ handlePreviousAutomated = () => {
                 <div>
 
                 <div>
-                <Button disabled 
+                <Button  
                 className = {activeStep>=1 ? 'check-visible':'check-hidden'}
                 variant="outlined" color="primary"
                   onClick={this.handleCancel}

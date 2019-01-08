@@ -38,6 +38,8 @@ class AutomatedToolChain extends Component{
     }
     setNextButton = (data) =>
     {
+
+        console.log("DDDAAATTTAAA :"+data)
         if(data===0)
         {
             this.setState({data: data+1});
@@ -115,7 +117,7 @@ class AutomatedToolChain extends Component{
                              
                             ]}                    */}
 
-                            <ProgressBarPage ref="pbp"/>
+                            <ProgressBarPage setnextButton={this.setNextButton(this.state.data)} ref="pbp"/>
                         <div id="automatedStatusTableDiv">
                                
                             {localStorage.getItem("installationLog")===null ? 

@@ -18,7 +18,6 @@ class SideBarStandard extends Component {
     this.state = {
         steps: [{id: 1,name:'1. Steps to configure Urban Code Velocity', component: <Page2 />},
         {id: 2,name:'2. Install and Configure HCL Functional Tester', component:<Page5 />},],
-
         activeStep:1,
         isPrevDisabled:true,
         isNextDisabled:false,
