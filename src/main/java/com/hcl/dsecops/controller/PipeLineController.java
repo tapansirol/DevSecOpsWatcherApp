@@ -103,4 +103,17 @@ public class PipeLineController {
  
     }
     
+    @GetMapping("/api/cleanUp")
+    public String cleanUp() {
+       return new DeployToolChain().cleanUp();
+ 
+    }
+    
+    @GetMapping("/api/stopServices")
+    public String stopServices() {
+    	return new DeployToolChain().stopServices();
+ 
+    }
+    
+    
 }

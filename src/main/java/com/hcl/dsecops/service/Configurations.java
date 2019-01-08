@@ -109,5 +109,11 @@ public class Configurations {
 	public String getuDeploy_script() {
 		return  getProperty("uDeploy_script");
 	}
+	public String getCleanup() {
+		return  getProperty("cleanup");
+	}
+	public String getStop_services() {
+		return getProperty("stop-services");
+	}
 
 }
