@@ -43,11 +43,12 @@ public class PipelineUtil {
 	
 	private static String HTTP = "HTTP://";
 	private static String HTTPS = "HTTPS://";
+	private static String COLON = ":";
 	/**
 	 * Adding the created pipeline into local storage (pipelines.xml)
 	 * @param pipeline to be added into local storage
 	 */
-	public static void createPipeline(PipeLine pipeline) {
+	public void createPipeline(PipeLine pipeline) {
 		loadProperties();
 		XMLEncoder encoder=null;
 		//This line will be enabled when provided support for multiple-pipeline 
@@ -63,7 +64,7 @@ public class PipelineUtil {
 		encoder.close();
 	}
 	
-	private static void loadProperties() {
+	private void loadProperties() {
 		Properties props = new Properties();
 		try{
 			InputStream stream = new FileInputStream(CONFIG_FILE_PATH);
@@ -86,7 +87,7 @@ public class PipelineUtil {
 	 * @return all the pipelines which were created using this Application
 	 */
 	@SuppressWarnings("unchecked")
-	public static List<PipeLine> getPipelines() {
+	public List<PipeLine> getPipelines() {
 		XMLDecoder decoder=null;
 		try {
 			decoder=new XMLDecoder(new BufferedInputStream(new FileInputStream(FILE_NAME)));
@@ -104,7 +105,7 @@ public class PipelineUtil {
 		return pipelines;
 	}
 	
-	public static List<Service> getStandardServices() {
+	public List<Service> getStandardServices() {
 		List<Service> list = new ArrayList<>();
 		Service git =new Service();
 		git.setCode(IService.GITHUB_CODE); git.setDisplayName(IService.GITHUB_DESC); git.setServiceType(ServiceType.STANDARD); git.setServiceCategory(ServiceCategory.DEVELOPANDTEST);
@@ -138,7 +139,7 @@ public class PipelineUtil {
 		return list;
 	}
 	
-	public static List<Service> getPremiumServices() {
+	public List<Service> getPremiumServices() {
 		
 		List<Service> list = new ArrayList<>();
 		Service git =new Service();
@@ -181,10 +182,10 @@ public class PipelineUtil {
 		return list;
 	}
 	
-	public static StatusPage getToolStatus(String toolCode) {
+	public StatusPage getToolStatus(String toolCode) {
 		CheckToolsStatus status = new CheckToolsStatus();
-        String host = HTTP+Configurations.getInstance().getHOST_IP()+":";
-        String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+":";
+        String host = HTTP+Configurations.getInstance().getHOST_IP()+COLON;
+        String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+COLON;
         StatusPage statusPage= null;
         switch(toolCode) {
         case IService.GITHUB_CODE: statusPage = new StatusPage(IService.GITHUB_CODE,IService.GITHUB_DESC,
@@ -239,11 +240,11 @@ public class PipelineUtil {
 	       
 	}
 	
-	public static List<StatusPage> getAutoInstallStatusStandard() {
+	public List<StatusPage> getAutoInstallStatusStandard() {
 		List<StatusPage> statusPages = new ArrayList<>();
 		CheckToolsStatus status = new CheckToolsStatus();
-		String host = HTTP+Configurations.getInstance().getHOST_IP()+":";
-		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+":";
+		String host = HTTP+Configurations.getInstance().getHOST_IP()+COLON;
+		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+COLON;
         statusPages.add(new StatusPage(IService.JENKINS_CODE, IService.JENKINS_DESC,	
         		status.isToolAlive( host+Configurations.getInstance().getJENKINS_PORT()),
         		JENKINS_DOC,
@@ -267,11 +268,11 @@ public class PipelineUtil {
        return statusPages;
 	}
 	
-	public static List<StatusPage> getAutoInstallStatusPremium() {
+	public List<StatusPage> getAutoInstallStatusPremium() {
 		List<StatusPage> statusPages = new ArrayList<>();
 		CheckToolsStatus status = new CheckToolsStatus();
-		String host = HTTP+Configurations.getInstance().getHOST_IP()+":";
-		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+":";
+		String host = HTTP+Configurations.getInstance().getHOST_IP()+COLON;
+		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+COLON;
         statusPages.add(new StatusPage(IService.JENKINS_CODE, IService.JENKINS_DESC,
         		status.isToolAlive( host+Configurations.getInstance().getJENKINS_PORT()),
         		JENKINS_DOC,
@@ -280,18 +281,18 @@ public class PipelineUtil {
         		status.isToolAlive(Configurations.getInstance().getASOC_URL()),
                ASOC_DOC,
                 Configurations.getInstance().getASOC_URL()));
-       statusPages.add(new StatusPage(IService.UCV_CODE,"UrbanCode_Velocity",
+       statusPages.add(new StatusPage(IService.UCV_CODE, IService.UCV_DESC,
     		   status.isToolAlive( secureHost+Configurations.getInstance().getUCV_PORT()),
                 UCV_DOC,
                 secureHost+Configurations.getInstance().getUCV_PORT()));
-       statusPages.add(new StatusPage(IService.UCD_CODE,"UrbanCode Deploy",
+       statusPages.add(new StatusPage(IService.UCD_CODE, IService.UCD_DESC,
     		   status.isToolAlive(secureHost+Configurations.getInstance().getUCD_PORT()),
                UCD_DOC,
                 secureHost+Configurations.getInstance().getUCD_PORT()));
        return statusPages;
 	}
 	
-	public static List<StatusPage> getManualInstallStatusStandard() {
+	public List<StatusPage> getManualInstallStatusStandard() {
 		List<StatusPage> statusPages = new ArrayList<>();
 //		CheckToolsStatus status = new CheckToolsStatus();
 //        String host = Configurations.getInstance().getIP();
@@ -300,11 +301,11 @@ public class PipelineUtil {
        return statusPages;
 	}
 
-	public static List<StatusPage> getManualInstallStatusPremium() {
+	public List<StatusPage> getManualInstallStatusPremium() {
 		List<StatusPage> statusPages = new ArrayList<>();
 		CheckToolsStatus status = new CheckToolsStatus();
-		String host = HTTP+Configurations.getInstance().getHOST_IP()+":";
-		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+":";
+//		String host = HTTP+Configurations.getInstance().getHOST_IP()+COLON;
+		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+COLON;
         statusPages.add(new StatusPage(IService.DOORS_NG_CODE,IService.DOORS_NG_DESC,
         		status.isToolAlive(secureHost+"9443/rm"),
         		CLM_DOC,
@@ -328,7 +329,7 @@ public class PipelineUtil {
        return statusPages;
 	}
 	
-	public static void updateServiceStatus(List<PipeLine> pipeLineList) {
+	public void updateServiceStatus(List<PipeLine> pipeLineList) {
 		for (PipeLine pipeline:pipeLineList) {
 			for(Service service:pipeline.getServices()) {
 				StatusPage statusPage = getToolStatus(service.getCode());
