@@ -34,22 +34,23 @@ public class PipeLineController {
         System.out.println("PipeLineController.getAvailableServices()");
         System.out.println("PipeLineController.getAvailableServices() capsule "+capsule);
         List<List<Service>> services = new ArrayList<List<Service>>();
+        PipelineUtil pipeline = new PipelineUtil();
         if(capsule == Capsule.JAVA) {
-            services.add(PipelineUtil.getStandardServices());
-            services.add(PipelineUtil.getPremiumServices());
+            services.add(pipeline.getStandardServices());
+            services.add(pipeline.getPremiumServices());
         } else if(capsule==Capsule.DOTNET) {
-            services.add(PipelineUtil.getStandardServices());
+            services.add(pipeline.getStandardServices());
         } else if (capsule==null) {
-            services.add(PipelineUtil.getStandardServices());
-            services.add(PipelineUtil.getPremiumServices());
+            services.add(pipeline.getStandardServices());
+            services.add(pipeline.getPremiumServices());
         }
         return services;
     }
     
     @GetMapping("/api/createdPipelines")
     public List<PipeLine> getPipeline(){
-    	List<PipeLine> pipeLineList = PipelineUtil.getPipelines();
-    	PipelineUtil.updateServiceStatus(pipeLineList);
+    	List<PipeLine> pipeLineList = new PipelineUtil().getPipelines();
+    	new PipelineUtil().updateServiceStatus(pipeLineList);
         return pipeLineList;
     }
     
@@ -59,7 +60,7 @@ public class PipeLineController {
     	DeployToolChain.clear();
     	ServiceType defaultServiceType = ServiceType.STANDARD;
         if(pipeline != null) {
-            PipelineUtil.createPipeline(pipeline);
+        	new PipelineUtil().createPipeline(pipeline);
             defaultServiceType = pipeline.getServiceType();
         }
         new DeployToolChain().installPipeline(defaultServiceType);
@@ -85,21 +86,21 @@ public class PipeLineController {
     
     @GetMapping("/api/autoInstallStatusStandard")
     public List<StatusPage> autoInstallStatusStandard() {
-       return PipelineUtil.getAutoInstallStatusStandard();
+       return new PipelineUtil().getAutoInstallStatusStandard();
     }
     
     @GetMapping("/api/autoInstallStatusPremium")
     public List<StatusPage> autoInstallStatusPremium() {
-    	return PipelineUtil.getAutoInstallStatusPremium();
+    	return new PipelineUtil().getAutoInstallStatusPremium();
     }
     
     @GetMapping("/api/manualInstallStatusPremium")
     public List<StatusPage> manualInstallStatusPremium() {
-       return PipelineUtil.getManualInstallStatusPremium();
+       return new PipelineUtil().getManualInstallStatusPremium();
     }
     @GetMapping("/api/manualInstallStatusStandard")
     public List<StatusPage> manualInstallStatusStandard() {
-       return PipelineUtil.getManualInstallStatusStandard();
+       return new PipelineUtil().getManualInstallStatusStandard();
  
     }
     
