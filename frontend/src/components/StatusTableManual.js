@@ -7,6 +7,9 @@ import TableRow from '@material-ui/core/TableRow';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 
+import deployed from '../static/images/extra/deployed.svg';
+import undeployed from '../static/images/extra/undeployed.svg';
+
 class StatusTableManual extends Component {
   constructor(props) {
     super(props);
@@ -131,7 +134,7 @@ class StatusTableManual extends Component {
                   {row.toolName}
                 </TableCell>
                 <TableCell id="tableRowStatus">
-                  {!row.installationStatus ? <HighlightOff id="highlightOff" /> : <CheckCircle id="checkCircle" />}
+                  {!row.installationStatus ? <img src={undeployed} id="highlightOff" /> : <img src={deployed} id="checkCircle" />}
                 </TableCell>
                 <TableCell id="tableRowActions"><a href={row.actions} target="_blank">User Manual</a></TableCell>
                 <TableCell style={{ textAlign: 'center' }}>

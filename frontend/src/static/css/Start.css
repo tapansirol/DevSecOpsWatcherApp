@@ -13,7 +13,7 @@ body {
   }
   #HCL-Dashboard
   {
-    width: 105px;
+  width: 105px;
   height: 21px;
   font-family: Roboto;
   font-size: 18px;
@@ -25,11 +25,7 @@ body {
   color: #ffffff;
   margin-left: 65px;
   }
-  #text-style-1
-  {
-    /* font-weight: bold; */
-  }
-
+ 
   /*
     stepper component styles
   */
@@ -48,7 +44,7 @@ body {
     margin-top: 40px;
     height: 35px;
     font-size: 22px;
-    /* font-family: Roboto; */
+    font-family: Roboto;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
@@ -62,7 +58,7 @@ body {
     margin-bottom: 40px;
     /* width: 192px; */
     height: 18px;
-    /* font-family: Roboto; */
+    font-family: Roboto;
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
@@ -76,7 +72,7 @@ body {
   #label-name {
     width: 43px;
     height: 19px;
-    /* font-family: Roboto; */
+    font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
     font-style: normal;
@@ -91,7 +87,7 @@ body {
   width: 274px;
   height: 19px;
   margin-left: 585px;
-  /* font-family: Roboto; */
+  font-family: Roboto;
   font-size: 16px;
   font-weight: normal;
   font-style: normal;
@@ -104,7 +100,7 @@ body {
 #label-available-toolchain {
   width: 414px;
   height: 19px;
-  /* font-family: Roboto; */
+  font-family: Roboto;
   font-size: 16px;
   font-weight: normal;
   font-style: normal;
@@ -167,7 +163,7 @@ body {
 }
 
 #label-standard-toolchain{
-  /* font-family: Roboto; */
+  font-family: Roboto;
   font-size: 14px;
   font-weight: bold;
   font-style: normal;
@@ -334,8 +330,9 @@ body {
 }
 #progressButton
 {
-  width: 5px;
-  height: 5px;
+  width: 24px;
+  height: 24px;
+  margin-top: 8px;
   
   margin-left: 403px;
   
@@ -405,19 +402,14 @@ body {
   margin-left: 90.5px;
 }
 
+
 #troubleShootingDiv
 {
   margin-left: 42px;
   margin-right: 40px;
-
-
-
-}
-#troubleShootingDiv
-{
   width: 322px;
   height: 352px;
-  border: 1px solid green
+  border: 1px solid #d2d2d2;
 }
 #troubleShootingHeading
 {
@@ -767,6 +759,7 @@ body {
   pointer-events: none;
    cursor: default;
    color: grey;
+   
 }
 
 
@@ -778,3 +771,32 @@ body {
 }
 
 
+
+.primary
+{
+  background-color: #0066b3;
+  height: 40px;
+}
+.primary :hover
+{
+  background-color: #00518f;
+}
+.secondary :hover{
+
+  background: red;  
+}
+.disabledButton
+{
+  pointer-events: none;
+   cursor: default;
+   color: grey;
+   
+}
+#arrowForward
+{
+  background: #0066b3;
+}
+#arrowBack
+{
+  background: #0066b3;
+}

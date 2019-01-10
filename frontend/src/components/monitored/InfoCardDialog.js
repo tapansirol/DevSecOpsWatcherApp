@@ -7,6 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import HighlightOff from '@material-ui/icons/HighlightOff';
+import close1 from '../../static/images/extra/close.svg'
 
 class InfoCardDialog extends Component{
 
@@ -36,10 +37,10 @@ class InfoCardDialog extends Component{
             <Dialog style={{backgroundColor: 'c3143a'}} open={state.open}>
            <div style={{borderTop:"2px solid white",borderTopColor:color}}>
             <DialogActions>
-              <Button onClick={close} >
-                {/* <i className="material-icons">X</i> */}
+              <img src={close1} onClick={close} style={{width:12, height:12,marginTop:48,marginRight:48}}/>
+                {/* <i className="material-icons">X</i> 
                 <HighlightOff/>
-              </Button>
+              </Button>*/}
             </DialogActions>
 
           

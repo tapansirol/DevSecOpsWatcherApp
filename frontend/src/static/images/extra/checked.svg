@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>UI Icon/Glyph/Checkmark/$brand-01</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Component/Tile/Selectable/States/Selected" transform="translate(-132.000000, -5.000000)" fill="#0066B3">
+            <g id="Selectable---Selected">
+                <g id="UI-Icon/checkmark--solid/$brand-01" transform="translate(132.000000, 5.000000)">
+                    <path d="M5.90769231,11.8153846 C2.64496394,11.8153846 0,9.17042068 0,5.90769231 C0,2.64496394 2.64496394,0 5.90769231,0 C9.17042068,0 11.8153846,2.64496394 11.8153846,5.90769231 C11.8153846,9.17042068 9.17042068,11.8153846 5.90769231,11.8153846 Z M8.3393673,3.44705961 L4.98461538,6.80181152 L3.47601732,5.29321345 L2.43167499,6.33755578 L4.98461538,8.89049617 L9.38370962,4.49140193 L8.3393673,3.44705961 Z" id="checkmark"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

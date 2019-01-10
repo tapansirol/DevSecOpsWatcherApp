@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Typography } from '@material-ui/core';
-import DESKTOP_IMAGE from '../static/images/extra/desktop.png';
+import DESKTOP_IMAGE from '../static/images/extra/desktop.svg';
 import CardMedia from "@material-ui/core/CardMedia";
 
 
@@ -51,11 +51,11 @@ const styles = theme =>({
                 
                 <div>
                 
-                <CardMedia 
-                  image={DESKTOP_IMAGE}
+                <img 
+                  src={DESKTOP_IMAGE}
                    style={{width: 120,
-                    height: 120,marginLeft:107,marginTop:86}}>
-              </CardMedia>
+                    height: 120,marginLeft:107,marginTop:86}}/>
+             
               <Typography id="troubleShootingContent5">The dashboard is ready for display and real-time monitoring</Typography>
 
             </div> :

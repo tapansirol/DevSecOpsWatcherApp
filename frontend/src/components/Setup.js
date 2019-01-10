@@ -8,13 +8,15 @@ import Card from '@material-ui/core/Card';
 import InputBase from '@material-ui/core/InputBase';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CheckCircle from '@material-ui/icons/CheckCircle';
-import Java_IMG from '../static/images/capsules/new/java.jpg';
+import Java_IMG from '../static/images/capsules/new/java.JPG';
 import Dotnet_IMG from '../static/images/capsules/new/dotnet.JPG';
 import Sap_IMG from '../static/images/capsules/new/sap.JPG';
 import Cpp_IMG from '../static/images/capsules/new/c++.JPG';
+//Icons imported
+import checked from '../static/images/extra/checked.svg'
 import Embedded_IMG from '../static/images/capsules/new/embedded.JPG';
 import APIService from '../util/APIService';
-import { Button, TableBody} from '@material-ui/core';
+import { Button, TableBody, Fade} from '@material-ui/core';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import StandardServiceAssembly from './StandardServiceAssembly';
@@ -24,7 +26,8 @@ import AutomatedToolChain from './AutomatedToolChain';
 import ManualInstallation from './ManualInstallation';
 import ManualInstallationCheck from './ManualInstallationCheck';
 import ManualInstallationPremium from './ManualInstallationPremium';
-import { grey, red } from '@material-ui/core/colors';
+import { grey, red, green } from '@material-ui/core/colors';
+import Radium from 'radium';
 
 
 
@@ -53,56 +56,15 @@ const styles = theme =>({
     marginRight20: {
         marginRight: 20
     },
-    // grow: {
-    //   flexGrow: 1,
-    // },
-    // backButton: {
-    //     marginRight: theme.spacing.unit,
-    //   },
-    //   instructions: {
-    //     marginTop: theme.spacing.unit,
-    //     marginBottom: theme.spacing.unit,
-    //   },
 
-
-    //   card: {
-    //     minWidth: 275,
-    //     padding: 20,
-    //     //align: 
-    //     //marginLeft: 30
-    //   },
-    //   bullet: {
-    //     display: 'inline-block',
-    //     margin: '0 2px',
-    //     transform: 'scale(0.8)',
-    //   },
-      
-    //   media: {
-    //     // ⚠️ object-fit is not supported by IE11.
-    //     objectFit: 'cover',
-    // },
-
-    //   title: {
-    //     fontSize: 14,
-        
-    //   },
-    //   pos: {
-    //     marginBottom: 12,
-    //   },
-     
-    // bootstrapRoot: {
-    //     'label + &': {
-    //       marginTop: theme.spacing.unit * 3,
-    //     },
-    //   },
-      bootstrapInput: {
-        borderRadius: 4,
-        backgroundColor: '#f5f5f5',
-        width:520,
-        height:30,
-        fontSize: 18,
-        //textColor: red
-      },
+    bootstrapInput: {
+    borderRadius: 4,
+    backgroundColor: '#f5f5f5',
+    width:520,
+    height:30,
+    fontSize: 18,
+    //textColor: red
+    },
      
     
   });
@@ -175,7 +137,8 @@ class SetupPage extends Component {
             isd: true,
             isRefreshDisabled: false,
             cleanupMessage: '',
-            stopMessage: ''
+            stopMessage: '',
+            variant: 'outlined'
             
         }
     }
@@ -597,6 +560,14 @@ handlePreviousAutomated = () => {
         console.log("hahah :==>")
         console.log("Is Disabled Refresh ?"+this.state.isRefreshDisabled)
     }
+    changeHover()
+    {
+        this.setState({variant:'contained'})
+    }
+    resetHover()
+    {
+        this.setState({variant:'outlined'})
+    }
 
     render() 
     {
@@ -605,6 +576,9 @@ handlePreviousAutomated = () => {
         const steps = getSteps();
         const { capsuleArray, isButtonDisabled, pipelineName, pipelineArray, 
             selectedPipelineIndex, temp ,value, isManualButtonDisabled,isPremiumDashBoardDisabled,installationLog} = this.state;
+        let varnt = 'outlined';
+
+       
        // console.log('yahan active step ka value :')
        //console.log("value kya hai ?",isPremiumDashBoardDisabled)
         return(
@@ -655,10 +629,10 @@ handlePreviousAutomated = () => {
                                             <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'capsule-focus':'capsule-active'}
                                                 onClick= {() => {this.handleCapsuleClick(capsule)}} id = {capsule!=='JAVA' ? 'disableCapsule':''}>
                                             
-                                            <span style={{marginLeft:10}}>{capsule==='DOTNET'?'.NET':[capsule==='JAVA'?'Java':capsule]}</span>
+                                            <span style={{marginLeft:10,fontFamily:'Roboto'}}>{capsule==='DOTNET'?'.NET':[capsule==='JAVA'?'Java':capsule]}</span>
                                             <img src={imageMap[capsule]} style={{marginLeft:23}}/> 
-                                           
-                                            <CheckCircle style={{float: "right",fontSize:'16px'}} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/>
+                                           <img src ={checked } style={{float: "right", width:13,height:13,marginRight:5}} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/>
+                                            {/* <CheckCircle style={{float: "right",fontSize:'16px'}} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/> */}
                                         
                                         </CardActionArea>
                                              </div>
@@ -677,8 +651,8 @@ handlePreviousAutomated = () => {
                             </div>
                             <div style={{marginBottom: '25px'}}>
                             <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary" >
-                                <Tab style={{textAlign:'left', minWidth:'60px', width:'75px',textTransform:"none",fontSize: 14,color: '#0066b3'}} label="Standard"/>
-                                <Tab style={{textAlign:'left', minWidth:'80px', width:'80px',textTransform:"none"}} label="Premium"/>
+                                <Tab style={{fontFamily:'Roboto',height:20, textAlign:'left', minWidth:'60px', width:'75px',textTransform:"none",fontSize: 14,color: '#0066b3'}} label="Standard"/>
+                                <Tab style={{fontFamily:'Roboto',height:20,textAlign:'left', minWidth:'80px', width:'80px',textTransform:"none"}} label="Premium"/>
                             </Tabs>
                             </div>
                             {console.log('dekh le 7879',pipelineArray )}
@@ -700,12 +674,12 @@ handlePreviousAutomated = () => {
                                         <div className={selectedPipelineIndex === sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
                                         <div style={{marginTop:23, marginBottom:26,marginLeft:32, display:'flex' }}>
-                                            <div style={{width:673,display:'flex'}}>
+                                            <div style={{width:673,display:'flex', fontFamily:'Roboto'}}>
                                                 <Typography id='label-standard-toolchain'>Standard toolchain</Typography>
                                                 <Typography style={{marginLeft:100}} id='label-standard-toolchain'>Typology:&nbsp; </Typography> Open Source + HCL
                                                 <Typography style={{marginLeft:100}} id='label-standard-toolchain'>Tools:&nbsp; </Typography>7
                                              </div>
-                                             <CheckCircle style={{marginLeft:373}} className={selectedPipelineIndex === sIndex ? 'check-visible':'check-hidden'}/>
+                                             <img src={checked} style={{marginLeft:373,height:13,width:13}} className={selectedPipelineIndex === sIndex ? 'check-visible':'check-hidden'}/>
                                         </div>
                                     <div style={{marginLeft:32, width:'95%'}}><StandardServiceAssembly serviceArray={serviceArray} sIndex= {sIndex}  bool={false} activeStep={activeStep}/></div>
                                         
@@ -741,12 +715,12 @@ handlePreviousAutomated = () => {
                                     <div className={selectedPipelineIndex === sIndex ? 'glowing-border-cpl2':'border-cpl2'}
                                         onClick={()=>{this.handleSelectPipeline(serviceArray, sIndex)}}>
                                          <div style={{marginTop:23, marginBottom:26,marginLeft:32, display:'flex' }}>
-                                        <div style={{width:673,display:'flex'}}>
+                                        <div style={{width:673,display:'flex',fontFamily:'Roboto'}}>
                                         <Typography id='label-standard-toolchain'>Premium Tool Chain</Typography>
                                         <Typography style={{marginLeft:100}} id='label-standard-toolchain'>Typology:&nbsp; </Typography> IBM + Jenkins
                                         <Typography style={{marginLeft:100}} id='label-standard-toolchain'>Tools:&nbsp; </Typography>9
                                         </div>
-                                        <CheckCircle style={{marginLeft:373}} className={selectedPipelineIndex === sIndex ? 'check-visible':'check-hidden'}/>
+                                        <img src={checked} style={{marginLeft:373,height:13,width:13}} className={selectedPipelineIndex === sIndex ? 'check-visible':'check-hidden'}/>
                                         </div>
                                         <div style={{marginLeft:32, width:'95%'}}><PremiumServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} bool={false} activeStep={activeStep}/></div>
                                         
@@ -795,7 +769,7 @@ handlePreviousAutomated = () => {
                 
                     {activeStep === steps.length ? null : (
             <div style={{marginLeft:'40px',marginRight:'40px',marginTop:'32px', marginBottom:32}}>
-              <Button style={{float: "right",marginLeft:"1rem",textTransform:"none"}}  disabled = {activeStep===0 ? isButtonDisabled :
+              <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto'}}  disabled = {activeStep===0 ? isButtonDisabled :
               activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:*/ false}
 
               
@@ -803,6 +777,9 @@ handlePreviousAutomated = () => {
                     //style={{textTransform: "none"}}
                   variant="contained"
                   color="primary"
+                  //className="some-class"
+                  //kind="primary"
+                  
                   onClick={this.handleNext.bind(this)}
                   className={activeStep === steps.length - 2 ? '':classes.marginRight20}
                 >
@@ -810,16 +787,21 @@ handlePreviousAutomated = () => {
                  [activeStep === steps.length - 2 ? 'Next: check and deploy':'Next: manual install']]}
                 </Button>
                 {activeStep===1 ?
-                <Button style={{float: "right",textTransform:"none"}} 
-                variant="outlined" color="primary"
+                <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto'}} className="secondary"
+                variant={this.state.variant} color="primary"
                   
                   onClick={this.handlePreviousSetup.bind(this)}
                   className={classes.button}
+                  onMouseEnter={this.changeHover.bind(this)}
+                  onMouseLeave={this.resetHover.bind(this)}
                   //disabled={true}
+                  //style={{background: red}}
+                  
+                  
                 >
                   Previous: setup
                 </Button> : [activeStep === 2 ?
-                <Button style={{float: "right",textTransform:"none"}} 
+                <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto'}} 
                 variant="outlined"
                 color="primary"
                 onClick={this.handlePreviousAutomated}
@@ -828,7 +810,7 @@ handlePreviousAutomated = () => {
               >
                  Previous : automated 
               </Button> : [activeStep === steps.length - 1 ?
-                <Button style={{float: "right",marginLeft:"1rem",textTransform:"none"}} 
+                <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto'}} 
                 variant="contained"
                 color="primary"
                 onClick={this.refreshpage.bind(this)}
@@ -839,7 +821,7 @@ handlePreviousAutomated = () => {
               </Button>: null]]}
 
                 {activeStep=== steps.length-1 ?
-                <Button style={{float: "right",textTransform:"none"}} //disabled = {this.state.isPrevDisabled}
+                <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto'}} //disabled = {this.state.isPrevDisabled}
                 variant="outlined" color="primary"
                   
                   onClick={this.handlePreviousAutomated.bind(this)}
@@ -848,7 +830,7 @@ handlePreviousAutomated = () => {
                   Previous:manual steps
                 </Button>
                 : [activeStep === steps.length - 1 ?
-                    <Button style={{float: "right",textTransform:"none"}} 
+                    <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto'}} 
                     variant="outlined"
                     color="primary"
                     onClick={this.handlePrevious1}
@@ -863,7 +845,7 @@ handlePreviousAutomated = () => {
                 className = {activeStep>=1 ? 'check-visible':'check-hidden'}
                 variant="outlined" color="primary"
                   onClick={this.handleCancel}
-                  style={{textTransform:"none"}}
+                  style={{textTransform:"none",fontFamily:'Roboto'}}
                 //  className={classes.button}
                 >
                   Cancel

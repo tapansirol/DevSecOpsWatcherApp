@@ -34,7 +34,7 @@ class PipeLines extends Component{
             <div style={{width: '100%', margin: 'auto'}}>
              
                 <Card id = "pipeline">
-                <div style={{float: "right"}}><LongMenu /></div>
+                {/* <div style={{float: "right"}}><LongMenu /></div> */}
                     <CardContent >
                     {pipelineArray.map((pipeline, index ) =>{
                         return (

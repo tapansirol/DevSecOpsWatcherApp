@@ -7,6 +7,9 @@ import TroubleShootingTips from './TroubleShootingTips';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import StatusTableManual from './StatusTableManual';
+import error from '../static/images/extra/error.svg';
+import loading from '../static/images/extra/loading.svg';
+import success from '../static/images/extra/success.svg';
 
 // const styles = theme =>({
 //     root: {
@@ -101,7 +104,7 @@ class ManualInstallationCheck extends Component{
                             {this.setNextButton(this.state.data)}
                              {this.setRefreshButton(this.state.refreshData)} 
                             <Card id="manualSuccess">
-                                <CheckCircle id="successButton"/> 
+                                <img src={success} id="successButton"/> 
                                 <Typography  id = "successText">
                                     All tools have been correctly installed
                                 </Typography>
@@ -112,7 +115,7 @@ class ManualInstallationCheck extends Component{
                         [this.state.isStatus === false ?
                             <div>
                                 <Card /*className={classes.failure}*/ id="manualFailure">
-                                    <HighlightOff id="failureButton" />
+                                    <img src={error} id="failureButton" />
                                     <Typography  id = "failureText">
                                         Some tools were not installed correctly.
                                     </Typography>
@@ -120,7 +123,7 @@ class ManualInstallationCheck extends Component{
                             </div> 
                         :
                             <Card /*className={classes.progress}*/ id = "manualProgress">
-                                <CircularProgress id="progressButton"/>
+                                <img src={loading} id="progressButton"/>
                                 <Typography  id = "successText">
                                     Installation in Progress
                                 </Typography>

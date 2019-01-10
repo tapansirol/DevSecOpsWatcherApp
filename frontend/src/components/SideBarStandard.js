@@ -7,7 +7,10 @@ import { Button} from '@material-ui/core';
 import pdf from '../static/resources/StandardToolChain.pdf';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import PictureAsPdf from '@material-ui/icons/PictureAsPdf';
+import PictureAsPdf from '../static/images/extra/document.svg';
+import ArrowLeft from '../static/images/extra/arrowleft.svg';
+import ArrowRight from '../static/images/extra/arrowright.svg';
+
 
 class SideBarStandard extends Component {
 
@@ -109,7 +112,7 @@ getNextStepDetails() {
                         {steps.map(step=>
 
                             <Typography class={activeStep<step.id ? 'disabled' : null} 
-                                style={{color:"#383838",fontWeight:"bold",marginLeft:16,fontSize: 12, width: '80%',height: 40,marginTop: 10}}>
+                                style={{color:"#383838",fontWeight:"bold",marginLeft:16,fontSize: 12, width: 250,height: 40,marginTop: 10}}>
                                 {step.name}
                             </Typography>
                         )}
@@ -124,22 +127,22 @@ getNextStepDetails() {
                     </div>
                 </div>
                 <div style={{marginLeft:40,marginRight:40,marginTop: 24, marginBottom:24}}>
-                    <Button style={{float:'right'}} disabled = {this.state.isNextDisabled}
+                    <Button style={{float:'right',background:'#0066b3',width:32, height:32}} disabled = {this.state.isNextDisabled}
                         variant="contained"
                         color="primary"
                         onClick={this.handleNextClick.bind(this)}>
-                        <ArrowForward></ArrowForward>
+                        <img src={ArrowRight} style={{height:13, width:16}}/>
                     </Button>
                                 
-                    <Button style={{float:'right',marginRight: "0.75rem"}} disabled = {this.state.isPrevDisabled}
+                    <Button style={{float:'right',marginRight: "0.75rem", background:'#0066b3',width:32, height:32}} disabled = {this.state.isPrevDisabled}
                         variant="contained"
                         color="primary"
                         onClick={this.handlePrevious1}>
-                        <ArrowBack></ArrowBack>
+                        <img src={ArrowLeft} style={{height:13, width:16}}/>
                     </Button>
-                    <a href={pdf} target="_blank">
+                    <a href={pdf} target="_blank" style={{color:'#3d70b2',fontFamily: 'Roboto'}}>
                     
-                        Open PDF Version <PictureAsPdf/>
+                        Open PDF Version <img src={PictureAsPdf} style={{marginLeft:16, height:16,width:12}}/>
                     
                     </a>
                 </div>

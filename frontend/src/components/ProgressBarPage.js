@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import HighlightOff from '@material-ui/icons/HighlightOff';
-import CheckCircle from '@material-ui/icons/CheckCircle';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import error from '../static/images/extra/error.svg';
+import loading from '../static/images/extra/loading.svg';
+import success from '../static/images/extra/success.svg';
 
 
 class ProgressBarPage extends Component
@@ -33,13 +33,13 @@ class ProgressBarPage extends Component
                     flag===null ?
 
                         <Card id="automatedProgress">
-                           <CircularProgress id="progressButton"/>
+                           <img src={loading} id="progressButton"/>
                             <Typography  id = "successText">Installation in Progress</Typography>
                         </Card>
 
                         : [flag===false ?
                             <Card id="manualFailure">
-                                 <HighlightOff id="automatedFailureButton" />
+                                 <img src={error} id="automatedFailureButton" />
                                  <Typography id = "automatedFailureText">
                                      Some tools were not installed correcly. Re-run the script or <a href="">contact your Admin</a> for help.
                                  </Typography>
@@ -47,7 +47,7 @@ class ProgressBarPage extends Component
                         :
                             <div>{this.props.setnextButton}
                                 <Card id="manualSuccess">
-                                     <CheckCircle id="successButton"/>
+                                     <img src={success} id="successButton"/>
                                      <Typography  id = "successText">
                                      Automated installation successful
                                      </Typography>

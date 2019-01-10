@@ -52,7 +52,7 @@ class PremiumServiceAssembly extends Component{
             <div  key={sIndex} style={{display: 'flex'}}>
             <div style={{width:'20%'}} >
                             {this.containsInArray(serviceArray, 'serviceCategory', 'PLANANDMEASURE') &&  <div>
-                            <Typography style={{textAlign:'center', background:'#edf5ff'}}>PLAN & MEASURE</Typography>
+                            <Typography style={{textAlign:'center', background:'#edf5ff',fontFamily:'Roboto'}}>PLAN & MEASURE</Typography>
                                 {serviceArray.map((service, cIndex) => {
                                     let dis='none';let tcolor="";
                                     if(service.available==false){dis=' ';tcolor="red";}
@@ -76,7 +76,7 @@ class PremiumServiceAssembly extends Component{
                          
                          <div style={{marginLeft:'5%',width:'55%'}} >
                             
-                            <Typography  style={{ textAlign:'center', background:'#edf5ff'}}>DEVELOP & TEST</Typography>
+                            <Typography  style={{ textAlign:'center', background:'#edf5ff',fontFamily:'Roboto'}}>DEVELOP & TEST</Typography>
                                 {serviceArray.map((service, cIndex) => {
                                     let dis='none';let tcolor="";
                                     if(service.available==false){dis=' ';tcolor="red";}
@@ -99,7 +99,7 @@ class PremiumServiceAssembly extends Component{
                             </div>
           
                             <div style={{marginLeft:'5%',width:'20%'}}>
-                            <Typography  style={{textAlign:'center',background:'#edf5ff'}}>RELEASE & DEPLOY</Typography>
+                            <Typography  style={{textAlign:'center',background:'#edf5ff',fontFamily:'Roboto'}}>RELEASE & DEPLOY</Typography>
                                 {serviceArray.map((service, cIndex) => {
                                     let dis='none';let tcolor="";
                                     if(service.available==false){dis=' ';tcolor="red";}

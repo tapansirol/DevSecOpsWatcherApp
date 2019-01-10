@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from '@material-ui/core/Divider';
 import NativeSelects from './NativeSelects';
 import NativeSelects1 from './NativeSelects1';
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '../../static/images/extra/search.svg';
 import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
 import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
@@ -75,7 +75,7 @@ const styles = {
 },
 
 search: {
-  position: 'relative',
+  //position: 'relative',
   //borderRadius: theme.shape.borderRadius,
   marginTop: 20,
 },
@@ -164,7 +164,7 @@ getUnavailableServicesCount(pipelineArray){
           
           <div className={classes.search} style={{width: "209px", height: "40px",background: "#f5f5f5"}}>
                         <div className={classes.searchIcon}>
-                            <SearchIcon />
+                            <img src={SearchIcon} style={{marginLeft:11, height:16}} />
                         </div>
                         <Input style= {{marginLeft: 32}}
                             placeholder="Search"

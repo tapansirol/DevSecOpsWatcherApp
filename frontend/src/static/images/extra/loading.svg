@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice 1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="loading-(1)" fill="#0066B3">
+            <ellipse id="Oval" cx="12.7310769" cy="2.73112615" rx="2.84492308" ry="2.73112615"></ellipse>
+            <ellipse id="Oval" cx="12.7310769" cy="21.7116554" rx="1.70676923" ry="1.63849846"></ellipse>
+            <ellipse id="Oval" cx="5.74061538" cy="5.51010462" rx="2.56061538" ry="2.45819077"></ellipse>
+            <ellipse id="Oval" cx="19.7215385" cy="18.9309046" rx="1.42246154" ry="1.36556308"></ellipse>
+            <ellipse id="Oval" cx="2.84492308" cy="12.2218338" rx="2.27538462" ry="2.18436923"></ellipse>
+            <ellipse id="Oval" cx="22.6163077" cy="12.2209477" rx="1.13723077" ry="1.09174154"></ellipse>
+            <path d="M4.33292308,17.5812923 C3.55476923,18.32832 3.55476923,19.5370338 4.33292308,20.2840615 C5.11015385,21.0310892 6.37107692,21.0310892 7.14830769,20.2840615 C7.92646154,19.5370338 7.92646154,18.32832 7.14830769,17.5812923 C6.37107692,16.8333785 5.11107692,16.8262892 4.33292308,17.5812923 Z" id="Path"></path>
+            <ellipse id="Oval" cx="19.7206154" cy="5.51010462" rx="1" ry="1"></ellipse>
+        </g>
+    </g>
+</svg>
