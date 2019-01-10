@@ -8,7 +8,7 @@ import Card from '@material-ui/core/Card';
 import InputBase from '@material-ui/core/InputBase';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CheckCircle from '@material-ui/icons/CheckCircle';
-import Java_IMG from '../static/images/capsules/new/java.JPG';
+import Java_IMG from '../static/images/capsules/new/java.jpg';
 import Dotnet_IMG from '../static/images/capsules/new/dotnet.JPG';
 import Sap_IMG from '../static/images/capsules/new/sap.JPG';
 import Cpp_IMG from '../static/images/capsules/new/c++.JPG';
