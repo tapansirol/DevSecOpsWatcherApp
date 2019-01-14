@@ -133,7 +133,7 @@ class AutomatedToolChain extends Component{
                             }
                             
                             <div  style={{width: "100%"}} id="logDiv">
-                                <span style={{color:'white'}}>{localStorage.getItem("installationLog")}</span>
+                                <span style={{color:'white',fontFamily:'Roboto'}}>{localStorage.getItem("installationLog")}</span>
                             </div>              
                         </div>     
                 </div>

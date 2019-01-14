@@ -7,7 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import InputBase from '@material-ui/core/InputBase';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CheckCircle from '@material-ui/icons/CheckCircle';
 import Java_IMG from '../static/images/capsules/new/java.JPG';
 import Dotnet_IMG from '../static/images/capsules/new/dotnet.JPG';
 import Sap_IMG from '../static/images/capsules/new/sap.JPG';
@@ -16,7 +15,7 @@ import Cpp_IMG from '../static/images/capsules/new/c++.JPG';
 import checked from '../static/images/extra/checked.svg'
 import Embedded_IMG from '../static/images/capsules/new/embedded.JPG';
 import APIService from '../util/APIService';
-import { Button, TableBody, Fade} from '@material-ui/core';
+import { Button} from '@material-ui/core';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import StandardServiceAssembly from './StandardServiceAssembly';
@@ -26,8 +25,7 @@ import AutomatedToolChain from './AutomatedToolChain';
 import ManualInstallation from './ManualInstallation';
 import ManualInstallationCheck from './ManualInstallationCheck';
 import ManualInstallationPremium from './ManualInstallationPremium';
-import { grey, red, green } from '@material-ui/core/colors';
-import Radium from 'radium';
+
 
 
 
@@ -45,6 +43,31 @@ const imageMap = {
 
 
 const styles = theme =>({
+
+
+
+    //Adding for tabs styling
+
+    tabsIndicator: {
+        backgroundColor: '#1890ff',
+      },
+      tabRoot: {
+
+        '&:hover': {
+          color: '#00518f',
+          opacity: 1,
+        },
+        '&$tabSelected': {
+          color: '#00518f',
+          //fontWeight: theme.typography.fontWeightMedium,
+        },
+        '&:focus': {
+          color: '#00518f',
+          outline: 'none'
+        },
+      },
+
+      //Ending tabs styling
    
     root: {
       flexGrow: 1,
@@ -596,6 +619,11 @@ handlePreviousAutomated = () => {
         document.getElementById('scbutton').style.background='#ffffff';
         document.getElementById('scbutton').style.color='#0066b3';
     }
+    getFocus()
+    {
+        console.log("tab clicked")
+        document.getElementById('tabId').style.outline='none';
+    }
 
     render() 
     {
@@ -678,9 +706,9 @@ handlePreviousAutomated = () => {
                                 </Typography> 
                             </div>
                             <div style={{marginBottom: '25px'}}>
-                            <Tabs value={value} onChange={this.handleChange} indicatorColor="primary" textColor="primary" >
-                                <Tab style={{fontFamily:'Roboto',height:20, textAlign:'left', minWidth:'60px', width:'75px',textTransform:"none",fontSize: 14,color: '#0066b3'}} label="Standard"/>
-                                <Tab style={{fontFamily:'Roboto',height:20,textAlign:'left', minWidth:'80px', width:'80px',textTransform:"none"}} label="Premium"/>
+                            <Tabs value={value} onChange={this.handleChange} classes={{indicator: classes.tabsIndicator }}>
+                                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} style={{fontFamily:'Roboto',height:20, textAlign:'left', minWidth:'60px', width:'75px',textTransform:"none",fontSize: 14,}} label="Standard"/>
+                                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} style={{fontFamily:'Roboto',height:20,textAlign:'left', minWidth:'80px', width:'80px',textTransform:"none",fontSize: 14,}} label="Premium"/>
                             </Tabs>
                             </div>
                             {console.log('dekh le 7879',pipelineArray )}
@@ -972,6 +1000,7 @@ handlePreviousAutomated = () => {
           )}
           
           </Card>
+          
            </div>
    
         );

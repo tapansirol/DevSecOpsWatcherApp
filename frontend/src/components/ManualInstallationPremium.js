@@ -16,8 +16,8 @@ class ManualInstallationPremium extends Component{
         const { classes } = this.props;
         return(
             <div>
-                <Typography style={{marginTop:40, marginLeft:'40%',fontSize: 22, fontWeight:'bold'}}>Tool chain Manual installation Steps</Typography>
-                <Typography style={{marginLeft:'37%',fontSize: 14,marginBottom: 24}}>Follow the steps to complete the manual installation part of your toolchain.</Typography>
+                <Typography style={{marginTop:40, marginLeft:'40%',fontSize: 22, fontWeight:'bold',fontFamily:'Roboto'}}>Tool chain Manual installation Steps</Typography>
+                <Typography style={{marginLeft:'37%',fontSize: 14,marginBottom: 24,fontFamily:'Roboto'}}>Follow the steps to complete the manual installation part of your toolchain.</Typography>
                 <SideBarPremium></SideBarPremium>
             </div>
         );

@@ -121,7 +121,7 @@ getNextStepDetails() {
                         {steps.map(step=>
 
                             <Typography class={activeStep<step.id ? 'disabled' : null} 
-                                style={{color:"#383838",fontWeight:"bold",marginLeft:16,fontSize: 12, width: 250,height: 40,marginTop: 10}}>
+                                style={{color:"#383838",fontWeight:"bold",marginLeft:16,fontSize: 12, width: 250,height: 40,marginTop: 10,fontFamily:'Roboto'}}>
                                 {step.name}
                             </Typography>
                         )}
@@ -130,7 +130,7 @@ getNextStepDetails() {
 
                     <div>
                     
-                        <Typography>
+                        <Typography id="textStyle">
                             {this.getStepContent(activeStep)}
                         </Typography>
                     </div>
