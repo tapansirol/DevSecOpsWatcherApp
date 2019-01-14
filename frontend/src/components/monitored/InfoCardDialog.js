@@ -29,6 +29,16 @@ class InfoCardDialog extends Component{
         return count;
       }
 
+    getMouseOver()
+    {
+        document.getElementById('pbutton').style.background='#00518f';
+        document.getElementById('pbutton').style.color='#ffffff';
+    }
+    getMouseOut()
+    {
+        document.getElementById('pbutton').style.background='#0066b3';
+    }
+
     render() {
         const { status,state,close} = this.props;
         const color = state.clr;
@@ -37,7 +47,7 @@ class InfoCardDialog extends Component{
             <Dialog style={{backgroundColor: 'c3143a'}} open={state.open}>
            <div style={{borderTop:"2px solid white",borderTopColor:color}}>
             <DialogActions>
-              <img src={close1} onClick={close} style={{width:12, height:12,marginTop:48,marginRight:48}}/>
+              <img src={close1} onClick={close} style={{width:12, height:12,marginTop:48,marginRight:48, cursor:'pointer'}}/>
                 {/* <i className="material-icons">X</i> 
                 <HighlightOff/>
               </Button>*/}
@@ -72,7 +82,11 @@ class InfoCardDialog extends Component{
             </div>
             
             <div  style={{marginLeft: 40}}><Button href={status.toolURL} target="_blank" color="primary"  variant="contained"
-            style={{textTransform: "none"}}>
+            style={{textTransform: "none",fontFamily:'Roboto',borderRadius:0}}
+            onMouseOver={this.getMouseOver}
+            onMouseOut={this.getMouseOut}
+            id="pbutton"
+            >
             Open Tool
             </Button></div>
             <div className="col-md-6 col-md-offset-0">

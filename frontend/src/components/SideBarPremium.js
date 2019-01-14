@@ -105,6 +105,15 @@ getNextStepDetails() {
         return 'Unknown step';
     }
   }
+
+  getMouseOver()
+    {
+        document.getElementById('pbutton').style.background='#00518f';
+    }
+    getMouseOut()
+    {
+        document.getElementById('pbutton').style.background='#0066b3';
+    }
  
 
     render(){
@@ -136,16 +145,20 @@ getNextStepDetails() {
                     <Button style={{float:'right',width:32, height:32}} //disabled = {this.state.isNextDisabled}
                     //className={this.state.isNextDisabled?'disabledButton':''}
                     className={this.state.isNextDisabled?'disabledButton':'arrowForward'}
-                    id="arrowForward"
+                    id={this.state.isNextDisabled?"pdisabledbutton":"pbutton"}
+                    onMouseOver={this.getMouseOver.bind(this)}
+                    onMouseOut={this.getMouseOut.bind(this)}
                         variant="contained"
                         //color="primary"
                         onClick={this.handleNextClick.bind(this)}>
                         <img src={ArrowRight} style={{height:13, width:16}}/>
                     </Button>
                                 
-                    <Button style={{float:'right',marginRight: "1rem",width:32, height:32}} disabled = {this.state.isPrevDisabled}
+                    <Button style={{float:'right',marginRight: "1rem",width:32, height:32}} //disabled = {this.state.isPrevDisabled}
 
-                        id="arrowBack"
+                        id={this.state.isPrevDisabled?"pdisabledbutton":"pbutton"}
+                        onMouseOver={this.getMouseOver.bind(this)}
+                        onMouseOut={this.getMouseOut.bind(this)}
                         variant="contained"
                         color="primary"
                         onClick={this.handlePrevious1}>

@@ -98,6 +98,15 @@ getNextStepDetails() {
         return 'Unknown step';
     }
   }
+
+  getMouseOver()
+    {
+        document.getElementById('pbutton').style.background='#00518f';
+    }
+    getMouseOut()
+    {
+        document.getElementById('pbutton').style.background='#0066b3';
+    }
  
 
     render(){
@@ -130,14 +139,21 @@ getNextStepDetails() {
                     <Button style={{float:'right',background:'#0066b3',width:32, height:32}} disabled = {this.state.isNextDisabled}
                         variant="contained"
                         color="primary"
+                        id={this.state.isNextDisabled?"pdisabledbutton":"pbutton"}
+                        onMouseOver={this.getMouseOver.bind(this)}
+                        onMouseOut={this.getMouseOut.bind(this)}
                         onClick={this.handleNextClick.bind(this)}>
                         <img src={ArrowRight} style={{height:13, width:16}}/>
                     </Button>
                                 
-                    <Button style={{float:'right',marginRight: "0.75rem", background:'#0066b3',width:32, height:32}} disabled = {this.state.isPrevDisabled}
+                    <Button style={{float:'right',marginRight: "0.75rem",width:32, height:32}} //disabled = {this.state.isPrevDisabled}
                         variant="contained"
                         color="primary"
-                        onClick={this.handlePrevious1}>
+                        onClick={this.handlePrevious1}
+                        id={this.state.isPrevDisabled?"pdisabledbutton":"pbutton"}
+                        onMouseOver={this.getMouseOver.bind(this)}
+                        onMouseOut={this.getMouseOut.bind(this)}
+                        >
                         <img src={ArrowLeft} style={{height:13, width:16}}/>
                     </Button>
                     <a href={pdf} target="_blank" style={{color:'#3d70b2',fontFamily: 'Roboto'}}>

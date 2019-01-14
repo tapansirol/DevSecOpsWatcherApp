@@ -253,7 +253,7 @@ body {
   letter-spacing: normal;
   text-align: center;
   color: #383838;
-  margin-left: 490px
+  margin-left: 490px;
 }
 #manualSuccess{
   width: 1120px;
@@ -262,6 +262,7 @@ body {
   margin-left: 35px;
   margin-top: 39.2px;
   display: flex;
+  box-shadow: none;
 }
 #successButton
 {
@@ -294,6 +295,7 @@ body {
   margin-left: 35px;
   margin-top: 39.2px;
   display: flex;
+  box-shadow: none;
 }
 #failureButton
 {
@@ -600,7 +602,7 @@ body {
 #automatedProgress{
   width: 1120px;
   height: 40px;
-  
+  box-shadow: none;
   margin-left: 40px;
   margin-top: 40px;
   display: flex;
@@ -799,4 +801,35 @@ body {
 #arrowBack
 {
   background: #0066b3;
+}
+.disablePrimaryButton
+{
+  opacity: 0.3;
+  color: red;
+  
+}
+.primaryButton
+{
+  background:'#0066b3';
+}
+#pbutton
+{
+  background: #0066b3;
+  box-shadow: none;
+}
+#pdisabledbutton
+{
+  box-shadow: none;
+  opacity: 0.5;
+  pointer-events: none
+}
+#sdisablebutton
+{
+  box-shadow: none;
+  opacity: 0.5;
+  pointer-events: none
+}
+#sbutton
+{
+  box-shadow: none;
 }

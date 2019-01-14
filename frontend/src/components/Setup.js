@@ -568,6 +568,34 @@ handlePreviousAutomated = () => {
     {
         this.setState({variant:'outlined'})
     }
+    getMouseOver()
+    {
+        document.getElementById('pbutton').style.background='#00518f';
+    }
+    getMouseOut()
+    {
+        document.getElementById('pbutton').style.background='#0066b3';
+    }
+    getMouseOverPrev()
+    {
+        document.getElementById('sbutton').style.background='#00518f';
+        document.getElementById('sbutton').style.color='#ffffff';
+    }
+    getMouseOutPrev()
+    {
+        document.getElementById('sbutton').style.background='#ffffff';
+        document.getElementById('sbutton').style.color='#0066b3';
+    }
+    getMouseOverCancel()
+    {
+        document.getElementById('scbutton').style.background='#00518f';
+        document.getElementById('scbutton').style.color='#ffffff';
+    }
+    getMouseOutCancel()
+    {
+        document.getElementById('scbutton').style.background='#ffffff';
+        document.getElementById('scbutton').style.color='#0066b3';
+    }
 
     render() 
     {
@@ -769,90 +797,176 @@ handlePreviousAutomated = () => {
                 
                     {activeStep === steps.length ? null : (
             <div style={{marginLeft:'40px',marginRight:'40px',marginTop:'32px', marginBottom:32}}>
-              <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto'}}  disabled = {activeStep===0 ? isButtonDisabled :
-              activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:*/ false}
-
-              
-             /* [activeStep===1? this.state.isd: this.state.isDashBoardDisabled]}*/
-                    //style={{textTransform: "none"}}
-                  variant="contained"
+              {/* <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
+            //   activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:false}
+               {/*   variant="contained"
                   color="primary"
-                  //className="some-class"
-                  //kind="primary"
+                  id={activeStep===0 ? 
+                        [isButtonDisabled?"pdisabledbutton":"pbutton"]
+                    :[activeStep>2 ? 
+                        [this.state.isDashBoardDisabled?"pdisabledbutton":"pbutton"]
+                        :'']}
                   
+                  className = 'disablePrimaryButton'
                   onClick={this.handleNext.bind(this)}
                   className={activeStep === steps.length - 2 ? '':classes.marginRight20}
+                  onMouseOver={this.getMouseOver.bind(this)}
+                  onMouseOut={this.getMouseOut.bind(this)}
                 >
                  {activeStep===0 ? 'Next: Install': [activeStep === steps.length - 1 ? 'Go to DashBoard' : 
                  [activeStep === steps.length - 2 ? 'Next: check and deploy':'Next: manual install']]}
-                </Button>
+                </Button> */}
+                {activeStep===0 ?
+
+                    <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
+                    //   activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:false}
+                        variant="contained"
+                        color="primary"
+                        id={isButtonDisabled?"pdisabledbutton":"pbutton"}
+                        
+                        //className = 'disablePrimaryButton'
+                        onClick={this.handleNext.bind(this)}
+                        className={activeStep === steps.length - 2 ? '':classes.marginRight20}
+                        onMouseOver={this.getMouseOver.bind(this)}
+                        onMouseOut={this.getMouseOut.bind(this)}
+                        >
+                        Next: Install
+                        </Button>
+                :
+                [activeStep === steps.length - 2 ?
+
+                    <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
+                    //   activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:false}
+                        variant="contained"
+                        color="primary"
+                        id={isButtonDisabled?"pdisabledbutton":"pbutton"}
+                        
+                        //className = 'disablePrimaryButton'
+                        onClick={this.handleNext.bind(this)}
+                        className={activeStep === steps.length - 2 ? '':classes.marginRight20}
+                        onMouseOver={this.getMouseOver.bind(this)}
+                        onMouseOut={this.getMouseOut.bind(this)}
+                        >
+                        Next: check and deploy
+                        </Button>
+                        :[activeStep === steps.length - 1 ?
+                            <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
+                                //   activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:false}
+                                variant="contained"
+                                color="primary"
+                                id={this.state.isDashBoardDisabled?"pdisabledbutton":"pbutton"}
+                                
+                                //className = 'disablePrimaryButton'
+                                onClick={this.handleNext.bind(this)}
+                                className={activeStep === steps.length - 2 ? '':classes.marginRight20}
+                                onMouseOver={this.getMouseOver.bind(this)}
+                                onMouseOut={this.getMouseOut.bind(this)}
+                                >
+                                    Go To DashBoard
+                                </Button>
+                        
+                        :
+                        <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
+                        //   activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:false}
+                        variant="contained"
+                        color="primary"
+                        id={isButtonDisabled?"pdisabledbutton":"pbutton"}
+                        
+                        //className = 'disablePrimaryButton'
+                        onClick={this.handleNext.bind(this)}
+                        className={activeStep === steps.length - 2 ? '':classes.marginRight20}
+                        onMouseOver={this.getMouseOver.bind(this)}
+                        onMouseOut={this.getMouseOut.bind(this)}
+                        >
+                            Next: Manual Install
+                        </Button>
+                        ]
+                ]
+                
+                }
+
+
+
+
+
+
+
+
+
+
+
                 {activeStep===1 ?
-                <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto'}} className="secondary"
+                <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto',borderRadius:0}} className="secondary"
                 variant={this.state.variant} color="primary"
                   
                   onClick={this.handlePreviousSetup.bind(this)}
                   className={classes.button}
-                  onMouseEnter={this.changeHover.bind(this)}
-                  onMouseLeave={this.resetHover.bind(this)}
+                  //onMouseEnter={this.changeHover.bind(this)}
+                  //onMouseLeave={this.resetHover.bind(this)}
                   //disabled={true}
                   //style={{background: red}}
+                  id="sbutton"
+                  onMouseOver={this.getMouseOverPrev}
+                  onMouseOut={this.getMouseOutPrev}
                   
                   
                 >
                   Previous: setup
                 </Button> : [activeStep === 2 ?
-                <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto'}} 
+                <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto',borderRadius:0}} 
                 variant="outlined"
                 color="primary"
                 onClick={this.handlePreviousAutomated}
                 className={classes.button}
                 disabled={true}
+                id="sbutton"
+                onMouseOver={this.getMouseOverPrev}
+                onMouseOut={this.getMouseOutPrev}
               >
                  Previous : automated 
               </Button> : [activeStep === steps.length - 1 ?
-                <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto'}} 
+                <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}} 
                 variant="contained"
                 color="primary"
+                id={this.state.isRefreshDisabled?"pdisabledbutton":"pbutton"}
                 onClick={this.refreshpage.bind(this)}
                 className={classes.button}
-                disabled = {this.state.isRefreshDisabled}
+                //disabled = {this.state.isRefreshDisabled}
               >
                  Refresh 
               </Button>: null]]}
 
                 {activeStep=== steps.length-1 ?
-                <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto'}} //disabled = {this.state.isPrevDisabled}
+                <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto',borderRadius:0}} //disabled = {this.state.isPrevDisabled}
                 variant="outlined" color="primary"
                   
                   onClick={this.handlePreviousAutomated.bind(this)}
                   className={classes.button}
+                  id="sbutton"
+                  onMouseOver={this.getMouseOverPrev}
+                  onMouseOut={this.getMouseOutPrev}
                 >
                   Previous:manual steps
-                </Button>
-                : [activeStep === steps.length - 1 ?
-                    <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto'}} 
-                    variant="outlined"
-                    color="primary"
-                    onClick={this.handlePrevious1}
-                    className={classes.button}
-                  >
-                     Previous 
-                  </Button> : null]}
-                <div>
+                </Button> :null}
+               
+                
 
                 <div>
                 <Button  
                 className = {activeStep>=1 ? 'check-visible':'check-hidden'}
                 variant="outlined" color="primary"
                   onClick={this.handleCancel}
-                  style={{textTransform:"none",fontFamily:'Roboto'}}
+                  style={{textTransform:"none",fontFamily:'Roboto',borderRadius:0}}
                 //  className={classes.button}
+                id="scbutton"
+                  onMouseOver={this.getMouseOverCancel}
+                  onMouseOut={this.getMouseOutCancel}
                 >
                   Cancel
                 </Button>
                 
               
-                </div>
+                
               </div>
             </div>
           )}
