@@ -6,7 +6,7 @@ import Jenkins_IMG from '../static/images/services/jenkins.JPG';
 import Git_IMG from '../static/images/services/git.JPG';
 import Sonar_IMG from '../static/images/services/sonar.JPG';
 import Asoc_IMG from '../static/images/services/asoc.JPG';
-import Hft_IMG from '../static/images/services/hft.JPG';
+import Hft_IMG from '../static/images/services/onetest.JPG';
 import Ucd_IMG from '../static/images/services/ucd.JPG';
 import Ucv_IMG from '../static/images/services/ucv.JPG';
 

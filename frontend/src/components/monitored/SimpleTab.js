@@ -16,6 +16,28 @@ function TabContainer(props) {
 }
 
 const styles = {
+
+
+  tabsIndicator: {
+    backgroundColor: '#1890ff',
+  },
+  tabRoot: {
+
+    '&:hover': {
+      color: '#00518f',
+      opacity: 1,
+    },
+    '&$tabSelected': {
+      color: '#00518f',
+      //fontWeight: theme.typography.fontWeightMedium,
+    },
+    '&:focus': {
+      color: '#00518f',
+      outline: 'none'
+    },
+  },
+
+  //Ending tabs styling
     root: {
       flexGrow: 1,
     },
@@ -45,13 +67,16 @@ class SimpleTab extends React.Component {
         <Tabs
           value={value}
           onChange={this.handleChange}
+          classes={{indicator: classes.tabsIndicator }}
           indicatorColor="primary"
           textColor="primary"
           centered
         >
-        <Tab style={{textTransform: "none",fontSize: 16}} label="Monitored Tools"/>
-        <Tab style={{textTransform: "none",fontSize: 16}} label="Pipeline" />
+        <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} style={{fontFamily:'Roboto', textTransform: "none",fontSize: 16}} label="Monitored Tools"/>
+        <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} style={{fontFamily:'Roboto', textTransform: "none",fontSize: 16}} label="Pipeline" />
         </Tabs>
+
+    
 
         {value == 0 && (
           <TabContainer>

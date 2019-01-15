@@ -128,8 +128,8 @@ class StatusTable extends Component{
                                   <TableCell id ="automatedTableRowActions"><a href={row.actions} target="_blank">User manual</a></TableCell>
                               <TableCell style={{textAlign:'center'}}>
                               {!row.installationStatus ?
-                              <span style={{cursor:'pointer'}} onClick={()=>this.installTool(row.toolCode)}
-                              style={{textTransform:"none",textAlign:"left"}}>Re-run</span>
+                              <Button style={{cursor:'pointer'}} onClick={()=>this.installTool(row.toolCode)}
+                              style={{textTransform:"none",textAlign:"left"}}>Re-run</Button>
                               :
                               null
                               }

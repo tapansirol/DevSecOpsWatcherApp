@@ -5,8 +5,6 @@ import Page2 from './page2';
 import Page5 from './page5';
 import { Button} from '@material-ui/core';
 import pdf from '../static/resources/StandardToolChain.pdf';
-import ArrowBack from '@material-ui/icons/ArrowBack';
-import ArrowForward from '@material-ui/icons/ArrowForward';
 import PictureAsPdf from '../static/images/extra/document.svg';
 import ArrowLeft from '../static/images/extra/arrowleft.svg';
 import ArrowRight from '../static/images/extra/arrowright.svg';
