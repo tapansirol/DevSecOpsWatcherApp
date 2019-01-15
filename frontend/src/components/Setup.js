@@ -846,7 +846,7 @@ handlePreviousAutomated = () => {
                 </Button> */}
                 {activeStep===0 ?
 
-                    <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
+                    <Button style={{float: "right",background:'#0066b3',marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
                     //   activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:false}
                         variant="contained"
                         color="primary"
@@ -878,7 +878,7 @@ handlePreviousAutomated = () => {
                         Next: check and deploy
                         </Button>
                         :[activeStep === steps.length - 1 ?
-                            <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
+                            <Button style={{float: "right",background:'#0066b3',marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
                                 //   activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:false}
                                 variant="contained"
                                 color="primary"
@@ -953,7 +953,7 @@ handlePreviousAutomated = () => {
               >
                  Previous : automated 
               </Button> : [activeStep === steps.length - 1 ?
-                <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}} 
+                <Button style={{float: "right",background:'#0066b3',marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}} 
                 variant="contained"
                 color="primary"
                 id={this.state.isRefreshDisabled?"pdisabledbutton":"pbutton"}

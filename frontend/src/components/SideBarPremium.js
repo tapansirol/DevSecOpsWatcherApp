@@ -142,9 +142,9 @@ getNextStepDetails() {
                     </div>
                 </div>
                 <div style={{marginLeft:40,marginRight:40,marginTop: 24, marginBottom:24}}>
-                    <Button style={{float:'right',width:32, height:32}} //disabled = {this.state.isNextDisabled}
+                    <Button style={{float:'right',background:'#0066b3',width:32, height:32}} //disabled = {this.state.isNextDisabled}
                     //className={this.state.isNextDisabled?'disabledButton':''}
-                    className={this.state.isNextDisabled?'disabledButton':'arrowForward'}
+                    //className={this.state.isNextDisabled?'disabledButton':'arrowForward'}
                     id={this.state.isNextDisabled?"pdisabledbutton":"pbutton"}
                     onMouseOver={this.getMouseOver.bind(this)}
                     onMouseOut={this.getMouseOut.bind(this)}
@@ -154,7 +154,7 @@ getNextStepDetails() {
                         <img src={ArrowRight} style={{height:13, width:16}}/>
                     </Button>
                                 
-                    <Button style={{float:'right',marginRight: "1rem",width:32, height:32}} //disabled = {this.state.isPrevDisabled}
+                    <Button style={{float:'right',background:'#0066b3',marginRight: "1rem",width:32, height:32}} //disabled = {this.state.isPrevDisabled}
 
                         id={this.state.isPrevDisabled?"pdisabledbutton":"pbutton"}
                         onMouseOver={this.getMouseOver.bind(this)}

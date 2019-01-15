@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Page2 from './page2';
 import Page5 from './page5';
 import { Button} from '@material-ui/core';
-import pdf from '../static/resources/StandardToolChain.pdf';
+import pdf from '../static/resources/StandardToolchainDocs.pdf';
 import PictureAsPdf from '../static/images/extra/document.svg';
 import ArrowLeft from '../static/images/extra/arrowleft.svg';
 import ArrowRight from '../static/images/extra/arrowright.svg';
@@ -18,7 +18,8 @@ class SideBarStandard extends Component {
 
     this.state = {
         steps: [{id: 1,name:'1. Steps to configure Urban Code Velocity', component: <Page2 />},
-        {id: 2,name:'2. Install and Configure HCL Functional Tester', component:<Page5 />},],
+        //{id: 2,name:'2. Install and Configure HCL Functional Tester', component:<Page5 />},
+    ],
         activeStep:1,
         isPrevDisabled:true,
         isNextDisabled:false,
@@ -90,8 +91,7 @@ getNextStepDetails() {
         return <div></div>;
     case 1:         
         return <Page2/>;
-    case 2:
-        return <Page5/>;
+   
     default:
         return 'Unknown step';
     }
@@ -134,21 +134,23 @@ getNextStepDetails() {
                     </div>
                 </div>
                 <div style={{marginLeft:40,marginRight:40,marginTop: 24, marginBottom:24}}>
-                    <Button style={{float:'right',background:'#0066b3',width:32, height:32}} disabled = {this.state.isNextDisabled}
+                    <Button style={{float:'right',background:'#0066b3',width:32, height:32}} //disabled = {this.state.isNextDisabled}
                         variant="contained"
                         color="primary"
-                        id={this.state.isNextDisabled?"pdisabledbutton":"pbutton"}
+                        //id={this.state.isNextDisabled?"pdisabledbutton":"pbutton"}
+                        id="pdisabledbutton"
                         onMouseOver={this.getMouseOver.bind(this)}
                         onMouseOut={this.getMouseOut.bind(this)}
                         onClick={this.handleNextClick.bind(this)}>
                         <img src={ArrowRight} style={{height:13, width:16}}/>
                     </Button>
                                 
-                    <Button style={{float:'right',marginRight: "0.75rem",width:32, height:32}} //disabled = {this.state.isPrevDisabled}
+                    <Button style={{float:'right',background:'#0066b3',marginRight: "0.75rem",width:32, height:32}} //disabled = {this.state.isPrevDisabled}
                         variant="contained"
                         color="primary"
                         onClick={this.handlePrevious1}
-                        id={this.state.isPrevDisabled?"pdisabledbutton":"pbutton"}
+                        //id={this.state.isPrevDisabled?"pdisabledbutton":"pbutton"}
+                        id="pdisabledbutton"
                         onMouseOver={this.getMouseOver.bind(this)}
                         onMouseOut={this.getMouseOut.bind(this)}
                         >
