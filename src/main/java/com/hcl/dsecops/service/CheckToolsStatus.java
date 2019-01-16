@@ -169,7 +169,7 @@ public class CheckToolsStatus {
 	 */
 	public static void main(String[] args) {
 		CheckToolsStatus chkToolStatus = new CheckToolsStatus();
-		String url = "http://10.134.43.155:9292";
+		String url = "http://localhost:9292";
 		System.out.println("isAlive : " + chkToolStatus.isToolAlive(url));
 	}
 }

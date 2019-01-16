@@ -274,8 +274,7 @@ public class PipelineUtil {
 		List<StatusPage> statusPages = new ArrayList<>();
 //		CheckToolsStatus status = new CheckToolsStatus();
 //        String host = Configurations.getInstance().getIP();
-        statusPages.add(new StatusPage(IService.HFT_CODE,IService.HFT_DESC,true,TEST_DOC,
-                " "));
+//        statusPages.add(new StatusPage(IService.HFT_CODE,IService.HFT_DESC,true,TEST_DOC," "));
        return statusPages;
 	}
 
