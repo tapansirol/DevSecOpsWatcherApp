@@ -122,23 +122,35 @@ class ManualInstallationCheck extends Component{
                                 </Card>
                             </div> 
                         :
-                            <Card /*className={classes.progress}*/ id = "manualProgress">
-                                <img src={loading} id="progressButton"/>
-                                <Typography  id = "successText">
-                                    Installation in Progress
-                                </Typography>
-                            </Card> 
+
+                        <div>
+                        {this.setNextButton(this.state.data)}
+                         {this.setRefreshButton(this.state.refreshData)} 
+                        <Card id="manualSuccess">
+                            <img src={success} id="successButton"/> 
+                            <Typography  id = "successText">
+                                No manual tools for this pipeline
+                            </Typography>
+                           
+                        </Card>
+                    </div>
+                            // <Card /*className={classes.progress}*/ id = "manualProgress">
+                            //     <img src={loading} id="progressButton"/>
+                            //     <Typography  id = "successText">
+                            //         Installation in Progress
+                            //     </Typography>
+                            // </Card> 
                         ]} 
                     </div>
                     
-                        <div id="statusTableDiv">
+                        {/* <div id="statusTableDiv">
                         {console.log("After Refresh Call")}
                                 <StatusTableManual ref="stm"  count = {count} selectedPipelineIndex={selectedPipelineIndex} findValue={this.getFalseValue.bind(this)}
                                 findTrueValue={this.getTrueValue.bind(this)}/>
                                 
                                         <div id = "troubleShootingDiv"><TroubleShootingTips status={this.state.isStatus}/></div>
 
-                                        </div>
+                                        </div> */}
 
                 </div>
                

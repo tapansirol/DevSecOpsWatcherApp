@@ -25,4 +25,6 @@ public interface IService {
 	String UCV_CODE = "UCV";
 	String UCV_DESC = "Urban Code Velocity";
 	
+	String HOT_CODE = "HOT";
+	String HOT_DESC = "HCL One Test";
 }
