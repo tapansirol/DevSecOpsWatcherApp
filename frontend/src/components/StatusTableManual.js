@@ -138,7 +138,7 @@ class StatusTableManual extends Component {
                 </TableCell>
                 <TableCell id="tableRowActions"><a href={row.actions} target="_blank">User Manual</a></TableCell>
                 <TableCell style={{ textAlign: 'center' }}>
-                <a href={row.toolLink} target="_blank" className={!row.installationStatus || row.toolCode === 'HFT' || row.toolCode === 'HPT' ? 'disabledOpen' : ''}>
+                <a href={row.toolLink} target="_blank" className={!row.installationStatus || row.toolCode === 'HOT' || row.toolCode === 'HPT' ? 'disabledOpen' : ''}>
                   Open
                 </a>
                 </TableCell>

@@ -33,6 +33,7 @@ public class PipelineUtil {
 	private static final String UCV_DOC = "https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html";
 	private static final String CLM_DOC = "https://jazz.net/help-dev/clm/index.jsp?topic=%2Fcom.ibm.rational.test.qm.doc%2Ftopics%2Fc_qm_overview.html";
 	private static final String TEST_DOC = "https://www.ibm.com/developerworks/downloads/r/rft/index.html";
+	private static final String ONE_TEST_DOC = "https://www.hcltech.com/products-and-platforms/onetest";
 	
 	private static final String FILE_NAME="pipelines.xml";
 	
@@ -98,7 +99,7 @@ public class PipelineUtil {
 		asoc.setCode(IService.ASOC_CODE); asoc.setDisplayName(IService.ASOC_DESC); asoc.setServiceType(ServiceType.STANDARD); asoc.setServiceCategory(ServiceCategory.DEVELOPANDTEST);
 		
 		Service hft =new Service();
-		hft.setCode(IService.HFT_CODE); hft.setDisplayName(IService.HFT_DESC); hft.setServiceType(ServiceType.STANDARD); hft.setServiceCategory(ServiceCategory.DEVELOPANDTEST);
+		hft.setCode(IService.HOT_CODE); hft.setDisplayName(IService.HOT_DESC); hft.setServiceType(ServiceType.STANDARD); hft.setServiceCategory(ServiceCategory.DEVELOPANDTEST);
 		
 		Service ucd =new Service();
 		ucd.setCode(IService.UCD_CODE); ucd.setDisplayName(IService.UCD_DESC); ucd.setServiceType(ServiceType.STANDARD); ucd.setServiceCategory(ServiceCategory.RELEASEANDDEPLOY);
@@ -139,7 +140,7 @@ public class PipelineUtil {
 		doors.setCode(IService.DOORS_NG_CODE); doors.setDisplayName(IService.DOORS_NG_DESC); doors.setServiceType(ServiceType.PREMIUM); doors.setServiceCategory(ServiceCategory.PLANANDMEASURE);
 		
 		Service hft =new Service();
-		hft.setCode(IService.HFT_CODE); hft.setDisplayName(IService.HFT_DESC); hft.setServiceType(ServiceType.PREMIUM); hft.setServiceCategory(ServiceCategory.DEVELOPANDTEST);
+		hft.setCode(IService.HOT_CODE); hft.setDisplayName(IService.HOT_DESC); hft.setServiceType(ServiceType.PREMIUM); hft.setServiceCategory(ServiceCategory.DEVELOPANDTEST);
 		
 		Service ucd =new Service();
 		ucd.setCode(IService.UCD_CODE); ucd.setDisplayName(IService.UCD_DESC); ucd.setServiceType(ServiceType.PREMIUM); ucd.setServiceCategory(ServiceCategory.RELEASEANDDEPLOY);
@@ -172,7 +173,7 @@ public class PipelineUtil {
         		Configurations.getInstance().getGIT_REPO_URL());
         	break;
         case IService.JENKINS_CODE: statusPage = new StatusPage(IService.JENKINS_CODE,IService.JENKINS_DESC,
-        		status.isToolAlive(host+Configurations.getInstance().getJENKINS_PORT()),
+        		true, //status.isToolAlive(host+Configurations.getInstance().getJENKINS_PORT()),
         		JENKINS_DOC,
         		 host+Configurations.getInstance().getJENKINS_PORT());
         	break;
@@ -211,6 +212,11 @@ public class PipelineUtil {
         		CLM_DOC,
         		secureHost+"9443/rm");
         	break;	
+        case IService.HOT_CODE: statusPage = new StatusPage(IService.HOT_CODE,IService.HOT_DESC,
+        		true,
+        		ONE_TEST_DOC,
+        		" ");
+        	break;	
         
         default: 
         }
@@ -224,7 +230,7 @@ public class PipelineUtil {
 		String host = HTTP+Configurations.getInstance().getHOST_IP()+COLON;
 		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+COLON;
         statusPages.add(new StatusPage(IService.JENKINS_CODE, IService.JENKINS_DESC,	
-        		status.isToolAlive( host+Configurations.getInstance().getJENKINS_PORT()),
+        		true, //status.isToolAlive( host+Configurations.getInstance().getJENKINS_PORT()),
         		JENKINS_DOC,
         		host+Configurations.getInstance().getJENKINS_PORT()));
         statusPages.add(new StatusPage(IService.ASOC_CODE,	IService.ASOC_DESC,
@@ -243,6 +249,10 @@ public class PipelineUtil {
     		   status.isToolAlive( secureHost+Configurations.getInstance().getUCD_PORT()),
                UCD_DOC,
                 secureHost+Configurations.getInstance().getUCD_PORT()));
+       statusPages.add(new StatusPage(IService.HOT_CODE, IService.HOT_DESC,
+    		   true,
+    		   ONE_TEST_DOC,
+               ""));
        return statusPages;
 	}
 	
@@ -252,7 +262,7 @@ public class PipelineUtil {
 		String host = HTTP+Configurations.getInstance().getHOST_IP()+COLON;
 		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+COLON;
         statusPages.add(new StatusPage(IService.JENKINS_CODE, IService.JENKINS_DESC,
-        		status.isToolAlive( host+Configurations.getInstance().getJENKINS_PORT()),
+        		true, //status.isToolAlive( host+Configurations.getInstance().getJENKINS_PORT()),
         		JENKINS_DOC,
         		host+Configurations.getInstance().getJENKINS_PORT()));
         statusPages.add(new StatusPage(IService.ASOC_CODE, IService.ASOC_DESC,
@@ -274,8 +284,7 @@ public class PipelineUtil {
 		List<StatusPage> statusPages = new ArrayList<>();
 //		CheckToolsStatus status = new CheckToolsStatus();
 //        String host = Configurations.getInstance().getIP();
-        statusPages.add(new StatusPage(IService.HFT_CODE,IService.HFT_DESC,true,TEST_DOC,
-                " "));
+//        statusPages.add(new StatusPage(IService.HOT_CODE,IService.HOT_DESC,true,ONE_TEST_DOC," "));
        return statusPages;
 	}
 

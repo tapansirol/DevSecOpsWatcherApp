@@ -4,7 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Git from '../../static/images/services1/git.JPG';
 import sonar from '../../static/images/services1/sonar.JPG';
 import ucdeploy from '../../static/images/services1/ucd.JPG';
-import hcl from '../../static/images/services1/hft.JPG';
 import jenkins from '../../static/images/services1/jenkins.JPG';
 import ucvelocity from '../../static/images/services1/ucv.JPG';
 import Asoc_IMG from '../../static/images/services1/asoc.JPG';
@@ -13,6 +12,7 @@ import Rtc_IMG from '../../static/images/services1/rtc.JPG';
 import rqm from '../../static/images/services1/rqm.jpg';
 import hotui from '../../static/images/services1/hcl_one_test_ui.jpg';
 import hotpt from '../../static/images/services1/hcl_one_test_pt.jpg';
+import onetest from '../../static/images/services/onetest.JPG';
 import '../../static/css/ServicesList.css';
 import InfoCardDialog from './InfoCardDialog';
 
@@ -22,7 +22,7 @@ const imageMap = {
     SONARQUBE: sonar,
     ASOC: Asoc_IMG,
     DNG: Dng_IMG,
-    HFT: hcl,
+    HOT:onetest,
     RTC: Rtc_IMG,
     UCD: ucdeploy,
     UCV: ucvelocity,

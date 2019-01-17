@@ -7,7 +7,7 @@ import Git_IMG from '../static/images/services/git.JPG';
 import Sonar_IMG from '../static/images/services/sonar.JPG';
 import Asoc_IMG from '../static/images/services/asoc.JPG';
 import Dng_IMG from '../static/images/services/dng.JPG';
-import Hft_IMG from '../static/images/services/onetest.JPG';
+import HOT_IMG from '../static/images/services/onetest.JPG';
 import Rtc_IMG from '../static/images/services/rtc.JPG';
 import Ucd_IMG from '../static/images/services/ucd.JPG';
 import Ucv_IMG from '../static/images/services/ucv.JPG';
@@ -23,7 +23,7 @@ const imageMap = {
     SONARQUBE: Sonar_IMG,
     ASOC: Asoc_IMG,
     DNG: Dng_IMG,
-    HFT: Hft_IMG,
+    HOT: HOT_IMG,
     RTC: Rtc_IMG,
     UCD: Ucd_IMG,
     UCV: Ucv_IMG,
