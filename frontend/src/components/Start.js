@@ -12,7 +12,10 @@ import pipeline from './monitored/Pipelines';
 
 import ManualInstallationCheck from './ManualInstallationCheck';
 import ManualInstallationPremium from './ManualInstallationPremium';
-
+import parent from './TransferData/Parent';
+import HeaderPage3 from './TransferData/HeaderPage3';
+import set from './setupbkp';
+import {  Redirect } from 'react-router';
 //import InfoCard from './components/InfoCard';
 
 class Start extends Component {
@@ -35,8 +38,7 @@ class Start extends Component {
                 <MenuAppBar/>
                 <Router>
                     <Switch>  
-                        <Route exact path="/" component={Home}/> 
-                        
+                        <Route exact path="/watcher" component={Home}/> 
                         <Route exact path="/createPage" component={Try2}/>
                         <Route exact path="/atc" component={ATC}/>
                         <Route exact path="/sidebar3" component={SideBar3}/>
@@ -44,7 +46,10 @@ class Start extends Component {
                         <Route path="/pipeline" component={pipeline}/>
                         <Route path="/mi" component={ManualInstallationPremium}/>
                         <Route path="/mic" component={ManualInstallationCheck}/>
-                        
+                        <Route path="/parent" component={parent}/>
+                        <Route path="/hdr3" component={HeaderPage3}/>
+                        <Route path="/set" component={set}/>
+                        <Redirect from="/" to="/watcher" />
                     </Switch>
                 </Router>
             </div>

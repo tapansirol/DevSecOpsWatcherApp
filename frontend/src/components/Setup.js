@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+//import {TextInput } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -25,6 +26,7 @@ import AutomatedToolChain from './AutomatedToolChain';
 import ManualInstallation from './ManualInstallation';
 import ManualInstallationCheck from './ManualInstallationCheck';
 import ManualInstallationPremium from './ManualInstallationPremium';
+import { green } from '@material-ui/core/colors';
 
 
 
@@ -81,12 +83,13 @@ const styles = theme =>({
     },
 
     bootstrapInput: {
-    borderRadius: 4,
-    backgroundColor: '#f5f5f5',
-    width:520,
-    height:30,
-    fontSize: 18,
-    //textColor: red
+        //borderRadius: 4,
+        backgroundColor: '#f5f5f5',
+        width:520,
+        height:40,
+        fontSize: 18,
+        //textColor: 'red'
+        color: green
     },
      
     
@@ -642,9 +645,11 @@ handlePreviousAutomated = () => {
                                     
                         <Stepper activeStep={activeStep} alternativeLabel id='main-stepper'>
                                 {steps.map(label => {
+                                    const labelProps = {};
+                                    labelProps.icon = <div>dekh</div>
                                     return (
                                         <Step key={label}>
-                                            <StepLabel>{label}</StepLabel>
+                                            <StepLabel icon={Cpp_IMG}>{label}</StepLabel>
                                         </Step>
                                     );
                                 })}
@@ -664,12 +669,13 @@ handlePreviousAutomated = () => {
                                 
 
                                 <div id='flex-container'>
-                                    <InputBase
-                                    // id="bootstrap-input"
-                                    //style={{:placeholder: {color:red}}}
+                                    <InputBase 
+                                     id="bootstrap-input"
+                                    //style={{place}}
                                     placeholder="Enter a name"
                                     value={pipelineName}
                                     onChange={this.handleNameChange}
+                                    
                                     classes={{
                                         // root: classes.bootstrapRoot,
                                         input: classes.bootstrapInput,

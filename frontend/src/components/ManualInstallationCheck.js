@@ -129,7 +129,7 @@ class ManualInstallationCheck extends Component{
                         <Card id="manualSuccess">
                             <img src={success} id="successButton"/> 
                             <Typography  id = "successText">
-                                No manual tools for this pipeline
+                                No manual tools required for this pipeline
                             </Typography>
                            
                         </Card>

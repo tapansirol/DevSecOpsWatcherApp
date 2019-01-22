@@ -4,7 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import error from '../static/images/extra/error.svg';
 import loading from '../static/images/extra/loading.svg';
 import success from '../static/images/extra/success.svg';
-
+import 'font-awesome/css/font-awesome.min.css';
+import color from '@material-ui/core/colors/deepPurple';
 
 class ProgressBarPage extends Component
 {
@@ -33,8 +34,11 @@ class ProgressBarPage extends Component
                     flag===null ?
 
                         <Card id="automatedProgress">
-                           <img src={loading} id="progressButton"/>
-                            <Typography  id = "successText">Installation in Progress</Typography>
+                                <i class="fa fa-spinner fa-spin fa-2x fa-fw" id="progressButton" style={{color:'#0066b3'}}></i>
+                                
+                            
+                           {/* <img src={loading} id="progressButton"/> */}
+                            <Typography  id = "successText">Installation-- in Progress</Typography>
                         </Card>
 
                         : [flag===false ?
