@@ -116,4 +116,39 @@ public class Configurations {
 		return getProperty("stop-services");
 	}
 
+	public String getJenkinsVersion() {
+		return getProperty("JENKINS_VERSION");
+	}
+	public String getUCDVersion() {
+		return getProperty("UCD_VERSION");
+	}
+	
+	public String getUCVVersion() {
+		return getProperty("UCV_VERSION");
+	}
+	
+	public String getSonarVersion() {
+		return getProperty("SONAR_VERSION");
+	}
+	
+	public String getASOCVersion() {
+		return getProperty("ASOC_VERSION");
+	}
+	
+	public String getGitVersion() {
+		return getProperty("GIT_VERSION");
+	}
+	
+	public String getHFTVersion() {
+		return getProperty("HFT_VERSION");
+	}
+	
+	public String getHOTVersion() {
+		return getProperty("HOT_VERSION");
+	}
+	
+	public String getCLMVersion() {
+		return getProperty("CLM_VERSION");
+	}
+	
 }

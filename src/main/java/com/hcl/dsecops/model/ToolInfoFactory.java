@@ -1,49 +1,58 @@
 package com.hcl.dsecops.model;
 
+import com.hcl.dsecops.PipelineUtil;
 import com.hcl.dsecops.service.Configurations;
 
 public class ToolInfoFactory {
-
+	
+	private static final String OPEN_BLANK = "_blank";
+	private static final String RM = "9443/rm";
+	private static final String CCM = "9443/ccm";
+	private static final String QM = "9443/qm";
+			
+	private Configurations CONFIG = Configurations.getInstance();
+	
 	public ToolInfo getToolInfo(String toolCode) {
 		if (toolCode==null || toolCode.isEmpty()) {
 			return null;
 		} 
-		String host = Configurations.getInstance().getHOST_IP();
 		ToolInfo toolInfo = null;
 		switch(toolCode) {
 		case
 		IService.JENKINS_CODE: 
-			toolInfo = new ToolInfo("http://"+host+":9292","2.121.3","https://jenkins.io/doc/");
+			toolInfo = new ToolInfo(PipelineUtil.HOST+CONFIG.getJENKINS_PORT(),CONFIG.getJenkinsVersion(),PipelineUtil.JENKINS_DOC);
 			break;
 		case IService.UCD_CODE:
-			toolInfo = new ToolInfo("https://"+host+":"+Configurations.getInstance().getUCD_PORT(),"1.0.0","https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html");
+			toolInfo = new ToolInfo(PipelineUtil.SECUREHOST+CONFIG.getUCD_PORT(),CONFIG.getUCDVersion(),PipelineUtil.UCD_DOC );
 			break;
 		case IService.UCV_CODE:
-			toolInfo = new ToolInfo("https://"+host+":"+Configurations.getInstance().getUCV_PORT(),"1.0.0","https://www.ibm.com/support/knowledgecenter/en/SSCKX6_1.0.0/com.ibm.uvelocity.doc/ucv_version_welcome.html");
+			toolInfo = new ToolInfo(PipelineUtil.SECUREHOST+CONFIG.getUCV_PORT(),CONFIG.getUCVVersion(),PipelineUtil.UCV_DOC);
 			break;
 		case IService.SONARQUBE_CODE:
-			toolInfo = new ToolInfo("http://"+host+":"+Configurations.getInstance().getSONAR_PORT(),"7.4","https://docs.sonarqube.org/latest/");
+			toolInfo = new ToolInfo(PipelineUtil.HOST+CONFIG.getSONAR_PORT(),CONFIG.getSonarVersion(),PipelineUtil.SONAR_DOC);
 			break;
 		case IService.ASOC_CODE:
-			toolInfo = new ToolInfo("https://stage.appscan.ibmcloud.com/AsoCUI/serviceui/home","1.0.0","https://www.ibm.com/support/knowledgecenter/SSYJJF_1.0.0/ApplicationSecurityonCloud/Welcome.html");
+			toolInfo = new ToolInfo(CONFIG.getASOC_URL(),CONFIG.getASOCVersion(),PipelineUtil.ASOC_DOC);
 			break;
 		case IService.GITHUB_CODE:
-			toolInfo = new ToolInfo("https://github.com/tapansirol/jpet-store","2.1","https://guides.github.com/");
+			toolInfo = new ToolInfo(CONFIG.getGIT_REPO_URL(),CONFIG.getGitVersion(),PipelineUtil.GIT_DOC);
 			break;
 		case IService.HFT_CODE:
-			toolInfo = new ToolInfo("_blank","9.2.0","https://www.ibm.com/support/knowledgecenter/SSJMXE_9.2.0/com.ibm.rational.test.ft.doc/rft_welcome.html");
+			toolInfo = new ToolInfo(OPEN_BLANK,CONFIG.getHFTVersion(),PipelineUtil.HFT_DOC);
 			break;
-
+		case IService.HOT_CODE:
+			toolInfo = new ToolInfo(OPEN_BLANK,CONFIG.getHOTVersion(),PipelineUtil.ONE_TEST_DOC);
+			break;
 		case IService.RQM_CODE:
-			toolInfo = new ToolInfo("https://"+host+":9443/qm","6.0.6","https://jazz.net/help-dev/clm/index.jsp?topic=%2Fcom.ibm.rational.test.qm.doc%2Ftopics%2Fc_qm_overview.html");
+			toolInfo = new ToolInfo(PipelineUtil.SECUREHOST+QM,CONFIG.getCLMVersion(),PipelineUtil.CLM_DOC);
 			break;
 
 		case IService.RTC_CODE:
-			toolInfo = new ToolInfo("https://"+host+":9443/ccm","6.0.6","https://jazz.net/help-dev/clm/index.jsp?topic=%2Fcom.ibm.rational.test.qm.doc%2Ftopics%2Fc_qm_overview.html");
+			toolInfo = new ToolInfo(PipelineUtil.SECUREHOST+CCM,CONFIG.getCLMVersion(),PipelineUtil.CLM_DOC);
 			break;
 
 		case IService.DOORS_NG_CODE:
-			toolInfo = new ToolInfo("https://"+host+":9443/rm","6.0.6","https://jazz.net/help-dev/clm/index.jsp?topic=%2Fcom.ibm.rational.test.qm.doc%2Ftopics%2Fc_qm_overview.html");
+			toolInfo = new ToolInfo(PipelineUtil.SECUREHOST+RM,CONFIG.getCLMVersion(),PipelineUtil.CLM_DOC);
 			break;
 		}
 

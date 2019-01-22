@@ -25,21 +25,27 @@ import com.hcl.dsecops.service.Configurations;
  */
 public class PipelineUtil {
 	
-	private static final String GIT_DOC = "https://guides.github.com/";
-	private static final String JENKINS_DOC = "https://jenkins.io/doc/";
-	private static final String ASOC_DOC = "https://www.ibm.com/support/knowledgecenter/en/SSPH29_9.0.3/com.ibm.help.common.infocenter.aps/helpindex_appscan.html";
-	private static final String SONAR_DOC = "https://docs.sonarqube.org/latest/";
-	private static final String UCD_DOC = "https://www.ibm.com/support/knowledgecenter/en/SSCKX6_1.0.0/com.ibm.uvelocity.doc/ucv_version_welcome.html";
-	private static final String UCV_DOC = "https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html";
-	private static final String CLM_DOC = "https://jazz.net/help-dev/clm/index.jsp?topic=%2Fcom.ibm.rational.test.qm.doc%2Ftopics%2Fc_qm_overview.html";
-	private static final String TEST_DOC = "https://www.ibm.com/developerworks/downloads/r/rft/index.html";
-	private static final String ONE_TEST_DOC = "https://www.hcltech.com/products-and-platforms/onetest";
+	public static final String GIT_DOC = "https://guides.github.com/";
+	public static final String JENKINS_DOC = "https://jenkins.io/doc/";
+	public static final String ASOC_DOC = "https://www.ibm.com/support/knowledgecenter/en/SSPH29_9.0.3/com.ibm.help.common.infocenter.aps/helpindex_appscan.html";
+	public static final String SONAR_DOC = "https://docs.sonarqube.org/latest/";
+	public static final String UCD_DOC = "https://www.ibm.com/support/knowledgecenter/en/SSCKX6_1.0.0/com.ibm.uvelocity.doc/ucv_version_welcome.html";
+	public static final String UCV_DOC = "https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.0/com.ibm.udeploy.doc/ucd_version_welcome.html";
+	public static final String CLM_DOC = "https://jazz.net/help-dev/clm/index.jsp?topic=%2Fcom.ibm.rational.test.qm.doc%2Ftopics%2Fc_qm_overview.html";
+	public static final String TEST_DOC = "https://www.ibm.com/developerworks/downloads/r/rft/index.html";
+	public static final String ONE_TEST_DOC = "https://www.hcltech.com/products-and-platforms/onetest";
+	public static final String HFT_DOC = "https://www.ibm.com/support/knowledgecenter/SSJMXE_9.2.0/com.ibm.rational.test.ft.doc/rft_welcome.html";
 	
 	private static final String FILE_NAME="pipelines.xml";
 	
-	private static String HTTP = "HTTP://";
-	private static String HTTPS = "HTTPS://";
-	private static String COLON = ":";
+	public static String HTTP = "HTTP://";
+	public static String HTTPS = "HTTPS://";
+	public static String COLON = ":";
+	
+	private static Configurations CONFIG = Configurations.getInstance();
+	public static String HOST = getHost();
+	public static String SECUREHOST = getSecureHost();
+	
 	/**
 	 * Adding the created pipeline into local storage (pipelines.xml)
 	 * @param pipeline to be added into local storage
@@ -163,54 +169,52 @@ public class PipelineUtil {
 	
 	public StatusPage getToolStatus(String toolCode) {
 		CheckToolsStatus status = new CheckToolsStatus();
-        String host = HTTP+Configurations.getInstance().getHOST_IP()+COLON;
-        String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+COLON;
         StatusPage statusPage= null;
         switch(toolCode) {
         case IService.GITHUB_CODE: statusPage = new StatusPage(IService.GITHUB_CODE,IService.GITHUB_DESC,
-        		status.isToolAlive(Configurations.getInstance().getGIT_REPO_URL()),
+        		status.isToolAlive(CONFIG.getGIT_REPO_URL()),
         		GIT_DOC,
-        		Configurations.getInstance().getGIT_REPO_URL());
+        		CONFIG.getGIT_REPO_URL());
         	break;
         case IService.JENKINS_CODE: statusPage = new StatusPage(IService.JENKINS_CODE,IService.JENKINS_DESC,
-        		true, //status.isToolAlive(host+Configurations.getInstance().getJENKINS_PORT()),
+        		true, //status.isToolAlive(host+CONFIG.getJENKINS_PORT()),
         		JENKINS_DOC,
-        		 host+Configurations.getInstance().getJENKINS_PORT());
+        		 HOST+CONFIG.getJENKINS_PORT());
         	break;
         case IService.ASOC_CODE: statusPage = new StatusPage(IService.ASOC_CODE,IService.ASOC_DESC,
-        		status.isToolAlive(Configurations.getInstance().getASOC_URL()),
+        		status.isToolAlive(CONFIG.getASOC_URL()),
                 ASOC_DOC,
-                Configurations.getInstance().getASOC_URL());
+                CONFIG.getASOC_URL());
         	break;
         case IService.SONARQUBE_CODE: statusPage = new StatusPage(IService.SONARQUBE_CODE,IService.SONARQUBE_CODE,
-        		status.isToolAlive(host+Configurations.getInstance().getSONAR_PORT()),
+        		status.isToolAlive(HOST+CONFIG.getSONAR_PORT()),
         		SONAR_DOC,
-                host+Configurations.getInstance().getSONAR_PORT());
+                HOST+CONFIG.getSONAR_PORT());
         	break;
         case IService.UCV_CODE: statusPage = new StatusPage(IService.UCV_CODE,IService.UCV_DESC,
-        		status.isToolAlive(secureHost+Configurations.getInstance().getUCV_PORT()),
+        		status.isToolAlive(SECUREHOST+CONFIG.getUCV_PORT()),
         		UCD_DOC,
-                secureHost+Configurations.getInstance().getUCV_PORT());
+        		SECUREHOST+CONFIG.getUCV_PORT());
         	break;
         case IService.UCD_CODE: statusPage = new StatusPage(IService.UCD_CODE,IService.UCD_DESC,
-        		status.isToolAlive( secureHost+Configurations.getInstance().getUCD_PORT()),
+        		status.isToolAlive( SECUREHOST+CONFIG.getUCD_PORT()),
         		UCV_DOC,
-        		secureHost+Configurations.getInstance().getUCD_PORT());
+        		SECUREHOST+CONFIG.getUCD_PORT());
         	break;
         case IService.RQM_CODE: statusPage = new StatusPage(IService.RQM_CODE,IService.RQM_DESC,
-        		status.isToolAlive(secureHost+"9443/qm"),
+        		status.isToolAlive(SECUREHOST+"9443/qm"),
         		CLM_DOC,
-        		secureHost+"9443/qm");
+        		SECUREHOST+"9443/qm");
         	break;
         case IService.RTC_CODE: statusPage = new StatusPage(IService.RTC_CODE,IService.RTC_DESC,
-        		status.isToolAlive(secureHost+"9443/ccm"),
+        		status.isToolAlive(SECUREHOST+"9443/ccm"),
         		CLM_DOC,
-        		secureHost+"9443/ccm");
+        		SECUREHOST+"9443/ccm");
         	break;
         case IService.DOORS_NG_CODE: statusPage = new StatusPage(IService.DOORS_NG_CODE,IService.DOORS_NG_DESC,
-        		status.isToolAlive(secureHost+"9443/rm"),
+        		status.isToolAlive(SECUREHOST+"9443/rm"),
         		CLM_DOC,
-        		secureHost+"9443/rm");
+        		SECUREHOST+"9443/rm");
         	break;	
         case IService.HOT_CODE: statusPage = new StatusPage(IService.HOT_CODE,IService.HOT_DESC,
         		true,
@@ -227,28 +231,27 @@ public class PipelineUtil {
 	public List<StatusPage> getAutoInstallStatusStandard() {
 		List<StatusPage> statusPages = new ArrayList<>();
 		CheckToolsStatus status = new CheckToolsStatus();
-		String host = HTTP+Configurations.getInstance().getHOST_IP()+COLON;
-		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+COLON;
+		
         statusPages.add(new StatusPage(IService.JENKINS_CODE, IService.JENKINS_DESC,	
-        		true, //status.isToolAlive( host+Configurations.getInstance().getJENKINS_PORT()),
+        		true, //status.isToolAlive( host+CONFIG.getJENKINS_PORT()),
         		JENKINS_DOC,
-        		host+Configurations.getInstance().getJENKINS_PORT()));
+        		HOST+CONFIG.getJENKINS_PORT()));
         statusPages.add(new StatusPage(IService.ASOC_CODE,	IService.ASOC_DESC,
-        		status.isToolAlive(Configurations.getInstance().getASOC_URL()),
+        		status.isToolAlive(CONFIG.getASOC_URL()),
                 ASOC_DOC,
-                Configurations.getInstance().getASOC_URL()));
+                CONFIG.getASOC_URL()));
        statusPages.add(new StatusPage(IService.SONARQUBE_CODE, IService.SONARQUBE_DESC,
-    		   status.isToolAlive(host+Configurations.getInstance().getSONAR_PORT()),
+    		   status.isToolAlive(HOST+CONFIG.getSONAR_PORT()),
                SONAR_DOC,
-               host+Configurations.getInstance().getSONAR_PORT()));
+               HOST+CONFIG.getSONAR_PORT()));
        statusPages.add(new StatusPage(IService.UCV_CODE, IService.UCV_DESC,
-    		   status.isToolAlive(secureHost +Configurations.getInstance().getUCV_PORT()),
+    		   status.isToolAlive(SECUREHOST +CONFIG.getUCV_PORT()),
                UCV_DOC,
-                secureHost+Configurations.getInstance().getUCV_PORT()));
+                SECUREHOST+CONFIG.getUCV_PORT()));
        statusPages.add(new StatusPage(IService.UCD_CODE, IService.UCD_DESC,
-    		   status.isToolAlive( secureHost+Configurations.getInstance().getUCD_PORT()),
+    		   status.isToolAlive( SECUREHOST+CONFIG.getUCD_PORT()),
                UCD_DOC,
-                secureHost+Configurations.getInstance().getUCD_PORT()));
+                SECUREHOST+CONFIG.getUCD_PORT()));
        statusPages.add(new StatusPage(IService.HOT_CODE, IService.HOT_DESC,
     		   true,
     		   ONE_TEST_DOC,
@@ -259,31 +262,29 @@ public class PipelineUtil {
 	public List<StatusPage> getAutoInstallStatusPremium() {
 		List<StatusPage> statusPages = new ArrayList<>();
 		CheckToolsStatus status = new CheckToolsStatus();
-		String host = HTTP+Configurations.getInstance().getHOST_IP()+COLON;
-		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+COLON;
         statusPages.add(new StatusPage(IService.JENKINS_CODE, IService.JENKINS_DESC,
-        		true, //status.isToolAlive( host+Configurations.getInstance().getJENKINS_PORT()),
+        		true, //status.isToolAlive( host+CONFIG.getJENKINS_PORT()),
         		JENKINS_DOC,
-        		host+Configurations.getInstance().getJENKINS_PORT()));
+        		HOST+CONFIG.getJENKINS_PORT()));
         statusPages.add(new StatusPage(IService.ASOC_CODE, IService.ASOC_DESC,
-        		status.isToolAlive(Configurations.getInstance().getASOC_URL()),
+        		status.isToolAlive(CONFIG.getASOC_URL()),
                ASOC_DOC,
-                Configurations.getInstance().getASOC_URL()));
+                CONFIG.getASOC_URL()));
        statusPages.add(new StatusPage(IService.UCV_CODE, IService.UCV_DESC,
-    		   status.isToolAlive( secureHost+Configurations.getInstance().getUCV_PORT()),
+    		   status.isToolAlive( SECUREHOST+CONFIG.getUCV_PORT()),
                 UCV_DOC,
-                secureHost+Configurations.getInstance().getUCV_PORT()));
+                SECUREHOST+CONFIG.getUCV_PORT()));
        statusPages.add(new StatusPage(IService.UCD_CODE, IService.UCD_DESC,
-    		   status.isToolAlive(secureHost+Configurations.getInstance().getUCD_PORT()),
+    		   status.isToolAlive(SECUREHOST+CONFIG.getUCD_PORT()),
                UCD_DOC,
-                secureHost+Configurations.getInstance().getUCD_PORT()));
+                SECUREHOST+CONFIG.getUCD_PORT()));
        return statusPages;
 	}
 	
 	public List<StatusPage> getManualInstallStatusStandard() {
 		List<StatusPage> statusPages = new ArrayList<>();
 //		CheckToolsStatus status = new CheckToolsStatus();
-//        String host = Configurations.getInstance().getIP();
+//        String host = CONFIG.getIP();
 //        statusPages.add(new StatusPage(IService.HOT_CODE,IService.HOT_DESC,true,ONE_TEST_DOC," "));
        return statusPages;
 	}
@@ -291,20 +292,18 @@ public class PipelineUtil {
 	public List<StatusPage> getManualInstallStatusPremium() {
 		List<StatusPage> statusPages = new ArrayList<>();
 		CheckToolsStatus status = new CheckToolsStatus();
-//		String host = HTTP+Configurations.getInstance().getHOST_IP()+COLON;
-		String secureHost = HTTPS+Configurations.getInstance().getHOST_IP()+COLON;
         statusPages.add(new StatusPage(IService.DOORS_NG_CODE,IService.DOORS_NG_DESC,
-        		status.isToolAlive(secureHost+"9443/rm"),
+        		status.isToolAlive(SECUREHOST+"9443/rm"),
         		CLM_DOC,
-        		secureHost+"9443/rm"));
+        		SECUREHOST+"9443/rm"));
         statusPages.add(new StatusPage(IService.RTC_CODE,IService.RTC_DESC,
-        		status.isToolAlive(secureHost+"9443/ccm"),
+        		status.isToolAlive(SECUREHOST+"9443/ccm"),
                 CLM_DOC,
-                secureHost+"9443/ccm"));
+                SECUREHOST+"9443/ccm"));
        statusPages.add(new StatusPage(IService.RQM_CODE,IService.RQM_DESC,
-    		   status.isToolAlive(secureHost+"9443/qm"),
+    		   status.isToolAlive(SECUREHOST+"9443/qm"),
     		   CLM_DOC,
-    		    secureHost+"9443/qm"));
+    		    SECUREHOST+"9443/qm"));
        statusPages.add(new StatusPage(IService.HFT_CODE,IService.HFT_DESC,
     		   true,
     		   TEST_DOC,
@@ -325,6 +324,18 @@ public class PipelineUtil {
 				} 
 			}
 		}
+	}
+	
+	private static String getSecureHost() {
+		String ip = CONFIG.getHOST_IP();
+		if (ip!=null)	ip = ip.trim();
+		return HTTPS+ip+COLON;
+	}
+	
+	private static String getHost() {
+		String ip = CONFIG.getHOST_IP();
+		if (ip!=null)	ip = ip.trim();
+		return HTTP+ip+COLON;
 	}
 	
 }
