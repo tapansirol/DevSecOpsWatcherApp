@@ -18,7 +18,7 @@ public class DeployToolChain {
 	public static int DEFAULT_PORT = 22;
 	public static String STRICT_HOST_CONFIG_KEY = "StrictHostKeyChecking";
 	public static String STRICT_HOST_CONFIG_VALUE = "no";
-	private static String LINE_BREAK = "<br>";
+	private static String LINE_BREAK = System.getProperty("line.separator");
 	private static String SHELL_COMMAND = "sh ";
 	private static String STANDARD_STARTUP_COMMAND = "STANDARD_STARTUP_COMMAND";
 	private static String PREMIUM_STARTUP_COMMAND = "PREMIUM_STARTUP_COMMAND";
