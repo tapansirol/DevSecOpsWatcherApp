@@ -3,13 +3,10 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
-import Divider from '@material-ui/core/Divider';
 import NativeSelects from './NativeSelects';
 import NativeSelects1 from './NativeSelects1';
 import SearchIcon from '../../static/images/extra/search.svg';
-import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
-import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 
 const styles = {
   card1: {

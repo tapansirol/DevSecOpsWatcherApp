@@ -1,14 +1,7 @@
 import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import TroubleShootingTips from './TroubleShootingTips';
-import CheckCircle from '@material-ui/icons/CheckCircle';
-import HighlightOff from '@material-ui/icons/HighlightOff';
-import StatusTableManual from './StatusTableManual';
 import error from '../static/images/extra/error.svg';
-import loading from '../static/images/extra/loading.svg';
 import success from '../static/images/extra/success.svg';
 
 // const styles = theme =>({
@@ -60,9 +53,7 @@ class ManualInstallationCheck extends Component{
             {this.props.triggerUpdate1()}
             
         }
-        else{
-            //this.setState({data: data+1})
-        }
+        
     }
     setRefreshButton = (refreshData) =>
     {
@@ -74,9 +65,7 @@ class ManualInstallationCheck extends Component{
             {this.props.triggerUpdate2()}
             
         }
-        else{
-            //this.setState({data: data+1})
-        }
+        
     }
     RefreshButton()
     {
@@ -90,8 +79,8 @@ class ManualInstallationCheck extends Component{
 
     render()
     {
-        const { classes,selectedPipelineIndex } = this.props;
-        var count =0;
+        //const { classes,selectedPipelineIndex } = this.props;
+        //var count =0;
         return(
             <div /*className={classes.root}*/>
                 <div  >
@@ -104,7 +93,7 @@ class ManualInstallationCheck extends Component{
                             {this.setNextButton(this.state.data)}
                              {this.setRefreshButton(this.state.refreshData)} 
                             <Card id="manualSuccess">
-                                <img src={success} id="successButton"/> 
+                                <img src={success} id="successButton" alt="Sorry Image not found"/> 
                                 <Typography  id = "successText">
                                     All tools have been correctly installed
                                 </Typography>
@@ -115,7 +104,7 @@ class ManualInstallationCheck extends Component{
                         [this.state.isStatus === false ?
                             <div>
                                 <Card /*className={classes.failure}*/ id="manualFailure">
-                                    <img src={error} id="failureButton" />
+                                    <img src={error} id="failureButton" alt="Sorry Image not found"/>
                                     <Typography  id = "failureText">
                                         Some tools were not installed correctly.
                                     </Typography>
@@ -127,7 +116,7 @@ class ManualInstallationCheck extends Component{
                         {this.setNextButton(this.state.data)}
                          {this.setRefreshButton(this.state.refreshData)} 
                         <Card id="manualSuccess">
-                            <img src={success} id="successButton"/> 
+                            <img src={success} id="successButton" alt="Sorry Image not found"/> 
                             <Typography  id = "successText">
                                 No manual tools required for this pipeline
                             </Typography>

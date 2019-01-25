@@ -4,7 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import ServiceAssembly from '../ServiceAssembly'
-import LongMenu from './LongMenu';
+
 
 class PipeLines extends Component{
 
@@ -28,7 +28,7 @@ class PipeLines extends Component{
       }
 
     render() {
-        const { classes, pipelineArray } = this.props;
+        const { pipelineArray } = this.props;
         console.log("Pipeline Array  ====>",pipelineArray)
         return(
             <div style={{width: '100%', margin: 'auto'}}>

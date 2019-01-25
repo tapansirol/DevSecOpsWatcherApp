@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import HighlightOff from '@material-ui/icons/HighlightOff';
-import CheckCircle from '@material-ui/icons/CheckCircle';
 import StatusTable from './StatusTable';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Slide from "@material-ui/core/Slide";
 import ProgressBarPage from './ProgressBarPage';
 
@@ -89,11 +85,19 @@ class AutomatedToolChain extends Component{
         const nextButtonStatus = this.state.nextButtonStatus;
        
         return(
-                <div className={classes.card}>
+                <div >
+                    {/* <div>
                     <Typography id="automatedInstallationHeading">Toolchain automated installation</Typography>
                     <Typography id="automatedlInstallationSubHeading">
                         The system is running some scripts for the automated installation part of your toolchain.
                     </Typography>
+                    </div> */}
+                    <div>
+                    <Typography style={{marginTop:40, marginLeft:'40%',fontSize: 22, fontWeight:'bold',fontFamily:'Roboto'}}>Toolchain automated installation</Typography>
+                    <Typography style={{marginLeft:'37%',fontSize: 14,marginBottom: 24,fontFamily:'Roboto'}}>
+                        The system is running some scripts for the automated installation part of your toolchain.
+                    </Typography>
+                    </div>
                     {/* {localStorage.getItem('statusValue')===null || localStorage.getItem('statusValue')==='null'? 
                         <Card id="automatedProgress">
                            <CircularProgress id="progressButton"/>

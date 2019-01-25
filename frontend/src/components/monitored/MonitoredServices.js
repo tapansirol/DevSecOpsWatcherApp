@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import ServicesList from './ServicesList';
-import SearchIcon from '@material-ui/icons/Search';
-import Input from '@material-ui/core/Input';
 import InfoCard from './InfoCard';
 
 const styles = theme => ({
@@ -33,7 +31,7 @@ const styles = theme => ({
   });
 
 class MonitoredServices extends Component {
-    constructor(props) {
+    constructor() {
         super();
         this.state= {
             myvalue1:"ALL",
@@ -55,7 +53,7 @@ class MonitoredServices extends Component {
       }
 
     render() {
-        const { classes, pipelineArray } = this.props;
+        const { pipelineArray } = this.props;
         return(
             <div style={{display: 'inline-flex', margin: '20px', marginTop: '0px', width: '100%'}}>
                 <div>

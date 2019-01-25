@@ -16,7 +16,7 @@ import Cpp_IMG from '../static/images/capsules/new/c++.JPG';
 import checked from '../static/images/extra/checked.svg'
 import Embedded_IMG from '../static/images/capsules/new/embedded.JPG';
 import APIService from '../util/APIService';
-import { Button} from '@material-ui/core';
+import { Button, StepConnector} from '@material-ui/core';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import StandardServiceAssembly from './StandardServiceAssembly';
@@ -26,7 +26,9 @@ import AutomatedToolChain from './AutomatedToolChain';
 import ManualInstallation from './ManualInstallation';
 import ManualInstallationCheck from './ManualInstallationCheck';
 import ManualInstallationPremium from './ManualInstallationPremium';
-import { green } from '@material-ui/core/colors';
+import { green, red } from '@material-ui/core/colors';
+import si from './StepperIcon';
+import completed from '../static/images/extra/completed.png';
 
 
 
@@ -51,7 +53,7 @@ const styles = theme =>({
     //Adding for tabs styling
 
     tabsIndicator: {
-        backgroundColor: '#1890ff',
+        backgroundColor: '#0066b3',
       },
       tabRoot: {
 
@@ -637,19 +639,32 @@ handlePreviousAutomated = () => {
             selectedPipelineIndex, temp ,value, isManualButtonDisabled,isPremiumDashBoardDisabled,installationLog} = this.state;
         let varnt = 'outlined';
 
-       
+        const labelProps = {};
+        labelProps.icon =   <div id="outer-circle">
+                                <div id="inner-circle">
+      
+                                </div>
+                            </div>
+        labelProps.icon1 =  <div id="outer-circle">
+                                <i class="fa fa-check" id="inner-tick"></i>
+                            </div>
+        labelProps.icon2 =  <div id="outer-circle-grey">
+                            
+                        </div>
        // console.log('yahan active step ka value :')
        //console.log("value kya hai ?",isPremiumDashBoardDisabled)
         return(
             <div className={classes.root}>
-                                    
+                               
+                                
                         <Stepper activeStep={activeStep} alternativeLabel id='main-stepper'>
-                                {steps.map(label => {
-                                    const labelProps = {};
-                                    labelProps.icon = <div>dekh</div>
+                                {steps.map((label,index) => {
+                                    
                                     return (
-                                        <Step key={label}>
-                                            <StepLabel icon={Cpp_IMG}>{label}</StepLabel>
+                                        <Step>
+                                            <StepLabel icon={activeStep>index?labelProps.icon1:
+                                                [activeStep<index?labelProps.icon2:labelProps.icon]} connector= {activeStep>0}>{label}</StepLabel>
+                                           
                                         </Step>
                                     );
                                 })}
@@ -658,50 +673,52 @@ handlePreviousAutomated = () => {
                  
                     <Card >
                         <div className={classes.card} id="screen1">
-                    <Typography  id='create-toolchain-text'>Create a new toolchain</Typography>
-                    <Typography  id ="setup-your-projects">Setup your project's toolchain</Typography>
+                            <Typography  id='create-toolchain-text'>Create a new toolchain</Typography>
+                            <Typography  id ="setup-your-projects">Setup your project's toolchain</Typography>
                      
                             <div>
-                             <div id='flex-container' style={{marginBottom:16}}>
-                                <Typography  id='label-name'>Name</Typography>
-                                <Typography  id='label-stack-technology'>Select Stack Technology</Typography> 
+                                <div id='flex-container' style={{marginBottom:16}}>
+                                    <Typography  id='label-name'>Name</Typography>
+                                    <Typography  id='label-stack-technology'>Select Stack Technology</Typography> 
                                 </div>
                                 
-
                                 <div id='flex-container'>
                                     <InputBase 
-                                     id="bootstrap-input"
-                                    //style={{place}}
-                                    placeholder="Enter a name"
-                                    value={pipelineName}
-                                    onChange={this.handleNameChange}
-                                    
-                                    classes={{
-                                        // root: classes.bootstrapRoot,
-                                        input: classes.bootstrapInput,
-                                    }}
-                                />
-                            <div style={{marginLeft:110}} id='flex-container'>
-                            {console.log("capsuleArray=====> ",capsuleArray)}
-                                 {capsuleArray.map((capsule, index) => {
+                                        id="bootstrap-input"
+                                        //style={{place}}
+                                        placeholder="Enter a name"
+                                        value={pipelineName}
+                                        onChange={this.handleNameChange}
+                                        classes={{
+                                            // root: classes.bootstrapRoot,
+                                            input: classes.bootstrapInput,
+                                        }}
+                                    />
+                                    <div style={{float:'right',marginLeft:'15%',width:'41.5%'}} id='flex-container'>
+                                        {console.log("capsuleArray=====> ",capsuleArray)}
+                                        {capsuleArray.map((capsule, index) => {
                                             // if(index===0)
                                             
-                                    return (
-                                         <div style={{ marginRight:'40px'}} >
-                                            <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'capsule-focus':'capsule-active'}
-                                                onClick= {() => {this.handleCapsuleClick(capsule)}} id = {capsule!=='JAVA' ? 'disableCapsule':''}>
+                                        return (
+                                            <div style={{ marginLeft:'2%', width:'25%'}} >
+                                                <CardActionArea key= {index} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'capsule-focus':'capsule-active'}
+                                                    onClick= {() => {this.handleCapsuleClick(capsule)}} id = {capsule!=='JAVA' ? 'disableCapsule':''}>
                                             
-                                            <span style={{marginLeft:10,fontFamily:'Roboto'}}>{capsule==='DOTNET'?'.NET':[capsule==='JAVA'?'Java':capsule]}</span>
-                                            <img src={imageMap[capsule]} style={{marginLeft:23}}/> 
-                                           <img src ={checked } style={{float: "right", width:13,height:13,marginRight:5}} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/>
-                                            {/* <CheckCircle style={{float: "right",fontSize:'16px'}} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/> */}
+                                                    <span style={{marginLeft:10,fontFamily:'Roboto'}}>
+                                                        {capsule==='DOTNET'?'.NET':[capsule==='JAVA'?'Java':capsule]}
+                                                    </span>
+                                                    <img src={imageMap[capsule]} style={{marginLeft:23}}/> 
+                                                    <img src ={checked } style={{float: "right", width:13,height:13,marginRight:5}} 
+                                                        className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 
+                                                        'check-visible':'check-hidden'}/>
+                                                    {/* <CheckCircle style={{float: "right",fontSize:'16px'}} className={this.state.selectedCapsule && capsule === this.state.selectedCapsule ? 'check-visible':'check-hidden'}/> */}
                                         
-                                        </CardActionArea>
-                                             </div>
+                                                </CardActionArea>
+                                            </div>
                                         );
-                                    })
-                                 }
-                                 </div>
+                                        })
+                                        }
+                                    </div>
                             </div>
                 
                     <div style={{width: '100%', margin: 'auto'}}>
@@ -726,7 +743,7 @@ handlePreviousAutomated = () => {
                                 
                             <TabContainer>
                                 {pipelineArray===null ? 'No Contents' :
-                                <div style={{width:1120, height:215}}>
+                                <div style={{width:'92%', height:'18%'}}>
                                 
                                 {pipelineArray.map((serviceArray, sIndex) => {
                                     //console.log('here',serviceArray,sIndex,selectedPipelineIndex );
@@ -852,7 +869,7 @@ handlePreviousAutomated = () => {
                 </Button> */}
                 {activeStep===0 ?
 
-                    <Button style={{float: "right",background:'#0066b3',marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
+                    <Button style={{float: "right",background:'#0066b3',textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
                     //   activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:false}
                         variant="contained"
                         color="primary"

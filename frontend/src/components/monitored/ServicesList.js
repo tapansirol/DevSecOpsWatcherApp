@@ -65,7 +65,7 @@ class ServicesList extends Component {
 
     containsInCommonServices = (inputArray, service, key) => {
         for (let input of inputArray) {
-            if (input[key] == service[key]) {
+            if (input[key] === service[key]) {
                 return true;
             }
         }
@@ -116,8 +116,8 @@ class ServicesList extends Component {
             <div className="wrapper_sl">
                 {this.getCommonServices(pipelineArray).map((capsule, cIndex) => {
                     let cl = 'none'; let tmp = "true"; let clr = "blue;"
-                    if (capsule.available == false) { cl = ''; tmp = "false"; clr = "red" }
-                    if ((capsule['serviceCategory'] == myvalue1 || myvalue1 == 'ALL') && (tmp == myvalue2 || myvalue2 == 'ALL'))
+                    if (capsule.available === false) { cl = ''; tmp = "false"; clr = "red" }
+                    if ((capsule['serviceCategory'] === myvalue1 || myvalue1 === 'ALL') && (tmp === myvalue2 || myvalue2 === 'ALL'))
                         return (
                             <div key={cIndex} style={{ display: 'flex', margin: '20px' }}>
                                 <ServiceImageCard

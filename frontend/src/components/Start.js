@@ -16,6 +16,7 @@ import parent from './TransferData/Parent';
 import HeaderPage3 from './TransferData/HeaderPage3';
 import set from './setupbkp';
 import {  Redirect } from 'react-router';
+import si from './StepperIcon'
 //import InfoCard from './components/InfoCard';
 
 class Start extends Component {
@@ -49,6 +50,7 @@ class Start extends Component {
                         <Route path="/parent" component={parent}/>
                         <Route path="/hdr3" component={HeaderPage3}/>
                         <Route path="/set" component={set}/>
+                        <Route path="/si" component={si}/>
                         <Redirect from="/" to="/watcher" />
                     </Switch>
                 </Router>

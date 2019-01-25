@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 body {
     margin: 0;
     padding: 0;
@@ -84,7 +85,7 @@ body {
   }
 
   #label-stack-technology {
-  width: 274px;
+  /* width: 274px; */
   height: 19px;
   margin-left: 585px;
   font-family: Roboto;
@@ -149,14 +150,14 @@ body {
 
 .capsule-active {
 
-  width: 130px;
+  width: 100%;
   height: 40px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
 }
 
 .capsule-focus {
-  width: 130px;
+  width: 100%;/*130*/
   height: 40px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
@@ -227,8 +228,8 @@ body {
   }
   #manualInstallationHeading{
 
-    width: 357px;
-    height: 35px;
+    /* width: 357px;
+    height: 35px; */
     font-family: Roboto;
     font-size: 22px;
     font-weight: bold;
@@ -238,12 +239,13 @@ body {
     letter-spacing: normal;
     text-align: center;
     color: #383838;
-    margin-left: 418.5px;
+    /* margin-left: 418.5px; */
+    /* margin-left:  40%; */
     margin-top: 40px
   }
 #manualInstallationSubHeading{
-  width: 213px;
-  height: 18px;
+  /* width: 213px;
+  height: 18px; */
   font-family: Roboto;
   font-size: 14px;
   font-weight: normal;
@@ -253,10 +255,10 @@ body {
   letter-spacing: normal;
   text-align: center;
   color: #383838;
-  margin-left: 490px;
+  /* margin-left: 490px; */
 }
 #manualSuccess{
-  width: 1120px;
+  width: 92%;
   height: 40px;
   background-color: #effae7;
   margin-left: 35px;
@@ -269,13 +271,14 @@ body {
   width: 24px;
   height: 23.5px;
   color: #79d732;
-  margin-left: 403px;
+  margin-left: 40%; 
   margin-top: 8px;
+  
 }
 #successText
 {
-  width: 293px;
-  height: 20px;
+  /* width: 293px;
+  height: 20px; */
   font-family: Roboto;
   font-size: 16px;
   font-weight: normal;
@@ -289,7 +292,7 @@ body {
 }
 
 #manualFailure{
-  width: 1120px;
+  width: 92%;
   height: 40px;
   background-color: #faf0f1;
   margin-left: 35px;
@@ -302,7 +305,7 @@ body {
   width: 24px;
   height: 24px;
   color: #eb1946;
-  margin-left: 403px;
+  margin-left: 40%;
   margin-top: 8px;
   
 }
@@ -322,7 +325,7 @@ body {
   margin-left: 16px;
 }
 #manualProgress{
-  width: 1120px;
+  width: 92%;
   height: 40px;
   
   margin-left: 35px;
@@ -336,7 +339,7 @@ body {
   height: 24px;
   margin-top: 8px;
   
-  margin-left: 403px;
+  margin-left: 40%;
   
 }
 #statusTableDiv
@@ -570,8 +573,8 @@ body {
 /* Automated Installation */
 #automatedInstallationHeading{
 
-  width: 326px;
-  height: 35px;
+  /* width: 326px; 
+  height: 35px;*/
   font-family: Roboto;
   font-size: 22px;
   font-weight: bold;
@@ -581,7 +584,7 @@ body {
   letter-spacing: normal;
   text-align: center;
   color: #383838;
-  margin-left: 437px;
+  margin-left: 36%;;
   margin-top: 40px
 }
 #automatedlInstallationSubHeading
@@ -597,11 +600,12 @@ body {
   letter-spacing: normal;
   text-align: center;
   color: #383838;
-  margin-left: 321px;
+  margin-left: 27%;
+  margin-right: 27%;
 }
 #automatedProgress{
-  width: 1120px;
-  height: 40px;
+   width: 92%;
+  height: 40px; 
   box-shadow: none;
   margin-left: 40px;
   margin-top: 40px;
@@ -689,7 +693,7 @@ body {
 #logDiv
 {
   background-color: #ffffff;
-  height: 350px;
+  height: 345px;
   overflow: auto;
   border: 1px solid grey
 }
@@ -698,7 +702,7 @@ body {
   margin-top: 32px;
   margin-left: 36px;
   display: flex;
-  width: 1120px;
+  width: 92%;
 }
 #automatedTableRowActions
 {
@@ -753,9 +757,10 @@ body {
 }
 
 #screen1{
-  width: 1200px;
-  margin-left:40px;
-  margin-right:40px;
+  width: 100%;/*1200px*/
+  margin-left:3.33%;/*40px*/
+  margin-right:3.33%;
+  height: 100%;
 }
 .disabledOpen
 {
@@ -843,13 +848,66 @@ body {
   height: 24px;
   width: 24px;
   border-radius: 50%;
-
-}
-#bootstrap-input::placeholder
-{
- 
+  background-color: #79d732;
 }
 #bootstrap-input
 {
   text-indent: 10px;
+}
+
+#outer-circle {
+  border: 2px solid #3d70b2;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  position: relative;
+  /* 
+   Child elements with absolute positioning will be 
+   positioned relative to this div 
+  */
+}
+#inner-circle {
+  position: absolute;
+  background: #3d70b2;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  /*
+   Put top edge and left edge in the center
+  */
+   top: 50%;
+  left: 50%;
+  margin: -6px 0px 0px -6px; 
+  /* 
+   Offset the position correctly with
+   minus half of the width and minus half of the height 
+  */
+}
+#inner-tick {
+  position: absolute;
+  color: #3d70b2;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  /*
+   Put top edge and left edge in the center
+  */
+   top: 50%;
+  left: 50%;
+  margin: -8px 0px 0px -8px; 
+  /* 
+   Offset the position correctly with
+   minus half of the width and minus half of the height 
+  */
+}
+#outer-circle-grey {
+  border: 2px solid #d2d2d2;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  position: relative;
+  /* 
+   Child elements with absolute positioning will be 
+   positioned relative to this div 
+  */
 }

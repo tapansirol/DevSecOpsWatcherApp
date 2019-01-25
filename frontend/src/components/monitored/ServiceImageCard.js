@@ -4,8 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
-import Divider from '@material-ui/core/Divider';
-import red from '../../static/images/extra/red.jpg';
 import open_tool from '../../static/images/extra/launch.svg';
 
 const styles = {

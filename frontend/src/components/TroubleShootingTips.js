@@ -1,50 +1,41 @@
 import React, {Component} from 'react';
 import { Typography } from '@material-ui/core';
 import DESKTOP_IMAGE from '../static/images/extra/desktop.svg';
-import CardMedia from "@material-ui/core/CardMedia";
 
 
 
-const styles = theme =>({
-    root: {
-      flexGrow: 1,
-      width: '100%',
-      margin: 'auto',
+// const styles = theme =>({
+//     root: {
+//       flexGrow: 1,
+//       width: '100%',
+//       margin: 'auto',
       
-    },
-    progress: {
-        flexGrow: 1,
-        padding: 10,
-        margin: 'auto',
-        background:'#e7f3ff',
-        height: '3.5rem'
-      },
+//     },
+//     progress: {
+//         flexGrow: 1,
+//         padding: 10,
+//         margin: 'auto',
+//         background:'#e7f3ff',
+//         height: '3.5rem'
+//       },
     
 
 
-      card: {
-        minWidth: 275,
-        padding: 20,
-        //align: 
-        //marginLeft: 30
-      },
+//       card: {
+//         minWidth: 275,
+//         padding: 20,
+//         //align: 
+//         //marginLeft: 30
+//       },
     
     
-  });
+//   });
 
 
   class TroubleShootingTips extends Component{
-
-    constructor()
-    {
-        super();
-
-    }
-
-
     render()
     {
-        const { classes } = this.props;
+       // const { classes } = this.props;
         return(
             <div>
                 {this.props.status===true ? 
@@ -54,7 +45,8 @@ const styles = theme =>({
                 <img 
                   src={DESKTOP_IMAGE}
                    style={{width: 120,
-                    height: 120,marginLeft:107,marginTop:86}}/>
+                    height: 120,marginLeft:107,marginTop:86}}
+                    alt="Sorry Image not found"/>
              
               <Typography id="troubleShootingContent5">The dashboard is ready for display and real-time monitoring</Typography>
 

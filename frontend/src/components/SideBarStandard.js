@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import '../static/css/SideBar.css';
 import Typography from '@material-ui/core/Typography';
 import Page2 from './page2';
-import Page5 from './page5';
 import { Button} from '@material-ui/core';
 import pdf from '../static/resources/StandardToolchainDocs.pdf';
 import PictureAsPdf from '../static/images/extra/document.svg';
@@ -48,7 +47,7 @@ getNextStepDetails() {
  }
 
  handlePrevious1 = () => {
-     if(this.state.activeStep!=1)
+     if(this.state.activeStep!==1)
      {
         this.setState(state => ({
             activeStep: state.activeStep - 1,
@@ -142,7 +141,7 @@ getNextStepDetails() {
                         onMouseOver={this.getMouseOver.bind(this)}
                         onMouseOut={this.getMouseOut.bind(this)}
                         onClick={this.handleNextClick.bind(this)}>
-                        <img src={ArrowRight} style={{height:13, width:16}}/>
+                        <img src={ArrowRight} style={{height:13, width:16}} alt="Sorry Image not found"/>
                     </Button>
                                 
                     <Button style={{float:'right',background:'#0066b3',marginRight: "0.75rem",width:32, height:32}} //disabled = {this.state.isPrevDisabled}
@@ -154,11 +153,11 @@ getNextStepDetails() {
                         onMouseOver={this.getMouseOver.bind(this)}
                         onMouseOut={this.getMouseOut.bind(this)}
                         >
-                        <img src={ArrowLeft} style={{height:13, width:16}}/>
+                        <img src={ArrowLeft} style={{height:13, width:16}} alt="Sorry Image not found"/>
                     </Button>
                     <a href={pdf} target="_blank" style={{color:'#3d70b2',fontFamily: 'Roboto'}}>
                     
-                        Open PDF Version <img src={PictureAsPdf} style={{marginLeft:16, height:16,width:12}}/>
+                        Open PDF Version <img src={PictureAsPdf} style={{marginLeft:16, height:16,width:12}} alt="Sorry Image not found"/>
                     
                     </a>
                 </div>

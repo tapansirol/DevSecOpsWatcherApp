@@ -19,7 +19,7 @@ const styles = {
 
 
   tabsIndicator: {
-    backgroundColor: '#1890ff',
+    backgroundColor: '#0066b3',
   },
   tabRoot: {
 
