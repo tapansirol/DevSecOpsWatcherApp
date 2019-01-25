@@ -27,11 +27,6 @@ import ManualInstallation from './ManualInstallation';
 import ManualInstallationCheck from './ManualInstallationCheck';
 import ManualInstallationPremium from './ManualInstallationPremium';
 import { green, red } from '@material-ui/core/colors';
-import si from './StepperIcon';
-import completed from '../static/images/extra/completed.png';
-
-
-
 
 
 const imageMap = {
