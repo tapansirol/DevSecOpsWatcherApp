@@ -694,7 +694,7 @@ handlePreviousAutomated = () => {
                                             input: classes.bootstrapInput,
                                         }}
                                     />
-                                    <div style={{float:'right',marginLeft:'15%',width:'41.5%'}} id='flex-container'>
+                                    <div style={{marginLeft:'15%',width:'41.5%'}} id='flex-container'>
                                         {console.log("capsuleArray=====> ",capsuleArray)}
                                         {capsuleArray.map((capsule, index) => {
                                             // if(index===0)
