@@ -108,7 +108,6 @@ const styles = theme =>({
     );
   }
 
-
 class SetupPage extends Component {
 
     constructor(props) {
@@ -147,7 +146,6 @@ class SetupPage extends Component {
             selectedPipelineIndex: selectedPipelineIndex,
             temp:temp,
             value:0,
-
             //Foe Stepper
             activeStep: 0,
             isPrevDisabled:true,
@@ -165,8 +163,6 @@ class SetupPage extends Component {
             
         }
     }
-
-  
 
     handleCapsuleClick = (title) => {
         //console.log('capsule selected', title);
@@ -382,10 +378,6 @@ class SetupPage extends Component {
                         }
                     }
                     , 5000);
-                
-                
-        
-        
 
         /*try{
             localStorage.removeItem('installationLog')
@@ -663,9 +655,7 @@ handlePreviousAutomated = () => {
                                         </Step>
                                     );
                                 })}
-                            </Stepper>
-                      
-                 
+                        </Stepper>                 
                     <Card >
                         <div className={classes.card} id="screen1">
                             <Typography  id='create-toolchain-text'>Create a new toolchain</Typography>
@@ -726,7 +716,7 @@ handlePreviousAutomated = () => {
                             <div style={{marginBottom: '25px'}}>
                             <Tabs value={value} onChange={this.handleChange} classes={{indicator: classes.tabsIndicator }}>
                                 <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} style={{fontFamily:'Roboto',height:20, textAlign:'left', minWidth:'60px', width:'75px',textTransform:"none",fontSize: 14,}} label="Standard"/>
-                                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} style={{fontFamily:'Roboto',height:20,textAlign:'left', minWidth:'80px', width:'80px',textTransform:"none",fontSize: 14,}} label="Premium"/>
+                                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} style={{fontFamily:'Roboto',height:20,textAlign:'left', minWidth:'80px', width:'80px',textTransform:"none",fontSize: 14,}} label="Premium" disabled/>
                             </Tabs>
                             </div>
                             {console.log('dekh le 7879',pipelineArray )}
@@ -819,9 +809,7 @@ handlePreviousAutomated = () => {
                                                         </tbody>
                                                 </table>
                                             </div>
-                                           
-                                            
-                                        
+                                         
                                         <div style={{marginLeft:32}}><PremiumServiceAssembly serviceArray={serviceArray} sIndex= {sIndex} temp={temp} bool={false}/></div>
                                          */}
                                         </div>
@@ -910,7 +898,6 @@ handlePreviousAutomated = () => {
                                 >
                                     Go To DashBoard
                                 </Button>
-                        
                         :
                         <Button style={{float: "right",marginLeft:"1rem",textTransform:"none",fontFamily:'Roboto',borderRadius:0}}  //disabled = {activeStep===0 ? isButtonDisabled :
                         //   activeStep>2 ? this.state.isDashBoardDisabled: /* activeStep===1?this.state.isd:false}
@@ -931,16 +918,6 @@ handlePreviousAutomated = () => {
                 
                 }
 
-
-
-
-
-
-
-
-
-
-
                 {activeStep===1 ?
                 <Button style={{float: "right",textTransform:"none",fontFamily:'Roboto',borderRadius:0}} className="secondary"
                 variant={this.state.variant} color="primary"
@@ -954,8 +931,6 @@ handlePreviousAutomated = () => {
                   id="sbutton"
                   onMouseOver={this.getMouseOverPrev}
                   onMouseOut={this.getMouseOutPrev}
-                  
-                  
                 >
                   Previous: setup
                 </Button> : [activeStep === 2 ?
@@ -995,8 +970,6 @@ handlePreviousAutomated = () => {
                   Previous:manual steps
                 </Button> :null}
                
-                
-
                 <div>
                 <Button  
                 className = {activeStep>=1 ? 'check-visible':'check-hidden'}
@@ -1010,8 +983,6 @@ handlePreviousAutomated = () => {
                 >
                   Cancel
                 </Button>
-                
-              
                 
               </div>
             </div>

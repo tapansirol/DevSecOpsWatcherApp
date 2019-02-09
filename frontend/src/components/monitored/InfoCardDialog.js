@@ -80,11 +80,12 @@ class InfoCardDialog extends Component{
                 </Typography>
             </div>
             
-            <div  style={{marginLeft: 40}}><Button href={status.toolURL} target="_blank" color="primary"  variant="contained"
+            <div  style={{marginLeft: 40}}>
+            <Button href={status.toolURL} target="_blank" color="primary"  variant="contained"
             style={{textTransform: "none",fontFamily:'Roboto',borderRadius:0}}
             onMouseOver={this.getMouseOver}
             onMouseOut={this.getMouseOut}
-            id="pbutton"
+            id={state.name==='HOT'?"pdisabledbutton":"pbutton"}
             >
             Open Tool
             </Button></div>
